@@ -1,0 +1,7 @@
+.foot {
+    display: grid;
+    grid-template: 1fr / 1fr;
+    grid-area: foot;
+    grid-column: 2;
+    background-color: #b7b4b4;
+}
