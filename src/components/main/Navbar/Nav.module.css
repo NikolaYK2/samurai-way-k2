@@ -1,0 +1,15 @@
+.nav {
+    display: grid;
+    grid-column: 1;
+    background-color: aquamarine;
+    }
+    nav ul{
+        margin: 10% 0 0 10%;
+    }
+    nav li{
+        padding: 4% 0 0 0%;
+        color: white;
+        }
+        .item_active {
+            color: burlywood;
+}

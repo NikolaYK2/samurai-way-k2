@@ -1,12 +1,12 @@
 import React from "react";
-import "./Nav.css";
+import s from "./Nav.module.css";
 
 export const Nav =()=>{
     return(
-        <aside className='nav'>
-            <nav className="item">
+        <aside className={s.nav}>
+            <nav className={s.item}>
                 <ul>
-                    <li><a>Profile</a></li>
+                    <li className={s.item_active}><a>Profile</a></li>
                     <li><a>Messages</a></li>
                     <li><a>News</a></li>
                     <li><a>Music</a></li>
