@@ -11,7 +11,7 @@
     background-color: #daf8e9;
     border-radius: 10px;
     height: 50px;
-    padding: 5px;
+    padding: 5px 10px 5px 10px;
 }
 .content__myPost button {
     margin: 10px 0 0 0;

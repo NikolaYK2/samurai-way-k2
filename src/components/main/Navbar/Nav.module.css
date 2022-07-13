@@ -4,12 +4,14 @@
     background-color: aquamarine;
     }
     nav ul{
-        margin: 10% 0 0 10%;
+        margin: 5px 15px 0 5px;
     }
     nav li{
-        padding: 4% 0 0 0%;
+    }
+    nav a{
         color: white;
+        line-height: 17px;
         }
-        .item_active {
+    nav a.activeLink {
             color: burlywood;
 }

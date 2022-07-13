@@ -1,7 +1,12 @@
 import React from "react";
 import s from "./Post.module.css";
 
-export const Post = () => {
+type PostType={
+    message:string
+    like:number
+}
+
+export const Post = (props:PostType) => {
     return (
         <div>
             <div className={s.content__profUsers}>
@@ -10,10 +15,10 @@ export const Post = () => {
                         src="https://avatars.mds.yandex.net/i?id=0eaa142d7202ac9bbd26ac279e7ae159_l-4898876-images-thumbs&n=27&h=384&w=480"
                         alt=""/>
                 </div>
-                Hey, why nobody love me?
+                {props.message}
             </div>
             <div>
-                <span>like</span>
+                <span>like </span>{props.like}
             </div>
         </div>
     );
