@@ -2,13 +2,13 @@
     display: flex;
     margin: 0 0 10px 0;
 }
-.content__profUsers div{
+.content__profUsers>div{
     position: relative;
     width: 70px;
     height: 70px;
     margin: 0 10px 0 0;
 }
-.content__profUsers div img{
+.content__profUsers>div>img{
     position: absolute;
     top: 0;
     left: 0;
