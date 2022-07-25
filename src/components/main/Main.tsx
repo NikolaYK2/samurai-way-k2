@@ -1,12 +1,12 @@
 import React from "react";
 import {Nav} from "./Navbar/Nav";
 import s from "./Main.module.css";
-import {DialogsMessage} from "../dialogs/DialogsMessage";
+import {DialogsMessage} from "./content/dialogs/DialogsMessage";
 import {ContentProfile} from "./content/ContentProfile";
 import {Route,  Routes, } from "react-router-dom";
-import {Music} from "../music/Music";
-import {News} from "../news/News";
-import {Settings} from "../settings/Settings";
+import {Music} from "./content/music/Music";
+import {News} from "./content/news/News";
+import {Settings} from "./content/settings/Settings";
 
 
 export const Main = () => {

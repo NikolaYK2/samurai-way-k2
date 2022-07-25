@@ -1,0 +1,13 @@
+.dialogs {
+    display: grid;
+    grid-template: 1fr / 1fr 3fr;
+}
+
+.dialogs__users,
+.dialogs__messages {
+    line-height: 17px;
+}
+
+.active {
+    color: gold;
+}
