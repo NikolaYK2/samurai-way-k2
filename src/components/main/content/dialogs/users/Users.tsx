@@ -19,7 +19,7 @@ export const Users = (props: UserType) => {
             {props.users.map(el => {
                 return (
                     <div key={el.id}>
-                        <NavLink to={el.link} className={({isActive}) => isActive ? s.active : undefined}>{el.name}</NavLink>
+                        <NavLink to={el.link} className={({isActive}) => isActive ? s.active : s.users}>{el.name}</NavLink>
                     </div>
                 )
             })}

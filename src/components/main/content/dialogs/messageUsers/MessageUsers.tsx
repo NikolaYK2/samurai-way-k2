@@ -16,7 +16,7 @@ export const MessageUsers = (props: MessageUsersType) => {
             Messages
             {props.usersMessages.map(uM => {
                 return (
-                    <div key={uM.id} >
+                    <div key={uM.id} className={s.dialogs__users}>
                         {uM.sms}
                     </div>
                 )

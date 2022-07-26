@@ -16,7 +16,7 @@ export const Post = (props: PostType) => {
         <>
             {props.postData.map(pD => {
                 return (
-                    <div key={pD.id} >
+                    <div key={pD.id}>
                         <div className={s.content__profUsers}>
                             <div>
                                 <img

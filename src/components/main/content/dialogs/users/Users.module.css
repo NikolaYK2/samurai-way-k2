@@ -1,8 +1,14 @@
 .dialogs__users{
     line-height: 17px;
+    color: black;
+    font-weight: 700;
 }
 .active {
     color: gold;
+    font-weight: 700;
 }
-
+.users {
+    color: black;
+    font-weight: 400;
+}
 

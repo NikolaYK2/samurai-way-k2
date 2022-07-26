@@ -4,7 +4,6 @@
     grid-template: 1fr / minmax(auto, 100px) minmax(auto, 1300px);
     grid-area: main;
     grid-column: 2;
-
 }
 
 

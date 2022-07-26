@@ -1,15 +1,14 @@
 import React from "react";
 import s from "./DialogsMessage.module.css";
-import {NavLink} from "react-router-dom";
 import {v1} from "uuid";
 import {MessageUsers} from "./messageUsers/MessageUsers";
 import {Users} from "./users/Users";
 //DATA =============================================================
 const users = [
-    {id: v1(), name: "Nik", link: "/dialogs/1"},
-    {id: v1(), name: "Vita", link: "/dialogs/2"},
-    {id: v1(), name: "Vova", link: "/dialogs/3"},
-    {id: v1(), name: "Dima", link: "/dialogs/4"},
+    {id: v1(), name: "Nik", link: "1"},
+    {id: v1(), name: "Vita", link: "2"},
+    {id: v1(), name: "Vova", link: "3"},
+    {id: v1(), name: "Dima", link: "4"},
 ]
 const usersMessages = [
     {id: v1(), sms: "Hi",},
