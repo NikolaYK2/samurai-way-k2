@@ -1,12 +1,8 @@
 import s from "./MyPost.module.css";
 import React from "react";
 import {Post} from "../post/Post";
-import {v1} from "uuid";
+import {postData} from "../../../../../index";
 
-const postData = [
-    {id: v1(), sms: "Ha, how are you?", like: 15,},
-    {id: v1(), sms: "It's my first post", like: 43,},
-]
 
 export const MyPost = () => {
     return (
