@@ -10,7 +10,10 @@
         top: 0;
         left: 0;
     }
-    nav li{
+    nav li:last-child{
+        margin: 20px 0 0 0;
+        font-size: 20px;
+        font-weight: 300;
     }
     nav a{
         color: white;
@@ -18,4 +21,22 @@
         }
     nav a.activeLink {
             color: burlywood;
+}
+
+.item__friends{
+    display: inline-block;
+    text-align: center;
+    margin: 5px 6px 0 0;
+    font-size: 8px;
+    color: white;
+    }
+    .item__friends div{
+        width: 20px;
+        height: 20px;
+        }
+        .item__friends div img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
 }

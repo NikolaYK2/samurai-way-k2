@@ -1,23 +1,19 @@
 import React from 'react';
 import s from "./MessageUsers.module.css";
+import {stateType} from "../../../../redux/state";
 
-
-type usersMessagesType = {
-    id: string,
-    sms: string
+type MessageUsersType={
+    state:stateType
 }
 
-type MessageUsersType = {
-    usersMessages: usersMessagesType[]
-}
 export const MessageUsers = (props: MessageUsersType) => {
     return (
         <div className={s.dialogs__messages}>
             Messages
-            {props.usersMessages.map(uM => {
+            {props.state.messagesPage.usersMessages.map(uM => {
                 return (
                     <div key={uM.id} className={s.dialogs__users}>
-                        {uM.sms}
+                        <div>{uM.sms}</div>
                     </div>
                 )
             })}

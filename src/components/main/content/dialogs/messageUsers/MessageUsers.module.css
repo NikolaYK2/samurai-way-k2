@@ -3,9 +3,23 @@
     line-height: 17px;
     color: black;
     font-weight: 700;
+    max-width: 500px;
 }
 .dialogs__users{
+    display: flex;
+    align-items: start;
     font-weight: 400;
+    min-height: 80px;
+    margin: 20px 0 0 0;
+}
+    .dialogs__users>div{
+        display: flex;
+        padding: 10px;
+        background-color: #c2ffe7;
+        border-radius: 5px 5px 5px 0;
+}
+.dialogs__users:nth-child(even){
+    justify-content: end;
 }
 
 

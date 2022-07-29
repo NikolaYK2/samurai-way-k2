@@ -1,10 +1,12 @@
 import s from "./MyPost.module.css";
 import React from "react";
 import {Post} from "../post/Post";
-import {postData} from "../../../../../index";
+import {stateType} from "../../../../redux/state";
 
-
-export const MyPost = () => {
+type MyPostType={
+    state:stateType
+}
+export const MyPost = (props: MyPostType) => {
     return (
         <>
             <div className={s.content__myPost}>
@@ -14,7 +16,7 @@ export const MyPost = () => {
                     <button>Send</button>
                 </div>
             </div>
-            <Post postData={postData}/>
+            <Post postData={props.state.proFilePage.postData}/>
         </>
     );
 }

@@ -2,9 +2,12 @@ import React from "react";
 import s from "./ContentProfile.module.css";
 import {MyPost} from "./MyProfile/myPost/MyPost";
 import {MyProfile} from "./MyProfile/MyProfile";
+import {stateType} from "../../redux/state";
 
-
-export const ContentProfile = () => {
+type ContentProfileType={
+    state:stateType
+}
+export const ContentProfile = (props: ContentProfileType) => {
     return (
         <section className={s.content}>
             <div className={s.content__wrap}>
@@ -13,7 +16,7 @@ export const ContentProfile = () => {
                     alt=""/>
             </div>
             <MyProfile/>
-            <MyPost/>
+            <MyPost state={props.state}/>
         </section>
     );
 }

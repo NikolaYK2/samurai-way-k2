@@ -2,6 +2,10 @@
     line-height: 17px;
     color: black;
     font-weight: 700;
+    }
+    .dialogs__users>div{
+        margin: 20px 0 0 0;
+        min-height: 80px;
 }
 .active {
     color: gold;
@@ -11,4 +15,17 @@
     color: black;
     font-weight: 400;
 }
-
+.users__avatar {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+.users__avatar img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
