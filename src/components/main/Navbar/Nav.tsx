@@ -26,7 +26,7 @@ export const Nav =(props: NavType)=>{
                                     <div>
                                         <img src={f.avatar} alt=""/>
                                     </div>
-                                    <p>Denis</p>
+                                    <p>{f.name}</p>
                                 </div>
                             )
                         })}

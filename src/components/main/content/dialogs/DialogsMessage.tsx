@@ -7,7 +7,7 @@ import {stateType} from "../../../redux/state";
 type DialogsMessageType={
     state:stateType
 }
-export const DialogsMessage = (props: DialogsMessageType) => {
+export const DialogsMessage: React.FC<DialogsMessageType> = (props ) => {
 
     return (
         <div className={s.dialogs}>

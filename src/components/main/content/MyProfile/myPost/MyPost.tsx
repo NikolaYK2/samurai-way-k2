@@ -7,13 +7,21 @@ type MyPostType={
     state:stateType
 }
 export const MyPost = (props: MyPostType) => {
+
+    const newPostElement = React.createRef<HTMLTextAreaElement>();
+
+    const addPostButtonHandler=()=>{
+        let text = newPostElement.current?.value;//привязываем событие к кнопке
+        //newPostElement - обьект у которого ест св-во current и берем value
+        alert(text)
+    }
     return (
         <>
             <div className={s.content__myPost}>
-                My post
+                <h3>My post</h3>
                 <div>
-                    <textarea placeholder={"new post"}></textarea>
-                    <button>Send</button>
+                    <textarea placeholder={"my post"} ref={newPostElement}></textarea>
+                    <button onClick={addPostButtonHandler}>Send</button>
                 </div>
             </div>
             <Post postData={props.state.proFilePage.postData}/>
