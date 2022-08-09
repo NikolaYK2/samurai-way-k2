@@ -12,6 +12,7 @@ import {Friends} from "./content/friends/Friends";
 
 type MainType={
     state:stateType
+    addPost:(postMessage: string)=>void,
 }
 
 export const Main = (props: MainType) => {
@@ -20,7 +21,7 @@ export const Main = (props: MainType) => {
         <main className={s.main}>
             <Nav state={props.state}/>
             <Routes>
-                <Route path="/content" element={<ContentProfile state={props.state}/>}/>
+                <Route path="/content" element={<ContentProfile state={props.state} addPost={props.addPost}/>}/>
                 <Route path="/dialogs/*" element={<DialogsMessage state={props.state} />}/>
                 <Route path="/news" element={<News/>}/>
                 <Route path="/music" element={<Music/>}/>

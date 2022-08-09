@@ -1,4 +1,5 @@
 import {v1} from "uuid";
+import {rerenderEntireTree} from "../../render";
 //=======State========================================================
 
 
@@ -104,3 +105,10 @@ export let state: stateType = {
         ]
     }
 }
+//Добавление нового поста=================================================
+export const addPost = (postMessage: string) => {
+    state.proFilePage.postData.push({id: v1(), sms: postMessage, like: 0,});
+    rerenderEntireTree(state);
+}
+
+//=====================================================================
