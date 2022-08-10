@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {addPost, stateType} from "./components/redux/state";
+import {addMessageUsers, addMessageUsersChange, addPost, addPostChange, stateType} from "./components/redux/state";
 import {BrowserRouter} from "react-router-dom";
 
     const root = ReactDOM.createRoot(
@@ -13,7 +13,12 @@ export let rerenderEntireTree=(state: stateType)=>{//функция перери
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={state} addPost={addPost}/>
+                <App state={state}
+                     addPost={addPost}
+                     addPostChange={addPostChange}
+                     addMessageUsers={addMessageUsers}
+                     addMessageUsersChange={addMessageUsersChange}
+                />
             </BrowserRouter>
         </React.StrictMode>
     );

@@ -3,46 +3,49 @@ import {rerenderEntireTree} from "../../render";
 //=======State========================================================
 
 
-type usersType = {
+export type usersType = {
     id: string,
     name: string,
     link: string,
     avatar: string,
 }
 
-type usersMessagesType = {
+export type usersMessagesType = {
     id: string,
     sms: string,
 }
 
-type postDataType = {
+export type postDataType = {
     id: string,
     sms: string,
     like: number,
 }
 
-type friendsType = {
+export type friendsType = {
     id: string,
     name: string,
     avatar: string,
 }
-type  messagesPageType = {
+export type  messagesPageType = {
     users: usersType[],
+    message:string,
     usersMessages: usersMessagesType[],
 }
 
-type proFilePageType = {
+export type proFilePageType = {
     postData: postDataType[],
+    message:string,
+
 }
 
-type sidebarType = {
+export type sidebarType = {
     friends: friendsType[],
 }
 
 export type stateType = {
     proFilePage: proFilePageType,
     messagesPage: messagesPageType,
-    sidebar: sidebarType
+    sidebar: sidebarType,
 }
 
 export let state: stateType = {
@@ -69,6 +72,7 @@ export let state: stateType = {
             },
             {id: v1(), name: "Dima", link: "4", avatar: 'https://crosti.ru/patterns/00/18/72/5109ae65df/picture.jpg'},
         ],
+        message: '',
         usersMessages: [
             {id: v1(), sms: "Hi",},
             {id: v1(), sms: "How is your",},
@@ -78,6 +82,7 @@ export let state: stateType = {
     },
     //=============PostData /MyProfile/====================================
     proFilePage: {
+        message: "",
         postData: [
             {id: v1(), sms: "Ha, how are you?", like: 15,},
             {id: v1(), sms: "It's my first post", like: 43,},
@@ -105,10 +110,31 @@ export let state: stateType = {
         ]
     }
 }
-//Добавление нового поста=================================================
-export const addPost = (postMessage: string) => {
-    state.proFilePage.postData.push({id: v1(), sms: postMessage, like: 0,});
+//Добавление нового поста кнопка=================================================
+export const addPost = (/*postMessage: string*/) => {//postMessage - берем это напрямую из state
+    // const newPost: postDataType ={id: v1(), sms: postMessage, like: 0,};//МОжно через переменную, протипизировав ее указав postDataType
+    // state.proFilePage.postData.push(newPost);
+    state.proFilePage.postData.push({id: v1(), sms: /*postMessage*/ state.proFilePage.message, like: 0,});
+    state.proFilePage.message = '';//зачищаем ем строку здесь
     rerenderEntireTree(state);
 }
-
+//Добавление нового поста для change=================================================
+export const addPostChange = (postMessage: string) => {
+    state.proFilePage.message = postMessage;//message = переменной newTextPost, в которую будем сам ивписывать знаечния(контралируемая)
+    rerenderEntireTree(state);
+}
 //=====================================================================
+
+
+//add new message users=============================================
+export const addMessageUsers = () => {
+    state.messagesPage.usersMessages.push({id: v1(), sms: state.messagesPage.message,});
+    state.messagesPage.message = '';
+    rerenderEntireTree(state);
+}
+//add Для Change==========
+export const addMessageUsersChange = (newMessageUsers: string) => {
+    state.messagesPage.message = newMessageUsers;
+    rerenderEntireTree(state);
+}
+// ========================================================================

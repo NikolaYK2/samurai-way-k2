@@ -1,42 +1,47 @@
 import s from "./MyPost.module.css";
-import React, {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import {Post} from "../post/Post";
-import {stateType} from "../../../../redux/state";
+import {proFilePageType, state, stateType} from "../../../../redux/state";
 import {text} from "stream/consumers";
 
 type MyPostType = {
     state: stateType,
-    addPost: (postMessage: string) => void,
+    addPost: () => void,
+    message: string,
+    addPostChange: (newText: string) => void,
 }
 export const MyPost = (props: MyPostType) => {
     let [errorText, setErrorText] = useState<string | null>(null)
-    let [textStop, setTextStop] = useState('')
 
-
-    const newPostElement = React.createRef<HTMLTextAreaElement>();//событие для textarea
+//======Добавления смс для кнопки======================================================
+    // const newPostElement = React.createRef<HTMLTextAreaElement>();//событие для textarea
     const addPostButtonHandler = () => {
-        let text = newPostElement.current!.value || '';//привязываем событие к кнопке
+        // let text = newPostElement.current!.value;//привязываем событие к кнопке
         //newPostElement - обьект у которого ест св-во current и берем value
-        if (text !== '') {
-            props.addPost(text);
-            newPostElement.current!.value = '';//привязываем событие к кнопке
+        // if (text !== '') {
+        if (state.proFilePage.message !== '') {
+            props.addPost();//message - можно не получать этот текст, оно и так сидит в state
+            // props.addPostChange('')//зачищаем пустой строкой смс после добавления / но лучше зачистку предоставить это BLL
+            //     newPostElement.current!.value = '';//привязываем событие к кнопке
         } else {
             setErrorText(null)
         }
-
     }
-    // const onChangeTextareaHandltr=(event: ChangeEvent<HTMLTextAreaElement>)=>{
-    //     props.addPost(event.currentTarget.value)
-    // }
+    //===============================================================================
+//добавление сообщения в textarea =========================================
+    const onCHandlerValue = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        props.addPostChange(event.currentTarget.value)
+    }
+    //=====================================================================================
     return (
         <>
             <div className={s.content__myPost}>
                 <h3>My post</h3>
                 <div>
                     <textarea placeholder={"my post"}
-                              ref={newPostElement}
-                        // onChange={onChangeTextareaHandltr}
-                        /*value={postMessage}*/></textarea>
+                        // ref={newPostElement}
+                              onChange={onCHandlerValue}
+                              value={props.message}/>
                     <button onClick={addPostButtonHandler}>Send</button>
                 </div>
             </div>

@@ -1,19 +1,27 @@
-import React from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from "./MessageUsers.module.css";
 import {stateType} from "../../../../redux/state";
 
 type MessageUsersType = {
     state: stateType
+    addMessageUsers:()=>void,
+    message: string,
+    addMessageUsersChange:(newMessageUsers: string)=>void,
 }
 
 export const MessageUsers = (props: MessageUsersType) => {
+    let [errorText, setErrorText] = useState<string | null>(null)
 
-    const newMessages = React.createRef<HTMLDivElement>();
     const addMessages = () => {
-        let text = newMessages.current?.id;
-        alert(text)
+        if (props.message !== ""){
+            props.addMessageUsers();
+        }else {
+            setErrorText(null)
+        }
     }
-
+    const addMessagesChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        props.addMessageUsersChange(event.currentTarget.value);
+    }
 
     return (
         <div className={s.dialogs__messages}>
@@ -22,10 +30,13 @@ export const MessageUsers = (props: MessageUsersType) => {
 
                 return (
                     <div key={uM.id} className={s.dialogs__users}>
-                        <div ref={newMessages} onClick={addMessages}>{uM.sms}</div>
+                        <div  >{uM.sms}</div>
                     </div>
                 )
             })}
+            <textarea onChange={addMessagesChange} value={props.message}></textarea>
+            <br/>
+            <button onClick={addMessages}>send</button>
         </div>
     );
 };

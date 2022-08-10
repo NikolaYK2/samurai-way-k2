@@ -2,12 +2,13 @@ import React from "react";
 import s from "./ContentProfile.module.css";
 import {MyPost} from "./MyProfile/myPost/MyPost";
 import {MyProfile} from "./MyProfile/MyProfile";
-import {addPost, stateType} from "../../redux/state";
+import {addPost, proFilePageType, stateType} from "../../redux/state";
 
 type ContentProfileType={
     state:stateType
-    addPost:(postMessage: string)=>void,
-
+    addPost:()=>void,
+    proFilePage:proFilePageType,
+    addPostChange:(newTextPost: string)=>void,
 }
 export const ContentProfile = (props: ContentProfileType) => {
     return (
@@ -18,7 +19,11 @@ export const ContentProfile = (props: ContentProfileType) => {
                     alt=""/>
             </div>
             <MyProfile/>
-            <MyPost state={props.state} addPost={props.addPost}/>
+            <MyPost state={props.state}
+                    addPost={props.addPost}
+                    message={props.proFilePage.message}
+                    addPostChange={props.addPostChange}
+            />
         </section>
     );
 }
