@@ -16,7 +16,7 @@ export const MessageUsers = (props: MessageUsersType) => {
         if (props.message !== ""){
             props.addMessageUsers();
         }else {
-            setErrorText(null)
+            setErrorText(errorText)
         }
     }
     const addMessagesChange = (event: ChangeEvent<HTMLTextAreaElement>) => {

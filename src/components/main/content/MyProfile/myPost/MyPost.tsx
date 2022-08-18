@@ -24,7 +24,7 @@ export const MyPost = (props: MyPostType) => {
             // props.addPostChange('')//зачищаем пустой строкой смс после добавления / но лучше зачистку предоставить это BLL
             //     newPostElement.current!.value = '';//привязываем событие к кнопке
         } else {
-            setErrorText(null)
+            setErrorText(errorText)
         }
     }
     //===============================================================================

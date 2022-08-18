@@ -1,8 +1,5 @@
 import {v1} from "uuid";
-import {rerenderEntireTree} from "../../render";
 //=======State========================================================
-
-
 export type usersType = {
     id: string,
     name: string,
@@ -28,13 +25,13 @@ export type friendsType = {
 }
 export type  messagesPageType = {
     users: usersType[],
-    message:string,
+    message: string,
     usersMessages: usersMessagesType[],
 }
 
 export type proFilePageType = {
     postData: postDataType[],
-    message:string,
+    message: string,
 
 }
 
@@ -46,6 +43,9 @@ export type stateType = {
     proFilePage: proFilePageType,
     messagesPage: messagesPageType,
     sidebar: sidebarType,
+}
+
+let rerenderEntireTree = (state: stateType) => {
 }
 
 export let state: stateType = {
@@ -115,16 +115,15 @@ export const addPost = (/*postMessage: string*/) => {//postMessage - берем 
     // const newPost: postDataType ={id: v1(), sms: postMessage, like: 0,};//МОжно через переменную, протипизировав ее указав postDataType
     // state.proFilePage.postData.push(newPost);
     state.proFilePage.postData.push({id: v1(), sms: /*postMessage*/ state.proFilePage.message, like: 0,});
-    state.proFilePage.message = '';//зачищаем ем строку здесь
+    state.proFilePage.message = '';//зачищаем строку здесь
     rerenderEntireTree(state);
 }
 //Добавление нового поста для change=================================================
 export const addPostChange = (postMessage: string) => {
-    state.proFilePage.message = postMessage;//message = переменной newTextPost, в которую будем сам ивписывать знаечния(контралируемая)
+    state.proFilePage.message = postMessage;//message = переменной newTextPost, в которую будем сам и вписывать знаечния(контралируемая)
     rerenderEntireTree(state);
 }
 //=====================================================================
-
 
 //add new message users=============================================
 export const addMessageUsers = () => {
@@ -136,5 +135,11 @@ export const addMessageUsers = () => {
 export const addMessageUsersChange = (newMessageUsers: string) => {
     state.messagesPage.message = newMessageUsers;
     rerenderEntireTree(state);
+}
+//=================================================================
+
+//render =========================================================
+export const subscribe = (observer: any) => {
+    rerenderEntireTree = observer;
 }
 // ========================================================================
