@@ -1,14 +1,14 @@
 import s from "./MyPost.module.css";
 import React, {ChangeEvent, useState} from "react";
 import {Post} from "../post/Post";
-import {proFilePageType, state, stateType} from "../../../../redux/state";
-import {text} from "stream/consumers";
+import {ActionsType, StoreType} from "../../../../redux/state";
 
 type MyPostType = {
-    state: stateType,
-    addPost: () => void,
+    store: StoreType,
+    dispatch: (action: ActionsType)=>void,
     message: string,
-    addPostChange: (newText: string) => void,
+    // addPost: () => void,
+    // addPostChange: (newText: string) => void,
 }
 export const MyPost = (props: MyPostType) => {
     let [errorText, setErrorText] = useState<string | null>(null)
@@ -19,8 +19,12 @@ export const MyPost = (props: MyPostType) => {
         // let text = newPostElement.current!.value;//привязываем событие к кнопке
         //newPostElement - обьект у которого ест св-во current и берем value
         // if (text !== '') {
-        if (state.proFilePage.message !== '') {
-            props.addPost();//message - можно не получать этот текст, оно и так сидит в state
+        if (props.message !== '') {
+            // props.addPost();//message - можно не получать этот текст, оно и так сидит в state
+
+            //Переходим на dispatch и обязательно указываем тип ему, делая конкретный диспатч
+            props.dispatch({type: "addPost", postMessage: props.message });
+
             // props.addPostChange('')//зачищаем пустой строкой смс после добавления / но лучше зачистку предоставить это BLL
             //     newPostElement.current!.value = '';//привязываем событие к кнопке
         } else {
@@ -30,7 +34,7 @@ export const MyPost = (props: MyPostType) => {
     //===============================================================================
 //добавление сообщения в textarea =========================================
     const onCHandlerValue = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.addPostChange(event.currentTarget.value)
+        props.dispatch({type: 'addPostChange', postMessage: event.currentTarget.value})
     }
     //=====================================================================================
     return (
@@ -45,7 +49,7 @@ export const MyPost = (props: MyPostType) => {
                     <button onClick={addPostButtonHandler}>Send</button>
                 </div>
             </div>
-            <Post postData={props.state.proFilePage.postData}/>
+            <Post postData={props.store.getState().proFilePage.postData}/>
         </>
     );
 }

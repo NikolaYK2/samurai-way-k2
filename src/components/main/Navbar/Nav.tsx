@@ -1,10 +1,10 @@
 import React from "react";
 import s from "./Nav.module.css";
 import {NavLink} from "react-router-dom";
-import {stateType} from "../../redux/state";
+import {StoreType} from "../../redux/state";
 
 type NavType={
-    state: stateType,
+    store: StoreType,
 }
 
 export const Nav =(props: NavType)=>{
@@ -20,7 +20,7 @@ export const Nav =(props: NavType)=>{
                     <br/>
                     <li><NavLink to="/settings" className={({isActive})=> isActive ? s.activeLink : undefined}>Settings</NavLink></li>
                     <li><NavLink to="/friends" className={({isActive})=> isActive ? s.activeLink : undefined}>Friends</NavLink>
-                        {props.state.sidebar.friends.map(f=>{
+                        {props.store._state.sidebar.friends.map(f=>{
                             return(
                                 <div className={s.item__friends} key={f.id}>
                                     <div>

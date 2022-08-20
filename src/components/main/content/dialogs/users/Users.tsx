@@ -1,17 +1,17 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import s from "./Users.module.css";
-import {stateType} from "../../../../redux/state";
+import {StoreType} from "../../../../redux/state";
 
 type UsersType={
-    state:stateType
+    store:StoreType
 }
 
 export const Users = (props: UsersType) => {
     return (
         <div className={s.dialogs__users}>
             Dialogs
-            {props.state.messagesPage.users.map((u) => {
+            {props.store._state.messagesPage.users.map((u) => {
                 return (
                     <div key={u.id} className="bob">
                         <NavLink to={u.link} className={({isActive}) => isActive ? s.active : s.users}>

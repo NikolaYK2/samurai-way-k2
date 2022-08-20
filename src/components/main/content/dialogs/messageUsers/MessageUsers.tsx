@@ -1,9 +1,9 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from "./MessageUsers.module.css";
-import {stateType} from "../../../../redux/state";
+import {StoreType} from "../../../../redux/state";
 
 type MessageUsersType = {
-    state: stateType
+    store: StoreType,
     addMessageUsers:()=>void,
     message: string,
     addMessageUsersChange:(newMessageUsers: string)=>void,
@@ -26,7 +26,7 @@ export const MessageUsers = (props: MessageUsersType) => {
     return (
         <div className={s.dialogs__messages}>
             Messages
-            {props.state.messagesPage.usersMessages.map(uM => {
+            {props.store.getState().messagesPage.usersMessages.map(uM => {
 
                 return (
                     <div key={uM.id} className={s.dialogs__users}>

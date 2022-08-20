@@ -3,21 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {state, addPost, stateType, addPostChange, addMessageUsers, addMessageUsersChange, subscribe} from "./components/redux/state";
+import {store} from "./components/redux/state";
 import {BrowserRouter} from "react-router-dom";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
-let rerenderEntireTree=(state: stateType)=>{//функция перерисовки
+let rerenderEntireTree=()=>{//функция перерисовки
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={state}
-                     addPost={addPost}
-                     addPostChange={addPostChange}
-                     addMessageUsers={addMessageUsers}
-                     addMessageUsersChange={addMessageUsersChange}
+                <App store={store}
+                     // addPost={addPost}
+                     // addPostChange={addPostChange}
+                     // addMessageUsers={addMessageUsers}
+                     // addMessageUsersChange={addMessageUsersChange}
                 />
             </BrowserRouter>
         </React.StrictMode>
@@ -28,8 +28,8 @@ let rerenderEntireTree=(state: stateType)=>{//функция перерисов�
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 }
 
-rerenderEntireTree(state);
-subscribe(rerenderEntireTree);
+store.subscribe(rerenderEntireTree);
+rerenderEntireTree();
 reportWebVitals();
 
 
