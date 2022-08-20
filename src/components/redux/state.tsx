@@ -1,4 +1,5 @@
 import {v1} from "uuid";
+import {ChangeEvent} from "react";
 //=======State========================================================
 export type usersType = {
     id: string,
@@ -55,20 +56,39 @@ export type StoreType = {
     getState:()=>stateType,
     dispatch:(action: ActionsType)=>void,
 }
-//=====типизация actions ===============================
-type AddPostActionType ={
-    type: 'addPost'
-    postMessage: string,
+//=====типизация actions ==============================================================================
+// type AddPostActionType ={
+//     type: 'addPost'
+//     postMessage: string,
+//
+// }
+// type AddPostChangeActionType ={
+//     type: 'addPostChange'
+//     postMessage: string,
+// }
 
+//Автоматическое определение типа функции=============================================================
+// type AddPostActionType = ReturnType<typeof addPostAC>;
+// type AddPostChangeActionType = ReturnType<typeof addPostChangeActionCreator>;
+export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof addPostChangeActionCreator>;
+//==============================================================================================================
+
+//======function Action Creator==============================================================================
+export const addPostAC =(postMessage:string)=>{
+    return{
+        type: 'addPost',
+        postMessage: postMessage,
+    } as const//воспринимать весь обьект как константу
 }
-type AddPostChangeActionType ={
-    type: 'addPostChange'
-    postMessage: string,
+export const addPostChangeActionCreator =(event: ChangeEvent<HTMLTextAreaElement>)/*: AddPostChangeActionType - типизировали функцию вверху*/=>{
+    return{
+        type: 'addPostChange',
+        postMessage: event.currentTarget.value,
+    }as const
 }
 
-export type ActionsType = AddPostActionType | AddPostChangeActionType;
-//=============================================================
 
+// ==========================================================================================================
 export let store: StoreType ={
     _state: {//_state - Приватный доступ означает _подчеркивание
         //DATA messagesUsers /dialogs/=============================================================
@@ -193,8 +213,6 @@ export let store: StoreType ={
             this._rerenderEntireTree(store);
         }
     },
-// ========================================================================
-
 }
 
 

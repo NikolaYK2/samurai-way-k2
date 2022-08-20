@@ -1,7 +1,7 @@
 import s from "./MyPost.module.css";
 import React, {ChangeEvent, useState} from "react";
 import {Post} from "../post/Post";
-import {ActionsType, StoreType} from "../../../../redux/state";
+import {ActionsType, addPostAC, addPostChangeActionCreator, StoreType} from "../../../../redux/state";
 
 type MyPostType = {
     store: StoreType,
@@ -11,8 +11,9 @@ type MyPostType = {
     // addPostChange: (newText: string) => void,
 }
 export const MyPost = (props: MyPostType) => {
-    let [errorText, setErrorText] = useState<string | null>(null)
-
+    //ошибка при добавление пустой строки ===============================
+    let [errorText, setErrorText] = useState<string | null>(null);
+        //====================================================================
 //======Добавления смс для кнопки======================================================
     // const newPostElement = React.createRef<HTMLTextAreaElement>();//событие для textarea
     const addPostButtonHandler = () => {
@@ -23,8 +24,8 @@ export const MyPost = (props: MyPostType) => {
             // props.addPost();//message - можно не получать этот текст, оно и так сидит в state
 
             //Переходим на dispatch и обязательно указываем тип ему, делая конкретный диспатч
-            props.dispatch({type: "addPost", postMessage: props.message });
-
+            // props.dispatch({type: "addPost", postMessage: props.message });
+            props.dispatch(addPostAC(props.message));
             // props.addPostChange('')//зачищаем пустой строкой смс после добавления / но лучше зачистку предоставить это BLL
             //     newPostElement.current!.value = '';//привязываем событие к кнопке
         } else {
