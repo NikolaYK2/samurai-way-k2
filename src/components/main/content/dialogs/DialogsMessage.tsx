@@ -14,8 +14,8 @@ export const DialogsMessage: React.FC<DialogsMessageType> = (props ) => {
             <Users store={props.store}/>
             <MessageUsers store={props.store}
                           message={props.store.getState().messagesPage.message}
-                          addMessageUsers={props.store.addMessageUsers.bind(props.store)}
-                          addMessageUsersChange={props.store.addMessageUsersChange.bind(props.store)}
+                          dispatch={props.store.dispatch.bind(props.store)}
+                          // addMessageUsersChange={props.store.dispatch.bind(props.store)}
             />
         </div>
     );

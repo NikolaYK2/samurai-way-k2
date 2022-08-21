@@ -49,14 +49,22 @@ export type StoreType = {
     _state: stateType,
     // addPost: () => void,
     // addPostChange: (postMessage: string) => void,
-    addMessageUsers:()=>void,
-    addMessageUsersChange:(newMessageUsers: string)=>void,
+    // addMessageUsers: () => void,
+    // addMessageUsersChange: (newMessageUsers: string) => void,
     _rerenderEntireTree: (store: StoreType) => void,
-    subscribe:(observer: any)=>void,
-    getState:()=>stateType,
-    dispatch:(action: ActionsType)=>void,
+    subscribe: (observer: ()=>void) => void,
+    getState: () => stateType,
+    dispatch: (action: ActionsType | ActionsTypeMessagesUsers) => void,
 }
-//=====типизация actions ==============================================================================
+
+//КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
+const addPost = 'addPost';
+const addPostChange = 'addPostChange';
+const addMessageUsers = 'addMessageUsers';
+const addMessageUsersChange = 'addMessageUsersChange';
+//==========================================================================================
+
+//=====типизация actions add post==============================================================================
 // type AddPostActionType ={
 //     type: 'addPost'
 //     postMessage: string,
@@ -66,30 +74,43 @@ export type StoreType = {
 //     type: 'addPostChange'
 //     postMessage: string,
 // }
-
 //Автоматическое определение типа функции=============================================================
 // type AddPostActionType = ReturnType<typeof addPostAC>;
 // type AddPostChangeActionType = ReturnType<typeof addPostChangeActionCreator>;
-export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof addPostChangeActionCreator>;
-//==============================================================================================================
+export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof addPostChangeAC>;
+//Type messages Users Type===========================================================================================================
+export type ActionsTypeMessagesUsers = ReturnType<typeof addMessageUsersAC> | ReturnType<typeof addMessageUsersChangeAC>;
 
-//======function Action Creator==============================================================================
-export const addPostAC =(postMessage:string)=>{
-    return{
+//======function Action Creator addPoast==============================================================================
+export const addPostAC = (postMessage: string) => {
+    return {
         type: 'addPost',
         postMessage: postMessage,
     } as const//воспринимать весь обьект как константу
 }
-export const addPostChangeActionCreator =(event: ChangeEvent<HTMLTextAreaElement>)/*: AddPostChangeActionType - типизировали функцию вверху*/=>{
-    return{
+export const addPostChangeAC = (event: ChangeEvent<HTMLTextAreaElement>)/*: AddPostChangeActionType - типизировали функцию вверху*/ => {
+    return {
         type: 'addPostChange',
         postMessage: event.currentTarget.value,
-    }as const
+    } as const
 }
 
+//FUNCTION ADD MESSAGES USERS=======================================================
+export const addMessageUsersAC = (newMessageUsers: string) => {
+    return {
+        type: 'addMessageUsers',
+        newMessageUsers: newMessageUsers,
+    } as const
+}
+export const addMessageUsersChangeAC=(event: ChangeEvent<HTMLTextAreaElement>)=>{
+    return{
+        type:'addMessageUsersChange',
+        newMessageUsers: event.currentTarget.value
+    } as const
+}
 
 // ==========================================================================================================
-export let store: StoreType ={
+export let store: StoreType = {
     _state: {//_state - Приватный доступ означает _подчеркивание
         //DATA messagesUsers /dialogs/=============================================================
         messagesPage: {
@@ -125,7 +146,7 @@ export let store: StoreType ={
                 {id: v1(), sms: "How is your",},
                 {id: v1(), sms: "Eeeee",},
                 {id: v1(), sms: "Cool",},
-            ]
+            ],
         },
         //=============PostData /MyProfile/====================================
         proFilePage: {
@@ -173,32 +194,32 @@ export let store: StoreType ={
 //         this._rerenderEntireTree(store);
 //     },
 //=====================================================================
-
+//MESSAGE USERS===============================================================
 //add new message users=============================================
-    addMessageUsers() {
-        this._state.messagesPage.usersMessages.push({id: v1(), sms: this._state.messagesPage.message,});
-        this._state.messagesPage.message = '';
-        this._rerenderEntireTree(store);
-    },
-//add Для Change==========
-    addMessageUsersChange(newMessageUsers: string) {
-        this._state.messagesPage.message = newMessageUsers;
-        this._rerenderEntireTree(store);
-    },
+//     addMessageUsers() {
+//         this._state.messagesPage.usersMessages.push({id: v1(), sms: this._state.messagesPage.message,});
+//         this._state.messagesPage.message = '';
+//         this._rerenderEntireTree(store);
+//     },
+// //add Для Change update==========
+//     addMessageUsersChange(newMessageUsers: string) {
+//         this._state.messagesPage.message = newMessageUsers;
+//         this._rerenderEntireTree(store);
+//     },
 //=================================================================
     //Рундерим =================================================================
-    _rerenderEntireTree() {
+    _rerenderEntireTree() {//Функция отрисовки всего дерева
     },
     //render ================================================================
-    subscribe(observer: ()=>void,) {
+    subscribe(observer: () => void,) {
         this._rerenderEntireTree = observer;
     },
     //Возвращает state=====================
-    getState(){
+    getState() {
         return this._state
     },
     dispatch(action) {//{type: 'addPost'
-        if (action.type === "addPost") {
+        if (action.type === addPost) {
             //Добавление нового поста кнопка=================================================
             const newPost: postDataType = {id: v1(), sms: action.postMessage, like: 0,};//МОжно через переменную, протипизировав ее указав postDataType
             this._state.proFilePage.postData = [newPost, ...this._state.proFilePage.postData];
@@ -206,13 +227,25 @@ export let store: StoreType ={
             // this._state.proFilePage.postData.push({id: v1(), sms: /*postMessage*/ this._state.proFilePage.message, like: 0,});
             this._state.proFilePage.message = '';//зачищаем строку здесь
             this._rerenderEntireTree(store);
-        } else if(action.type === 'addPostChange'){
+        } else if (action.type === addPostChange) {
             //Добавление нового поста для change(update)=================================================
             //     this._state.proFilePage.message = postMessage;//message = переменной newTextPost, в которую будем сам и вписывать знаечния(контралируемая)
             this._state.proFilePage.message = action.postMessage;//Нужно упаковать для action, так как с переменной теперь работать не будет
             this._rerenderEntireTree(store);
+            //MESSAGE USERS===============================`================================
+        } else if (action.type === addMessageUsers) {
+            //add new message users=============================================
+            // this._state.messagesPage.usersMessages.push({id: v1(), sms: action.newMessageUsers,});
+            const newMessages = {id: v1(), sms: action.newMessageUsers,}
+            this._state.messagesPage.usersMessages = [...this._state.messagesPage.usersMessages, newMessages];
+            this._state.messagesPage.message = '';
+            this._rerenderEntireTree(store);
+        } else if (action.type === addMessageUsersChange) {
+            //add Для Change update==========
+            this._state.messagesPage.message = action.newMessageUsers;
+            this._rerenderEntireTree(store);
         }
-    },
+    }
 }
 
 

@@ -1,7 +1,7 @@
 import s from "./MyPost.module.css";
 import React, {ChangeEvent, useState} from "react";
 import {Post} from "../post/Post";
-import {ActionsType, addPostAC, addPostChangeActionCreator, StoreType} from "../../../../redux/state";
+import {ActionsType, addPostAC, addPostChangeAC, StoreType} from "../../../../redux/state";
 
 type MyPostType = {
     store: StoreType,
@@ -35,7 +35,7 @@ export const MyPost = (props: MyPostType) => {
     //===============================================================================
 //добавление сообщения в textarea =========================================
     const onCHandlerValue = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: 'addPostChange', postMessage: event.currentTarget.value})
+        props.dispatch(addPostChangeAC(event))
     }
     //=====================================================================================
     return (

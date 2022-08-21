@@ -24,7 +24,6 @@ export const ContentProfile = (props: ContentProfileType) => {
                 // addPost={props.store.dispatch.bind(props.store)}
                 // addPostChange={props.store.dispatch.bind(props.store)}
                     message={props.store.getState().proFilePage.message}
-
             />
         </section>
     );

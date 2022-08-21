@@ -4,7 +4,13 @@
     color: black;
     font-weight: 700;
     max-width: 500px;
-}
+    }
+    .dialogs__messages>textarea{
+        border: 1px solid black;
+        border-radius: 5px 0 5px 0;
+        padding: 0 5px;
+    }
+
 .dialogs__users{
     display: flex;
     align-items: start;
