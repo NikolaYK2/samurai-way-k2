@@ -2,7 +2,7 @@ import React from "react";
 import s from "./ContentProfile.module.css";
 import {MyPost} from "./MyProfile/myPost/MyPost";
 import {MyProfile} from "./MyProfile/MyProfile";
-import {StoreType} from "../../redux/state";
+import {StoreType} from "../../redux/store";
 
 type ContentProfileType = {
     store: StoreType,

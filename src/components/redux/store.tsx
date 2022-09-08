@@ -1,5 +1,7 @@
 import {v1} from "uuid";
-import {ChangeEvent} from "react";
+import {ActionsTypeMessagesUsers, messagesPageReducer} from "./messagesPageReducer";
+import {ActionsType, proFileReducer} from "./proFilePageReducer";
+import {sidebarReducer} from "./sidebarReducer";
 //=======State========================================================
 export type usersType = {
     id: string,
@@ -52,62 +54,63 @@ export type StoreType = {
     // addMessageUsers: () => void,
     // addMessageUsersChange: (newMessageUsers: string) => void,
     _rerenderEntireTree: (store: StoreType) => void,
-    subscribe: (observer: ()=>void) => void,
+    subscribe: (observer: () => void) => void,
     getState: () => stateType,
-    dispatch: (action: ActionsType | ActionsTypeMessagesUsers) => void,
+    dispatch: (action: ActionTypeFull) => void,
 }
+export type ActionTypeFull = ActionsType | ActionsTypeMessagesUsers;
 
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
-const addPost = 'addPost';
-const addPostChange = 'addPostChange';
-const addMessageUsers = 'addMessageUsers';
-const addMessageUsersChange = 'addMessageUsersChange';
+// const addPost = 'addPost';
+// const addPostChange = 'addPostChange';
+// const addMessageUsers = 'addMessageUsers';
+// const addMessageUsersChange = 'addMessageUsersChange';
 //==========================================================================================
 
-//=====типизация actions add post==============================================================================
-// type AddPostActionType ={
-//     type: 'addPost'
-//     postMessage: string,
+// //=====типизация actions add post==============================================================================
+// // type AddPostActionType ={
+// //     type: 'addPost'
+// //     postMessage: string,
+// //
+// // }
+// // type AddPostChangeActionType ={
+// //     type: 'addPostChange'
+// //     postMessage: string,
+// // }
+// //Автоматическое определение типа функции=============================================================
+// // type AddPostActionType = ReturnType<typeof addPostAC>;
+// // type AddPostChangeActionType = ReturnType<typeof addPostChangeActionCreator>;
+// export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof addPostChangeAC>;
+// //Type messages Users Type===========================================================================================================
+// export type ActionsTypeMessagesUsers = ReturnType<typeof addMessageUsersAC> | ReturnType<typeof addMessageUsersChangeAC>;
+// export type ActionTypeFull = ActionsType | ActionsTypeMessagesUsers;
+// //======function Action Creator addPoast==============================================================================
+// export const addPostAC = (postMessage: string) => {
+//     return {
+//         type: 'addPost',
+//         postMessage: postMessage,
+//     } as const//воспринимать весь обьект как константу
+// }
+// export const addPostChangeAC = (event: ChangeEvent<HTMLTextAreaElement>)/*: AddPostChangeActionType - типизировали функцию вверху*/ => {
+//     return {
+//         type: 'addPostChange',
+//         postMessage: event.currentTarget.value,
+//     } as const
+// }
 //
+// //FUNCTION ADD MESSAGES USERS=ЭКШЭН КРИЕЙТЕРЫ - AC======================================================
+// export const addMessageUsersAC = (newMessageUsers: string) => {
+//     return {
+//         type: 'addMessageUsers',
+//         newMessageUsers: newMessageUsers,
+//     } as const
 // }
-// type AddPostChangeActionType ={
-//     type: 'addPostChange'
-//     postMessage: string,
+// export const addMessageUsersChangeAC = (event: ChangeEvent<HTMLTextAreaElement>) => {
+//     return {
+//         type: 'addMessageUsersChange',
+//         newMessageUsers: event.currentTarget.value
+//     } as const
 // }
-//Автоматическое определение типа функции=============================================================
-// type AddPostActionType = ReturnType<typeof addPostAC>;
-// type AddPostChangeActionType = ReturnType<typeof addPostChangeActionCreator>;
-export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof addPostChangeAC>;
-//Type messages Users Type===========================================================================================================
-export type ActionsTypeMessagesUsers = ReturnType<typeof addMessageUsersAC> | ReturnType<typeof addMessageUsersChangeAC>;
-
-//======function Action Creator addPoast==============================================================================
-export const addPostAC = (postMessage: string) => {
-    return {
-        type: 'addPost',
-        postMessage: postMessage,
-    } as const//воспринимать весь обьект как константу
-}
-export const addPostChangeAC = (event: ChangeEvent<HTMLTextAreaElement>)/*: AddPostChangeActionType - типизировали функцию вверху*/ => {
-    return {
-        type: 'addPostChange',
-        postMessage: event.currentTarget.value,
-    } as const
-}
-
-//FUNCTION ADD MESSAGES USERS=======================================================
-export const addMessageUsersAC = (newMessageUsers: string) => {
-    return {
-        type: 'addMessageUsers',
-        newMessageUsers: newMessageUsers,
-    } as const
-}
-export const addMessageUsersChangeAC=(event: ChangeEvent<HTMLTextAreaElement>)=>{
-    return{
-        type:'addMessageUsersChange',
-        newMessageUsers: event.currentTarget.value
-    } as const
-}
 
 // ==========================================================================================================
 export let store: StoreType = {
@@ -219,32 +222,36 @@ export let store: StoreType = {
         return this._state
     },
     dispatch(action) {//{type: 'addPost'
-        if (action.type === addPost) {
-            //Добавление нового поста кнопка=================================================
-            const newPost: postDataType = {id: v1(), sms: action.postMessage, like: 0,};//МОжно через переменную, протипизировав ее указав postDataType
-            this._state.proFilePage.postData = [newPost, ...this._state.proFilePage.postData];
-            // state.proFilePage.postData.push(newPost);
-            // this._state.proFilePage.postData.push({id: v1(), sms: /*postMessage*/ this._state.proFilePage.message, like: 0,});
-            this._state.proFilePage.message = '';//зачищаем строку здесь
-            this._rerenderEntireTree(store);
-        } else if (action.type === addPostChange) {
-            //Добавление нового поста для change(update)=================================================
-            //     this._state.proFilePage.message = postMessage;//message = переменной newTextPost, в которую будем сам и вписывать знаечния(контралируемая)
-            this._state.proFilePage.message = action.postMessage;//Нужно упаковать для action, так как с переменной теперь работать не будет
-            this._rerenderEntireTree(store);
-            //MESSAGE USERS===============================`================================
-        } else if (action.type === addMessageUsers) {
-            //add new message users=============================================
-            // this._state.messagesPage.usersMessages.push({id: v1(), sms: action.newMessageUsers,});
-            const newMessages = {id: v1(), sms: action.newMessageUsers,}
-            this._state.messagesPage.usersMessages = [...this._state.messagesPage.usersMessages, newMessages];
-            this._state.messagesPage.message = '';
-            this._rerenderEntireTree(store);
-        } else if (action.type === addMessageUsersChange) {
-            //add Для Change update==========
-            this._state.messagesPage.message = action.newMessageUsers;
-            this._rerenderEntireTree(store);
-        }
+        this._state = messagesPageReducer(this._state, action);
+        this._state = proFileReducer(this._state, action);
+        sidebarReducer(this._state,action);
+        this._rerenderEntireTree(store);
+        // if (action.type === addPost) {
+        //     //Добавление нового поста кнопка=================================================
+        //     const newPost: postDataType = {id: v1(), sms: action.postMessage, like: 0,};//МОжно через переменную, протипизировав ее указав postDataType
+        //     this._state.proFilePage.postData = [newPost, ...this._state.proFilePage.postData];
+        //     // state.proFilePage.postData.push(newPost);
+        //     // this._state.proFilePage.postData.push({id: v1(), sms: /*postMessage*/ this._state.proFilePage.message, like: 0,});
+        //     this._state.proFilePage.message = '';//зачищаем строку здесь
+        //     this._rerenderEntireTree(store);
+        // } else if (action.type === addPostChange) {
+        //     //Добавление нового поста для change(update)=================================================
+        //     //     this._state.proFilePage.message = postMessage;//message = переменной newTextPost, в которую будем сам и вписывать знаечния(контралируемая)
+        //     this._state.proFilePage.message = action.postMessage;//Нужно упаковать для action, так как с переменной теперь работать не будет
+        //     this._rerenderEntireTree(store);
+        //     //MESSAGE USERS===============================`================================
+        // } else if (action.type === addMessageUsers) {
+        //     //add new message users=============================================
+        //     // this._state.messagesPage.usersMessages.push({id: v1(), sms: action.newMessageUsers,});
+        //     const newMessages = {id: v1(), sms: action.newMessageUsers,}
+        //     this._state.messagesPage.usersMessages = [...this._state.messagesPage.usersMessages, newMessages];
+        //     this._state.messagesPage.message = '';
+        //     this._rerenderEntireTree(store);
+        // } else if (action.type === addMessageUsersChange) {
+        //     //add Для Change update==========
+        //     this._state.messagesPage.message = action.newMessageUsers;
+        //     this._rerenderEntireTree(store);
+        // }
     }
 }
 

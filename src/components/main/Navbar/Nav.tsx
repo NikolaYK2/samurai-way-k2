@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Nav.module.css";
 import {NavLink} from "react-router-dom";
-import {StoreType} from "../../redux/state";
+import {StoreType} from "../../redux/store";
 
 type NavType={
     store: StoreType,

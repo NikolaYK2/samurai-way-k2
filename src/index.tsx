@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {store} from "./components/redux/state";
-import {BrowserRouter} from "react-router-dom";
+import {store} from "./components/redux/store";
+import {BrowserRouter, HashRouter} from "react-router-dom";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -12,14 +12,14 @@ const root = ReactDOM.createRoot(
 let rerenderEntireTree=()=>{//функция перерисовки
     root.render(
         <React.StrictMode>
-            <BrowserRouter>
+            <HashRouter>
                 <App store={store}
                      // addPost={addPost}
                      // addPostChange={addPostChange}
                      // addMessageUsers={addMessageUsers}
                      // addMessageUsersChange={addMessageUsersChange}
                 />
-            </BrowserRouter>
+            </HashRouter>
         </React.StrictMode>
     );
 

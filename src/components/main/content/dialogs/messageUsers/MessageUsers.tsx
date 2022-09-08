@@ -1,12 +1,11 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from "./MessageUsers.module.css";
+import {StoreType} from "../../../../redux/store";
 import {
     ActionsTypeMessagesUsers,
     addMessageUsersAC,
-    addMessageUsersChangeAC,
-    addPostAC,
-    StoreType
-} from "../../../../redux/state";
+    addMessageUsersChangeAC
+} from "../../../../redux/messagesPageReducer";
 
 type MessageUsersType = {
     store: StoreType,
