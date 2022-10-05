@@ -1,7 +1,8 @@
 import {v1} from "uuid";
-import {ActionsTypeMessagesUsers, messagesPageReducer} from "./messagesPageReducer";
-import {ActionsType, proFileReducer} from "./proFilePageReducer";
+import {messagesPageReducer} from "./messagesPageReducer";
+import {proFileReducer} from "./proFilePageReducer";
 import {sidebarReducer} from "./sidebarReducer";
+import {ActionTypeFull, StoreType} from "./redux-store";
 //=======State========================================================
 export type usersType = {
     id: string,
@@ -43,22 +44,21 @@ export type sidebarType = {
 }
 
 export type stateType = {
-    proFilePage: proFilePageType,
     messagesPage: messagesPageType,
+    proFilePage: proFilePageType,
     sidebar: sidebarType,
 }
-export type StoreType = {
-    _state: stateType,
-    // addPost: () => void,
-    // addPostChange: (postMessage: string) => void,
-    // addMessageUsers: () => void,
-    // addMessageUsersChange: (newMessageUsers: string) => void,
-    _rerenderEntireTree: (store: StoreType) => void,
-    subscribe: (observer: () => void) => void,
-    getState: () => stateType,
-    dispatch: (action: ActionTypeFull) => void,
-}
-export type ActionTypeFull = ActionsType | ActionsTypeMessagesUsers;
+// export type StoreType = {
+//     _state: stateType,
+//     // addPost: () => void,
+//     // addPostChange: (postMessage: string) => void,
+//     // addMessageUsers: () => void,
+//     // addMessageUsersChange: (newMessageUsers: string) => void,
+//     _rerenderEntireTree: (store: StoreType) => void,
+//     subscribe: (observer: () => void) => void,
+//     getState: () => stateType,
+//     dispatch: (action: ActionTypeFull) => void,
+// }
 
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 // const addPost = 'addPost';
@@ -222,9 +222,9 @@ export let store: StoreType = {
         return this._state
     },
     dispatch(action) {//{type: 'addPost'
-        this._state = messagesPageReducer(this._state, action);
-        this._state = proFileReducer(this._state, action);
-        sidebarReducer(this._state,action);
+        this._state.messagesPage = messagesPageReducer(this._state.messagesPage, action);
+        this._state.proFilePage = proFileReducer(this._state.proFilePage, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
         this._rerenderEntireTree(store);
         // if (action.type === addPost) {
         //     //Добавление нового поста кнопка=================================================

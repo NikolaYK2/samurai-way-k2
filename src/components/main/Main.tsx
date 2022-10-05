@@ -7,8 +7,8 @@ import {Navigate, Route, Routes, useSearchParams,} from "react-router-dom";
 import {Music} from "./content/music/Music";
 import {News} from "./content/news/News";
 import {Settings} from "./content/settings/Settings";
-import {StoreType} from "../redux/store";
 import {Friends} from "./content/friends/Friends";
+import {StoreType} from "../../redux/redux-store";
 
 type MainType={
     store: StoreType,

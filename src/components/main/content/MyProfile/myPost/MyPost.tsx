@@ -1,12 +1,12 @@
 import s from "./MyPost.module.css";
 import React, {ChangeEvent, useState} from "react";
 import {Post} from "../post/Post";
-import {StoreType} from "../../../../redux/store";
-import {ActionsType, addPostAC, addPostChangeAC} from "../../../../redux/proFilePageReducer";
+import {ActionTypeFull, StoreType} from "../../../../../redux/redux-store";
+import {addPostAC, addPostChangeAC} from "../../../../../redux/proFilePageReducer";
 
 type MyPostType = {
     store: StoreType,
-    dispatch: (action: ActionsType)=>void,
+    dispatch: (action: ActionTypeFull)=>void,
     message: string,
     // addPost: () => void,
     // addPostChange: (newText: string) => void,

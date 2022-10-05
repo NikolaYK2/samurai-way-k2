@@ -2,7 +2,7 @@ import React from "react";
 import s from "./DialogsMessage.module.css";
 import {MessageUsers} from "./messageUsers/MessageUsers";
 import {Users} from "./users/Users";
-import {StoreType} from "../../../redux/store";
+import {StoreType} from "../../../../redux/redux-store";
 
 type DialogsMessageType={
     store:StoreType,

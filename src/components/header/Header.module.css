@@ -3,7 +3,7 @@
     grid-template: 100px / minmax(auto, 100px)  minmax(auto, 1300px);
     grid-area: header;
     grid-column: 2;
-    background-color: aquamarine;
+    background: url("https://catherineasquithgallery.com/uploads/posts/2021-02/1612800826_3-p-nezhno-goluboi-fon-s-oblakami-3.jpg")0 center/cover no-repeat;
 }
 .header img {
     padding: 10px;

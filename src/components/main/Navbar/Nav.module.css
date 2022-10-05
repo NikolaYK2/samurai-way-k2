@@ -1,7 +1,7 @@
 .nav {
     display: grid;
     grid-column: 1;
-    background-color: aquamarine;
+    background: rgb(135,216,237);
     position: relative;
     }
     nav ul{
