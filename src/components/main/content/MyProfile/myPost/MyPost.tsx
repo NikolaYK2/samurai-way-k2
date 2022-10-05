@@ -4,8 +4,8 @@ import {Post} from "../post/Post";
 import {ActionTypeFull, StoreType} from "../../../../../redux/redux-store";
 
 type MyPostType = {
-    store: StoreType,
-    dispatch: (action: ActionTypeFull)=>void,
+    // store: StoreType,
+    // dispatch: (action: ActionTypeFull)=>void,
     message: string,
     addPost: () => void,
     addPostChange: (event: ChangeEvent<HTMLTextAreaElement>) => void,

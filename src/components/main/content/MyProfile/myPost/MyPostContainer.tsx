@@ -46,8 +46,8 @@ export const MyPostContainer = (props: MyPostType) => {
             <MyPost addPostChange={onCHandlerValue}
                     addPost={addPostButtonHandler}
                     message={props.store.getState().proFilePage.message}
-                    store={props.store}
-                    dispatch={props.store.dispatch}
+                    // store={props.store}
+                    // dispatch={props.store.dispatch}
             />
             <Post postData={props.store.getState().proFilePage.postData}/>
         </>

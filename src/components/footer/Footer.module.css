@@ -3,5 +3,5 @@
     grid-template: 1fr / 1fr;
     grid-area: foot;
     grid-column: 2;
-    background-color: #b7b4b4;
+    background: url("https://catherineasquithgallery.com/uploads/posts/2021-02/1612800826_3-p-nezhno-goluboi-fon-s-oblakami-3.jpg")0 top/cover no-repeat;
 }
