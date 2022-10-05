@@ -6,7 +6,7 @@ import {Footer} from "./components/footer/Footer";
 import {StoreType} from "./redux/redux-store";
 
 type AppPropsType = {
-    store: StoreType,
+    // store: StoreType,
     // addPostChange:(newMessageUsers:any)=>void,
 }
 
@@ -14,7 +14,8 @@ function App(props: AppPropsType) {
     return (
             <div className="wrapper">
                 <Header/>
-                <Main store={props.store}
+                <Main
+                    // store={props.store}
                       // addPost={props.addPost}//Добавления обьекта с сообщением
                       // proFilePage={props.state.proFilePage}//передаем значения для textarea value
                       // addPostChange={props.addPostChange}

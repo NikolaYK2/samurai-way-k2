@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {stateType, store} from "./redux/redux-store";
+import {store} from "./redux/redux-store";
 import {BrowserRouter, HashRouter} from "react-router-dom";
-import {addPostChangeAC} from "./redux/proFilePageReducer";
+import {Provider, StoreContext} from "./StoreContext";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -16,12 +16,17 @@ let rerenderEntireTree=()=>{//функция перерисовки
     root.render(
         <React.StrictMode>
             <HashRouter>
-                <App store={store}
-                     // addPost={addPost}
-                     // addPostChange={addPostChangeAC}
-                     // addMessageUsers={addMessageUsers}
-                     // addMessageUsersChange={addMessageUsersChange}
-                />
+                {/*<StoreContext.Provider value={store}>*/}
+                <Provider store={store}>{/* - Компонента которая работает с контекстом API*/}
+                    <App
+                    // store={store}//store теперь не передаем через пропсы, есть API
+                    // addPost={addPost}
+                    // addPostChange={addPostChangeAC}
+                    // addMessageUsers={addMessageUsers}
+                    // addMessageUsersChange={addMessageUsersChange}
+                    />
+                </Provider>
+                {/*</StoreContext.Provider>*/}
             </HashRouter>
         </React.StrictMode>
     );

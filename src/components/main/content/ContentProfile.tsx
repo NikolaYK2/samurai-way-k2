@@ -1,12 +1,11 @@
 import React from "react";
 import s from "./ContentProfile.module.css";
-import {MyPost} from "./MyProfile/myPost/MyPost";
 import {MyProfile} from "./MyProfile/MyProfile";
 import {StoreType} from "../../../redux/redux-store";
 import {MyPostContainer} from "./MyProfile/myPost/MyPostContainer";
 
 type ContentProfileType = {
-    store: StoreType,
+    // store: StoreType,
     // addPost:()=>void,
     // proFilePage:proFilePageType,
     // addPostChange:(newMessageUsers: any)=>void,
@@ -20,7 +19,7 @@ export const ContentProfile = (props: ContentProfileType) => {
                     alt=""/>
             </div>
             <MyProfile/>
-            <MyPostContainer store={props.store}
+            <MyPostContainer /*store={props.store}*/
                 //     dispatch={props.store.dispatch.bind(props.store)}
                 // // addPost={props.store.dispatch.bind(props.store)}
                 // // addPostChange={props.addPostChange}

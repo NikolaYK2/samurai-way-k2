@@ -2,9 +2,10 @@ import React from "react";
 import s from "./Nav.module.css";
 import {NavLink} from "react-router-dom";
 import {StoreType} from "../../../redux/redux-store";
+import {StoreContext} from "../../../StoreContext";
 
 type NavType={
-    store: StoreType,
+    // store: StoreType,
 }
 
 export const Nav =(props: NavType)=>{
@@ -20,16 +21,20 @@ export const Nav =(props: NavType)=>{
                     <br/>
                     <li><NavLink to="/settings" className={({isActive})=> isActive ? s.activeLink : undefined}>Settings</NavLink></li>
                     <li><NavLink to="/friends" className={({isActive})=> isActive ? s.activeLink : undefined}>Friends</NavLink>
-                        {props.store.getState().sidebar.friends.map(f=>{
-                            return(
+                        <StoreContext.Consumer>
+                            {(store)=>(
+                                <>
+                            {/*props.*/store.getState().sidebar.friends.map(f=>{
+                                return(
                                 <div className={s.item__friends} key={f.id}>
-                                    <div>
-                                        <img src={f.avatar} alt=""/>
-                                    </div>
-                                    <p>{f.name}</p>
+                                <div>
+                                <img src={f.avatar} alt=""/>
                                 </div>
-                            )
-                        })}
+                                <p>{f.name}</p>
+                                </div>
+                                )})}
+                                </>)}
+                        </StoreContext.Consumer>
                     </li>
                 </ul>
             </nav>
