@@ -7,6 +7,7 @@ import {StoreType} from "./redux/redux-store";
 
 type AppPropsType = {
     store: StoreType,
+    // addPostChange:(newMessageUsers:any)=>void,
 }
 
 function App(props: AppPropsType) {

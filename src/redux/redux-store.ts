@@ -1,8 +1,7 @@
-import {combineReducers, legacy_createStore as createStore, Store} from "redux";
-import {ActionsTypeMessagesUsers, messagesPageReducer} from "./messagesPageReducer";
-import {sidebarReducer} from "./sidebarReducer";
-import {ActionsTypeProfile, proFileReducer} from "./proFilePageReducer";
-import {stateType} from "./store";
+import {combineReducers, legacy_createStore as createStore} from "redux";
+import {ActionsTypeMessagesUsers, messagesPageReducer, messagesPageType} from "./messagesPageReducer";
+import {sidebarReducer, sidebarType} from "./sidebarReducer";
+import {ActionsTypeProfile, proFilePageType, proFileReducer} from "./proFilePageReducer";
 
 export type StoreType = {
     _state: stateType,
@@ -14,6 +13,12 @@ export type StoreType = {
     subscribe: (observer: () => void) => void,
     getState: () => stateType,
     dispatch: (action: ActionTypeFull) => void,
+}
+
+export type stateType = {
+    messagesPage: messagesPageType,
+    proFilePage: proFilePageType,
+    sidebar: sidebarType,
 }
 
 export type ActionTypeFull = ActionsTypeProfile | ActionsTypeMessagesUsers;

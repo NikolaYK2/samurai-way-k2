@@ -1,7 +1,5 @@
-import {postDataType, proFilePageType} from "./store";
 import {v1} from "uuid";
 import {ChangeEvent} from "react";
-import {ActionsTypeMessagesUsers} from "./messagesPageReducer";
 import {ActionTypeFull} from "./redux-store";
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addPost = 'addPost';
@@ -36,6 +34,17 @@ export const addPostChangeAC = (event: ChangeEvent<HTMLTextAreaElement>)/*: AddP
     } as const
 }
 
+export type postDataType = {
+    id: string,
+    sms: string,
+    like: number,
+}
+
+export type proFilePageType = {
+    postData: postDataType[],
+    message: string,
+}
+
 let initializationState: proFilePageType = {
     message: "",
     postData: [
@@ -44,6 +53,7 @@ let initializationState: proFilePageType = {
     ],
 
 }
+
 export const proFileReducer = (state = initializationState, action: ActionTypeFull) => {
 
     if (action.type === addPost) {

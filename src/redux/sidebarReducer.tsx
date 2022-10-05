@@ -1,5 +1,14 @@
-import {sidebarType} from "./store";
 import {v1} from "uuid";
+
+export type friendsType = {
+    id: string,
+    name: string,
+    avatar: string,
+}
+
+export type sidebarType = {
+    friends: friendsType[],
+}
 
 let initializationState: sidebarType = {
     friends: [

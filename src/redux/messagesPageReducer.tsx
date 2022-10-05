@@ -1,4 +1,3 @@
-import {messagesPageType} from "./store";
 import {v1} from "uuid";
 import {ChangeEvent} from "react";
 import {ActionTypeFull} from "./redux-store";
@@ -20,9 +19,7 @@ const addMessageUsersChange = 'addMessageUsersChange';
 // type AddPostActionType = ReturnType<typeof addPostAC>;
 // type AddPostChangeActionType = ReturnType<typeof addPostChangeActionCreator>;
 //Type messages Users Type===========================================================================================================
-export type ActionsTypeMessagesUsers =
-    ReturnType<typeof addMessageUsersAC>
-    | ReturnType<typeof addMessageUsersChangeAC>;
+export type ActionsTypeMessagesUsers = ReturnType<typeof addMessageUsersAC> | ReturnType<typeof addMessageUsersChangeAC>;
 //FUNCTION ADD MESSAGES USERS=ЭКШЭН КРИЕЙТЕРЫ - AC======================================================
 export const addMessageUsersAC = (newMessageUsers: string) => {
     return {
@@ -36,6 +33,25 @@ export const addMessageUsersChangeAC = (event: ChangeEvent<HTMLTextAreaElement>)
         newMessageUsers: event.currentTarget.value
     } as const
 }
+
+export type usersType = {
+    id: string,
+    name: string,
+    link: string,
+    avatar: string,
+}
+
+export type usersMessagesType = {
+    id: string,
+    sms: string,
+}
+
+export type  messagesPageType = {
+    users: usersType[],
+    message: string,
+    usersMessages: usersMessagesType[],
+}
+
 
 let initializationState: messagesPageType = {
     users: [
@@ -72,6 +88,7 @@ let initializationState: messagesPageType = {
         {id: v1(), sms: "Cool",},
     ],
 }
+
 export const messagesPageReducer = (state = initializationState, action: ActionTypeFull) => {
 //Если нужно преобразовали state
     switch (action.type) {

@@ -3,12 +3,13 @@ import s from "./ContentProfile.module.css";
 import {MyPost} from "./MyProfile/myPost/MyPost";
 import {MyProfile} from "./MyProfile/MyProfile";
 import {StoreType} from "../../../redux/redux-store";
+import {MyPostContainer} from "./MyProfile/myPost/MyPostContainer";
 
 type ContentProfileType = {
     store: StoreType,
     // addPost:()=>void,
     // proFilePage:proFilePageType,
-    // addPostChange:(newTextPost: string)=>void,
+    // addPostChange:(newMessageUsers: any)=>void,
 }
 export const ContentProfile = (props: ContentProfileType) => {
     return (
@@ -19,11 +20,12 @@ export const ContentProfile = (props: ContentProfileType) => {
                     alt=""/>
             </div>
             <MyProfile/>
-            <MyPost store={props.store}
-                    dispatch={props.store.dispatch.bind(props.store)}
-                // addPost={props.store.dispatch.bind(props.store)}
-                // addPostChange={props.store.dispatch.bind(props.store)}
-                    message={props.store.getState().proFilePage.message}
+            <MyPostContainer store={props.store}
+                //     dispatch={props.store.dispatch.bind(props.store)}
+                // // addPost={props.store.dispatch.bind(props.store)}
+                // // addPostChange={props.addPostChange}
+                // // addPostChange={props.store.dispatch.bind(props.store)}
+                //     message={props.store.getState().proFilePage.message}
             />
         </section>
     );
