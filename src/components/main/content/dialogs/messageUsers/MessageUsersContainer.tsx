@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {StoreType} from "../../../../../redux/redux-store";
+import {AppStateType} from "../../../../../redux/redux-store";
 import {addMessageUsersAC, addMessageUsersChangeAC} from "../../../../../redux/messagesPageReducer";
 import {MessageUsers} from "./MessageUsers";
 import {StoreContext} from "../../../../../StoreContext";

@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import s from "./Users.module.css";
-import {StoreType} from "../../../../../redux/redux-store";
+import {AppStateType} from "../../../../../redux/redux-store";
 import {StoreContext} from "../../../../../StoreContext";
 
 type UsersType = {

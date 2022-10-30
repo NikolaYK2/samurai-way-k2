@@ -2,7 +2,7 @@ import {v1} from "uuid";
 import {messagesPageReducer} from "./messagesPageReducer";
 import {proFileReducer} from "./proFilePageReducer";
 import {sidebarReducer} from "./sidebarReducer";
-import {StoreType} from "./redux-store";
+import {AppStateType} from "./redux-store";
 //=======State========================================================
 // export type usersType = {
 //     id: string,

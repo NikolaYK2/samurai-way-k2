@@ -1,7 +1,7 @@
 import s from "./MyPost.module.css";
 import React, {ChangeEvent, useState} from "react";
 import {Post} from "../post/Post";
-import {ActionTypeFull, StoreType} from "../../../../../redux/redux-store";
+import {ActionTypeFull, AppStateType} from "../../../../../redux/redux-store";
 
 type MyPostType = {
     // store: StoreType,

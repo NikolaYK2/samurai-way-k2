@@ -1,12 +1,12 @@
 import React from "react";
-import {store, StoreType} from "./redux/redux-store";
+import {AppStateType, store} from "./redux/redux-store";
 
 
 export const StoreContext = React.createContext(store);//StoreContext - задаем собственное имя
 
 type ProviderType={
-    children: any;
-    store: StoreType
+    children: any,
+    store: any,
 }
 export const Provider = (props: ProviderType)=>{
     return (

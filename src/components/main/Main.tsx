@@ -8,7 +8,7 @@ import {Music} from "./content/music/Music";
 import {News} from "./content/news/News";
 import {Settings} from "./content/settings/Settings";
 import {Friends} from "./content/friends/Friends";
-import {StoreType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/redux-store";
 
 type MainType={
     // store: StoreType,

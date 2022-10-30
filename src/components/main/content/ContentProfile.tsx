@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./ContentProfile.module.css";
 import {MyProfile} from "./MyProfile/MyProfile";
-import {StoreType} from "../../../redux/redux-store";
+import {AppStateType} from "../../../redux/redux-store";
 import {MyPostContainer} from "./MyProfile/myPost/MyPostContainer";
 
 type ContentProfileType = {
