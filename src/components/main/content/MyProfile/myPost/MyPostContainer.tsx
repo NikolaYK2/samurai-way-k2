@@ -1,5 +1,5 @@
 import React from "react";
-import {addPostAC, addPostChangeAC} from "../../../../../redux/proFilePageReducer";
+import {addPostAC, addPostChangeAC, postDataType} from "../../../../../redux/proFilePageReducer";
 import {MyPost} from "./MyPost";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../../../redux/redux-store";
@@ -66,6 +66,7 @@ import {Dispatch} from "redux";
 
 type MapStatePropsType = {
     message: string,
+    postData: postDataType[],
 }
 
 type MapDispatchPropsType = {
@@ -80,6 +81,7 @@ const mapStateToProps = (state: AppStateType):MapStatePropsType => {//назва
     return {
         //getState мы уже не делаем
         message: state.proFilePage.message,
+        postData: state.proFilePage.postData,
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {

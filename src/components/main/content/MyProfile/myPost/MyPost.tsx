@@ -1,6 +1,7 @@
 import s from "./MyPost.module.css";
 import React, {ChangeEvent, useState} from "react";
 import {MyPostType} from "./MyPostContainer";
+import {store} from "../../../../../redux/redux-store";
 
 // type MyPostType = {
 //     // store: StoreType,
@@ -12,7 +13,7 @@ import {MyPostType} from "./MyPostContainer";
 export const MyPost = (props: MyPostType) => {
     //ошибка при добавление пустой строки ===============================
     let [errorText, setErrorText] = useState<string | null>(null);
-        //====================================================================
+    //====================================================================
 //======Добавления смс для кнопки======================================================
     // const newPostElement = React.createRef<HTMLTextAreaElement>();//событие для textarea
     const addPostButtonHandler = () => {
@@ -33,13 +34,31 @@ export const MyPost = (props: MyPostType) => {
     }
     //===============================================================================
 //добавление сообщения в textarea =========================================
-    const onCHandlerValue = (event:ChangeEvent<HTMLTextAreaElement>) => {
+    const onCHandlerValue = (event: ChangeEvent<HTMLTextAreaElement>) => {
         let text = event.currentTarget.value
         props.addPostChange(text)
         // props.dispatch(addPostChangeAC(event))
         setErrorText('')
     }
     //=====================================================================================
+    const post = props.postData.map(pD => {
+            return (
+                <div key={pD.id}>
+                    <div className={s.content__profUsers}>
+                        <div>
+                            <img
+                                src="https://avatars.mds.yandex.net/i?id=0eaa142d7202ac9bbd26ac279e7ae159_l-4898876-images-thumbs&n=27&h=384&w=480"
+                                alt=""/>
+                        </div>
+                        {pD.sms}
+                    </div>
+                    <div>
+                        <span>like </span>{pD.like}
+                    </div>
+                </div>
+            )
+        })
+
     return (
         <>
             <div className={s.content__myPost}>
@@ -49,10 +68,13 @@ export const MyPost = (props: MyPostType) => {
                         // ref={newPostElement}
                               onChange={onCHandlerValue}
                               value={props.message}
-                              />
+                    />
                     <button onClick={addPostButtonHandler}>Send</button>
                 </div>
             </div>
+            <>
+                {post}
+            </>
         </>
     );
 }
