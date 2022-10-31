@@ -1,7 +1,6 @@
 import s from "./MyPost.module.css";
 import React, {ChangeEvent, useState} from "react";
 import {MyPostType} from "./MyPostContainer";
-import {store} from "../../../../../redux/redux-store";
 
 // type MyPostType = {
 //     // store: StoreType,
