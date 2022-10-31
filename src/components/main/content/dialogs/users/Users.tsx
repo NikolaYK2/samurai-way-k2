@@ -1,21 +1,18 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import s from "./Users.module.css";
-import {AppStateType} from "../../../../../redux/redux-store";
-import {StoreContext} from "../../../../../StoreContext";
+import {store} from "../../../../../redux/redux-store";
 
 type UsersType = {
     // store:StoreType
 }
 
-export const Users = (props: UsersType) => {
+export const Users = () => {
     return (
         <div className={s.dialogs__users}>
             Dialogs
-            <StoreContext.Consumer>
-                {(store) => (
                     <>
-                        {/*props.*/store.getState().messagesPage.users.map((u) => {
+                        {store.getState().messagesPage.users.map((u) => {
                             return (
                                 <div key={u.id}>
                                     <NavLink to={u.link} className={({isActive}) => isActive ? s.active : s.users}>
@@ -26,8 +23,6 @@ export const Users = (props: UsersType) => {
                         })}
                     </>
                 )
-                }
-            </StoreContext.Consumer>
         </div>
     )
 }

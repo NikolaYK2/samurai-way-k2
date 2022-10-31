@@ -1,5 +1,4 @@
 import {v1} from "uuid";
-import {ChangeEvent} from "react";
 import {ActionTypeFull} from "./redux-store";
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addMessageUsers = 'addMessageUsers';
@@ -27,10 +26,10 @@ export const addMessageUsersAC = (newMessageUsers: string) => {
         newMessageUsers: newMessageUsers,
     } as const
 }
-export const addMessageUsersChangeAC = (event: ChangeEvent<HTMLTextAreaElement>) => {
+export const addMessageUsersChangeAC = (text:string) => {
     return {
         type: 'addMessageUsersChange',
-        newMessageUsers: event.currentTarget.value
+        newMessageUsers: text,
     } as const
 }
 
@@ -53,7 +52,7 @@ export type  messagesPageType = {
 }
 
 
-let initializationState: messagesPageType = {
+const initializationState: messagesPageType = {
     users: [
         {
             id: v1(),
@@ -89,17 +88,19 @@ let initializationState: messagesPageType = {
     ],
 }
 
-export const messagesPageReducer = (state = initializationState, action: ActionTypeFull) => {
+export const messagesPageReducer = (state = initializationState, action: ActionTypeFull):messagesPageType => {
 //Если нужно преобразовали state
     switch (action.type) {
         case addMessageUsers:
-            const newMessages = {id: v1(), sms: action.newMessageUsers,}
-            state.usersMessages = [...state.usersMessages, newMessages];
-            state.message = '';
-            return state;
+            // const newMessages = {id: v1(), sms: action.newMessageUsers,}
+            // state.usersMessages = [...state.usersMessages, newMessages];
+            // state.message = '';
+            // return state;
+            return {...state, message: '', usersMessages:[...state.usersMessages, {id: v1(), sms:action.newMessageUsers}]};
+
         case addMessageUsersChange:
-            state.message = action.newMessageUsers;
-            return state;
+            // state.message = action.newMessageUsers;
+            return {...state, message: action.newMessageUsers};
         default:
             return state;
     }

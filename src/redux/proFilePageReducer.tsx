@@ -1,5 +1,4 @@
 import {v1} from "uuid";
-import {ChangeEvent} from "react";
 import {ActionTypeFull} from "./redux-store";
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addPost = 'addPost';
@@ -27,10 +26,10 @@ export const addPostAC = (postMessage: string) => {
         postMessage: postMessage,
     } as const//воспринимать весь обьект как константу
 }
-export const addPostChangeAC = (event: ChangeEvent<HTMLTextAreaElement>)/*: AddPostChangeActionType - типизировали функцию вверху*/ => {
+export const addPostChangeAC = (text: string)/*: AddPostChangeActionType - типизировали функцию вверху*/ => {
     return {
         type: 'addPostChange',
-        postMessage: event.currentTarget.value,
+        postMessage: text,
     } as const
 }
 
@@ -58,15 +57,18 @@ export const proFileReducer = (state = initializationState, action: ActionTypeFu
 
     if (action.type === addPost) {
         //Добавление нового поста кнопка=================================================
-        const newPost: postDataType = {id: v1(), sms: action.postMessage, like: 0,};//МОжно через переменную, протипизировав ее указав postDataType
-        state.postData = [newPost, ...state.postData];
-        // state.proFilePage.postData.push(newPost);
-        // this._state.proFilePage.postData.push({id: v1(), sms: /*postMessage*/ this._state.proFilePage.message, like: 0,});
-        state.message = '';//зачищаем строку здесь
+        // const newPost: postDataType = {id: v1(), sms: action.postMessage, like: 0,};//МОжно через переменную, протипизировав ее указав postDataType
+        // state.postData = [newPost, ...state.postData];
+        // // state.proFilePage.postData.push(newPost);
+        // // this._state.proFilePage.postData.push({id: v1(), sms: /*postMessage*/ this._state.proFilePage.message, like: 0,});
+        // state.message = '';//зачищаем строку здесь
+        return {...state, message: '', postData:[{id: v1(), sms: action.postMessage, like:0}, ...state.postData]}
+
     } else if (action.type === addPostChange) {
         //Добавление нового поста для change(update)=================================================
         //     this._state.proFilePage.message = postMessage;//message = переменной newTextPost, в которую будем сам и вписывать знаечния(контралируемая)
-        state.message = action.postMessage;//Нужно упаковать для action, так как с переменной теперь работать не будет
+        // state.message = action.postMessage;//Нужно упаковать для action, так как с переменной теперь работать не будет
+        return {...state, message: action.postMessage}
         //MESSAGE USERS===============================`================================
     }
     return state;

@@ -1,50 +1,83 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import {AppStateType} from "../../../../../redux/redux-store";
-import {addMessageUsersAC, addMessageUsersChangeAC} from "../../../../../redux/messagesPageReducer";
+import {
+    addMessageUsersAC,
+    addMessageUsersChangeAC,
+    usersMessagesType
+} from "../../../../../redux/messagesPageReducer";
 import {MessageUsers} from "./MessageUsers";
-import {StoreContext} from "../../../../../StoreContext";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
-type MessageUsersType = {
-    // store: StoreType,
-    // addMessageUsers:()=>void,
-    // addMessageUsersChange:(newMessageUsers: string)=>void,
-    // message: string,
-    // dispatch:(action: ActionsTypeMessagesUsers)=>void,
+// type MessageUsersType = {
+//     // store: StoreType,
+//     // addMessageUsers:()=>void,
+//     // addMessageUsersChange:(newMessageUsers: string)=>void,
+//     // message: string,
+//     // dispatch:(action: ActionsTypeMessagesUsers)=>void,
+// }
+//
+// export const MessageUsersContainer = (props: MessageUsersType) => {
+//
+//     // const message = props.store.getState().messagesPage.message
+//     // const usersMessages = props.store.getState().messagesPage.usersMessages
+//     //
+//     // const addMessages = () => {
+//     //         props.store.dispatch(addMessageUsersAC(props.store.getState().messagesPage.message));
+//     // }
+//     // const addMessagesChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+//     //     props.store.dispatch(addMessageUsersChangeAC(event));
+//     // }
+//
+//                 const message = /*props.*/store.getState().messagesPage.message
+//                 const usersMessages = /*props.*/store.getState().messagesPage.usersMessages
+//
+//                 const addMessages = () => {
+//                     /*props.*/store.dispatch(addMessageUsersAC(/*props.*/store.getState().messagesPage.message));
+//                 }
+//                 const addMessagesChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+//                     /*props.*/store.dispatch(addMessageUsersChangeAC(event));
+//                 }
+//
+//                 return(
+//                     <MessageUsers message={message}
+//                                   usersMessages={usersMessages}
+//                                   addMessageUsers={addMessages}
+//                                   addMessageUsersChange={addMessagesChange}/>
+//                 );
+//     );
+// };
+
+
+type MapStatePropsType = {
+    message: string,
+    usersMessages: usersMessagesType[],
 }
 
-export const MessageUsersContainer = (props: MessageUsersType) => {
+type MapDispatchPropsType = {
+    addMessageUsers:(newMessageUsers: string)=>void,
+    addMessageUsersChange:(text: string)=>void,
+}
 
-    // const message = props.store.getState().messagesPage.message
-    // const usersMessages = props.store.getState().messagesPage.usersMessages
-    //
-    // const addMessages = () => {
-    //         props.store.dispatch(addMessageUsersAC(props.store.getState().messagesPage.message));
-    // }
-    // const addMessagesChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    //     props.store.dispatch(addMessageUsersChangeAC(event));
-    // }
+export type MessageUsersType = MapStatePropsType & MapDispatchPropsType;
 
-    return (
-        <StoreContext.Consumer>
-            {(store)=>{
-                const message = /*props.*/store.getState().messagesPage.message
-                const usersMessages = /*props.*/store.getState().messagesPage.usersMessages
+const mapStateToProps = (state: AppStateType):MapStatePropsType => {
+    return {
+        message: state.messagesPage.message,
+        usersMessages: state.messagesPage.usersMessages,
+    }
+}
 
-                const addMessages = () => {
-                    /*props.*/store.dispatch(addMessageUsersAC(/*props.*/store.getState().messagesPage.message));
-                }
-                const addMessagesChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-                    /*props.*/store.dispatch(addMessageUsersChangeAC(event));
-                }
+const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
+    return {
+        addMessageUsers: (newMessageUsers: string) => {
+            dispatch(addMessageUsersAC(newMessageUsers));
+        },
+        addMessageUsersChange: (text: string) => {
+            dispatch(addMessageUsersChangeAC(text));
+        },
+    }
+}
 
-                return(
-                    <MessageUsers message={message}
-                                  usersMessages={usersMessages}
-                                  addMessageUsers={addMessages}
-                                  addMessageUsersChange={addMessagesChange}/>
-                );
-            }}
-        </StoreContext.Consumer>
-    );
-};
+export const MessageUsersContainer = connect(mapStateToProps, mapDispatchToProps)(MessageUsers);
 

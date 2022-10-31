@@ -1,7 +1,7 @@
 import {combineReducers, legacy_createStore as createStore} from "redux";
 import {ActionsTypeMessagesUsers, messagesPageReducer, messagesPageType} from "./messagesPageReducer";
-import {sidebarReducer, sidebarType} from "./sidebarReducer";
-import {ActionsTypeProfile, proFilePageType, proFileReducer} from "./proFilePageReducer";
+import {sidebarReducer} from "./sidebarReducer";
+import {ActionsTypeProfile, proFileReducer} from "./proFilePageReducer";
 
 // export type StoreType = {
 //     _state: stateType,
@@ -31,9 +31,10 @@ export let rootReducer = combineReducers({//функция которой пер
     messagesPage: messagesPageReducer,
     proFilePage: proFileReducer,
     sidebar: sidebarReducer,
-
 });
+
+
 export type AppStateType = ReturnType<typeof rootReducer>;
 //Рудьюсеры отдаются стору, автоматически createStore создает внутри себя store
-export let store = createStore(rootReducer);
+export const store = createStore(rootReducer);
 //Что-бы работало нужно инициализировать

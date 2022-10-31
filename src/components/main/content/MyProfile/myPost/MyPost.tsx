@@ -1,15 +1,14 @@
 import s from "./MyPost.module.css";
 import React, {ChangeEvent, useState} from "react";
-import {Post} from "../post/Post";
-import {ActionTypeFull, AppStateType} from "../../../../../redux/redux-store";
+import {MyPostType} from "./MyPostContainer";
 
-type MyPostType = {
-    // store: StoreType,
-    // dispatch: (action: ActionTypeFull)=>void,
-    message: string,
-    addPost: () => void,
-    addPostChange: (event: ChangeEvent<HTMLTextAreaElement>) => void,
-}
+// type MyPostType = {
+//     // store: StoreType,
+//     // dispatch: (action: ActionTypeFull)=>void,
+//     message: string,
+//     addPost: () => void,
+//     addPostChange: (event: ChangeEvent<HTMLTextAreaElement>) => void,
+// }
 export const MyPost = (props: MyPostType) => {
     //ошибка при добавление пустой строки ===============================
     let [errorText, setErrorText] = useState<string | null>(null);
@@ -21,7 +20,7 @@ export const MyPost = (props: MyPostType) => {
         //newPostElement - обьект у которого ест св-во current и берем value
         // if (text !== '') {
         if (props.message !== '') {
-            props.addPost();//message - можно не получать этот текст, оно и так сидит в state
+            props.addPost(props.message);//message - можно не получать этот текст, оно и так сидит в state
 
             //Переходим на dispatch и обязательно указываем тип ему, делая конкретный диспатч
             // props.dispatch({type: "addPost", postMessage: props.message });
@@ -35,7 +34,8 @@ export const MyPost = (props: MyPostType) => {
     //===============================================================================
 //добавление сообщения в textarea =========================================
     const onCHandlerValue = (event:ChangeEvent<HTMLTextAreaElement>) => {
-        props.addPostChange(event)
+        let text = event.currentTarget.value
+        props.addPostChange(text)
         // props.dispatch(addPostChangeAC(event))
         setErrorText('')
     }

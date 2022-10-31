@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {store} from "./redux/redux-store";
-import {BrowserRouter, HashRouter} from "react-router-dom";
-import {Provider, StoreContext} from "./StoreContext";
+import {HashRouter} from "react-router-dom";
+import {Provider} from "react-redux";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -42,5 +42,28 @@ let rerenderEntireTree=()=>{//функция перерисовки
 store.subscribe(rerenderEntireTree);
 rerenderEntireTree();
 reportWebVitals();
+
+
+
+
+
+//storeContext просто напоминалка=========================================
+// import React from "react";
+// import {AppStateType, store} from "./redux/redux-store";
+//
+//
+// export const StoreContext = React.createContext(store);//StoreContext - задаем собственное имя
+//
+// type ProviderType={
+//     children: any,
+//     store: any,
+// }
+// export const Provider = (props: ProviderType)=>{
+//     return (
+//         <StoreContext.Provider value={props.store}>
+//             {props.children}
+//         </StoreContext.Provider>
+//     );
+// }
 
 

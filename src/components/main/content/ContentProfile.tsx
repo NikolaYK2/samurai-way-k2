@@ -1,8 +1,9 @@
 import React from "react";
 import s from "./ContentProfile.module.css";
 import {MyProfile} from "./MyProfile/MyProfile";
-import {AppStateType} from "../../../redux/redux-store";
-import {MyPostContainer} from "./MyProfile/myPost/MyPostContainer";
+import {store} from "../../../redux/redux-store";
+import MyPostContainer from "./MyProfile/myPost/MyPostContainer";
+import {Post} from "./MyProfile/post/Post";
 
 type ContentProfileType = {
     // store: StoreType,
@@ -10,7 +11,7 @@ type ContentProfileType = {
     // proFilePage:proFilePageType,
     // addPostChange:(newMessageUsers: any)=>void,
 }
-export const ContentProfile = (props: ContentProfileType) => {
+export const ContentProfile = () => {
     return (
         <section className={s.content}>
             <div className={s.content__wrap}>
@@ -26,6 +27,7 @@ export const ContentProfile = (props: ContentProfileType) => {
                 // // addPostChange={props.store.dispatch.bind(props.store)}
                 //     message={props.store.getState().proFilePage.message}
             />
+            <Post postData={/*props.*/store.getState().proFilePage.postData}/>
         </section>
     );
 }

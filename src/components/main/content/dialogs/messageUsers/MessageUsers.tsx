@@ -1,23 +1,23 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from "./MessageUsers.module.css";
-import {usersMessagesType} from "../../../../../redux/messagesPageReducer";
+import {MessageUsersType} from "./MessageUsersContainer";
 
-type MessageUsersType = {
-    // store: StoreType,
-    message: string,
-    usersMessages: usersMessagesType[],
-    // dispatch:(action: ActionsTypeMessagesUsers)=>void,
-    addMessageUsers:()=>void,
-    addMessageUsersChange:(event: ChangeEvent<HTMLTextAreaElement>)=>void,
-
-}
+// type MessageUsersType = {
+//     // store: StoreType,
+//     message: string,
+//     usersMessages: usersMessagesType[],
+//     // dispatch:(action: ActionsTypeMessagesUsers)=>void,
+//     addMessageUsers:()=>void,
+//     addMessageUsersChange:(event: ChangeEvent<HTMLTextAreaElement>)=>void,
+//
+// }
 
 export const MessageUsers = (props: MessageUsersType) => {
     let [errorText, setErrorText] = useState<string | null>(null)
 
     const addMessages = () => {
         if (props.message !== ""){
-            props.addMessageUsers();
+            props.addMessageUsers(props.message);
             // props.dispatch(addMessageUsersAC(props.message));
         }else {
             setErrorText('Але, пиши чееее!')
@@ -25,7 +25,8 @@ export const MessageUsers = (props: MessageUsersType) => {
     }
     const addMessagesChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         // props.dispatch(addMessageUsersChangeAC(event));
-        props.addMessageUsersChange(event);
+        let text = event.currentTarget.value
+        props.addMessageUsersChange(text);
         setErrorText('')
     }
 
