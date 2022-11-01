@@ -1,5 +1,4 @@
 import {v1} from "uuid";
-import {ActionTypeFull} from "./redux-store";
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addPost = 'addPost';
 const addPostChange = 'addPostChange';
@@ -53,7 +52,7 @@ let initializationState: proFilePageType = {
 
 }
 
-export const proFileReducer = (state = initializationState, action: ActionTypeFull) => {
+export const proFileReducer = (state = initializationState, action: ActionsTypeProfile) => {
 
     if (action.type === addPost) {
         //Добавление нового поста кнопка=================================================

@@ -1,5 +1,4 @@
 import {v1} from "uuid";
-import {ActionTypeFull} from "./redux-store";
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addMessageUsers = 'addMessageUsers';
 const addMessageUsersChange = 'addMessageUsersChange';
@@ -88,7 +87,7 @@ const initializationState: messagesPageType = {
     ],
 }
 
-export const messagesPageReducer = (state = initializationState, action: ActionTypeFull):messagesPageType => {
+export const messagesPageReducer = (state = initializationState, action: ActionsTypeMessagesUsers):messagesPageType => {
 //Если нужно преобразовали state
     switch (action.type) {
         case addMessageUsers:

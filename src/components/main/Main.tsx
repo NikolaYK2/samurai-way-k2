@@ -8,7 +8,7 @@ import {Music} from "./content/music/Music";
 import {News} from "./content/news/News";
 import {Settings} from "./content/settings/Settings";
 import {Friends} from "./content/friends/Friends";
-import {AppStateType} from "../../redux/redux-store";
+import {UsersContainer} from "./content/users/UsersContiner";
 
 type MainType={
     // store: StoreType,
@@ -25,6 +25,7 @@ export const Main = (props: MainType) => {
 
                 <Route path="/content" element={<ContentProfile /*store={props.store}*/ /*addPostChange={props.addPostChange} *//>}/>
                 <Route path="/dialogs/*" element={<DialogsMessage /*store={props.store}*//>}/>
+                <Route path="/users/*" element={<UsersContainer/>}/>
                 <Route path="/news" element={<News/>}/>
                 <Route path="/music" element={<Music/>}/>
                 <Route path="/settings" element={<Settings/>}/>

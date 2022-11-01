@@ -10,19 +10,18 @@ type UsersType = {
 export const Users = () => {
     return (
         <div className={s.dialogs__users}>
-            Dialogs
-                    <>
-                        {store.getState().messagesPage.users.map((u) => {
-                            return (
-                                <div key={u.id}>
-                                    <NavLink to={u.link} className={({isActive}) => isActive ? s.active : s.users}>
-                                        <div className={s.users__avatar}><img src={u.avatar} alt=""/></div>
-                                        <span>{u.name}</span></NavLink>
-                                </div>
-                            )
-                        })}
-                    </>
-                )
+            Users
+            <>
+                {store.getState().messagesPage.users.map((u) => {
+                    return (
+                        <div key={u.id}>
+                            <NavLink to={u.link} className={({isActive}) => isActive ? s.active : s.users}>
+                                <div className={s.users__avatar}><img src={u.avatar} alt=""/></div>
+                                <span>{u.name}</span></NavLink>
+                        </div>
+                    )
+                })}
+            </>
         </div>
     )
 }

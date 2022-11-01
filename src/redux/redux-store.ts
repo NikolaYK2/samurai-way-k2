@@ -1,7 +1,8 @@
 import {combineReducers, legacy_createStore as createStore} from "redux";
-import {ActionsTypeMessagesUsers, messagesPageReducer, messagesPageType} from "./messagesPageReducer";
+import {messagesPageReducer} from "./messagesPageReducer";
 import {sidebarReducer} from "./sidebarReducer";
-import {ActionsTypeProfile, proFileReducer} from "./proFilePageReducer";
+import {proFileReducer} from "./proFilePageReducer";
+import {usersReducer} from "./usersReducers";
 
 // export type StoreType = {
 //     _state: stateType,
@@ -21,7 +22,7 @@ import {ActionsTypeProfile, proFileReducer} from "./proFilePageReducer";
 //     sidebar: sidebarType,
 // }
 
-export type ActionTypeFull = ActionsTypeProfile | ActionsTypeMessagesUsers;
+// export type ActionTypeFull = ActionsTypeProfile | ActionsTypeMessagesUsers;
 // export type RootState = typeof reducers;//Типизируем редусер
 // export type ReduxStateType = ReturnType<RootState>;//хз что это
 // export type StoreType = Store<ReduxStateType, ActionTypeFull>;//Типизируем стор в нашем редюсере
@@ -30,6 +31,7 @@ export let rootReducer = combineReducers({//функция которой пер
 // Воспринимать как state по сути
     messagesPage: messagesPageReducer,
     proFilePage: proFileReducer,
+    usersPage: usersReducer,
     sidebar: sidebarReducer,
 });
 

@@ -12,25 +12,25 @@ const root = ReactDOM.createRoot(
 );
 
 
-// let rerenderEntireTree=()=>{//функция перерисовки
+// let rerenderEntireTree=()=> {//функция перерисовки - убираем так как рендерит теперь то что нужно функция connect
     root.render(
         <React.StrictMode>
             <HashRouter>
                 {/*<StoreContext.Provider value={store}>*/}
                 <Provider store={store}>{/* - Компонента которая работает с контекстом API*/}
                     <App
-                    // store={store}//store теперь не передаем через пропсы, есть API
-                    // addPost={addPost}
-                    // addPostChange={addPostChangeAC}
-                    // addMessageUsers={addMessageUsers}
-                    // addMessageUsersChange={addMessageUsersChange}
+                        // store={store}//store теперь не передаем через пропсы, есть API
+                        // addPost={addPost}
+                        // addPostChange={addPostChangeAC}
+                        // addMessageUsers={addMessageUsers}
+                        // addMessageUsersChange={addMessageUsersChange}
                     />
                 </Provider>
                 {/*</StoreContext.Provider>*/}
             </HashRouter>
         </React.StrictMode>
     );
-
+// }
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
@@ -65,5 +65,3 @@ reportWebVitals();
 //         </StoreContext.Provider>
 //     );
 // }
-
-
