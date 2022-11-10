@@ -6,13 +6,17 @@
     flex: 1 1 100%;
 }
 .containerUsers{
-    padding: 30px 0 0 30px;
+    padding: 2.5% 0 0 30px;
 }
 
 .containerUsers__item{
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    margin: 0 0 10px;
+    /*width: 100%;*/
     /*align-items: start;*/
-    height: 120px;
+    min-height: 120px;
 }
 
 .containerUsers__avatar {
@@ -21,8 +25,7 @@
     justify-content: space-between;
 
     }
-    .containerUsers__avatar>div{
-        display: flex;
+    .containerUsers__avatar div{
         width: 80px;
         height: 80px;
         min-height: 80px;
@@ -43,8 +46,9 @@
     display: flex;
     justify-content: space-between;
     align-self: start;
-    width: 100%;
     max-width: 600px;
+    min-width: 210px;
+    flex: 1 1 60%;
     border: 2px solid #c0c0c0;
     border-radius: 10px;
     margin: 0 0 0 20px;
@@ -69,7 +73,7 @@
 
 .container__button {
     background: rgba(135,216,237, 0.5);
-    max-width: 200px;
+    max-width: 600px;
     margin: 0 auto;
     border-radius: 5px;
     padding: 10px 20px;
