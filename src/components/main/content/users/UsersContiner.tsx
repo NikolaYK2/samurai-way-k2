@@ -2,15 +2,17 @@ import React from 'react';
 import {AppStateType} from "../../../../redux/redux-store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
-import {Users} from "./Users";
+// import {Users} from "./Users";
 import {followAC, setUsersAC, unFollowAC, UsersType} from "../../../../redux/usersReducers";
+import {Users} from "./Users";
+// import {Users} from "./UsersС";
 
 
-type MapStatePropsType = {
+export type MapStatePropsType = {
     users: UsersType[],
 }
 
-type MapDispatchPropsType = {
+export type MapDispatchPropsType = {
     follow: (userId: string) => void,//если в функции есть return например 10(числа), то уже не void пишется а number(state и т.д.)
     unFollow: (userId: string) => void,
     setUsers: (users: UsersType[]) => void,
