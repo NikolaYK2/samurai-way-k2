@@ -6,7 +6,7 @@ import userPhotos from './pngwing.com.png';
 import React, {useEffect, useState} from "react";
 import {retry} from "@reduxjs/toolkit/query";
 
-export const Users = (props: UsersTypeProps) => {
+export const Userss = (props: UsersTypeProps) => {
 
     useEffect(() => {
      axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {

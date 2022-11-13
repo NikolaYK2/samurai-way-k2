@@ -1,20 +1,22 @@
 import React from "react";
 import s from "./Users.module.css";
 import userPhotos from "./pngwing.com.png";
-import {UsersType} from "../../../../redux/usersReducers";
-import {MapStatePropsType, UsersTypeProps} from "./UsersContiner";
+import {UsersTypeProps} from "./UsersContiner";
 import axios from "axios";
 
-export class Userss extends React.Component<UsersTypeProps> {
-    constructor(props: UsersTypeProps) { //мы ничего нового конструировать не будем, можно не записывать
-        super(props);
+export class Users extends React.Component<UsersTypeProps> {
+    // constructor(props: UsersTypeProps) { //мы ничего нового конструировать не будем, можно не записывать
+    //     super(props);
+    //
+    // }
+    componentDidMount() {
         //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
             this.props.setUsers(response.data.items);
         })
     }
 
-    //class это не функция, props мы теперь не найдем, props это теперь часть обьекта this, теперь через this достаем
+     //class это не функция, props мы теперь не найдем, props это теперь часть обьекта this, теперь через this достаем
     // getUsers = ()=>{//не должна быть let, это теперь не переменная а метод, св-в объекта
     //     if (this.props.users.length === 0) {
     //         //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
