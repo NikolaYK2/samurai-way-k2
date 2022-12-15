@@ -1,10 +1,8 @@
 import {UsersTypeProps} from "./UsersContiner";
 import s from './Users.module.css';
-import {v1} from "uuid";
 import axios from "axios";
 import userPhotos from './pngwing.com.png';
-import React, {useEffect, useState} from "react";
-import {retry} from "@reduxjs/toolkit/query";
+import React, {useEffect} from "react";
 
 export const Userss = (props: UsersTypeProps) => {
 

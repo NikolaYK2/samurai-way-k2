@@ -1,8 +1,9 @@
-import React from "react";
+import React, {MouseEvent} from "react";
 import s from "./Users.module.css";
 import userPhotos from "./pngwing.com.png";
 import {UsersTypeProps} from "./UsersContiner";
 import axios from "axios";
+import {setCurrentPageAC} from "../../../../redux/usersReducers";
 
 export class Users extends React.Component<UsersTypeProps> {
     // constructor(props: UsersTypeProps) { //мы ничего нового конструировать не будем, можно не записывать
@@ -11,12 +12,12 @@ export class Users extends React.Component<UsersTypeProps> {
     // }
     componentDidMount() {
         //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items);
         })
     }
 
-     //class это не функция, props мы теперь не найдем, props это теперь часть обьекта this, теперь через this достаем
+    //class это не функция, props мы теперь не найдем, props это теперь часть обьекта this, теперь через this достаем
     // getUsers = ()=>{//не должна быть let, это теперь не переменная а метод, св-в объекта
     //     if (this.props.users.length === 0) {
     //         //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
@@ -26,11 +27,36 @@ export class Users extends React.Component<UsersTypeProps> {
     //     }
     // }
 
+    pageChange = (page: number) => {
+        this.props.setCurrentPage(page);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items);
+        })
+
+    }
+
     render = () => {//Единственный метод, который вы должны определить в React.Componentподклассе, называется render()
         //теперь и кнопке мы передаем на onClick не переменную а метод через this.getUsers
+
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+        let pages: number[] = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
+
         return (
             <div className={s.container}>
                 Users
+                <div>
+                    {pages.map((p, index) => {
+                        return (
+                            <span key={index}
+                                  className={this.props.currentPage === p ? s.pageActive : s.containerPage}
+                                  onClick={() => this.pageChange(p)}
+                            >{p}</span>
+                        );
+                    })}
+                </div>
                 <div className={s.container__data}>
                     {/*<button onClick={this.getUsers}>Get users</button>*/}
                     {this.props.users.map(u => {

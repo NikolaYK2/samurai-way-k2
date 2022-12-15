@@ -12,12 +12,18 @@ export type UsersType = {
 }
 export type InitializationStateType = {
     users: UsersType[],
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage: number,
 }
 // type InitializationStateType = typeof initializationState;
 
 
 let initializationState: InitializationStateType = {
-    users:[],
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 21,
+    currentPage: 1,
     // users: [
     //     {
     //         id: v1(),
@@ -56,7 +62,11 @@ export const usersReducer = (state: InitializationStateType = initializationStat
 
         case SET_USERS:
             // return {...state, users:[...state.users, ...action.users]};
-            return {...state, users:[...action.users]};
+            return {...state, users: [...action.users]};
+
+        case SET_CURRENT_PAGE:
+            // return {...state, users:[...state.users, ...action.users]};
+            return {...state, currentPage: action.page};
 
         default:
             return state;
@@ -66,15 +76,19 @@ export const usersReducer = (state: InitializationStateType = initializationStat
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UN-FOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 
-export type ActionUsersType = FollowACType | UnFollowACType | SetUsersACType;
+export type ActionUsersType = FollowACType
+    | UnFollowACType
+    | SetUsersACType
+    | SetCurrentPageACType;
 
 type FollowACType = ReturnType<typeof followAC>;
 export const followAC = (userId: string) => {
     return {
         type: FOLLOW,
         userId,
-    }as const;
+    } as const;
 }
 
 type UnFollowACType = ReturnType<typeof unFollowAC>;
@@ -82,7 +96,7 @@ export const unFollowAC = (userId: string) => {
     return {
         type: UNFOLLOW,
         userId,
-    }as const;
+    } as const;
 }
 
 type SetUsersACType = ReturnType<typeof setUsersAC>;
@@ -90,5 +104,13 @@ export const setUsersAC = (users: UsersType[]) => {
     return {
         type: SET_USERS,
         users,
-    }as const;
+    } as const;
+}
+
+type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>;
+export const setCurrentPageAC = (page: number) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        page,
+    } as const;
 }

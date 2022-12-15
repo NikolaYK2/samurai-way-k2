@@ -79,3 +79,12 @@
     padding: 10px 20px;
     font-size: 30px;
 }
+
+.containerPage{
+    cursor: pointer;
+    padding: 0 5px;
+    }
+    .pageActive{
+        font-weight: 900;
+        margin: 0 5px;
+    }
