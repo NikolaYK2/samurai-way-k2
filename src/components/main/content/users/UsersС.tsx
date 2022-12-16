@@ -1,9 +1,8 @@
-import React, {MouseEvent} from "react";
+import React from "react";
 import s from "./Users.module.css";
 import userPhotos from "./pngwing.com.png";
 import {UsersTypeProps} from "./UsersContiner";
 import axios from "axios";
-import {setCurrentPageAC} from "../../../../redux/usersReducers";
 
 export class Users extends React.Component<UsersTypeProps> {
     // constructor(props: UsersTypeProps) { //мы ничего нового конструировать не будем, можно не записывать
@@ -14,6 +13,7 @@ export class Users extends React.Component<UsersTypeProps> {
         //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items);
+            this.props.setTotalUsersCount(response.data.totalCount);
         })
     }
 
@@ -27,7 +27,7 @@ export class Users extends React.Component<UsersTypeProps> {
     //     }
     // }
 
-    pageChange = (page: number) => {
+    pageChange = (page: number) => {//меняем страницы
         this.props.setCurrentPage(page);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items);

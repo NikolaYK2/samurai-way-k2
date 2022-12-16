@@ -1,9 +1,17 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from 'react';
 import {AppStateType} from "../../../../redux/redux-store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 // import {Users} from "./Users";
-import {followAC, setCurrentPageAC, setUsersAC, unFollowAC, UsersType} from "../../../../redux/usersReducers";
+import {
+    followAC,
+    setCurrentPageAC,
+    setTotalUsersCountAC,
+    setUsersAC,
+    unFollowAC,
+    UsersType
+} from "../../../../redux/usersReducers";
 // import {Users} from "./Users";
 import {Users} from "./UsersС";
 
@@ -20,6 +28,7 @@ export type MapDispatchPropsType = {
     unFollow: (userId: string) => void,
     setUsers: (users: UsersType[]) => void,
     setCurrentPage: (page: number) => void,
+    setTotalUsersCount:(totalCount:number)=>void,
 }
 
 export type UsersTypeProps = MapStatePropsType & MapDispatchPropsType;
@@ -40,6 +49,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
         unFollow: (userId: string) => (dispatch(unFollowAC(userId))),
         setUsers: (users: UsersType[]) => (dispatch(setUsersAC(users))),
         setCurrentPage: (page: number) => (dispatch(setCurrentPageAC(page))),
+        setTotalUsersCount:(totalCount:number)=>(dispatch(setTotalUsersCountAC(totalCount)))
     }
 }
 
