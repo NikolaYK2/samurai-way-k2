@@ -80,11 +80,14 @@
     font-size: 30px;
 }
 
-.containerPage{
-    cursor: pointer;
-    padding: 0 5px;
+.containerPages{
+    max-width: 211px;
     }
-    .pageActive{
-        font-weight: 900;
-        margin: 0 5px;
-    }
+    .page{
+        cursor: pointer;
+        padding: 0 5px;
+        }
+        .pageActive{
+            font-weight: 900;
+            margin: 0 5px;
+}
