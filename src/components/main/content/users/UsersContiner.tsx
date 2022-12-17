@@ -7,11 +7,13 @@ import {
     setCurrentPageAC,
     setTotalUsersCountAC,
     setUsersAC,
+    switchLoadingAC,
     unFollowAC,
     UsersType
 } from "../../../../redux/usersReducers";
 import axios from "axios";
 import {Users} from "./Users";
+import {Loading} from "../../../loading/Loading";
 
 
 export type MapStatePropsType = {
@@ -19,6 +21,7 @@ export type MapStatePropsType = {
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
+    loadingPage:boolean,
 }
 
 export type MapDispatchPropsType = {
@@ -27,6 +30,7 @@ export type MapDispatchPropsType = {
     setUsers: (users: UsersType[]) => void,
     setCurrentPage: (page: number) => void,
     setTotalUsersCount:(totalCount:number)=>void,
+    switchLoading:(onOff:boolean)=>void,
 }
 
 export type UsersTypeProps = MapStatePropsType & MapDispatchPropsType;
@@ -39,6 +43,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {//назв�
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
+        loadingPage: state.usersPage.loadingPage,
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
@@ -47,11 +52,12 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
         unFollow: (userId: string) => (dispatch(unFollowAC(userId))),
         setUsers: (users: UsersType[]) => (dispatch(setUsersAC(users))),
         setCurrentPage: (page: number) => (dispatch(setCurrentPageAC(page))),
-        setTotalUsersCount:(totalCount:number)=>(dispatch(setTotalUsersCountAC(totalCount)))
+        setTotalUsersCount:(totalCount:number)=>(dispatch(setTotalUsersCountAC(totalCount))),
+        switchLoading:(onOff:boolean)=>(dispatch(switchLoadingAC(onOff))),
     }
 }
 
-//Контейнерная компонента которая делает API
+//Контейнерная class компонента которая делает API
 class UsersAPIComponent extends React.Component<UsersTypeProps> {
     // constructor(props: UsersTypeProps) { //мы ничего нового конструировать не будем, можно не записывать
     //     super(props);
@@ -59,7 +65,9 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
     // }
     componentDidMount() {
         //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
+        this.props.switchLoading(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.switchLoading(false);
             this.props.setUsers(response.data.items);
             this.props.setTotalUsersCount(response.data.totalCount);
         })
@@ -77,7 +85,9 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
 
     pageChange = (page: number) => {//меняем страницы
         this.props.setCurrentPage(page);
+        this.props.switchLoading(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
+            this.props.switchLoading(false);
             this.props.setUsers(response.data.items);
         })
 
@@ -93,17 +103,20 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
         // }
 
         return (
-            <Users
-                totalUsersCount={this.props.totalUsersCount}
-                pageSize={this.props.pageSize}
-                currentPage={this.props.currentPage}
-                users={this.props.users}
+            <div>
+                {this.props.loadingPage && <Loading/>}
+                <Users
+                    totalUsersCount={this.props.totalUsersCount}
+                    pageSize={this.props.pageSize}
+                    currentPage={this.props.currentPage}
+                    users={this.props.users}
 
-                pageChange={this.pageChange}
-                unFollow={this.props.unFollow}
-                follow={this.props.follow}
-                setUsers={this.props.setUsers}
-            />
+                    pageChange={this.pageChange}
+                    unFollow={this.props.unFollow}
+                    follow={this.props.follow}
+                    setUsers={this.props.setUsers}
+                />
+            </div>
             // <div className={s.container}>
             //     Users
             //     <div>

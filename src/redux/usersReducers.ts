@@ -15,6 +15,7 @@ export type InitializationStateType = {
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
+    loadingPage: boolean,
 }
 // type InitializationStateType = typeof initializationState;
 
@@ -24,6 +25,7 @@ let initializationState: InitializationStateType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
+    loadingPage: true,
     // users: [
     //     {
     //         id: v1(),
@@ -69,8 +71,10 @@ export const usersReducer = (state: InitializationStateType = initializationStat
             return {...state, currentPage: action.page};
 
         case SET_TOTAL_USERS_COUNT:
-            // return {...state, users:[...state.users, ...action.users]};
             return {...state, totalUsersCount: action.totalCount};
+
+        case LOADING_SWITCH:
+            return {...state, loadingPage: action.onOff};
 
         default:
             return state;
@@ -81,13 +85,15 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UN-FOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+const LOADING_SWITCH = 'LOADING_SWITCH';
 
 export type ActionUsersType = FollowACType
     | UnFollowACType
     | SetUsersACType
     | SetCurrentPageACType
-    | SetTotalUsersCountACType;
+    | SetTotalUsersCountACType
+    | SwitchLoadingACType;
 
 type FollowACType = ReturnType<typeof followAC>;
 export const followAC = (userId: string) => {
@@ -120,10 +126,19 @@ export const setCurrentPageAC = (page: number) => {
         page,
     } as const;
 }
+
 type SetTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>;
 export const setTotalUsersCountAC = (totalCount: number) => {
     return {
         type: SET_TOTAL_USERS_COUNT,
         totalCount,
+    } as const;
+}
+
+type SwitchLoadingACType = ReturnType<typeof switchLoadingAC>;
+export const switchLoadingAC = (onOff:boolean)=>{
+    return{
+        type: LOADING_SWITCH,
+        onOff,
     } as const;
 }
