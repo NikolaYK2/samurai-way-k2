@@ -1,6 +1,5 @@
 import React from 'react';
 import {AppStateType} from "../../../../redux/redux-store";
-import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {
     followAC,
@@ -46,16 +45,16 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {//назв�
         loadingPage: state.usersPage.loadingPage,
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-    return {
-        follow: (userId: string) => (dispatch(followAC(userId))),
-        unFollow: (userId: string) => (dispatch(unFollowAC(userId))),
-        setUsers: (users: UsersType[]) => (dispatch(setUsersAC(users))),
-        setCurrentPage: (page: number) => (dispatch(setCurrentPageAC(page))),
-        setTotalUsersCount:(totalCount:number)=>(dispatch(setTotalUsersCountAC(totalCount))),
-        switchLoading:(onOff:boolean)=>(dispatch(switchLoadingAC(onOff))),
-    }
-}
+// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
+//     return {
+//         follow: (userId: string) => (dispatch(followAC(userId))),
+//         unFollow: (userId: string) => (dispatch(unFollowAC(userId))),
+//         setUsers: (users: UsersType[]) => (dispatch(setUsersAC(users))),
+//         setCurrentPage: (page: number) => (dispatch(setCurrentPageAC(page))),
+//         setTotalUsersCount:(totalCount:number)=>(dispatch(setTotalUsersCountAC(totalCount))),
+//         switchLoading:(onOff:boolean)=>(dispatch(switchLoadingAC(onOff))),
+//     }
+// }
 
 //Контейнерная class компонента которая делает API
 class UsersAPIComponent extends React.Component<UsersTypeProps> {
@@ -172,4 +171,12 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
+export const UsersContainer = connect(mapStateToProps, {
+    follow: followAC,
+    unFollow: unFollowAC,
+    setUsers: setUsersAC,
+    setCurrentPage: setCurrentPageAC,
+    setTotalUsersCount:setTotalUsersCountAC,
+    switchLoading:switchLoadingAC,
+})(UsersAPIComponent);
+// export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
