@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {store} from "./redux/redux-store";
-import {HashRouter} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
 const root = ReactDOM.createRoot(
@@ -14,8 +14,9 @@ const root = ReactDOM.createRoot(
 
 // let rerenderEntireTree=()=> {//функция перерисовки - убираем так как рендерит теперь то что нужно функция connect
     root.render(
-        <React.StrictMode>
-            <HashRouter>
+        // <React.StrictMode>
+        <BrowserRouter>
+            {/*<HashRouter>*/}
                 {/*<StoreContext.Provider value={store}>*/}
                 <Provider store={store}>{/* - Компонента которая работает с контекстом API*/}
                     <App
@@ -27,8 +28,9 @@ const root = ReactDOM.createRoot(
                     />
                 </Provider>
                 {/*</StoreContext.Provider>*/}
-            </HashRouter>
-        </React.StrictMode>
+            {/*</HashRouter>*/}
+        </BrowserRouter>
+        // </React.StrictMode>
     );
 // }
 // If you want to start measuring performance in your app, pass a function

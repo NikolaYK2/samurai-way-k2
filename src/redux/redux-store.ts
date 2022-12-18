@@ -40,3 +40,6 @@ export type AppStateType = ReturnType<typeof rootReducer>;
 //Рудьюсеры отдаются стору, автоматически createStore создает внутри себя store
 export const store = createStore(rootReducer);
 //Что-бы работало нужно инициализировать
+
+// @ts-ignore
+window.store = store;

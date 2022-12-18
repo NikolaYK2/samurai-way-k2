@@ -14,48 +14,6 @@ import axios from "axios";
 import {Users} from "./Users";
 import {Loading} from "../../../loading/Loading";
 
-
-export type MapStatePropsType = {
-    users: UsersType[],
-    pageSize: number,
-    totalUsersCount: number,
-    currentPage: number,
-    loadingPage:boolean,
-}
-
-export type MapDispatchPropsType = {
-    follow: (userId: string) => void,//если в функции есть return например 10(числа), то уже не void пишется а number(state и т.д.)
-    unFollow: (userId: string) => void,
-    setUsers: (users: UsersType[]) => void,
-    setCurrentPage: (page: number) => void,
-    setTotalUsersCount:(totalCount:number)=>void,
-    switchLoading:(onOff:boolean)=>void,
-}
-
-export type UsersTypeProps = MapStatePropsType & MapDispatchPropsType;
-
-
-const mapStateToProps = (state: AppStateType): MapStatePropsType => {//название функции обозначает замапить state на пропсы
-    return {
-        //getState мы уже не делаем
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        loadingPage: state.usersPage.loadingPage,
-    }
-}
-// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-//     return {
-//         follow: (userId: string) => (dispatch(followAC(userId))),
-//         unFollow: (userId: string) => (dispatch(unFollowAC(userId))),
-//         setUsers: (users: UsersType[]) => (dispatch(setUsersAC(users))),
-//         setCurrentPage: (page: number) => (dispatch(setCurrentPageAC(page))),
-//         setTotalUsersCount:(totalCount:number)=>(dispatch(setTotalUsersCountAC(totalCount))),
-//         switchLoading:(onOff:boolean)=>(dispatch(switchLoadingAC(onOff))),
-//     }
-// }
-
 //Контейнерная class компонента которая делает API
 class UsersAPIComponent extends React.Component<UsersTypeProps> {
     // constructor(props: UsersTypeProps) { //мы ничего нового конструировать не будем, можно не записывать
@@ -171,6 +129,48 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
     }
 }
 
+
+
+
+export type UsersTypeProps = MapStatePropsType & MapDispatchPropsType;
+
+export type MapStatePropsType = {
+    users: UsersType[],
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage: number,
+    loadingPage:boolean,
+}
+
+export type MapDispatchPropsType = {
+    follow: (userId: string) => void,//если в функции есть return например 10(числа), то уже не void пишется а number(state и т.д.)
+    unFollow: (userId: string) => void,
+    setUsers: (users: UsersType[]) => void,
+    setCurrentPage: (page: number) => void,
+    setTotalUsersCount:(totalCount:number)=>void,
+    switchLoading:(onOff:boolean)=>void,
+}
+
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {//название функции обозначает замапить state на пропсы
+    return {
+        //getState мы уже не делаем
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage,
+        loadingPage: state.usersPage.loadingPage,
+    }
+}
+// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
+//     return {
+//         follow: (userId: string) => (dispatch(followAC(userId))),
+//         unFollow: (userId: string) => (dispatch(unFollowAC(userId))),
+//         setUsers: (users: UsersType[]) => (dispatch(setUsersAC(users))),
+//         setCurrentPage: (page: number) => (dispatch(setCurrentPageAC(page))),
+//         setTotalUsersCount:(totalCount:number)=>(dispatch(setTotalUsersCountAC(totalCount))),
+//         switchLoading:(onOff:boolean)=>(dispatch(switchLoadingAC(onOff))),
+//     }
+// }
 export const UsersContainer = connect(mapStateToProps, {
     follow: followAC,
     unFollow: unFollowAC,

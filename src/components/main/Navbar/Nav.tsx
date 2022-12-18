@@ -13,8 +13,8 @@ export const Nav =(props: NavType)=>{
         <aside className={s.nav}>
             <nav className={s.item}>
                 <ul>
-                    <li><NavLink to="/content" className={({isActive})=> isActive ? s.activeLink : ''}>Profile</NavLink></li>
-                    <li><NavLink to="/dialogs" className={({isActive})=> isActive ? s.activeLink : ''}>Messages</NavLink></li>
+                    <li><NavLink to="/profile" className={({isActive})=> isActive ? s.activeLink : ''}>Profile</NavLink></li>
+                    <li><NavLink to="/messages" className={({isActive})=> isActive ? s.activeLink : ''}>Messages</NavLink></li>
                     <li><NavLink to="/users" className={({isActive})=> isActive ? s.activeLink : ''}>Users</NavLink></li>
                     <li><NavLink to="/news" className={({isActive})=> isActive ? s.activeLink : ''}>News</NavLink></li>
                     <li><NavLink to="/music" className={({isActive})=> isActive ? s.activeLink : ''}>Music</NavLink></li>
