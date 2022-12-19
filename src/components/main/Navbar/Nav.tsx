@@ -3,11 +3,11 @@ import s from "./Nav.module.css";
 import {NavLink} from "react-router-dom";
 import {store} from "../../../redux/redux-store";
 
-type NavType={
-    // store: StoreType,
-}
+// type NavType={
+//     // store: StoreType,
+// }
 
-export const Nav =(props: NavType)=>{
+export const Nav =()=>{
 
     return(
         <aside className={s.nav}>

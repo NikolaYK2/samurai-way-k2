@@ -24,9 +24,15 @@ export const Profile = (props: ProfileType) => {
                 </div>
                 <div>
                     <h2>{props.profile.fullName}</h2>
+                    <p><span>aboutMe: </span>{props.profile.aboutMe}</p>
+                    <p><span>lookingForAJobDescription: </span>{props.profile.lookingForAJobDescription}</p>
+                    Contacts
                     <ul>
-                        <li><span>aboutMe: </span>{props.profile.aboutMe}</li>
-                        <li><span>lookingForAJobDescription: </span>{props.profile.lookingForAJobDescription}</li>
+                        <li><a href={props.profile.contacts?.facebook}>facebook</a></li>
+                        <li><a href={props.profile.contacts?.vk}>vk</a></li>
+                        <li><a href={props.profile.contacts?.twitter}>twitter</a></li>
+                        <li><a href={props.profile.contacts?.instagram}>instagram</a></li>
+                        <li><a href={props.profile.contacts?.github}>github</a></li>
                     </ul>
                 </div>
             </div>

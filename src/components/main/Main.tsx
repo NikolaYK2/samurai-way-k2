@@ -21,7 +21,7 @@ export const Main = (props: MainType) => {
         <main className={s.main}>
             <Nav /*store={props.store}*//>
             <Routes>
-                <Route path='/' element={<Navigate to="/profile"/>}/>
+                <Route path="*" element={<Navigate to="/profile"/>}/>
 
                 <Route path="/profile/*" element={<ProfileContainer /*store={props.store}*/ /*addPostChange={props.addPostChange} *//>}/>
                 <Route path="/messages/*" element={<DialogsMessage /*store={props.store}*//>}/>
