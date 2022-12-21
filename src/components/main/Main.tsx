@@ -10,20 +10,20 @@ import {Friends} from "./content/friends/Friends";
 import {UsersContainer} from "./content/users/UsersContiner";
 import {ProfileContainer} from "./content/ContentProfileContainer";
 
-type MainType={
-    // store: StoreType,
-    // addPostChange:(newMessageUsers: any)=>void,
-}
+// type MainType={
+//     // store: StoreType,
+//     // addPostChange:(newMessageUsers: any)=>void,
+// }
 
-export const Main = (props: MainType) => {
-
+export const Main = () => {
     return (
         <main className={s.main}>
             <Nav /*store={props.store}*//>
             <Routes>
                 <Route path="*" element={<Navigate to="/profile"/>}/>
-
-                <Route path="/profile/*" element={<ProfileContainer /*store={props.store}*/ /*addPostChange={props.addPostChange} *//>}/>
+                <Route path='/profile' element={<ProfileContainer/>}>
+                    <Route path=":userId" element={<ProfileContainer/>}/>
+                </Route>
                 <Route path="/messages/*" element={<DialogsMessage /*store={props.store}*//>}/>
                 <Route path="/users/*" element={<UsersContainer/>}/>
                 <Route path="/news" element={<News/>}/>
@@ -35,3 +35,4 @@ export const Main = (props: MainType) => {
         </main>
     );
 }
+
