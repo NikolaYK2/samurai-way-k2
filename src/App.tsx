@@ -1,19 +1,18 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/header/Header";
 import {Main} from "./components/main/Main";
 import {Footer} from "./components/footer/Footer";
-import {AppStateType} from "./redux/redux-store";
+import {HeaderContainerConnect} from "./components/header/HeaderContainer";
 
-type AppPropsType = {
-    // store: StoreType,
-    // addPostChange:(newMessageUsers:any)=>void,
-}
+// type AppPropsType = {
+//     // store: StoreType,
+//     // addPostChange:(newMessageUsers:any)=>void,
+// }
 
-function App(props: AppPropsType) {
+function App() {
     return (
             <div className="wrapper">
-                <Header/>
+                <HeaderContainerConnect/>
                 <Main
                     // store={props.store}
                       // addPost={props.addPost}//Добавления обьекта с сообщением

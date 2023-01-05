@@ -3,6 +3,7 @@ import {messagesPageReducer} from "./messagesPageReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {proFileReducer} from "./proFilePageReducer";
 import {usersReducer} from "./usersReducers";
+import {loginAuthorizationReducer} from "./loginReducer";
 
 // export type StoreType = {
 //     _state: stateType,
@@ -33,6 +34,7 @@ export let rootReducer = combineReducers({//функция которой пер
     proFilePage: proFileReducer,
     usersPage: usersReducer,
     sidebar: sidebarReducer,
+    loginAuthorization: loginAuthorizationReducer,
 });
 
 

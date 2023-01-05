@@ -12,3 +12,7 @@
     object-fit: cover;
 }
 
+.loginBlock{
+    grid-column: 3;
+    margin: auto;
+}
