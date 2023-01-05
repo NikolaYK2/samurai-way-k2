@@ -2,9 +2,14 @@ type LocationType = {
     city: string,
     country: string,
 }
+
+type PhotosType={
+    small:string,
+    large:string,
+}
 export type UsersType = {
     id: string,
-    photos: string,
+    photos: PhotosType,
     followed: boolean,
     name: string,
     status: string,

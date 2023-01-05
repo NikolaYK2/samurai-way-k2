@@ -105,86 +105,110 @@ import s from "./Users.module.css";
 import userPhotos from "./pngwing.com.png";
 import {UsersType} from "../../../../redux/usersReducers";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
-type UsersTypeComponent ={
-    totalUsersCount:number,
-    pageSize:number,
-    currentPage:number,
+type UsersTypeComponent = {
+    totalUsersCount: number,
+    pageSize: number,
+    currentPage: number,
 
-    users:UsersType[],
-    pageChange:(page: number)=>void,
-    unFollow:(userId: string)=>void,
-    follow:(userId: string)=>void,
-    setUsers:(users:UsersType[])=>void,
+    users: UsersType[],
+    pageChange: (page: number) => void,
+    unFollow: (userId: string) => void,
+    follow: (userId: string) => void,
+    setUsers: (users: UsersType[]) => void,
 
 }
-export const Users = (props:UsersTypeComponent) => {
+export const Users = (props: UsersTypeComponent) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
     let pages: number[] = [];
     for (let i = 1; i <= pagesCount; i++) {
-        if (i === 12){
-             break;
+        if (i === 12) {
+            break;
         } else {
-              pages.push(i);
+            pages.push(i);
         }
     }
 
 
     return (
-            <div className={s.container}>
-                Users
-                <div className={s.containerPages}>
-                    {pages.map((p, index) => {
-                        return (
-                            <span key={index}
-                                  className={props.currentPage === p ? s.pageActive : s.page}
-                                  onClick={() => props.pageChange(p)}
-                            >{p}</span>
-                        );
-                    })/*.slice(0,11)*/}
-                </div>
-                <div className={s.container__data}>
-                    {/*<button onClick={this.getUsers}>Get users</button>*/}
-                    {props.users.map(u => {
-                        return (
-                            <div key={u.id} className={s.containerUsers}>
-                                <div className={s.containerUsers__item}>
-                                    <div className={s.containerUsers__avatar}>
-                                        <div>
-                                            <NavLink to={'/profile/' + u.id}>
-                                                <img src={u.photos.small !== null ? u.photos : userPhotos} alt=""/>
-                                            </NavLink>
-                                        </div>
+        <div className={s.container}>
+            Users
+            <div className={s.containerPages}>
+                {pages.map((p, index) => {
+                    return (
+                        <span key={index}
+                              className={props.currentPage === p ? s.pageActive : s.page}
+                              onClick={() => props.pageChange(p)}
+                        >{p}</span>
+                    );
+                })/*.slice(0,11)*/}
+            </div>
+            <div className={s.container__data}>
+                {/*<button onClick={this.getUsers}>Get users</button>*/}
+                {props.users.map(u => {
 
-                                        {u.followed ?
-                                            // <button className={s.containerUsers__button} onClick={()=>onClickUnFollow(u.id)}>Follow</button> :
-                                            // <button className={s.containerUsers__button} onClick={()=>onClickFollow(u.id)}>Unfollow</button>
-                                            <button className={s.containerUsers__button}
-                                                    onClick={() => props.unFollow(u.id)}>Follow</button> :
-                                            <button className={s.containerUsers__button}
-                                                    onClick={() => props.follow(u.id)}>Unfollow</button>
-                                        }
+                    const unFollowHandler = () => {
+                        axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,  {
+                            withCredentials: true,
+                            headers: {'API-KEY': 'ac221b8b-8a64-47b0-b88a-297bbd35a29e'}
+                        }).then(response => {
+                            if (response.data.resultCode === 0) {
+                                props.unFollow(u.id);
+                            }
+                        })
+                    }
+                    const followHandler = () => {
+                        axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {}, {
+                            withCredentials: true,
+                            headers: {'API-KEY': 'ac221b8b-8a64-47b0-b88a-297bbd35a29e'}
+                        }).then(response => {
+                            if (response.data.resultCode === 0) {
+                                props.follow(u.id);
+                            }
+                        })
+                    }
+
+                    return (
+                        <div key={u.id} className={s.containerUsers}>
+                            <div className={s.containerUsers__item}>
+                                <div className={s.containerUsers__avatar}>
+                                    <div>
+                                        <NavLink to={'/profile/' + u.id}>
+                                            <img src={u.photos.small !== null ? u.photos.small : userPhotos} alt=""/>
+                                        </NavLink>
                                     </div>
-                                    <div className={s.containerUsers__title}>
-                                        <div>
-                                            <span className={s.containerUser__name}>{u.name}</span>
-                                            <span className={s.containerUser__status}>{u.status}</span>
-                                        </div>
-                                        <div>
-                                            <span>{'u.location.country'}</span>
-                                            <span>{'u.location.city'}</span>
-                                        </div>
+
+                                    {u.followed
+                                        ? <button className={s.containerUsers__button}
+                                                  onClick={unFollowHandler}>Follow</button>
+                                        : <button className={s.containerUsers__button}
+                                                  onClick={followHandler}>Unfollow</button>
+                                        // <button className={s.containerUsers__button} onClick={()=>onClickUnFollow(u.id)}>Follow</button> :
+                                        // <button className={s.containerUsers__button} onClick={()=>onClickFollow(u.id)}>Unfollow</button>
+                                    }
+
+                                </div>
+                                <div className={s.containerUsers__title}>
+                                    <div>
+                                        <span className={s.containerUser__name}>{u.name}</span>
+                                        <span className={s.containerUser__status}>{u.status}</span>
+                                    </div>
+                                    <div>
+                                        <span>{'u.location.country'}</span>
+                                        <span>{'u.location.city'}</span>
                                     </div>
                                 </div>
                             </div>
-                        );
-                    })}
-                </div>
-                <button className={s.container__button} onClick={() => props.setUsers(props.users)}>show
-                    more
-                </button>
+                        </div>
+                    );
+                })}
             </div>
+            <button className={s.container__button} onClick={() => props.setUsers(props.users)}>show
+                more
+            </button>
+        </div>
     );
 };
 

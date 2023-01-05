@@ -23,7 +23,9 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
     componentDidMount() {
         //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
         this.props.switchLoading(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{
+            withCredentials:true,
+        }).then(response => {
             this.props.switchLoading(false);
             this.props.setUsers(response.data.items);
             this.props.setTotalUsersCount(response.data.totalCount);
@@ -43,7 +45,9 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
     pageChange = (page: number) => {//меняем страницы
         this.props.setCurrentPage(page);
         this.props.switchLoading(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,{
+            withCredentials:true,
+        }).then(response => {
             this.props.switchLoading(false);
             this.props.setUsers(response.data.items);
         })
