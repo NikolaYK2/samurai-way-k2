@@ -50,7 +50,6 @@ export type  messagesPageType = {
     usersMessages: usersMessagesType[],
 }
 
-
 const initializationState: messagesPageType = {
     users: [
         {
