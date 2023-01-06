@@ -10,9 +10,9 @@ import {
     unFollowAC,
     UsersType
 } from "../../../../redux/usersReducers";
-import axios from "axios";
 import {Users} from "./Users";
 import {Loading} from "../../../loading/Loading";
+import {usersAPI} from "../../../api/api";
 
 //Контейнерная class компонента которая делает API
 class UsersAPIComponent extends React.Component<UsersTypeProps> {
@@ -22,13 +22,11 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
     // }
     componentDidMount() {
         //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
-        this.props.switchLoading(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{
-            withCredentials:true,
-        }).then(response => {
+        this.props.switchLoading(true);
+        usersAPI.getUsers(this.props.currentPage,this.props.pageSize).then(data => {
             this.props.switchLoading(false);
-            this.props.setUsers(response.data.items);
-            this.props.setTotalUsersCount(response.data.totalCount);
+            this.props.setUsers(data.items);
+            this.props.setTotalUsersCount(data.totalCount);
         })
     }
 
@@ -44,12 +42,13 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
 
     pageChange = (page: number) => {//меняем страницы
         this.props.setCurrentPage(page);
-        this.props.switchLoading(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,{
+        this.props.switchLoading(true);
+        usersAPI.getUsers(page,this.props.pageSize)
+       /* axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,{
             withCredentials:true,
-        }).then(response => {
+        })*/.then(data => {
             this.props.switchLoading(false);
-            this.props.setUsers(response.data.items);
+            this.props.setUsers(data.items);
         })
 
     }

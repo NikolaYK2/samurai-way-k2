@@ -2,11 +2,11 @@ import React, {useEffect} from "react";
 import s from "./ContentProfile.module.css";
 import {Profile} from "./MyProfile/MyProfile";
 import MyPostContainer from "./MyProfile/myPost/MyPostContainer";
-import axios from "axios";
 import {connect} from "react-redux";
 import {ProfileUserType, setUserProfileAC} from "../../../redux/proFilePageReducer";
 import {AppStateType} from "../../../redux/redux-store";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {usersAPI} from "../../api/api";
 
 // type ContentProfileType = {
 //     // store: StoreType,
@@ -66,19 +66,22 @@ export const withRouter = <Props extends WithRouterProps>(
 //     );
 // };
 
-const ContentProfileContainer =(props:ProfileTypeProps)=>{
+const ContentProfileContainer = (props: ProfileTypeProps) => {
 
 
-    useEffect(()=>{
+    useEffect(() => {
         let userId = props.params.userId;
-        if (!userId){
-            userId=2;
+        if (!userId) {
+            userId = 2;
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
-            props.setUserProfile(response.data);
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
+        //     props.setUserProfile(response.data);
+        // });
+        usersAPI.getUserProfile(userId).then(data => {
+            props.setUserProfile(data);
         });
 
-    },[])
+    }, [])
     return (
         <section className={s.content}>
             <div className={s.content__wrap}>
@@ -138,17 +141,17 @@ const ContentProfileContainer =(props:ProfileTypeProps)=>{
 
 type ProfileTypeProps = MapStateToPropsType & MapDispatchPropsType & WithRouterProps;
 
-type MapStateToPropsType={
-    profile:ProfileUserType | null,
+type MapStateToPropsType = {
+    profile: ProfileUserType | null,
 }
 
-type MapDispatchPropsType={
-    setUserProfile:(profile:ProfileUserType | null)=>void,
+type MapDispatchPropsType = {
+    setUserProfile: (profile: ProfileUserType | null) => void,
 }
 
 
-const mapStateToProps =(state:AppStateType): MapStateToPropsType=>{
-    return{
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+    return {
         profile: state.proFilePage.profile,
     }
 }

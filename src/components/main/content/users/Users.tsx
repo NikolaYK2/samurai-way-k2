@@ -105,7 +105,7 @@ import s from "./Users.module.css";
 import userPhotos from "./pngwing.com.png";
 import {UsersType} from "../../../../redux/usersReducers";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {usersAPI} from "../../../api/api";
 
 type UsersTypeComponent = {
     totalUsersCount: number,
@@ -131,6 +131,28 @@ export const Users = (props: UsersTypeComponent) => {
         }
     }
 
+    const unFollowHandler = (id:string) => {
+        usersAPI.deleteFollow(id).then(data => {
+            if (data.resultCode === 0) {
+                props.unFollow(id);
+            }
+        })
+        // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,  {
+        //     withCredentials: true,
+        //     headers: {'API-KEY': 'ac221b8b-8a64-47b0-b88a-297bbd35a29e'}
+        // }).then(response => {
+        //     if (response.data.resultCode === 0) {
+        //         props.unFollow(u.id);
+        //     }
+        // })
+    }
+    const followHandler = (id:string) => {
+        usersAPI.postFollow(id).then(data => {
+            if (data.resultCode === 0) {
+                props.follow(id);
+            }
+        })
+    }
 
     return (
         <div className={s.container}>
@@ -149,26 +171,28 @@ export const Users = (props: UsersTypeComponent) => {
                 {/*<button onClick={this.getUsers}>Get users</button>*/}
                 {props.users.map(u => {
 
-                    const unFollowHandler = () => {
-                        axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,  {
-                            withCredentials: true,
-                            headers: {'API-KEY': 'ac221b8b-8a64-47b0-b88a-297bbd35a29e'}
-                        }).then(response => {
-                            if (response.data.resultCode === 0) {
-                                props.unFollow(u.id);
-                            }
-                        })
-                    }
-                    const followHandler = () => {
-                        axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {}, {
-                            withCredentials: true,
-                            headers: {'API-KEY': 'ac221b8b-8a64-47b0-b88a-297bbd35a29e'}
-                        }).then(response => {
-                            if (response.data.resultCode === 0) {
-                                props.follow(u.id);
-                            }
-                        })
-                    }
+                    // const unFollowHandler = () => {
+                    //    usersAPI.deleteFollow(u.id).then(data => {
+                    //         if (data.resultCode === 0) {
+                    //             props.unFollow(u.id);
+                    //         }
+                    //     })
+                    //     // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,  {
+                    //     //     withCredentials: true,
+                    //     //     headers: {'API-KEY': 'ac221b8b-8a64-47b0-b88a-297bbd35a29e'}
+                    //     // }).then(response => {
+                    //     //     if (response.data.resultCode === 0) {
+                    //     //         props.unFollow(u.id);
+                    //     //     }
+                    //     // })
+                    // }
+                    // const followHandler = () => {
+                    //     usersAPI.postFollow(u.id).then(data => {
+                    //         if (data.resultCode === 0) {
+                    //             props.follow(u.id);
+                    //         }
+                    //     })
+                    // }
 
                     return (
                         <div key={u.id} className={s.containerUsers}>
@@ -182,9 +206,9 @@ export const Users = (props: UsersTypeComponent) => {
 
                                     {u.followed
                                         ? <button className={s.containerUsers__button}
-                                                  onClick={unFollowHandler}>Follow</button>
+                                                  onClick={()=>unFollowHandler(u.id)}>Follow</button>
                                         : <button className={s.containerUsers__button}
-                                                  onClick={followHandler}>Unfollow</button>
+                                                  onClick={()=>followHandler(u.id)}>Unfollow</button>
                                         // <button className={s.containerUsers__button} onClick={()=>onClickUnFollow(u.id)}>Follow</button> :
                                         // <button className={s.containerUsers__button} onClick={()=>onClickFollow(u.id)}>Unfollow</button>
                                     }
