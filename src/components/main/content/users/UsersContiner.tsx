@@ -2,11 +2,12 @@ import React from 'react';
 import {AppStateType} from "../../../../redux/redux-store";
 import {connect} from "react-redux";
 import {
+    Expectation,
     followAC,
     setCurrentPageAC,
     setTotalUsersCountAC,
     setUsersAC,
-    switchLoadingAC,
+    switchLoadingAC, toggleExpectationAC,
     unFollowAC,
     UsersType
 } from "../../../../redux/usersReducers";
@@ -23,7 +24,7 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
     componentDidMount() {
         //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
         this.props.switchLoading(true);
-        usersAPI.getUsers(this.props.currentPage,this.props.pageSize).then(data => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
             this.props.switchLoading(false);
             this.props.setUsers(data.items);
             this.props.setTotalUsersCount(data.totalCount);
@@ -43,10 +44,10 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
     pageChange = (page: number) => {//меняем страницы
         this.props.setCurrentPage(page);
         this.props.switchLoading(true);
-        usersAPI.getUsers(page,this.props.pageSize)
-       /* axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,{
-            withCredentials:true,
-        })*/.then(data => {
+        usersAPI.getUsers(page, this.props.pageSize)
+            /* axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,{
+                 withCredentials:true,
+             })*/.then(data => {
             this.props.switchLoading(false);
             this.props.setUsers(data.items);
         })
@@ -70,11 +71,14 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
                     pageSize={this.props.pageSize}
                     currentPage={this.props.currentPage}
                     users={this.props.users}
+                    expectation={this.props.expectation}
 
                     pageChange={this.pageChange}
                     unFollow={this.props.unFollow}
                     follow={this.props.follow}
                     setUsers={this.props.setUsers}
+                    toggleExpectation={this.props.toggleExpectation}
+
                 />
             </div>
             // <div className={s.container}>
@@ -133,8 +137,6 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
 }
 
 
-
-
 export type UsersTypeProps = MapStatePropsType & MapDispatchPropsType;
 
 export type MapStatePropsType = {
@@ -142,7 +144,8 @@ export type MapStatePropsType = {
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
-    loadingPage:boolean,
+    loadingPage: boolean,
+    expectation: (Expectation | string)[],
 }
 
 export type MapDispatchPropsType = {
@@ -150,8 +153,9 @@ export type MapDispatchPropsType = {
     unFollow: (userId: string) => void,
     setUsers: (users: UsersType[]) => void,
     setCurrentPage: (page: number) => void,
-    setTotalUsersCount:(totalCount:number)=>void,
-    switchLoading:(onOff:boolean)=>void,
+    setTotalUsersCount: (totalCount: number) => void,
+    switchLoading: (onOff: boolean) => void,
+    toggleExpectation: (userId: string, onOff: boolean) => void,
 }
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {//название функции обозначает замапить state на пропсы
@@ -162,6 +166,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {//назв�
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         loadingPage: state.usersPage.loadingPage,
+        expectation: state.usersPage.expectation,
     }
 }
 // const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
@@ -179,7 +184,8 @@ export const UsersContainer = connect(mapStateToProps, {
     unFollow: unFollowAC,
     setUsers: setUsersAC,
     setCurrentPage: setCurrentPageAC,
-    setTotalUsersCount:setTotalUsersCountAC,
-    switchLoading:switchLoadingAC,
+    setTotalUsersCount: setTotalUsersCountAC,
+    switchLoading: switchLoadingAC,
+    toggleExpectation: toggleExpectationAC,
 })(UsersAPIComponent);
 // export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);

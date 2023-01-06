@@ -103,7 +103,7 @@
 import React from 'react';
 import s from "./Users.module.css";
 import userPhotos from "./pngwing.com.png";
-import {UsersType} from "../../../../redux/usersReducers";
+import {Expectation, UsersType} from "../../../../redux/usersReducers";
 import {NavLink} from "react-router-dom";
 import {usersAPI} from "../../../api/api";
 
@@ -111,14 +111,16 @@ type UsersTypeComponent = {
     totalUsersCount: number,
     pageSize: number,
     currentPage: number,
+    expectation:(Expectation | string)[],
 
     users: UsersType[],
     pageChange: (page: number) => void,
     unFollow: (userId: string) => void,
     follow: (userId: string) => void,
     setUsers: (users: UsersType[]) => void,
-
+    toggleExpectation: (userId:string, onOff: boolean) => void,
 }
+
 export const Users = (props: UsersTypeComponent) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
@@ -131,12 +133,14 @@ export const Users = (props: UsersTypeComponent) => {
         }
     }
 
-    const unFollowHandler = (id:string) => {
+    const unFollowHandler = (id: string) => {
+        props.toggleExpectation(id,true, );
         usersAPI.deleteFollow(id).then(data => {
             if (data.resultCode === 0) {
                 props.unFollow(id);
             }
-        })
+            props.toggleExpectation(id,false);
+        });
         // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,  {
         //     withCredentials: true,
         //     headers: {'API-KEY': 'ac221b8b-8a64-47b0-b88a-297bbd35a29e'}
@@ -146,12 +150,14 @@ export const Users = (props: UsersTypeComponent) => {
         //     }
         // })
     }
-    const followHandler = (id:string) => {
+    const followHandler = (id: string) => {
+        props.toggleExpectation(id,true);
         usersAPI.postFollow(id).then(data => {
             if (data.resultCode === 0) {
                 props.follow(id);
             }
-        })
+            props.toggleExpectation(id,false);
+        });
     }
 
     return (
@@ -205,10 +211,8 @@ export const Users = (props: UsersTypeComponent) => {
                                     </div>
 
                                     {u.followed
-                                        ? <button className={s.containerUsers__button}
-                                                  onClick={()=>unFollowHandler(u.id)}>Follow</button>
-                                        : <button className={s.containerUsers__button}
-                                                  onClick={()=>followHandler(u.id)}>Unfollow</button>
+                                        ? <button disabled={props.expectation.some(id=>id === u.id)} className={s.containerUsers__button} onClick={() => unFollowHandler(u.id)}>Follow</button>
+                                        : <button disabled={props.expectation.some(id=>id === u.id)} className={s.containerUsers__button} onClick={() => followHandler(u.id)}>Unfollow</button>
                                         // <button className={s.containerUsers__button} onClick={()=>onClickUnFollow(u.id)}>Follow</button> :
                                         // <button className={s.containerUsers__button} onClick={()=>onClickFollow(u.id)}>Unfollow</button>
                                     }

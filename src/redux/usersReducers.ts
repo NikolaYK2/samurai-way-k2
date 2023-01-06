@@ -7,6 +7,9 @@ type PhotosType={
     small:string,
     large:string,
 }
+export type Expectation={
+    id:string,
+}
 export type UsersType = {
     id: string,
     photos: PhotosType,
@@ -21,6 +24,7 @@ export type InitializationStateType = {
     totalUsersCount: number,
     currentPage: number,
     loadingPage: boolean,
+    expectation:(Expectation | string)[],
 }
 // type InitializationStateType = typeof initializationState;
 
@@ -31,6 +35,8 @@ let initializationState: InitializationStateType = {
     totalUsersCount: 0,
     currentPage: 1,
     loadingPage: true,
+    expectation: [],
+
     // users: [
     //     {
     //         id: v1(),
@@ -81,6 +87,12 @@ export const usersReducer = (state: InitializationStateType = initializationStat
         case LOADING_SWITCH:
             return {...state, loadingPage: action.onOff};
 
+        case TOGGLE_EXPECTATION:
+            return {...state, expectation: action.onOff
+                    ? [...state.expectation, action.userId]
+                    : state.expectation.filter(id=>id !== action.userId)
+            };
+
         default:
             return state;
     }
@@ -92,13 +104,15 @@ const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const LOADING_SWITCH = 'LOADING_SWITCH';
+const TOGGLE_EXPECTATION = 'TOGGLE_EXPECTATION';
 
 export type ActionUsersType = FollowACType
     | UnFollowACType
     | SetUsersACType
     | SetCurrentPageACType
     | SetTotalUsersCountACType
-    | SwitchLoadingACType;
+    | SwitchLoadingACType
+    | ToggleExpectationACType;
 
 type FollowACType = ReturnType<typeof followAC>;
 export const followAC = (userId: string) => {
@@ -144,6 +158,15 @@ type SwitchLoadingACType = ReturnType<typeof switchLoadingAC>;
 export const switchLoadingAC = (onOff:boolean)=>{
     return{
         type: LOADING_SWITCH,
+        onOff,
+    } as const;
+}
+
+type ToggleExpectationACType = ReturnType<typeof toggleExpectationAC>;
+export const toggleExpectationAC = (userId:string, onOff:boolean)=>{
+    return{
+        type: TOGGLE_EXPECTATION,
+        userId,
         onOff,
     } as const;
 }
