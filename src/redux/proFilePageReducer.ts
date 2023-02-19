@@ -68,7 +68,7 @@ export type ProfileUserType = {
     lookingForAJobDescription: string,
     fullName: string,
     photos: PhotosType
-    userId: string,
+    userId: number,
 }
 export type proFilePageType = {
     message: string,

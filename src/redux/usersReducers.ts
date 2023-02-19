@@ -1,10 +1,10 @@
 import {Dispatch} from "redux";
 import {usersAPI} from "../components/api/api";
 
-type LocationType = {
-    city: string,
-    country: string,
-}
+// type LocationType = {
+//     city: string,
+//     country: string,
+// }
 
 type PhotosType = {
     small: string,
@@ -15,11 +15,11 @@ export type Expectation = {
 }
 export type UsersType = {
     id: string,
-    photos: PhotosType,
-    followed: boolean,
     name: string,
     status: string,
-    location: LocationType,
+    photos: PhotosType,
+    followed: boolean,
+    // location: LocationType,
 }
 export type InitializationStateType = {
     users: UsersType[],
@@ -175,7 +175,7 @@ export const toggleExpectationAC = (userId: string, onOff: boolean) => {
     } as const;
 }
 
-//thank =====================================================================
+//THUNK =====================================================================
 
 //COmponent UsersContiner ===================================================
 export const getUsersThunkCreator = (/*currentPage:number, pageSize:number*/) => {
@@ -195,7 +195,7 @@ export const pageChangeThunkCreator = (page: number, /*pageSize: number*/) => {
         dispatch(setCurrentPageAC(page));
         dispatch(switchLoadingAC(true));
 
-        usersAPI.getUsers(/*page, pageSize*/)
+        usersAPI.getUsers(page, /*pageSize*/)
             /* axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,{
                  withCredentials:true,
              })*/.then(data => {
