@@ -205,7 +205,7 @@ export const Users = (props: UsersTypeComponent) => {
                             <div className={s.containerUsers__item}>
                                 <div className={s.containerUsers__avatar}>
                                     <div>
-                                        <NavLink to={'/profile/' + u.id}>
+                                        <NavLink to={`/profile/${u.id}`}>
                                             <img src={u.photos.small !== null ? u.photos.small : userPhotos} alt=""/>
                                         </NavLink>
                                     </div>

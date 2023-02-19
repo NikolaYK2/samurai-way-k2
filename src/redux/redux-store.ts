@@ -1,9 +1,10 @@
-import {combineReducers, legacy_createStore as createStore} from "redux";
+import {applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux";
 import {messagesPageReducer} from "./messagesPageReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {proFileReducer} from "./proFilePageReducer";
 import {usersReducer} from "./usersReducers";
 import {loginAuthorizationReducer} from "./loginReducer";
+import thunkMiddleware from  'redux-thunk'
 
 // export type StoreType = {
 //     _state: stateType,
@@ -40,8 +41,17 @@ export let rootReducer = combineReducers({//функция которой пер
 
 export type AppStateType = ReturnType<typeof rootReducer>;
 //Рудьюсеры отдаются стору, автоматически createStore создает внутри себя store
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 //Что-бы работало нужно инициализировать
+
+// Типизация всех AC ...
+
+
+
+// export type RootState = ReturnType<typeof store.getState>
+// export type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>
+// export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AnyAction>
+
 
 // @ts-ignore
 window.store = store;

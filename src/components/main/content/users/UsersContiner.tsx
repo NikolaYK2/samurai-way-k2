@@ -4,16 +4,15 @@ import {connect} from "react-redux";
 import {
     Expectation,
     followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
+    getUsersThunkCreator,
+    pageChangeThunkCreator,
     setUsersAC,
-    switchLoadingAC, toggleExpectationAC,
+    toggleExpectationAC,
     unFollowAC,
     UsersType
 } from "../../../../redux/usersReducers";
 import {Users} from "./Users";
 import {Loading} from "../../../loading/Loading";
-import {usersAPI} from "../../../api/api";
 
 //Контейнерная class компонента которая делает API
 class UsersAPIComponent extends React.Component<UsersTypeProps> {
@@ -23,12 +22,14 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
     // }
     componentDidMount() {
         //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
-        this.props.switchLoading(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.switchLoading(false);
-            this.props.setUsers(data.items);
-            this.props.setTotalUsersCount(data.totalCount);
-        })
+        // this.props.switchLoading(true);
+        //
+        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        //     this.props.switchLoading(false);
+        //     this.props.setUsers(data.items);
+        //     this.props.setTotalUsersCount(data.totalCount);
+        // })
+        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
     }
 
     //class это не функция, props мы теперь не найдем, props это теперь часть обьекта this, теперь через this достаем
@@ -42,15 +43,16 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
     // }
 
     pageChange = (page: number) => {//меняем страницы
-        this.props.setCurrentPage(page);
-        this.props.switchLoading(true);
-        usersAPI.getUsers(page, this.props.pageSize)
-            /* axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,{
-                 withCredentials:true,
-             })*/.then(data => {
-            this.props.switchLoading(false);
-            this.props.setUsers(data.items);
-        })
+        // this.props.setCurrentPage(page);
+        // this.props.switchLoading(true);
+        // usersAPI.getUsers(page, this.props.pageSize)
+        //     /* axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,{
+        //          withCredentials:true,
+        //      })*/.then(data => {
+        //     this.props.switchLoading(false);
+        //     this.props.setUsers(data.items);
+        // })
+        this.props.pageChangeThunk(page, this.props.pageSize);
 
     }
 
@@ -152,10 +154,12 @@ export type MapDispatchPropsType = {
     follow: (userId: string) => void,//если в функции есть return например 10(числа), то уже не void пишется а number(state и т.д.)
     unFollow: (userId: string) => void,
     setUsers: (users: UsersType[]) => void,
-    setCurrentPage: (page: number) => void,
-    setTotalUsersCount: (totalCount: number) => void,
-    switchLoading: (onOff: boolean) => void,
     toggleExpectation: (userId: string, onOff: boolean) => void,
+    getUsersThunk:(currentPage:number, pageSize:number)=>void,
+    pageChangeThunk:(page:number, pageSize:number)=>void,
+    // setCurrentPage: (page: number) => void,
+    // setTotalUsersCount: (totalCount: number) => void,
+    // switchLoading: (onOff: boolean) => void,
 }
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {//название функции обозначает замапить state на пропсы
@@ -183,9 +187,11 @@ export const UsersContainer = connect(mapStateToProps, {
     follow: followAC,
     unFollow: unFollowAC,
     setUsers: setUsersAC,
-    setCurrentPage: setCurrentPageAC,
-    setTotalUsersCount: setTotalUsersCountAC,
-    switchLoading: switchLoadingAC,
     toggleExpectation: toggleExpectationAC,
+    getUsersThunk: getUsersThunkCreator,
+    pageChangeThunk:pageChangeThunkCreator,
+    // setCurrentPage: setCurrentPageAC, /*- нам теперь не нужны так как все это происходит в санках в редьюсере*/
+    // setTotalUsersCount: setTotalUsersCountAC,
+    // switchLoading: switchLoadingAC,
 })(UsersAPIComponent);
 // export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);

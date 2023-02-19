@@ -1,14 +1,17 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../components/api/api";
+
 type LocationType = {
     city: string,
     country: string,
 }
 
-type PhotosType={
-    small:string,
-    large:string,
+type PhotosType = {
+    small: string,
+    large: string,
 }
-export type Expectation={
-    id:string,
+export type Expectation = {
+    id: string,
 }
 export type UsersType = {
     id: string,
@@ -24,7 +27,7 @@ export type InitializationStateType = {
     totalUsersCount: number,
     currentPage: number,
     loadingPage: boolean,
-    expectation:(Expectation | string)[],
+    expectation: (Expectation | string)[],
 }
 // type InitializationStateType = typeof initializationState;
 
@@ -88,9 +91,10 @@ export const usersReducer = (state: InitializationStateType = initializationStat
             return {...state, loadingPage: action.onOff};
 
         case TOGGLE_EXPECTATION:
-            return {...state, expectation: action.onOff
+            return {
+                ...state, expectation: action.onOff
                     ? [...state.expectation, action.userId]
-                    : state.expectation.filter(id=>id !== action.userId)
+                    : state.expectation.filter(id => id !== action.userId)
             };
 
         default:
@@ -155,18 +159,46 @@ export const setTotalUsersCountAC = (totalCount: number) => {
 }
 
 type SwitchLoadingACType = ReturnType<typeof switchLoadingAC>;
-export const switchLoadingAC = (onOff:boolean)=>{
-    return{
+export const switchLoadingAC = (onOff: boolean) => {
+    return {
         type: LOADING_SWITCH,
         onOff,
     } as const;
 }
 
 type ToggleExpectationACType = ReturnType<typeof toggleExpectationAC>;
-export const toggleExpectationAC = (userId:string, onOff:boolean)=>{
-    return{
+export const toggleExpectationAC = (userId: string, onOff: boolean) => {
+    return {
         type: TOGGLE_EXPECTATION,
         userId,
         onOff,
     } as const;
+}
+
+//thank ===========================================
+export const getUsersThunkCreator = (/*currentPage:number, pageSize:number*/) => {
+    return (dispatch: Dispatch<ActionUsersType>) => {
+        //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
+        dispatch(switchLoadingAC(true));
+
+        usersAPI.getUsers(/*currentPage, pageSize*/).then(data => {
+            dispatch(switchLoadingAC(false));
+            dispatch(setUsersAC(data.items));
+            dispatch(setTotalUsersCountAC(data.totalCount));
+        })
+    }
+}
+export const pageChangeThunkCreator = (page: number, pageSize: number) => {
+    return (dispatch: Dispatch<ActionUsersType>) => {
+        dispatch(setCurrentPageAC(page));
+        dispatch(switchLoadingAC(true));
+
+        usersAPI.getUsers(page, pageSize)
+            /* axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,{
+                 withCredentials:true,
+             })*/.then(data => {
+            dispatch(switchLoadingAC(false));
+            dispatch(setUsersAC(data.items));
+        })
+    }
 }
