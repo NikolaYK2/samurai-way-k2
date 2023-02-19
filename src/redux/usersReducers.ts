@@ -175,7 +175,9 @@ export const toggleExpectationAC = (userId: string, onOff: boolean) => {
     } as const;
 }
 
-//thank ===========================================
+//thank =====================================================================
+
+//COmponent UsersContiner ===================================================
 export const getUsersThunkCreator = (/*currentPage:number, pageSize:number*/) => {
     return (dispatch: Dispatch<ActionUsersType>) => {
         //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
@@ -188,17 +190,50 @@ export const getUsersThunkCreator = (/*currentPage:number, pageSize:number*/) =>
         })
     }
 }
-export const pageChangeThunkCreator = (page: number, pageSize: number) => {
+export const pageChangeThunkCreator = (page: number, /*pageSize: number*/) => {
     return (dispatch: Dispatch<ActionUsersType>) => {
         dispatch(setCurrentPageAC(page));
         dispatch(switchLoadingAC(true));
 
-        usersAPI.getUsers(page, pageSize)
+        usersAPI.getUsers(/*page, pageSize*/)
             /* axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,{
                  withCredentials:true,
              })*/.then(data => {
             dispatch(switchLoadingAC(false));
             dispatch(setUsersAC(data.items));
         })
+    }
+}
+//COmponent User ===================================================
+export const unFollowThunkCreator = (id: string) => {
+    return (dispatch: Dispatch<ActionUsersType>) => {
+        dispatch(toggleExpectationAC(id,true));
+
+        usersAPI.deleteFollow(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(unFollowAC(id));
+            }
+            dispatch(toggleExpectationAC(id,false));
+        });
+        // props.toggleExpectation(id,true, );
+        // usersAPI.deleteFollow(id).then(data => {
+        //     if (data.resultCode === 0) {
+        //         props.unFollow(id);
+        //     }
+        //     props.toggleExpectation(id,false);
+        // });
+
+    }
+}
+export const followThunkCreator = (id: string) => {
+    return (dispatch: Dispatch<ActionUsersType>) => {
+        dispatch(toggleExpectationAC(id,true));
+
+        usersAPI.postFollow(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(followAC(id));
+            }
+            dispatch(toggleExpectationAC(id,false));
+        });
     }
 }

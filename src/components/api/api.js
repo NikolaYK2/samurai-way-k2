@@ -9,7 +9,7 @@ const instance = axios.create({
 });
 
 export const usersAPI = {
-    getUsers(currentPage = 1, pageSize = 10) {
+    getUsers(currentPage = 1, pageSize = 5) {
         return instance./*axios.*/get(/*baseUrl + */`users?page=${currentPage}&count=${pageSize}`/*,{withCredentials:true,}*/).then(response => response.data);
     },
     deleteFollow(id) {

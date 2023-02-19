@@ -3,12 +3,12 @@ import {AppStateType} from "../../../../redux/redux-store";
 import {connect} from "react-redux";
 import {
     Expectation,
-    followAC,
+    followThunkCreator,
     getUsersThunkCreator,
     pageChangeThunkCreator,
     setUsersAC,
     toggleExpectationAC,
-    unFollowAC,
+    unFollowThunkCreator,
     UsersType
 } from "../../../../redux/usersReducers";
 import {Users} from "./Users";
@@ -76,10 +76,12 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
                     expectation={this.props.expectation}
 
                     pageChange={this.pageChange}
-                    unFollow={this.props.unFollow}
-                    follow={this.props.follow}
                     setUsers={this.props.setUsers}
-                    toggleExpectation={this.props.toggleExpectation}
+                    unFollowThunk={this.props.unFollowThunk}
+                    followThunk={this.props.followThunk}
+                    // unFollow={this.props.unFollow}
+                    // follow={this.props.follow}
+                    // toggleExpectation={this.props.toggleExpectation}
 
                 />
             </div>
@@ -151,12 +153,12 @@ export type MapStatePropsType = {
 }
 
 export type MapDispatchPropsType = {
-    follow: (userId: string) => void,//если в функции есть return например 10(числа), то уже не void пишется а number(state и т.д.)
-    unFollow: (userId: string) => void,
     setUsers: (users: UsersType[]) => void,
     toggleExpectation: (userId: string, onOff: boolean) => void,
-    getUsersThunk:(currentPage:number, pageSize:number)=>void,
-    pageChangeThunk:(page:number, pageSize:number)=>void,
+    getUsersThunk: (currentPage: number, pageSize: number) => void,
+    pageChangeThunk: (page: number, pageSize: number) => void,
+    unFollowThunk: (userId: string) => void,//если в функции есть return например 10(числа), то уже не void пишется а number(state и т.д.)
+    followThunk:(userId: string)=>void,
     // setCurrentPage: (page: number) => void,
     // setTotalUsersCount: (totalCount: number) => void,
     // switchLoading: (onOff: boolean) => void,
@@ -184,12 +186,12 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {//назв�
 //     }
 // }
 export const UsersContainer = connect(mapStateToProps, {
-    follow: followAC,
-    unFollow: unFollowAC,
     setUsers: setUsersAC,
     toggleExpectation: toggleExpectationAC,
     getUsersThunk: getUsersThunkCreator,
-    pageChangeThunk:pageChangeThunkCreator,
+    pageChangeThunk: pageChangeThunkCreator,
+    unFollowThunk: unFollowThunkCreator,
+    followThunk:followThunkCreator,
     // setCurrentPage: setCurrentPageAC, /*- нам теперь не нужны так как все это происходит в санках в редьюсере*/
     // setTotalUsersCount: setTotalUsersCountAC,
     // switchLoading: switchLoadingAC,

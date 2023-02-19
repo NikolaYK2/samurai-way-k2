@@ -105,7 +105,6 @@ import s from "./Users.module.css";
 import userPhotos from "./pngwing.com.png";
 import {Expectation, UsersType} from "../../../../redux/usersReducers";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../../api/api";
 
 type UsersTypeComponent = {
     totalUsersCount: number,
@@ -115,10 +114,10 @@ type UsersTypeComponent = {
 
     users: UsersType[],
     pageChange: (page: number) => void,
-    unFollow: (userId: string) => void,
-    follow: (userId: string) => void,
     setUsers: (users: UsersType[]) => void,
-    toggleExpectation: (userId:string, onOff: boolean) => void,
+    unFollowThunk:(userId: string)=>void,
+    followThunk:(userId:string)=>void,
+    // toggleExpectation: (userId:string, onOff: boolean) => void,
 }
 
 export const Users = (props: UsersTypeComponent) => {
@@ -134,13 +133,14 @@ export const Users = (props: UsersTypeComponent) => {
     }
 
     const unFollowHandler = (id: string) => {
-        props.toggleExpectation(id,true, );
-        usersAPI.deleteFollow(id).then(data => {
-            if (data.resultCode === 0) {
-                props.unFollow(id);
-            }
-            props.toggleExpectation(id,false);
-        });
+        // props.toggleExpectation(id,true, );
+        // usersAPI.deleteFollow(id).then(data => {
+        //     if (data.resultCode === 0) {
+        //         props.unFollow(id);
+        //     }
+        //     props.toggleExpectation(id,false);
+        // });
+        props.unFollowThunk(id)
         // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,  {
         //     withCredentials: true,
         //     headers: {'API-KEY': 'ac221b8b-8a64-47b0-b88a-297bbd35a29e'}
@@ -151,20 +151,21 @@ export const Users = (props: UsersTypeComponent) => {
         // })
     }
     const followHandler = (id: string) => {
-        props.toggleExpectation(id,true);
-        usersAPI.postFollow(id).then(data => {
-            if (data.resultCode === 0) {
-                props.follow(id);
-            }
-            props.toggleExpectation(id,false);
-        });
+        props.followThunk(id)
+    //     props.toggleExpectation(id,true);
+    //     usersAPI.postFollow(id).then(data => {
+    //         if (data.resultCode === 0) {
+    //             props.follow(id);
+    //         }
+    //         props.toggleExpectation(id,false);
+    //     });
     }
 
     return (
         <div className={s.container}>
             Users
             <div className={s.containerPages}>
-                {pages.map((p, index) => {
+                {pages.map((p,index) => {
                     return (
                         <span key={index}
                               className={props.currentPage === p ? s.pageActive : s.page}
