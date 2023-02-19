@@ -10,10 +10,16 @@ const instance = axios.create({
     headers: {'API-KEY': 'ac221b8b-8a64-47b0-b88a-297bbd35a29e'},
 });
 
-type DeletePostFolType = {
+type DataAuthType={
+    id: number,
+    email: string,
+    login: string,
+}
+
+type ResponsType<D = {}> = {
     resultCode: number
     messages: string[],
-    data: {}
+    data: D
 }
 type GetUsersType = {
     items: UsersType[],
@@ -25,13 +31,21 @@ export const usersAPI = {
         return instance./*axios.*/get<GetUsersType>(/*baseUrl + */`users?page=${currentPage}&count=${pageSize}`/*,{withCredentials:true,}*/).then(response => response.data);
     },
     deleteFollow(id: string) {
-        return instance.delete<DeletePostFolType>(`follow/${id}`).then(response => response.data);
+        return instance.delete<ResponsType<{}>>(`follow/${id}`).then(response => response.data);
     },
     postFollow(id: string) {
-        return instance.post<DeletePostFolType>(`follow/${id}`).then(response => response.data);
+        return instance.post<ResponsType>(`follow/${id}`).then(response => response.data);
     },
     getUserProfile(userId: number) {
         return instance.get<ProfileUserType>(`profile/${userId}`).then(response => response.data);
+    },
+}
+//=================================================================================================
+
+
+export const loginAuthorizationAPI = {
+    loginMeAuthoriz(){
+        return instance.get<ResponsType<DataAuthType>>(`auth/me`).then(response=>response.data);
     },
 }
 

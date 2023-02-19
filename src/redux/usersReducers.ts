@@ -118,6 +118,7 @@ export type ActionUsersType = FollowACType
     | SwitchLoadingACType
     | ToggleExpectationACType;
 
+//AC=================================================================
 type FollowACType = ReturnType<typeof followAC>;
 export const followAC = (userId: string) => {
     return {
@@ -176,7 +177,6 @@ export const toggleExpectationAC = (userId: string, onOff: boolean) => {
 }
 
 //THUNK =====================================================================
-
 //COmponent UsersContiner ===================================================
 export const getUsersThunkCreator = (/*currentPage:number, pageSize:number*/) => {
     return (dispatch: Dispatch<ActionUsersType>) => {
