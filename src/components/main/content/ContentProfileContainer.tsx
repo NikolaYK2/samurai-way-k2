@@ -5,7 +5,7 @@ import MyPostContainer from "./MyProfile/myPost/MyPostContainer";
 import {connect} from "react-redux";
 import {getUserProfileThunkCreator, ProfileUserType} from "../../../redux/proFilePageReducer";
 import {AppStateType} from "../../../redux/redux-store";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {Navigate, useLocation, useNavigate, useParams} from "react-router-dom";
 
 // type ContentProfileType = {
 //     // store: StoreType,
@@ -81,6 +81,11 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
         //     props.setUserProfile(data);
         // });
     }, [])
+
+    if (!props.isAuth) {
+        return <Navigate to='/login' />
+    }
+
     return (
         <section className={s.content}>
             <div className={s.content__wrap}>
@@ -142,6 +147,7 @@ type ProfileTypeProps = MapStateToPropsType & MapDispatchPropsType & WithRouterP
 
 type MapStateToPropsType = {
     profile: ProfileUserType | null,
+    isAuth: boolean,
 }
 
 type MapDispatchPropsType = {
@@ -153,6 +159,7 @@ type MapDispatchPropsType = {
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.proFilePage.profile,
+        isAuth: state.loginAuthorization.isAuth,
     }
 }
 

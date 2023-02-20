@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from "./MessageUsers.module.css";
 import {MessageUsersType} from "./MessageUsersContainer";
+import {Navigate} from "react-router-dom";
 
 // type MessageUsersType = {
 //     // store: StoreType,
@@ -16,10 +17,10 @@ export const MessageUsers = (props: MessageUsersType) => {
     let [errorText, setErrorText] = useState<string | null>(null)
 
     const addMessages = () => {
-        if (props.message !== ""){
+        if (props.message !== "") {
             props.addMessageUsers(props.message);
             // props.dispatch(addMessageUsersAC(props.message));
-        }else {
+        } else {
             setErrorText('Але, пиши чееее!')
         }
     }
@@ -28,6 +29,11 @@ export const MessageUsers = (props: MessageUsersType) => {
         let text = event.currentTarget.value
         props.addMessageUsersChange(text);
         setErrorText('')
+    }
+
+    //Делаем Redirect =======================
+    if (!props.isAuth) {
+        return <Navigate to='/login' />
     }
 
     return (
@@ -40,7 +46,8 @@ export const MessageUsers = (props: MessageUsersType) => {
                     </div>
                 )
             })}
-            <textarea placeholder={errorText || 'Введите сообщение'} onChange={addMessagesChange} value={props.message}></textarea>
+            <textarea placeholder={errorText || 'Введите сообщение'} onChange={addMessagesChange}
+                      value={props.message}></textarea>
             <br/>
             <button onClick={addMessages}>send</button>
         </div>

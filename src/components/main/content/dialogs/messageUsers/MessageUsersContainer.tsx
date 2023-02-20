@@ -52,6 +52,7 @@ import {Dispatch} from "redux";
 type MapStatePropsType = {
     message: string,
     usersMessages: usersMessagesType[],
+    isAuth:boolean,
 }
 
 type MapDispatchPropsType = {
@@ -65,6 +66,7 @@ const mapStateToProps = (state: AppStateType):MapStatePropsType => {
     return {
         message: state.messagesPage.message,
         usersMessages: state.messagesPage.usersMessages,
+        isAuth: state.loginAuthorization.isAuth,
     }
 }
 

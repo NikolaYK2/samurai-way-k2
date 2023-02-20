@@ -9,6 +9,7 @@ import {Settings} from "./content/settings/Settings";
 import {Friends} from "./content/friends/Friends";
 import {UsersContainer} from "./content/users/UsersContiner";
 import {ProfileContainer} from "./content/ContentProfileContainer";
+import {Login} from "../login/Login";
 
 // type MainType={
 //     // store: StoreType,
@@ -30,6 +31,7 @@ export const Main = () => {
                 <Route path="/music" element={<Music/>}/>
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/friends" element={<Friends/>}/>
+                <Route path="/login" element={<Login/>}/>
                 <Route path="^" element={<div>404</div>}/>
             </Routes>
         </main>

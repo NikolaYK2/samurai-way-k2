@@ -1,8 +1,6 @@
 import React from "react";
 import s from "./DialogsMessage.module.css";
-import {MessageUsers} from "./messageUsers/MessageUsers";
 import {Users} from "./users/Users";
-import {AppStateType} from "../../../../redux/redux-store";
 import {MessageUsersContainer} from "./messageUsers/MessageUsersContainer";
 
 type DialogsMessageType={
