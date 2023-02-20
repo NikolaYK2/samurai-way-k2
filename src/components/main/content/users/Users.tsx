@@ -128,7 +128,8 @@ export const Users = (props: UsersTypeComponent) => {
         if (i === 12) {
             break;
         } else {
-            pages.push(i);
+            pages = [...pages, i];
+            // pages.push(i);
         }
     }
 
@@ -177,7 +178,6 @@ export const Users = (props: UsersTypeComponent) => {
             <div className={s.container__data}>
                 {/*<button onClick={this.getUsers}>Get users</button>*/}
                 {props.users.map(u => {
-
                     // const unFollowHandler = () => {
                     //    usersAPI.deleteFollow(u.id).then(data => {
                     //         if (data.resultCode === 0) {
@@ -200,7 +200,6 @@ export const Users = (props: UsersTypeComponent) => {
                     //         }
                     //     })
                     // }
-
                     return (
                         <div key={u.id} className={s.containerUsers}>
                             <div className={s.containerUsers__item}>

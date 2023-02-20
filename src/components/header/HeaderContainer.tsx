@@ -2,7 +2,7 @@ import React from 'react';
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {loginMeThunkC, setUserDataAC} from "../../redux/loginReducer";
+import {loginMeThunkC} from "../../redux/loginReducer";
 
 export class HeaderContainer extends React.Component<ProfileTypeProps> {
     componentDidMount() {
@@ -38,8 +38,8 @@ type MapStateToPropsType = {
 // loading:boolean,
 
 type MapDispatchPropsType = {
-    setUserData: (userId: number, email: string, login: string) => void,
     loginMeThunk:()=>void,
+    // setUserData: (userId: number, email: string, login: string) => void,
 }
 
 
@@ -51,7 +51,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 
 export const HeaderContainerConnect = connect(mapStateToProps, {
-    setUserData: setUserDataAC,
     loginMeThunk: loginMeThunkC,
+    // setUserData: setUserDataAC,
 
 })(HeaderContainer);
