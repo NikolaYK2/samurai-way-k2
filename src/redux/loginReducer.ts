@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {loginAuthorizationAPI} from "../components/api/api";
+import {authorizationAPI} from "../components/api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -47,7 +47,7 @@ export const loginMeThunkC = () => {
 
     return (dispatch: Dispatch<ActionsTypeLoginAuthorization>) => {
 
-        loginAuthorizationAPI.loginMeAuthoriz().then(data => {
+        authorizationAPI.authorizeMe().then(data => {
             if (data.resultCode === 0) {
                 let {id, email, login} = data.data;
                 dispatch(setUserDataAC(id, email, login));

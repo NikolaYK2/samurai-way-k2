@@ -3,10 +3,9 @@ import s from "./ContentProfile.module.css";
 import {Profile} from "./MyProfile/MyProfile";
 import MyPostContainer from "./MyProfile/myPost/MyPostContainer";
 import {connect} from "react-redux";
-import {ProfileUserType, setUserProfileAC} from "../../../redux/proFilePageReducer";
+import {getUserProfileThunkCreator, ProfileUserType} from "../../../redux/proFilePageReducer";
 import {AppStateType} from "../../../redux/redux-store";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 // type ContentProfileType = {
 //     // store: StoreType,
@@ -74,13 +73,13 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
         if (!userId) {
             userId = 2;
         }
+        props.getUserProfile(userId);
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
         //     props.setUserProfile(response.data);
         // });
-        usersAPI.getUserProfile(userId).then(data => {
-            props.setUserProfile(data);
-        });
-
+        // usersAPI.getUserProfile(userId).then(data => {
+        //     props.setUserProfile(data);
+        // });
     }, [])
     return (
         <section className={s.content}>
@@ -146,7 +145,8 @@ type MapStateToPropsType = {
 }
 
 type MapDispatchPropsType = {
-    setUserProfile: (profile: ProfileUserType | null) => void,
+    // setUserProfile: (profile: ProfileUserType | null) => void,
+    getUserProfile: (userId: number) => void,
 }
 
 
@@ -159,7 +159,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 let WithURLDataContainerComponent = withRouter(ContentProfileContainer);
 
 export const ProfileContainer = connect(mapStateToProps, {
-    setUserProfile: setUserProfileAC,
+    // setUserProfile: setUserProfileAC,
+    getUserProfile: getUserProfileThunkCreator,
 })(WithURLDataContainerComponent);
 
 

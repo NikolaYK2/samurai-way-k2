@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {usersAPI} from "../components/api/api";
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addPost = 'addPost';
 const addPostChange = 'addPostChange';
@@ -110,4 +112,14 @@ export const proFileReducer = (state = initializationState, action: ActionsTypeP
         //MESSAGE USERS===============================`================================
     }
     return state;
+}
+
+//THUNK =============================================================
+export const getUserProfileThunkCreator = (userId:number) => {
+    return (dispatch: Dispatch<ActionsTypeProfile>) => {
+        usersAPI.getUserProfile(userId).then(data => {
+            dispatch(setUserProfileAC(data));
+
+        })
+    }
 }

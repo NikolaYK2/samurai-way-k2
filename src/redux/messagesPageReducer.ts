@@ -3,6 +3,7 @@ import {v1} from "uuid";
 const addMessageUsers = 'addMessageUsers';
 const addMessageUsersChange = 'addMessageUsersChange';
 //==========================================================================================
+
 //=====типизация actions add post==============================================================================
 // type AddPostActionType ={
 //     type: 'addPost'
@@ -18,6 +19,7 @@ const addMessageUsersChange = 'addMessageUsersChange';
 // type AddPostChangeActionType = ReturnType<typeof addPostChangeActionCreator>;
 //Type messages Users Type===========================================================================================================
 export type ActionsTypeMessagesUsers = ReturnType<typeof addMessageUsersAC> | ReturnType<typeof addMessageUsersChangeAC>;
+
 //FUNCTION ADD MESSAGES USERS=ЭКШЭН КРИЕЙТЕРЫ - AC======================================================
 export const addMessageUsersAC = (newMessageUsers: string) => {
     return {
@@ -31,6 +33,11 @@ export const addMessageUsersChangeAC = (text:string) => {
         newMessageUsers: text,
     } as const
 }
+
+//THUNK C======================================================
+
+
+
 
 export type usersType = {
     id: string,

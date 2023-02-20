@@ -43,8 +43,8 @@ export const usersAPI = {
 //=================================================================================================
 
 
-export const loginAuthorizationAPI = {
-    loginMeAuthoriz(){
+export const authorizationAPI = {
+    authorizeMe(){
         return instance.get<ResponsType<DataAuthType>>(`auth/me`).then(response=>response.data);
     },
 }
