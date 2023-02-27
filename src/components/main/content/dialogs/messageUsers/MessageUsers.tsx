@@ -32,8 +32,16 @@ export const MessageUsers = (props: MessageUsersType) => {
     }
 
     //Делаем Redirect =======================
+    // const navigate = useNavigate();
+    // useEffect(() => {
+    //     if (!props.isAuth) {
+    //         navigate('/login')
+    //     } else {
+    //         navigate('/messages')
+    //     }
+    // }, [navigate, props.isAuth])
     if (!props.isAuth) {
-        return <Navigate to='/login' />
+        return <Navigate to='/login'/>
     }
 
     return (

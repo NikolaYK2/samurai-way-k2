@@ -10,7 +10,7 @@ const instance = axios.create({
     headers: {'API-KEY': 'ac221b8b-8a64-47b0-b88a-297bbd35a29e'},
 });
 
-type DataAuthType={
+type DataAuthType = {
     id: number,
     email: string,
     login: string,
@@ -44,9 +44,17 @@ export const usersAPI = {
 
 
 export const authorizationAPI = {
-    authorizeMe(){
-        return instance.get<ResponsType<DataAuthType>>(`auth/me`).then(response=>response.data);
+    authorizeMe() {
+        return instance.get<ResponsType<DataAuthType>>(`auth/me`).then(response => response.data);
     },
+}
+//================================================================================
+
+
+export const friendsAPI = {
+    setUsersFriend() {
+        return instance.get<GetUsersType>('users?count=5').then(response => response.data.items)
+    }
 }
 
 // export const getUsers =(currentPage = 1, pageSize = 10)=>{

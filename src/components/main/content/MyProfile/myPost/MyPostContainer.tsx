@@ -3,7 +3,6 @@ import {addPostAC, addPostChangeAC, postDataType} from "../../../../../redux/pro
 import {MyPost} from "./MyPost";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../../../redux/redux-store";
-import {Dispatch} from "redux";
 
 // type MyPostContainerType = {
 //     // store: StoreType,
@@ -84,17 +83,22 @@ const mapStateToProps = (state: AppStateType):MapStatePropsType => {//назва
         postData: state.proFilePage.postData,
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
-    return {
-        addPostChange: (text: string) => {
-            dispatch(addPostChangeAC(text))
-        },
-        addPost: (postMessage: string) => {
-            dispatch(addPostAC(postMessage));
-        }
+// const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
+//     return {
+//         addPostChange: (text: string) => {
+//             dispatch(addPostChangeAC(text))
+//         },
+//         addPost: (postMessage: string) => {
+//             dispatch(addPostAC(postMessage));
+//         }
+//
+//     }
+// }
 
-    }
-}
+export default connect(mapStateToProps, {
+    addPostChange: addPostChangeAC,
+    addPost: addPostAC,
+})(MyPost);//Вызываем ее два раза и во второй раз вызываем то ту фукнцию что она вернула в первой
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyPost);//Вызываем ее два раза и во второй раз вызываем то ту фукнцию что она вернула в первой
+// export default connect(mapStateToProps, mapDispatchToProps)(MyPost);//Вызываем ее два раза и во второй раз вызываем то ту фукнцию что она вернула в первой
 //С библиотекой connect можно забыть про store

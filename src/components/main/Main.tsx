@@ -6,7 +6,7 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import {Music} from "./content/music/Music";
 import {News} from "./content/news/News";
 import {Settings} from "./content/settings/Settings";
-import {Friends} from "./content/friends/Friends";
+import {FriendsContainer} from "./content/friends/FriendsContainer";
 import {UsersContainer} from "./content/users/UsersContiner";
 import {ProfileContainer} from "./content/ContentProfileContainer";
 import {Login} from "../login/Login";
@@ -30,7 +30,7 @@ export const Main = () => {
                 <Route path="/news" element={<News/>}/>
                 <Route path="/music" element={<Music/>}/>
                 <Route path="/settings" element={<Settings/>}/>
-                <Route path="/friends" element={<Friends/>}/>
+                <Route path="/friends" element={<FriendsContainer/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="^" element={<div>404</div>}/>
             </Routes>

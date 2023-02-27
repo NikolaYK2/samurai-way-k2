@@ -5,6 +5,7 @@ import {proFileReducer} from "./proFilePageReducer";
 import {usersReducer} from "./usersReducers";
 import {loginAuthorizationReducer} from "./loginReducer";
 import thunkMiddleware from  'redux-thunk'
+import {friendsReducer} from "./friendsReducer";
 
 // export type StoreType = {
 //     _state: stateType,
@@ -17,7 +18,7 @@ import thunkMiddleware from  'redux-thunk'
 //     getState: () => stateType,
 //     dispatch: (action: ActionTypeFull) => void,
 // }
-//
+
 // export type stateType = {
 //     messagesPage: messagesPageType,
 //     proFilePage: proFilePageType,
@@ -36,6 +37,7 @@ export let rootReducer = combineReducers({//функция которой пер
     usersPage: usersReducer,
     sidebar: sidebarReducer,
     loginAuthorization: loginAuthorizationReducer,
+    friends: friendsReducer,
 });
 
 
@@ -45,12 +47,6 @@ export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 //Что-бы работало нужно инициализировать
 
 // Типизация всех AC ...
-
-
-
-// export type RootState = ReturnType<typeof store.getState>
-// export type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>
-// export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AnyAction>
 
 
 // @ts-ignore

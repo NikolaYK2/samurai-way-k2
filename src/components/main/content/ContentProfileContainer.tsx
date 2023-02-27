@@ -143,6 +143,7 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
 //     }
 // }
 
+
 type ProfileTypeProps = MapStateToPropsType & MapDispatchPropsType & WithRouterProps;
 
 type MapStateToPropsType = {
