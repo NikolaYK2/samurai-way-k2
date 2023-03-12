@@ -5,7 +5,7 @@ import {ProfileUserType} from "../../../../redux/proFilePageReducer";
 
 
 type ProfileType = {
-    profile: ProfileUserType | null,
+    profile?: ProfileUserType | null,
 }
 
 export const Profile = (props: ProfileType) => {

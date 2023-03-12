@@ -4,8 +4,9 @@ import {Profile} from "./MyProfile/MyProfile";
 import MyPostContainer from "./MyProfile/myPost/MyPostContainer";
 import {connect} from "react-redux";
 import {getUserProfileThunkCreator, ProfileUserType} from "../../../redux/proFilePageReducer";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {RedirectContainer} from "../../../hoc/RedirectContainer";
 import {AppStateType} from "../../../redux/redux-store";
-import {Navigate, useLocation, useNavigate, useParams} from "react-router-dom";
 
 // type ContentProfileType = {
 //     // store: StoreType,
@@ -82,9 +83,9 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
         // });
     }, [])
 
-    if (!props.isAuth) {
-        return <Navigate to='/login' />
-    }
+    // if (!props.isAuth) {
+    //     return <Navigate to={'/login'} />
+    // }
 
     return (
         <section className={s.content}>
@@ -105,6 +106,16 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
     );
 
 }
+
+//RedirectContainer ============================================================
+// let RedirectComponentContainer = RedirectContainer(ContentProfileContainer);
+// let mapStateToPropsRedirect = (state: any): MapStateToPropsType => {
+//     return {
+//         isAuth: state.loginAuthorization.isAuth,
+//     }
+// }
+// RedirectComponentContainer = connect(mapStateToPropsRedirect)(RedirectComponentContainer);
+//RedirectContainer ============================================================
 
 
 // export class ContentProfileContainer extends  React.Component<ProfileTypeProps>{
@@ -147,8 +158,8 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
 type ProfileTypeProps = MapStateToPropsType & MapDispatchPropsType & WithRouterProps;
 
 type MapStateToPropsType = {
-    profile: ProfileUserType | null,
-    isAuth: boolean,
+    profile?: ProfileUserType | null,
+    isAuth?: boolean,
 }
 
 type MapDispatchPropsType = {
@@ -160,16 +171,16 @@ type MapDispatchPropsType = {
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.proFilePage.profile,
-        isAuth: state.loginAuthorization.isAuth,
+        // isAuth: state.loginAuthorization.isAuth,
     }
 }
 
 let WithURLDataContainerComponent = withRouter(ContentProfileContainer);
 
-export const ProfileContainer = connect(mapStateToProps, {
+export const ProfileContainer = RedirectContainer(connect(mapStateToProps, {
     // setUserProfile: setUserProfileAC,
     getUserProfile: getUserProfileThunkCreator,
-})(WithURLDataContainerComponent);
+})(WithURLDataContainerComponent));
 
 
 

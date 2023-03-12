@@ -13,6 +13,7 @@ import {
 } from "../../../../redux/usersReducers";
 import {Users} from "./Users";
 import {Loading} from "../../../loading/Loading";
+import {RedirectContainer} from "../../../../hoc/RedirectContainer";
 
 //Контейнерная class компонента которая делает API
 class UsersAPIComponent extends React.Component<UsersTypeProps> {
@@ -158,7 +159,7 @@ export type MapDispatchPropsType = {
     getUsersThunk: (currentPage: number, pageSize: number) => void,
     pageChangeThunk: (page: number, pageSize: number) => void,
     unFollowThunk: (userId: string) => void,//если в функции есть return например 10(числа), то уже не void пишется а number(state и т.д.)
-    followThunk:(userId: string)=>void,
+    followThunk: (userId: string) => void,
     // setCurrentPage: (page: number) => void,
     // setTotalUsersCount: (totalCount: number) => void,
     // switchLoading: (onOff: boolean) => void,
@@ -185,15 +186,20 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {//назв�
 //         switchLoading:(onOff:boolean)=>(dispatch(switchLoadingAC(onOff))),
 //     }
 // }
-export const UsersContainer = connect(mapStateToProps, {
+
+//RedirectComponent ========================================================
+// let RedirectComponent = RedirectContainer(UsersAPIComponent)
+//RedirectComponent ========================================================
+
+export const UsersContainer = RedirectContainer(connect(mapStateToProps, {
     setUsers: setUsersAC,
     toggleExpectation: toggleExpectationAC,
     getUsersThunk: getUsersThunkCreator,
     pageChangeThunk: pageChangeThunkCreator,
     unFollowThunk: unFollowThunkCreator,
-    followThunk:followThunkCreator,
+    followThunk: followThunkCreator,
     // setCurrentPage: setCurrentPageAC, /*- нам теперь не нужны так как все это происходит в санках в редьюсере*/
     // setTotalUsersCount: setTotalUsersCountAC,
     // switchLoading: switchLoadingAC,
-})(UsersAPIComponent);
+})(UsersAPIComponent));
 // export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);

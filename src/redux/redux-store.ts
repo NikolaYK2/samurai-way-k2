@@ -4,7 +4,7 @@ import {sidebarReducer} from "./sidebarReducer";
 import {proFileReducer} from "./proFilePageReducer";
 import {usersReducer} from "./usersReducers";
 import {loginAuthorizationReducer} from "./loginReducer";
-import thunkMiddleware from  'redux-thunk'
+import thunkMiddleware from  'redux-thunk';
 import {friendsReducer} from "./friendsReducer";
 
 // export type StoreType = {

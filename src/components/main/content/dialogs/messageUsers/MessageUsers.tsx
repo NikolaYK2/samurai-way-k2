@@ -1,7 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from "./MessageUsers.module.css";
 import {MessageUsersType} from "./MessageUsersContainer";
-import {Navigate} from "react-router-dom";
 
 // type MessageUsersType = {
 //     // store: StoreType,
@@ -40,9 +39,9 @@ export const MessageUsers = (props: MessageUsersType) => {
     //         navigate('/messages')
     //     }
     // }, [navigate, props.isAuth])
-    if (!props.isAuth) {
-        return <Navigate to='/login'/>
-    }
+    // if (!props.isAuth) {
+    //     return <Navigate to={'/login'}/>
+    // }
 
     return (
         <div className={s.dialogs__messages}>
@@ -61,4 +60,5 @@ export const MessageUsers = (props: MessageUsersType) => {
         </div>
     );
 };
+
 

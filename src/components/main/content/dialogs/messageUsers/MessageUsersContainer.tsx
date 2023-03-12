@@ -1,13 +1,10 @@
 import React from 'react';
 import {AppStateType} from "../../../../../redux/redux-store";
-import {
-    addMessageUsersAC,
-    addMessageUsersChangeAC,
-    usersMessagesType
-} from "../../../../../redux/messagesPageReducer";
+import {addMessageUsersAC, addMessageUsersChangeAC, usersMessagesType} from "../../../../../redux/messagesPageReducer";
 import {MessageUsers} from "./MessageUsers";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import {RedirectContainer} from "../../../../../hoc/RedirectContainer";
 
 // type MessageUsersType = {
 //     // store: StoreType,
@@ -52,7 +49,7 @@ import {Dispatch} from "redux";
 type MapStatePropsType = {
     message: string,
     usersMessages: usersMessagesType[],
-    isAuth:boolean,
+    isAuth?:boolean,
 }
 
 type MapDispatchPropsType = {
@@ -66,7 +63,7 @@ const mapStateToProps = (state: AppStateType):MapStatePropsType => {
     return {
         message: state.messagesPage.message,
         usersMessages: state.messagesPage.usersMessages,
-        isAuth: state.loginAuthorization.isAuth,
+        // isAuth: state.loginAuthorization.isAuth,
     }
 }
 
@@ -81,5 +78,17 @@ const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
     }
 }
 
-export const MessageUsersContainer = connect(mapStateToProps, mapDispatchToProps)(MessageUsers);
+//RedirectContaienr =========================================================
+// const RedirectComponentContainer = RedirectContainer(MessageUsers);
+// const RedirectComponentContainer =(props:MessageUsersType)=>{
+//     if (!props.isAuth) {
+//         return <Navigate to={'/login'} />
+//     }
+//
+//     return <MessageUsers {...props}/>
+// }
+//RedirectContaienr =========================================================
+
+export const MessageUsersContainer = RedirectContainer(connect(mapStateToProps, mapDispatchToProps)(MessageUsers));
+// export const MessageUsersContainer = connect(mapStateToProps, mapDispatchToProps)(RedirectComponentContainer);
 
