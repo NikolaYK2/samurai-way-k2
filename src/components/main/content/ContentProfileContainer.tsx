@@ -7,6 +7,7 @@ import {getUserProfileThunkCreator, ProfileUserType} from "../../../redux/proFil
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {RedirectContainer} from "../../../hoc/RedirectContainer";
 import {AppStateType} from "../../../redux/redux-store";
+import {compose} from "redux";
 
 // type ContentProfileType = {
 //     // store: StoreType,
@@ -174,6 +175,15 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         // isAuth: state.loginAuthorization.isAuth,
     }
 }
+
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        // setUserProfile: setUserProfileAC,
+        getUserProfile: getUserProfileThunkCreator}),
+    withRouter,
+    RedirectContainer
+)(ContentProfileContainer);
 
 let WithURLDataContainerComponent = withRouter(ContentProfileContainer);
 

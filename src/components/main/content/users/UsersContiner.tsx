@@ -14,6 +14,7 @@ import {
 import {Users} from "./Users";
 import {Loading} from "../../../loading/Loading";
 import {RedirectContainer} from "../../../../hoc/RedirectContainer";
+import {compose} from "redux";
 
 //Контейнерная class компонента которая делает API
 class UsersAPIComponent extends React.Component<UsersTypeProps> {
@@ -191,15 +192,29 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {//назв�
 // let RedirectComponent = RedirectContainer(UsersAPIComponent)
 //RedirectComponent ========================================================
 
-export const UsersContainer = RedirectContainer(connect(mapStateToProps, {
-    setUsers: setUsersAC,
-    toggleExpectation: toggleExpectationAC,
-    getUsersThunk: getUsersThunkCreator,
-    pageChangeThunk: pageChangeThunkCreator,
-    unFollowThunk: unFollowThunkCreator,
-    followThunk: followThunkCreator,
-    // setCurrentPage: setCurrentPageAC, /*- нам теперь не нужны так как все это происходит в санках в редьюсере*/
-    // setTotalUsersCount: setTotalUsersCountAC,
-    // switchLoading: switchLoadingAC,
-})(UsersAPIComponent));
+// export const UsersContainer = RedirectContainer(connect(mapStateToProps, {
+//     setUsers: setUsersAC,
+//     toggleExpectation: toggleExpectationAC,
+//     getUsersThunk: getUsersThunkCreator,
+//     pageChangeThunk: pageChangeThunkCreator,
+//     unFollowThunk: unFollowThunkCreator,
+//     followThunk: followThunkCreator,
+//     // setCurrentPage: setCurrentPageAC, /*- нам теперь не нужны так как все это происходит в санках в редьюсере*/
+//     // setTotalUsersCount: setTotalUsersCountAC,
+//     // switchLoading: switchLoadingAC,
+// })(UsersAPIComponent));
 // export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        setUsers: setUsersAC,
+        toggleExpectation: toggleExpectationAC,
+        getUsersThunk: getUsersThunkCreator,
+        pageChangeThunk: pageChangeThunkCreator,
+        unFollowThunk: unFollowThunkCreator,
+        followThunk: followThunkCreator,
+        // setCurrentPage: setCurrentPageAC, /*- нам теперь не нужны так как все это происходит в санках в редьюсере*/
+        // setTotalUsersCount: setTotalUsersCountAC,
+        // switchLoading: switchLoadingAC,
+    }),
+    RedirectContainer
+)(UsersAPIComponent);

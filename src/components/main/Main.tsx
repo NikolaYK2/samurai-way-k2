@@ -7,8 +7,8 @@ import {Music} from "./content/music/Music";
 import {News} from "./content/news/News";
 import {Settings} from "./content/settings/Settings";
 import {FriendsContainer} from "./content/friends/FriendsContainer";
-import {UsersContainer} from "./content/users/UsersContiner";
-import {ProfileContainer} from "./content/ContentProfileContainer";
+import UsersContainer from "./content/users/UsersContiner";
+import ProfileContainer from "./content/ContentProfileContainer";
 import {Login} from "../login/Login";
 
 // type MainType={

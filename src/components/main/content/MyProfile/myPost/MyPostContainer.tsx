@@ -95,6 +95,12 @@ const mapStateToProps = (state: AppStateType):MapStatePropsType => {//назва
 //     }
 // }
 
+// export default compose(
+//     connect(mapStateToProps, {
+//         addPostChange: addPostChangeAC,
+//         addPost: addPostAC,})
+// )(MyPost);
+
 export default connect(mapStateToProps, {
     addPostChange: addPostChangeAC,
     addPost: addPostAC,

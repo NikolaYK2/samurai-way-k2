@@ -1,10 +1,10 @@
 import React from 'react';
 import {AppStateType} from "../../../../../redux/redux-store";
 import {addMessageUsersAC, addMessageUsersChangeAC, usersMessagesType} from "../../../../../redux/messagesPageReducer";
-import {MessageUsers} from "./MessageUsers";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {RedirectContainer} from "../../../../../hoc/RedirectContainer";
+import {MessageUsers} from "./MessageUsers";
 
 // type MessageUsersType = {
 //     // store: StoreType,
@@ -44,6 +44,7 @@ import {RedirectContainer} from "../../../../../hoc/RedirectContainer";
 //                 );
 //     );
 // };
+
 
 
 type MapStatePropsType = {
@@ -88,7 +89,12 @@ const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
 //     return <MessageUsers {...props}/>
 // }
 //RedirectContaienr =========================================================
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    RedirectContainer//затем возьми результат и закинь в connect
+)(MessageUsers);//FN compose автомтаически закинет MessageUsers в RedirectContainer
 
-export const MessageUsersContainer = RedirectContainer(connect(mapStateToProps, mapDispatchToProps)(MessageUsers));
+// export const MessageUsersContainer = connect(mapStateToProps, mapDispatchToProps)(MessageUsers);
+// export const MessageUsersContainer = RedirectContainer(connect(mapStateToProps, mapDispatchToProps)(MessageUsers));
 // export const MessageUsersContainer = connect(mapStateToProps, mapDispatchToProps)(RedirectComponentContainer);
 
