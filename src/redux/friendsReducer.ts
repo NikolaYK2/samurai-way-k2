@@ -1,6 +1,5 @@
-import {UsersType} from "./usersReducers";
 import {Dispatch} from "redux";
-import {friendsAPI} from "../components/api/api";
+import {friendsAPI, UsersType} from "../components/api/api";
 
 export const statuses = {
     NOT_INITIALIZED: 'NOT_INITIALIZED',

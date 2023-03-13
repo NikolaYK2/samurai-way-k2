@@ -3,9 +3,13 @@ import s from "./ContentProfile.module.css";
 import {Profile} from "./MyProfile/MyProfile";
 import MyPostContainer from "./MyProfile/myPost/MyPostContainer";
 import {connect} from "react-redux";
-import {getUserProfileThunkCreator, ProfileUserType} from "../../../redux/proFilePageReducer";
+import {
+    getUserProfileThunkCreator,
+    ProfileUserType,
+    setStatusThunkCreator,
+    updStatusThunkCreator
+} from "../../../redux/proFilePageReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {RedirectContainer} from "../../../hoc/RedirectContainer";
 import {AppStateType} from "../../../redux/redux-store";
 import {compose} from "redux";
 
@@ -82,6 +86,10 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
         // usersAPI.getUserProfile(userId).then(data => {
         //     props.setUserProfile(data);
         // });
+
+        // setTimeout(()=>{
+            props.setStatus(userId);
+        // },1000);
     }, [])
 
     // if (!props.isAuth) {
@@ -90,12 +98,7 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
 
     return (
         <section className={s.content}>
-            <div className={s.content__wrap}>
-                <img
-                    src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
-                    alt=""/>
-            </div>
-            <Profile {...props} profile={props.profile}/>
+            <Profile {...props} profile={props.profile} status={props.status} updStatus={props.updStatus}/>
             <MyPostContainer /*store={props.store}*/
                 //     dispatch={props.store.dispatch.bind(props.store)}
                 // // addPost={props.store.dispatch.bind(props.store)}
@@ -159,19 +162,23 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
 type ProfileTypeProps = MapStateToPropsType & MapDispatchPropsType & WithRouterProps;
 
 type MapStateToPropsType = {
-    profile?: ProfileUserType | null,
+    profile: ProfileUserType | null,
     isAuth?: boolean,
+    status:string,
 }
 
 type MapDispatchPropsType = {
     // setUserProfile: (profile: ProfileUserType | null) => void,
     getUserProfile: (userId: number) => void,
+    setStatus:(userId:number)=>void,
+    updStatus:(status:string)=>void,
 }
 
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.proFilePage.profile,
+        status: state.proFilePage.status,
         // isAuth: state.loginAuthorization.isAuth,
     }
 }
@@ -180,17 +187,20 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         // setUserProfile: setUserProfileAC,
-        getUserProfile: getUserProfileThunkCreator}),
+        getUserProfile: getUserProfileThunkCreator,
+        setStatus:setStatusThunkCreator,
+        updStatus: updStatusThunkCreator,
+    }),
     withRouter,
-    RedirectContainer
+    // RedirectContainer
 )(ContentProfileContainer);
 
-let WithURLDataContainerComponent = withRouter(ContentProfileContainer);
-
-export const ProfileContainer = RedirectContainer(connect(mapStateToProps, {
-    // setUserProfile: setUserProfileAC,
-    getUserProfile: getUserProfileThunkCreator,
-})(WithURLDataContainerComponent));
+// let WithURLDataContainerComponent = withRouter(ContentProfileContainer);
+//
+// export const ProfileContainer = RedirectContainer(connect(mapStateToProps, {
+//     // setUserProfile: setUserProfileAC,
+//     getUserProfile: getUserProfileThunkCreator,
+// })(WithURLDataContainerComponent));
 
 
 

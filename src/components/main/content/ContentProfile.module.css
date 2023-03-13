@@ -2,19 +2,22 @@
     display: grid;
     grid-gap: 10px;
     grid-column: 2;
-    grid-template: minmax(auto, 120px) minmax(150px, auto) 1fr / 1fr;
+    grid-template: minmax(auto, 300px) minmax(150px, auto) 1fr / 1fr;
+/*display: flex;*/
+/*    flex-direction: column;*/
 }
-/*картинка ======================================================*/
-.content__wrap{
-    position: relative;
-    padding: 0 0 15% 0;
-}
-.content__wrap img{
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-}
+
+/*!*картинка ======================================================*!*/
+/*.content__wrap{*/
+/*    position: relative;*/
+/*    padding: 0 0 15% 0;*/
+/*}*/
+/*.content__wrap img{*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    object-fit: cover;*/
+/*    position: absolute;*/
+/*}*/
 /*===============================================================*/

@@ -10,6 +10,7 @@ beforeEach(() => {
             {id: v1(), sms: "It's my first post", like: 43,},
         ],
         profile: {} as ProfileUserType,
+        status:''
     }
 });
 

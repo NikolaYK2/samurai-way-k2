@@ -1,26 +1,26 @@
 import {Dispatch} from "redux";
-import {usersAPI} from "../components/api/api";
+import {usersAPI, UsersType} from "../components/api/api";
 
 // type LocationType = {
 //     city: string,
 //     country: string,
 // }
 
-type PhotosType = {
-    small: string,
-    large: string,
-}
+// type PhotosType = {
+//     small: string,
+//     large: string,
+// }
 export type Expectation = {
     id: string,
 }
-export type UsersType = {
-    id: string,
-    name: string,
-    status: string,
-    photos: PhotosType,
-    followed: boolean,
-    // location: LocationType,
-}
+// export type UsersType = {
+//     id: string,
+//     name: string,
+//     status: string,
+//     photos: PhotosType,
+//     followed: boolean,
+//     // location: LocationType,
+// }
 export type InitializationStateType = {
     users: UsersType[],
     pageSize: number,
@@ -175,6 +175,7 @@ export const toggleExpectationAC = (userId: string, onOff: boolean) => {
         onOff,
     } as const;
 }
+
 
 //THUNK =====================================================================
 //COmponent UsersContiner ===================================================

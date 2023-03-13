@@ -103,8 +103,9 @@
 import React from 'react';
 import s from "./Users.module.css";
 import userPhotos from "./pngwing.com.png";
-import {Expectation, UsersType} from "../../../../redux/usersReducers";
+import {Expectation} from "../../../../redux/usersReducers";
 import {NavLink} from "react-router-dom";
+import {UsersType} from "../../../api/api";
 
 type UsersTypeComponent = {
     totalUsersCount: number,

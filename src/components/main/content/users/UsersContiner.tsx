@@ -9,12 +9,12 @@ import {
     setUsersAC,
     toggleExpectationAC,
     unFollowThunkCreator,
-    UsersType
 } from "../../../../redux/usersReducers";
 import {Users} from "./Users";
 import {Loading} from "../../../loading/Loading";
 import {RedirectContainer} from "../../../../hoc/RedirectContainer";
 import {compose} from "redux";
+import {UsersType} from "../../../api/api";
 
 //Контейнерная class компонента которая делает API
 class UsersAPIComponent extends React.Component<UsersTypeProps> {

@@ -1,5 +1,4 @@
 import axios from "axios";
-import {UsersType} from "../../redux/usersReducers";
 import {ProfileUserType} from "../../redux/proFilePageReducer";
 
 // const baseUrl = 'https://social-network.samuraijs.com/api/1.0/';
@@ -7,7 +6,7 @@ import {ProfileUserType} from "../../redux/proFilePageReducer";
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-    headers: {'API-KEY': 'ac221b8b-8a64-47b0-b88a-297bbd35a29e'},
+    headers: {'API-KEY': '0317dbf2-f26f-44a4-a811-d77a69628a1e'},
 });
 
 type DataAuthType = {
@@ -21,6 +20,21 @@ type ResponsType<D = {}> = {
     messages: string[],
     data: D
 }
+
+type PhotosType = {
+    small: string,
+    large: string,
+}
+
+export type UsersType = {
+    id: string,
+    name: string,
+    status: string,
+    photos: PhotosType,
+    followed: boolean,
+    // location: LocationType,
+}
+
 type GetUsersType = {
     items: UsersType[],
     totalCount: number,
@@ -35,9 +49,6 @@ export const usersAPI = {
     },
     postFollow(id: string) {
         return instance.post<ResponsType>(`follow/${id}`).then(response => response.data);
-    },
-    getUserProfile(userId: number) {
-        return instance.get<ProfileUserType>(`profile/${userId}`).then(response => response.data);
     },
 }
 //=================================================================================================
@@ -60,3 +71,15 @@ export const friendsAPI = {
 // export const getUsers =(currentPage = 1, pageSize = 10)=>{
 //     return instance./*axios.*/get(/*baseUrl + */`users?page=${currentPage}&count=${pageSize}`/*,{withCredentials:true,}*/).then(response=>response.data);
 // }
+
+export const profileApi ={
+    getUserProfile(userId: number) {
+        return instance.get<ProfileUserType>(`profile/${userId}`).then(response => response.data);
+    },
+    getProfileStatusUser(userId: number) {
+        return instance.get(`profile/status/${userId}`);
+    },
+    updProfileStatus(status:string){
+        return instance.put<ResponsType>('profile/status', {status: status});
+    }
+}

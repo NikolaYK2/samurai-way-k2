@@ -1,5 +1,5 @@
 import React from 'react';
-import {UsersType} from "../../../../redux/usersReducers";
+import {UsersType} from "../../../api/api";
 
 type FriendsType={
     users: UsersType[],

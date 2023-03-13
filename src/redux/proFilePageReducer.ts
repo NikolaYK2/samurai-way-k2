@@ -1,10 +1,11 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
-import {usersAPI} from "../components/api/api";
+import {profileApi} from "../components/api/api";
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addPost = 'addPost';
 const addPostChange = 'addPostChange';
 const setUserProfile = 'setUserProfile';
+const setStatus = 'setStatus';
 //==========================================================================================
 //=====типизация actions add post==============================================================================
 // type AddPostActionType ={
@@ -21,7 +22,8 @@ const setUserProfile = 'setUserProfile';
 // type AddPostChangeActionType = ReturnType<typeof addPostChangeActionCreator>;
 export type ActionsTypeProfile = ReturnType<typeof addPostAC>
     | ReturnType<typeof addPostChangeAC>
-    | ReturnType<typeof setUserProfileAC>;
+    | ReturnType<typeof setUserProfileAC>
+    | ReturnType<typeof setStatusAC>;
 //Type messages Users Type===========================================================================================================
 //======function Action Creator addPoast==============================================================================
 export const addPostAC = (postMessage: string) => {
@@ -40,6 +42,12 @@ export const setUserProfileAC = (profile: ProfileUserType | null) => {
     return {
         type: 'setUserProfile',
         profile,
+    } as const
+}
+export const setStatusAC = (status: string) => {
+    return {
+        type: 'setStatus',
+        status,
     } as const
 }
 
@@ -76,6 +84,7 @@ export type proFilePageType = {
     message: string,
     postData: postDataType[],
     profile: ProfileUserType | null,
+    status: string,
 }
 
 let initializationState: proFilePageType = {
@@ -85,6 +94,7 @@ let initializationState: proFilePageType = {
         {id: v1(), sms: "It's my first post", like: 43,},
     ],
     profile: {} as ProfileUserType,
+    status: '',
 };
 
 export const proFileReducer = (state = initializationState, action: ActionsTypeProfile) => {
@@ -109,17 +119,38 @@ export const proFileReducer = (state = initializationState, action: ActionsTypeP
         //     this._state.proFilePage.message = postMessage;//message = переменной newTextPost, в которую будем сам и вписывать знаечния(контралируемая)
         // state.message = action.postMessage;//Нужно упаковать для action, так как с переменной теперь работать не будет
         return {...state, profile: action.profile}
+    } else if (action.type === setStatus) {
+        //Добавление нового поста для change(update)=================================================
+        //     this._state.proFilePage.message = postMessage;//message = переменной newTextPost, в которую будем сам и вписывать знаечния(контралируемая)
+        // state.message = action.postMessage;//Нужно упаковать для action, так как с переменной теперь работать не будет
+        return {...state, status: action.status}
         //MESSAGE USERS===============================`================================
     }
     return state;
 }
 
 //THUNK =============================================================
-export const getUserProfileThunkCreator = (userId:number) => {
+export const getUserProfileThunkCreator = (userId: number) => {
     return (dispatch: Dispatch<ActionsTypeProfile>) => {
-        usersAPI.getUserProfile(userId).then(data => {
+        profileApi.getUserProfile(userId).then(data => {
             dispatch(setUserProfileAC(data));
+        })
+    }
+}
 
+export const setStatusThunkCreator = (userId: number) => {
+    return (dispatch: Dispatch<ActionsTypeProfile>) => {
+        profileApi.getProfileStatusUser(userId).then(res => {
+            dispatch(setStatusAC(res.data));
+        })
+    }
+}
+export const updStatusThunkCreator = (status: string) => {
+    return (dispatch: Dispatch<ActionsTypeProfile>) => {
+        profileApi.updProfileStatus(status).then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(setStatusAC(status));
+            }
         })
     }
 }

@@ -1,0 +1,7 @@
+.blockStatus{
+    display: block;
+    margin: 10px 0 0 0;
+    }
+    .blockStatus input{
+        border-bottom: 1px solid black;
+    }
