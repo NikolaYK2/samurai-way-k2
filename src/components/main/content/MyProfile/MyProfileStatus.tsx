@@ -1,5 +1,6 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyProfileStatus.module.css'
+import {InitializationStateType} from "../../../../redux/usersReducers";
 
 type MyProfileStatusType={
     status:string,
@@ -29,6 +30,17 @@ export class MyProfileStatus extends React.Component<MyProfileStatusType> {
         this.setState({
             status: e.currentTarget.value,
         })
+    }
+
+    componentDidUpdate(prevProps: Readonly<MyProfileStatusType>, prevState: Readonly<InitializationStateType>) {
+        //Что бы не зациклилось, всегда нужно делать внутри какого-то условия
+//Если в предыдущих пропсах статус !==- который не равен статусу в текущих пропсах,
+//нужно обновить статус
+        if (prevProps.status !== this.props.status){
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
     render() {
