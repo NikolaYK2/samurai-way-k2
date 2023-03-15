@@ -3,6 +3,7 @@ import s from './Login.module.css';
 import {SubmitHandler, useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
 import {authLoginThunkC} from "../../redux/loginReducer";
+import {useAppSelector} from "../../redux/redux-store";
 
 export const Login = () => {
 
@@ -29,7 +30,7 @@ type LoginFormType = {
 
 };
 
-export const LoginForm = (props: any) => {
+export const LoginForm = () => {
     const {register, handleSubmit, watch, formState: {errors}} = useForm<LoginFormType>({
         defaultValues: {
             email: '',
@@ -38,10 +39,11 @@ export const LoginForm = (props: any) => {
         }
     });
     const dispatch = useDispatch<any>();
+    const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth)
     const onSubmit: SubmitHandler<LoginFormType> = data => {
         console.log(data)
         dispatch(authLoginThunkC(data));
-    }
+        }
     //watch - это как e.value
     //formState:{} - ошибки сохраняет
     return (
@@ -55,7 +57,7 @@ export const LoginForm = (props: any) => {
             <p>{errors.password?.message}</p>
             {/*<input placeholder={'Password'}  {...register("password", {required: true, minLength: 5})}/>*/}
             <input type="checkbox" {...register('rememberMe')}/> remember my
-            <input type="submit"/>
+            <input type="submit" disabled={isAuth}/>
             {/*<button>login</button>*/}
         </form>
     );

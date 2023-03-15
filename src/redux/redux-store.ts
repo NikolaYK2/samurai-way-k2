@@ -6,6 +6,7 @@ import {usersReducer} from "./usersReducers";
 import {loginAuthorizationReducer} from "./loginReducer";
 import thunkMiddleware from 'redux-thunk';
 import {friendsReducer} from "./friendsReducer";
+import {TypedUseSelectorHook, useSelector} from "react-redux";
 
 
 // export type StoreType = {
@@ -48,6 +49,8 @@ export type AppStateType = ReturnType<typeof rootReducer>;
 //Рудьюсеры отдаются стору, автоматически createStore создает внутри себя store
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 //Что-бы работало нужно инициализировать
+
+export const useAppSelector: TypedUseSelectorHook<AppStateType> = useSelector;
 
 // Типизация всех AC ...
 
