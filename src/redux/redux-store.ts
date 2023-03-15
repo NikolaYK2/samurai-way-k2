@@ -4,8 +4,9 @@ import {sidebarReducer} from "./sidebarReducer";
 import {proFileReducer} from "./proFilePageReducer";
 import {usersReducer} from "./usersReducers";
 import {loginAuthorizationReducer} from "./loginReducer";
-import thunkMiddleware from  'redux-thunk';
+import thunkMiddleware from 'redux-thunk';
 import {friendsReducer} from "./friendsReducer";
+
 
 // export type StoreType = {
 //     _state: stateType,
@@ -38,6 +39,8 @@ export let rootReducer = combineReducers({//функция которой пер
     sidebar: sidebarReducer,
     loginAuthorization: loginAuthorizationReducer,
     friends: friendsReducer,
+    // form: Controller,
+    // form: useForm,
 });
 
 

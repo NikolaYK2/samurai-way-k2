@@ -53,11 +53,20 @@ export const usersAPI = {
 }
 //=================================================================================================
 
-
+export type registerLoginType = {
+    email: string,
+    password: string,
+    rememberMe: boolean,
+    captcha: boolean,
+}
 export const authorizationAPI = {
     authorizeMe() {
         return instance.get<ResponsType<DataAuthType>>(`auth/me`).then(response => response.data);
     },
+    authorizeLogin(data: registerLoginType) {
+        return instance.post<ResponsType<registerLoginType>>('auth/login', data);
+    }
+
 }
 //================================================================================
 
@@ -65,21 +74,21 @@ export const authorizationAPI = {
 export const friendsAPI = {
     setUsersFriend() {
         return instance.get<GetUsersType>('users?count=5').then(response => response.data.items)
-    }
+    },
 }
 
 // export const getUsers =(currentPage = 1, pageSize = 10)=>{
 //     return instance./*axios.*/get(/*baseUrl + */`users?page=${currentPage}&count=${pageSize}`/*,{withCredentials:true,}*/).then(response=>response.data);
 // }
 
-export const profileApi ={
+export const profileApi = {
     getUserProfile(userId: number) {
         return instance.get<ProfileUserType>(`profile/${userId}`).then(response => response.data);
     },
     getProfileStatusUser(userId: number) {
         return instance.get(`profile/status/${userId}`);
     },
-    updProfileStatus(status:string){
+    updProfileStatus(status: string) {
         return instance.put<ResponsType>('profile/status', {status: status});
     }
 }

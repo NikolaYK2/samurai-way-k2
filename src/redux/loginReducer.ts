@@ -1,12 +1,15 @@
 import {Dispatch} from "redux";
-import {authorizationAPI} from "../components/api/api";
+import {authorizationAPI, registerLoginType} from "../components/api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
+const LOGIN_DATA = 'LOGIN_DATA';
 
 export type loginType = {
     id: number | null,
     email: string | null,
     login: string | null,
+    password: string | null,
+    rememberMy: boolean,
     isAuth: boolean,
 }
 
@@ -14,6 +17,8 @@ let initializationState: loginType = {
     id: null,
     email: null,
     login: null,
+    password: null,
+    rememberMy: false,
     isAuth: false,
 }
 
@@ -21,6 +26,8 @@ export const loginAuthorizationReducer = (state = initializationState, action: A
     switch (action.type) {
         case SET_USER_DATA:
             return {...state, ...action.data, isAuth: true};
+        case LOGIN_DATA:
+            return {...state, email: action.email, password: action.password, rememberMy: action.rememberMy, isAuth: true};
 
         default:
             return state;
@@ -28,8 +35,8 @@ export const loginAuthorizationReducer = (state = initializationState, action: A
 };
 
 //AC ===============================================================
-export type ActionsTypeLoginAuthorization =
-    ReturnType<typeof setUserDataAC>;
+export type ActionsTypeLoginAuthorization = ReturnType<typeof setUserDataAC>
+    | ReturnType<typeof loginDataAC>;
 
 export const setUserDataAC = (id: number, email: string, login: string) => {
     return {
@@ -39,6 +46,15 @@ export const setUserDataAC = (id: number, email: string, login: string) => {
             email,
             login,
         }
+    } as const;
+}
+
+export const loginDataAC = (email: string, password: string, rememberMy: boolean) => {
+    return {
+        type: LOGIN_DATA,
+        email,
+        password,
+        rememberMy,
     } as const;
 }
 
@@ -61,5 +77,17 @@ export const loginMeThunkC = () => {
         //         this.props.setUserData(id, email, login)
         //     }
         // })
+    }
+}
+export const authLoginThunkC = (data: registerLoginType) => {
+
+    return (dispatch: Dispatch<ActionsTypeLoginAuthorization>) => {
+
+        authorizationAPI.authorizeLogin(data).then(res => {
+            if (res.data.resultCode === 0) {
+                let {email, password, rememberMe} = res.data.data;
+                dispatch(loginDataAC(email, password, rememberMe));
+            }
+        })
     }
 }

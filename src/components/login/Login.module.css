@@ -1,0 +1,6 @@
+.form input, button{
+    display: block;
+}
+.form>input:nth-child(5){
+    display: inline-block;
+}
