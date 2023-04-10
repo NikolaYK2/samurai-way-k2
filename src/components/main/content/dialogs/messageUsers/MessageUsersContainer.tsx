@@ -1,6 +1,6 @@
 import React from 'react';
 import {AppStateType} from "../../../../../redux/redux-store";
-import {addMessageUsersAC, addMessageUsersChangeAC, usersMessagesType} from "../../../../../redux/messagesPageReducer";
+import {addMessageUsersAC, usersMessagesType} from "../../../../../redux/messagesPageReducer";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
 import {RedirectContainer} from "../../../../../hoc/RedirectContainer";
@@ -48,21 +48,21 @@ import {MessageUsers} from "./MessageUsers";
 
 
 type MapStatePropsType = {
-    message: string,
+    // message: string,
     usersMessages: usersMessagesType[],
     isAuth?:boolean,
 }
 
 type MapDispatchPropsType = {
     addMessageUsers:(newMessageUsers: string)=>void,
-    addMessageUsersChange:(text: string)=>void,
+    // addMessageUsersChange:(text: string)=>void,
 }
 
 export type MessageUsersType = MapStatePropsType & MapDispatchPropsType;
 
 const mapStateToProps = (state: AppStateType):MapStatePropsType => {
     return {
-        message: state.messagesPage.message,
+        // message: state.messagesPage.message,
         usersMessages: state.messagesPage.usersMessages,
         // isAuth: state.loginAuthorization.isAuth,
     }
@@ -73,9 +73,9 @@ const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
         addMessageUsers: (newMessageUsers: string) => {
             dispatch(addMessageUsersAC(newMessageUsers));
         },
-        addMessageUsersChange: (text: string) => {
-            dispatch(addMessageUsersChangeAC(text));
-        },
+        // addMessageUsersChange: (text: string) => {
+        //     dispatch(addMessageUsersChangeAC(text));
+        // },
     }
 }
 

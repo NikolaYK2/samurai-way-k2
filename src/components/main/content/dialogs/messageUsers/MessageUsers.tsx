@@ -1,6 +1,9 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from "./MessageUsers.module.css";
 import {MessageUsersType} from "./MessageUsersContainer";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {usersMessagesType} from "../../../../../redux/messagesPageReducer";
+import {formOnSubmit} from "../../../../../formOnSubmit/formOnSubmit";
 
 // type MessageUsersType = {
 //     // store: StoreType,
@@ -11,24 +14,7 @@ import {MessageUsersType} from "./MessageUsersContainer";
 //     addMessageUsersChange:(event: ChangeEvent<HTMLTextAreaElement>)=>void,
 //
 // }
-
 export const MessageUsers = (props: MessageUsersType) => {
-    let [errorText, setErrorText] = useState<string | null>(null)
-
-    const addMessages = () => {
-        if (props.message !== "") {
-            props.addMessageUsers(props.message);
-            // props.dispatch(addMessageUsersAC(props.message));
-        } else {
-            setErrorText('Але, пиши чееее!')
-        }
-    }
-    const addMessagesChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        // props.dispatch(addMessageUsersChangeAC(event));
-        let text = event.currentTarget.value
-        props.addMessageUsersChange(text);
-        setErrorText('')
-    }
 
     //Делаем Redirect =======================
     // const navigate = useNavigate();
@@ -53,12 +39,59 @@ export const MessageUsers = (props: MessageUsersType) => {
                     </div>
                 )
             })}
-            <textarea placeholder={errorText || 'Введите сообщение'} onChange={addMessagesChange}
-                      value={props.message}></textarea>
-            <br/>
-            <button onClick={addMessages}>send</button>
+            <FormTextarea usersMessages={props.usersMessages} addMessageUsers={props.addMessageUsers}/>
         </div>
     );
 };
+//--------------------------------------------------------------------------------------------
 
+
+
+
+
+type FormTextareaType = {
+    usersMessages: usersMessagesType[],
+    addMessageUsers:(newMessageUsers: string)=>void,
+}
+export const FormTextarea = (props: FormTextareaType) => {
+    const {addMessageUsers}=props;
+
+    const [errorText, setErrorText] = useState<string | null>(null);
+
+    const [message, setMessage] = useState('');
+
+    const writeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setMessage(e.currentTarget.value);
+        setErrorText('');
+    }
+
+    const {register, handleSubmit, watch, formState: {errors}, reset} = useForm<FormTextareaType>();
+
+    // const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth)
+    // const onSubmit: SubmitHandler<FormTextareaType> = data => {
+    //     if (message !== "") {
+    //         addMessageUsers(message);
+    //         setMessage('');
+    //         console.log(data);
+    //     } else {
+    //         setErrorText('Але, пиши чееее!');
+    //     }
+    //
+    // }
+
+    //FORM =================================================
+    const onSubmit: SubmitHandler<MessageUsersType> = formOnSubmit(message, addMessageUsers, setMessage, setErrorText);
+
+    return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <textarea {...register('usersMessages')}
+                      placeholder={errorText || 'Введите сообщение'}
+                      value={message}
+                      onChange={writeMessage}
+            />
+            <br/>
+            <button>send</button>
+        </form>
+    );
+};
 

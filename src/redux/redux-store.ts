@@ -1,12 +1,12 @@
-import {applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux";
+import {AnyAction, applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux";
 import {messagesPageReducer} from "./messagesPageReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {proFileReducer} from "./proFilePageReducer";
 import {usersReducer} from "./usersReducers";
 import {loginAuthorizationReducer} from "./loginReducer";
-import thunkMiddleware from 'redux-thunk';
+import thunkMiddleware, {ThunkDispatch} from 'redux-thunk';
 import {friendsReducer} from "./friendsReducer";
-import {TypedUseSelectorHook, useSelector} from "react-redux";
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 
 
 // export type StoreType = {
@@ -54,6 +54,9 @@ export const useAppSelector: TypedUseSelectorHook<AppStateType> = useSelector;
 
 // Типизация всех AC ...
 
+//Type DISPATCH =============
+export type AppThunkDispatch = ThunkDispatch<AppStateType, any, AnyAction>;
+export const useAppDispatch = () => useDispatch<AppThunkDispatch>();
 
 // @ts-ignore
 window.store = store;

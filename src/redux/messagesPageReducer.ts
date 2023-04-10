@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addMessageUsers = 'addMessageUsers';
-const addMessageUsersChange = 'addMessageUsersChange';
+// const addMessageUsersChange = 'addMessageUsersChange';
 //==========================================================================================
 
 //=====типизация actions add post==============================================================================
@@ -18,21 +18,16 @@ const addMessageUsersChange = 'addMessageUsersChange';
 // type AddPostActionType = ReturnType<typeof addPostAC>;
 // type AddPostChangeActionType = ReturnType<typeof addPostChangeActionCreator>;
 //Type messages Users Type===========================================================================================================
-export type ActionsTypeMessagesUsers = ReturnType<typeof addMessageUsersAC> | ReturnType<typeof addMessageUsersChangeAC>;
+export type ActionsTypeMessagesUsers = ReturnType<typeof addMessageUsersAC> /*| ReturnType<typeof addMessageUsersChangeAC>*/;
 
 //FUNCTION ADD MESSAGES USERS=ЭКШЭН КРИЕЙТЕРЫ - AC======================================================
-export const addMessageUsersAC = (newMessageUsers: string) => {
-    return {
-        type: 'addMessageUsers',
-        newMessageUsers: newMessageUsers,
-    } as const
-}
-export const addMessageUsersChangeAC = (text:string) => {
-    return {
-        type: 'addMessageUsersChange',
-        newMessageUsers: text,
-    } as const
-}
+export const addMessageUsersAC = (newMessageUsers: string) => ({type: 'addMessageUsers', newMessageUsers,} as const)
+// export const addMessageUsersChangeAC = (text:string) => {
+//     return {
+//         type: 'addMessageUsersChange',
+//         newMessageUsers: text,
+//     } as const
+// }
 
 //THUNK C======================================================
 
@@ -53,7 +48,7 @@ export type usersMessagesType = {
 
 export type  messagesPageType = {
     users: usersType[],
-    message: string,
+    // message: string,
     usersMessages: usersMessagesType[],
 }
 
@@ -84,7 +79,7 @@ const initializationState: messagesPageType = {
             avatar: 'https://crosti.ru/patterns/00/18/72/5109ae65df/picture.jpg'
         },
     ],
-    message: '',
+    // message: '',//С формами теперь не нужно создавать отдельное св для input
     usersMessages: [
         {id: v1(), sms: "Hi",},
         {id: v1(), sms: "How is your",},
@@ -101,15 +96,14 @@ export const messagesPageReducer = (state = initializationState, action: Actions
             // state.usersMessages = [...state.usersMessages, newMessages];
             // state.message = '';
             // return state;
-            return {...state, message: '', usersMessages:[...state.usersMessages, {id: v1(), sms:action.newMessageUsers}]};
+            return {...state, /*message: '', */usersMessages:[...state.usersMessages, {id: v1(), sms:action.newMessageUsers}]};
 
-        case addMessageUsersChange:
-            // state.message = action.newMessageUsers;
-            return {...state, message: action.newMessageUsers};
+        // case addMessageUsersChange:
+        //     // state.message = action.newMessageUsers;
+        //     return {...state, message: action.newMessageUsers};
         default:
             return state;
     }
-
     //     if (action.type === addMessageUsers) {
 //         //add new message users=============================================
 //         // this._state.messagesPage.usersMessages.push({id: v1(), sms: action.newMessageUsers,});

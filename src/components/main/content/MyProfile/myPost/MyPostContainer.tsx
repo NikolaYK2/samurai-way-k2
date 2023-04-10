@@ -1,5 +1,4 @@
-import React from "react";
-import {addPostAC, addPostChangeAC, postDataType} from "../../../../../redux/proFilePageReducer";
+import {addPostAC, postDataType} from "../../../../../redux/proFilePageReducer";
 import {MyPost} from "./MyPost";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../../../redux/redux-store";
@@ -64,12 +63,12 @@ import {AppStateType} from "../../../../../redux/redux-store";
 // что сидят в двух обьектах, это значит что в MyPost будет сидеть в пропсах и 1 и 2 функция
 
 type MapStatePropsType = {
-    message: string,
+    // message: string,
     postData: postDataType[],
 }
 
 type MapDispatchPropsType = {
-    addPostChange:(text: string)=>void,
+    // addPostChange:(text: string)=>void,
     addPost:(postMessage: string)=>void,
 }
 
@@ -79,7 +78,7 @@ export type MyPostType = MapStatePropsType & MapDispatchPropsType;
 const mapStateToProps = (state: AppStateType):MapStatePropsType => {//название функции обозначает замапить state на пропсы
     return {
         //getState мы уже не делаем
-        message: state.proFilePage.message,
+        // message: state.proFilePage.message,
         postData: state.proFilePage.postData,
     }
 }
@@ -102,7 +101,6 @@ const mapStateToProps = (state: AppStateType):MapStatePropsType => {//назва
 // )(MyPost);
 
 export default connect(mapStateToProps, {
-    addPostChange: addPostChangeAC,
     addPost: addPostAC,
 })(MyPost);//Вызываем ее два раза и во второй раз вызываем то ту фукнцию что она вернула в первой
 

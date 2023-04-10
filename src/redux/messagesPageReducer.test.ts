@@ -1,4 +1,4 @@
-import {addMessageUsersAC, addMessageUsersChangeAC, messagesPageReducer, messagesPageType} from "./messagesPageReducer";
+import {addMessageUsersAC, messagesPageReducer, messagesPageType} from "./messagesPageReducer";
 import {v1} from "uuid";
 
 let messagesPage: messagesPageType;
@@ -31,7 +31,7 @@ beforeEach(() => {
                 avatar: 'https://crosti.ru/patterns/00/18/72/5109ae65df/picture.jpg'
             },
         ],
-        message: '',
+        // message: '',
         usersMessages: [
             {id: v1(), sms: "Hi",},
             {id: v1(), sms: "How is your",},
@@ -48,6 +48,6 @@ test('add Message Users', () => {
 });
 
 test('add Message Users Change', () => {
-    const newMessagesPage = messagesPageReducer(messagesPage, addMessageUsersChangeAC('I am Nok'));
-    expect(newMessagesPage.message).toBe('I am Nok');
+    const newMessagesPage = messagesPageReducer(messagesPage, addMessageUsersAC('I am Nok'));
+    expect(newMessagesPage.usersMessages[newMessagesPage.usersMessages.length-1].sms).toBe('I am Nok');
 });
