@@ -1,9 +1,7 @@
-import React, {ChangeEvent, useState} from 'react';
+import React from 'react';
 import s from "./MessageUsers.module.css";
 import {MessageUsersType} from "./MessageUsersContainer";
-import {SubmitHandler, useForm} from "react-hook-form";
-import {usersMessagesType} from "../../../../../redux/messagesPageReducer";
-import {formOnSubmit} from "../../../../../formOnSubmit/formOnSubmit";
+import {FormTextarea} from "../../../../formTextArea/FormTextArea";
 
 // type MessageUsersType = {
 //     // store: StoreType,
@@ -39,7 +37,7 @@ export const MessageUsers = (props: MessageUsersType) => {
                     </div>
                 )
             })}
-            <FormTextarea usersMessages={props.usersMessages} addMessageUsers={props.addMessageUsers}/>
+            <FormTextarea messages={props.usersMessages} addMessages={props.addMessageUsers}/>
         </div>
     );
 };
@@ -49,49 +47,59 @@ export const MessageUsers = (props: MessageUsersType) => {
 
 
 
-type FormTextareaType = {
-    usersMessages: usersMessagesType[],
-    addMessageUsers:(newMessageUsers: string)=>void,
-}
-export const FormTextarea = (props: FormTextareaType) => {
-    const {addMessageUsers}=props;
-
-    const [errorText, setErrorText] = useState<string | null>(null);
-
-    const [message, setMessage] = useState('');
-
-    const writeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setMessage(e.currentTarget.value);
-        setErrorText('');
-    }
-
-    const {register, handleSubmit, watch, formState: {errors}, reset} = useForm<FormTextareaType>();
-
-    // const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth)
-    // const onSubmit: SubmitHandler<FormTextareaType> = data => {
-    //     if (message !== "") {
-    //         addMessageUsers(message);
-    //         setMessage('');
-    //         console.log(data);
-    //     } else {
-    //         setErrorText('Але, пиши чееее!');
-    //     }
-    //
-    // }
-
-    //FORM =================================================
-    const onSubmit: SubmitHandler<MessageUsersType> = formOnSubmit(message, addMessageUsers, setMessage, setErrorText);
-
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <textarea {...register('usersMessages')}
-                      placeholder={errorText || 'Введите сообщение'}
-                      value={message}
-                      onChange={writeMessage}
-            />
-            <br/>
-            <button>send</button>
-        </form>
-    );
-};
+// type FormTextareaType = {
+//     usersMessages: usersMessagesType[],
+//     addMessageUsers:(newMessageUsers: string)=>void,
+// }
+// export const FormTextarea = (props: FormTextareaType) => {
+//     const {addMessageUsers}=props;
+//
+//     const [errorText, setErrorText] = useState<string | null>(null);
+//     const [styleError, setStyleError] = useState<string>('');
+//     const [message, setMessage] = useState('');
+//
+//     const {register, handleSubmit, watch, formState: {errors}, reset} = useForm<FormTextareaType>();
+//
+//     const writeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+//         setMessage(e.currentTarget.value);
+//         setStyleError(s2.noError);
+//         // setErrorText('');
+//     }
+//     // const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth)
+//     // const onSubmit: SubmitHandler<FormTextareaType> = data => {
+//     //     if (message !== "") {
+//     //         addMessageUsers(message);
+//     //         setMessage('');
+//     //         console.log(data);
+//     //     } else {
+//     //         setErrorText('Але, пиши чееее!');
+//     //     }
+//     //
+//     // }
+//
+//     //FORM =================================================
+//     const onSubmit: SubmitHandler<MessageUsersType> = formOnSubmit(message, addMessageUsers, setMessage, setErrorText,setStyleError);
+//
+//     return (
+//         <form onSubmit={handleSubmit(onSubmit)}>
+//             <textarea {...register('usersMessages')}
+//                       placeholder={errorText || 'Введите сообщение'}
+//                       value={message}
+//                       onChange={writeMessage}
+//                       className={styleError}
+//             />
+//             {/*<TextArea*/}
+//             {/*          // errorText={errorText}*/}
+//             {/*          writeMessage={writeMessage}*/}
+//             {/*          message={message}*/}
+//             {/*          title={'add message'}*/}
+//             {/*          errors={errors}*/}
+//             {/*          typeRegister={props.usersMessages}*/}
+//             {/*          register={register}*/}
+//             {/*/>*/}
+//             <br/>
+//             <button>send</button>
+//         </form>
+//     );
+// };
 

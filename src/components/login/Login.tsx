@@ -30,7 +30,7 @@ type LoginFormType = {
 
 };
 export const LoginForm = () => {
-    const {register, handleSubmit, watch, formState: {errors, isValid}, reset} = useForm<LoginFormType>({
+    const {register, handleSubmit, formState: {errors}, reset} = useForm<LoginFormType>({
         defaultValues: {
             email: '',
             password: '',
@@ -46,7 +46,7 @@ export const LoginForm = () => {
         dispatch(authLoginThunkC(data));
         reset();//Очистка формы после отправки
     }
-    //watch - это как e.value
+    //watch - это если нужно отследить то что набираем
     //formState:{} - ошибки сохраняет
     return (
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>

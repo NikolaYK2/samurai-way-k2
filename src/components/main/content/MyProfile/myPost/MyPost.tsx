@@ -1,9 +1,7 @@
 import s from "./MyPost.module.css";
-import React, {ChangeEvent, useState} from "react";
+import React from "react";
 import {MyPostType} from "./MyPostContainer";
-import {SubmitHandler, useForm} from "react-hook-form";
-import {postDataType} from "../../../../../redux/proFilePageReducer";
-import {formOnSubmit} from "../../../../../formOnSubmit/formOnSubmit";
+import {FormTextarea} from "../../../../formTextArea/FormTextArea";
 
 // type MyPostType = {
 //     // store: StoreType,
@@ -12,7 +10,6 @@ import {formOnSubmit} from "../../../../../formOnSubmit/formOnSubmit";
 //     addPost: () => void,
 //     addPostChange: (event: ChangeEvent<HTMLTextAreaElement>) => void,
 // }
-
 export const MyPost = (props: MyPostType) => {
     //ошибка при добавление пустой строки ===============================
     // const [errorText, setErrorText] = useState<string | null>(null);
@@ -67,7 +64,7 @@ export const MyPost = (props: MyPostType) => {
         <>
             <div className={s.content__myPost}>
                 <h3>My post</h3>
-                <PostForm postData={props.postData} addPost={props.addPost}/>
+                <FormTextarea messages={props.postData} addMessages={props.addPost}/>
             </div>
             <>
                 {post}
@@ -78,56 +75,57 @@ export const MyPost = (props: MyPostType) => {
 //--------------------------------------------------------------------------------------
 
 
-
-
-type PostForType={
-    postData:postDataType[],
-    addPost:(postMessage: string)=>void,
-}
-export const PostForm =(props:PostForType)=>{
-    const {addPost}=props
-    const [errorText, setErrorText] = useState<string | null>(null);
-    const [message, setMessage] = useState<string>('');
-
-    const addMessage = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        let text = event.currentTarget.value
-        setMessage(text);
-        // props.dispatch(addPostChangeAC(event))
-        setErrorText('')
-    }
-
-    //FORM ============================================================
-    const {register, handleSubmit, watch, formState: {errors, isValid}, reset} = useForm<MyPostType>();
-    // const onSubmit: SubmitHandler<MyPostType> = data => {
-    //     if (message !== '') {
-    //         addPost(message);//message - можно не получать этот текст, оно и так сидит в state
-    //         console.log(data)
-    //         setMessage('');
-    //         //Переходим на dispatch и обязательно указываем тип ему, делая конкретный диспатч
-    //         // props.dispatch({type: "addPost", postMessage: props.message });
-    //         // props.dispatch(addPostAC(props.message));
-    //         // props.addPostChange('')//зачищаем пустой строкой смс после добавления / но лучше зачистку предоставить это BLL
-    //         //     newPostElement.current!.value = '';//привязываем событие к кнопке
-    //     } else {
-    //         setErrorText('Может введешь что-нибудь, а?')
-    //     }
-    //     // reset();//Очистка формы после отправки
-    // }
-
-    //FORM ==============================
-    const onSubmit: SubmitHandler<MyPostType> = formOnSubmit(message, addPost, setMessage, setErrorText);
-
-    return(
-        <form onSubmit={handleSubmit(onSubmit)}>
-                    <textarea
-                        {...register('postData')}
-                        placeholder={errorText || "add post"}
-                        // ref={newPostElement}
-                        onChange={addMessage}
-                        value={message}
-                    />
-            <button>Send</button>
-        </form>
-
-    );
-}
+// type PostForType = {
+//     postData: postDataType[],
+//     addPost: (postMessage: string) => void,
+// }
+// export const PostForm = (props: PostForType) => {
+//     const {addPost} = props
+//     const [errorText, setErrorText] = useState<string | null>(null);
+//     const [styleError, setStyleError] = useState<string>('');
+//     const [message, setMessage] = useState<string>('');
+//
+//     const addMessage = (event: ChangeEvent<HTMLTextAreaElement>) => {
+//         let text = event.currentTarget.value
+//         setMessage(text);
+//         // props.dispatch(addPostChangeAC(event))
+//         setErrorText('')
+//         setStyleError(s.noError)
+//     }
+//
+//     //FORM ============================================================
+//     const {register, handleSubmit, watch, formState: {errors, isValid}, reset} = useForm<MyPostType>();
+//     // const onSubmit: SubmitHandler<MyPostType> = data => {
+//     //     if (message !== '') {
+//     //         addPost(message);//message - можно не получать этот текст, оно и так сидит в state
+//     //         console.log(data)
+//     //         setMessage('');
+//     //         //Переходим на dispatch и обязательно указываем тип ему, делая конкретный диспатч
+//     //         // props.dispatch({type: "addPost", postMessage: props.message });
+//     //         // props.dispatch(addPostAC(props.message));
+//     //         // props.addPostChange('')//зачищаем пустой строкой смс после добавления / но лучше зачистку предоставить это BLL
+//     //         //     newPostElement.current!.value = '';//привязываем событие к кнопке
+//     //     } else {
+//     //         setErrorText('Может введешь что-нибудь, а?')
+//     //     }
+//     //     // reset();//Очистка формы после отправки
+//     // }
+//
+//     //FORM ==============================
+//     const onSubmit: SubmitHandler<MyPostType> = formOnSubmit(message, addPost, setMessage, setErrorText, setStyleError);
+//
+//     return (
+//         <form onSubmit={handleSubmit(onSubmit)}>
+//                     <textarea
+//                         {...register('postData')}
+//                         placeholder={errorText || "add post"}
+//                         // ref={newPostElement}
+//                         onChange={addMessage}
+//                         value={message}
+//                         className={`${styleError}`}
+//                     />
+//             <button>Send</button>
+//         </form>
+//
+//     );
+// }
