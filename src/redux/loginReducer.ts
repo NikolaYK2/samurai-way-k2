@@ -66,16 +66,20 @@ export const authMeThunkC = () => (dispatch: Dispatch<ActionsType>) => {
     // })
 }
 
-export const authLoginThunkC = (data: RegisterLoginType): AppThunk => (dispatch) => {
+export const authLoginThunkC = (data: RegisterLoginType, setEr?: any): AppThunk => (dispatch) => {
     authorizationAPI.authorizeLogin(data)
         .then(res => {
             if (res.data.resultCode === 0) {
                 // const {email, password, rememberMe} = res.data.data;
                 // dispatch(loginDataAC(email, password, rememberMe));
                 dispatch(authMeThunkC())
+            } else {
+                const message = res.data.messages.length > 0 ? res.data.messages[0] : 'error';//Делаем проверку на случай прихода с сервера пустого массива
+                dispatch(setEr(message))
             }
         })
 }
+//async ----
 // export const authLoginThunkC = (data: RegisterLoginType): AppThunk => async dispatch => {
 //     try {
 //         const res = await authorizationAPI.authorizeLogin(data)
@@ -88,11 +92,11 @@ export const authLoginThunkC = (data: RegisterLoginType): AppThunk => (dispatch)
 // }
 
 
-    export const logoutThunkC = () => (dispatch: Dispatch<ActionsType>) => {
-        authorizationAPI.logout().then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(setUserDataAC(null, null, null, false));
-            }
-        })
-    }
+export const logoutThunkC = () => (dispatch: Dispatch<ActionsType>) => {
+    authorizationAPI.logout().then(res => {
+        if (res.data.resultCode === 0) {
+            dispatch(setUserDataAC(null, null, null, false));
+        }
+    })
+}
 

@@ -75,9 +75,9 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
 
 
     useEffect(() => {
-        let userId = props.params.userId;
+        let userId:number | null = props.params.userId;
         if (!userId) {
-            userId = 2;
+            userId = props.userId;
         }
         props.getUserProfile(userId);
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
@@ -100,7 +100,10 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
 // }
     return (
         <section className={s.content}>
-            <Profile {...props} profile={props.profile} status={props.status} updStatus={props.updStatus}/>
+            <Profile {...props}
+                     profile={props.profile}
+                     status={props.status}
+                     updStatus={props.updStatus}/>
             <MyPostContainer /*store={props.store}*/
                 //     dispatch={props.store.dispatch.bind(props.store)}
                 // // addPost={props.store.dispatch.bind(props.store)}
@@ -167,12 +170,13 @@ type MapStateToPropsType = {
     profile: ProfileUserType | null,
     isAuth?: boolean,
     status:string,
+    userId: number | null,
 }
 
 type MapDispatchPropsType = {
     // setUserProfile: (profile: ProfileUserType | null) => void,
-    getUserProfile: (userId: number) => void,
-    setStatus:(userId:number)=>void,
+    getUserProfile: (userId: number | null) => void,
+    setStatus:(userId:number | null)=>void,
     updStatus:(status:string)=>void,
 }
 
@@ -181,6 +185,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.proFilePage.profile,
         status: state.proFilePage.status,
+        userId: state.loginAuthorization.id,
+        isAuth: state.loginAuthorization.isAuth
         // isAuth: state.loginAuthorization.isAuth,
     }
 }

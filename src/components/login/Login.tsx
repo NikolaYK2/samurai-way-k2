@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './Login.module.css';
 import {SubmitHandler, useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
@@ -35,27 +35,38 @@ type LoginFormType = {
 
 };
 export const LoginForm = () => {
-    const {register, handleSubmit, formState: {errors}, reset} = useForm<LoginFormType>({
+
+    const dispatch = useDispatch<AppThunkDispatch>();
+
+    const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth);
+
+    const [er,setEr] =useState<string | null>(null);
+
+    const {register, handleSubmit, formState: {errors}, setError, reset} = useForm<LoginFormType>({
         defaultValues: {
             email: '',
             password: '',
             rememberMe: false,
         }
     });
-    const dispatch = useDispatch<AppThunkDispatch>();
-
-    const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth)
 
     const onSubmit: SubmitHandler<LoginFormType> = data => {
         console.log(data)
-        dispatch(authLoginThunkC(data));
+        dispatch(authLoginThunkC(data,setEr));
         reset();//Очистка формы после отправки
     }
-    //watch - это если нужно отследить то что набираем
-    //formState:{} - ошибки сохраняет
+
     return (
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-            <input type='email' placeholder={'email'} {...register('email', {required: 'Заполни поле'})}/>
+            <input type='email'
+                   placeholder={'email'}
+                   {...register('email', {
+                       required: 'Заполните поле',
+                       pattern: {
+                           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                           message: 'Enter a valid e-mail address',
+                       },
+                   })}/>
             <p>{errors.email?.message}</p>
             <input type='password' placeholder={'Password'} 
                    {...register("password", {
@@ -63,11 +74,9 @@ export const LoginForm = () => {
                        minLength: {value: 4, message: 'min length is 4'}
                    })}/>
             <p>{errors.password?.message}</p>
-            {/*<input placeholder={'Password'}  {...register("password", {required: true, minLength: 5})}/>*/}
             <input type="checkbox" {...register('rememberMe')}/> remember my
-            {/*<input type="submit" disabled={!isValid}/>*/}
-            <input type="submit" disabled={isAuth}/>
-            {/*<button>login</button>*/}
+            <input type="submit" disabled={isAuth} onClick={()=>setError('email',{types:{test:'gavno'}})}/>
+            <p>{er}</p>
         </form>
     );
 };
