@@ -95,7 +95,9 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
     // if (!props.isAuth) {
     //     return <Navigate to={'/login'} />
     // }
-
+//     if (!isAuth) return <Navigate to={'/login'}/>
+//     return <Component {...restProps as T}/>//as - воспринимай его как - T -
+// }
     return (
         <section className={s.content}>
             <Profile {...props} profile={props.profile} status={props.status} updStatus={props.updStatus}/>

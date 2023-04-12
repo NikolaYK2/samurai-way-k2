@@ -13,6 +13,21 @@
 }
 
 .loginBlock{
-    grid-column: 3;
     margin: auto;
+    grid-column: 3;
+}
+.loginBlock>div{
+    text-align: center;
+    margin: 0 10px 0 0;
+}
+.loginBlock>div>button{
+    margin: 10px auto 0;
+    padding: 2px 10px;
+    font-size: 12px;
+    background-color: transparent;
+    border: 1px solid black;
+    color: black;
+}
+.header>div:nth-child(3){
+    cursor: pointer;
 }

@@ -53,7 +53,7 @@ export const usersAPI = {
 }
 //=================================================================================================
 
-export type registerLoginType = {
+export type RegisterLoginType = {
     email: string,
     password: string,
     rememberMe: boolean,
@@ -63,10 +63,12 @@ export const authorizationAPI = {
     authorizeMe() {
         return instance.get<ResponsType<DataAuthType>>(`auth/me`).then(response => response.data);
     },
-    authorizeLogin(data: registerLoginType) {
-        return instance.post<ResponsType<registerLoginType>>('auth/login', data);
+    authorizeLogin(data: RegisterLoginType) {
+        return instance.post<ResponsType<RegisterLoginType>>('auth/login', data);
+    },
+    logout() {
+        return instance.delete<ResponsType>('auth/login');
     }
-
 }
 //================================================================================
 

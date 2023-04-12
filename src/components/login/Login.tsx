@@ -4,8 +4,16 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
 import {authLoginThunkC} from "../../redux/loginReducer";
 import {AppThunkDispatch, useAppSelector} from "../../redux/redux-store";
+import {Navigate} from "react-router-dom";
 
 export const Login = () => {
+
+    const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth)
+
+    if (isAuth) {
+        return <Navigate to='/profile'/>
+    }
+
 
     return (
         <div className={s.loginFormContainer}>
@@ -13,15 +21,12 @@ export const Login = () => {
             <LoginForm/>
         </div>
     );
-};
+}
 
 //====================================================================
 
 
-// type Inputs = {
-//     example: string,
-//     exampleRequired: string,
-// };
+
 type LoginFormType = {
     email: string,
     password: string,
@@ -50,9 +55,9 @@ export const LoginForm = () => {
     //formState:{} - ошибки сохраняет
     return (
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-            <input placeholder={'login'} {...register('email', {required: 'Заполни поле'})}/>
+            <input type='email' placeholder={'email'} {...register('email', {required: 'Заполни поле'})}/>
             <p>{errors.email?.message}</p>
-            <input placeholder={'Password'}
+            <input type='password' placeholder={'Password'} 
                    {...register("password", {
                        required: 'Заполни поле',
                        minLength: {value: 4, message: 'min length is 4'}

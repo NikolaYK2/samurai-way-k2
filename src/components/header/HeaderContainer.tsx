@@ -2,11 +2,11 @@ import React from 'react';
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {loginMeThunkC} from "../../redux/loginReducer";
+import {authMeThunkC} from "../../redux/loginReducer";
 
 export class HeaderContainer extends React.Component<ProfileTypeProps> {
     componentDidMount() {
-        this.props.loginMeThunk();
+        this.props.authMeThunk();
         // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
         //     withCredentials: true
         // }).then(response => {
@@ -38,7 +38,7 @@ type MapStateToPropsType = {
 // loading:boolean,
 
 type MapDispatchPropsType = {
-    loginMeThunk:()=>void,
+    authMeThunk:()=>void,
     // setUserData: (userId: number, email: string, login: string) => void,
 }
 
@@ -51,7 +51,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 
 export const HeaderContainerConnect = connect(mapStateToProps, {
-    loginMeThunk: loginMeThunkC,
+    authMeThunk: authMeThunkC,
     // setUserData: setUserDataAC,
 
 })(HeaderContainer);
