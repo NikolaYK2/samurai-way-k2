@@ -40,9 +40,9 @@ export const LoginForm = () => {
 
     const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth);
 
-    const [er,setEr] =useState<string | null>(null);
+    const [error,setError] =useState<string | null>(null);
 
-    const {register, handleSubmit, formState: {errors}, setError, reset} = useForm<LoginFormType>({
+    const {register, handleSubmit, formState: {errors}, reset} = useForm<LoginFormType>({
         defaultValues: {
             email: '',
             password: '',
@@ -52,8 +52,8 @@ export const LoginForm = () => {
 
     const onSubmit: SubmitHandler<LoginFormType> = data => {
         console.log(data)
-        dispatch(authLoginThunkC(data,setEr));
-        reset();//Очистка формы после отправки
+        dispatch(authLoginThunkC(data,setError));
+        reset();
     }
 
     return (
@@ -75,8 +75,8 @@ export const LoginForm = () => {
                    })}/>
             <p>{errors.password?.message}</p>
             <input type="checkbox" {...register('rememberMe')}/> remember my
-            <input type="submit" disabled={isAuth} onClick={()=>setError('email',{types:{test:'gavno'}})}/>
-            <p>{er}</p>
+            <input type="submit" disabled={isAuth}/>
+            <p>{error}</p>
         </form>
     );
 };

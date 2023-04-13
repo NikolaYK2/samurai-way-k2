@@ -66,18 +66,17 @@ export const authMeThunkC = () => (dispatch: Dispatch<ActionsType>) => {
     // })
 }
 
-export const authLoginThunkC = (data: RegisterLoginType, setEr?: any): AppThunk => (dispatch) => {
-    authorizationAPI.authorizeLogin(data)
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                // const {email, password, rememberMe} = res.data.data;
-                // dispatch(loginDataAC(email, password, rememberMe));
-                dispatch(authMeThunkC())
-            } else {
-                const message = res.data.messages.length > 0 ? res.data.messages[0] : 'error';//Делаем проверку на случай прихода с сервера пустого массива
-                dispatch(setEr(message))
+export const authLoginThunkC = (data: RegisterLoginType, setError?: (text: string) => void): AppThunk => (dispatch) => {
+    authorizationAPI.authorizeLogin(data).then(res => {
+        if (res.data.resultCode === 0) {
+            dispatch(authMeThunkC())
+        } else {
+            const message = res.data.messages.length > 0 ? res.data.messages[0] : 'error';//Делаем проверку на случай прихода с сервера пустого массива
+            if (setError) {
+            setError(message)
             }
-        })
+        }
+    })
 }
 //async ----
 // export const authLoginThunkC = (data: RegisterLoginType): AppThunk => async dispatch => {
