@@ -46,21 +46,20 @@ import {MessageUsers} from "./MessageUsers";
 // };
 
 
-
 type MapStatePropsType = {
     // message: string,
     usersMessages: usersMessagesType[],
-    isAuth?:boolean,
+    isAuth?: boolean,
 }
 
 type MapDispatchPropsType = {
-    addMessageUsers:(newMessageUsers: string)=>void,
+    addMessageUsers: (newMessageUsers: string) => void,
     // addMessageUsersChange:(text: string)=>void,
 }
 
 export type MessageUsersType = MapStatePropsType & MapDispatchPropsType;
 
-const mapStateToProps = (state: AppStateType):MapStatePropsType => {
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         // message: state.messagesPage.message,
         usersMessages: state.messagesPage.usersMessages,
@@ -68,7 +67,7 @@ const mapStateToProps = (state: AppStateType):MapStatePropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         addMessageUsers: (newMessageUsers: string) => {
             dispatch(addMessageUsersAC(newMessageUsers));

@@ -17,7 +17,6 @@ export const Profile = (props: ProfileType) => {
     if (!props.profile) {
         return <Loading/>;
     }
-
     return (
         <div className={s.content__profile}>
             {/*<div className={s.content__wrap}>*/}

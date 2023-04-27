@@ -50,7 +50,7 @@ export const setUserDataAC = (id: number | null, email: string | null, login: st
 
 //THUNK ============================================================================
 export const authMeThunkC = () => (dispatch: Dispatch<ActionsType>) => {
-    authorizationAPI.authorizeMe().then(data => {
+    return authorizationAPI.authorizeMe().then(data => {
         if (data.resultCode === 0) {
             const {id, email, login} = data.data;
             dispatch(setUserDataAC(id, email, login, true));

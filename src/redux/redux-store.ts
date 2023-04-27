@@ -7,6 +7,7 @@ import {ActionsTypeLoginAuthorization, loginAuthorizationReducer} from "./loginR
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {friendsReducer} from "./friendsReducer";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import {ActionsAppType, appReducer} from "./appReducer";
 
 export let rootReducer = combineReducers({//функция которой передаем обьект внутри
 // Воспринимать как state по сути
@@ -16,6 +17,7 @@ export let rootReducer = combineReducers({//функция которой пер
     sidebar: sidebarReducer,
     loginAuthorization: loginAuthorizationReducer,
     friends: friendsReducer,
+    app: appReducer,
     // form: Controller,
     // form: useForm,
 });
@@ -33,7 +35,8 @@ export const useAppDispatch = () => useDispatch<AppThunkDispatch>();
 
 //Types action для всего app=============
 export type ActionsType =
-    | ActionsTypeLoginAuthorization;
+    | ActionsTypeLoginAuthorization
+    | ActionsAppType;
 
 //TYPE THUNK ============================
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, ActionsType>

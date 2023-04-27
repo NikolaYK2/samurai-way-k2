@@ -14,7 +14,7 @@ export const FormTextarea = (props: FormTextareaType) => {
     // const [styleError, setStyleError] = useState<string>('');
     // const [message, setMessage] = useState('');
 
-    const {register, handleSubmit, formState: {errors}, reset} = useForm<FormTextareaType>();
+    const {register, handleSubmit, watch, formState: {errors}, reset} = useForm<FormTextareaType>();
 
     // const writeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
     //     setMessage(e.currentTarget.value);
@@ -23,7 +23,8 @@ export const FormTextarea = (props: FormTextareaType) => {
     // }
 
     const onSubmit: SubmitHandler<FormTextareaType> = data => {
-        console.log(data)
+        console.log(data);
+        props.addMessages(String(watch('messages')));
         reset();
         // if (message !== '') {
         //     addMessages(message);//message - можно не получать этот текст, оно и так сидит в state

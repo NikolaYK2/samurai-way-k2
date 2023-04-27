@@ -12,6 +12,7 @@ import {
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {AppStateType} from "../../../redux/redux-store";
 import {compose} from "redux";
+import {RedirectContainer} from "../../../hoc/RedirectContainer";
 
 // type ContentProfileType = {
 //     // store: StoreType,
@@ -75,7 +76,7 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
 
 
     useEffect(() => {
-        let userId:number | null = props.params.userId;
+        let userId: number | null = props.params.userId;
         if (!userId) {
             userId = props.userId;
         }
@@ -88,7 +89,7 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
         // });
 
         // setTimeout(()=>{
-            props.setStatus(userId);
+        props.setStatus(userId);
         // },1000);
     }, [])
 
@@ -169,15 +170,15 @@ type ProfileTypeProps = MapStateToPropsType & MapDispatchPropsType & WithRouterP
 type MapStateToPropsType = {
     profile: ProfileUserType | null,
     isAuth?: boolean,
-    status:string,
+    status: string,
     userId: number | null,
 }
 
 type MapDispatchPropsType = {
     // setUserProfile: (profile: ProfileUserType | null) => void,
     getUserProfile: (userId: number | null) => void,
-    setStatus:(userId:number | null)=>void,
-    updStatus:(status:string)=>void,
+    setStatus: (userId: number | null) => void,
+    updStatus: (status: string) => void,
 }
 
 
@@ -196,11 +197,11 @@ export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         // setUserProfile: setUserProfileAC,
         getUserProfile: getUserProfileThunkCreator,
-        setStatus:setStatusThunkCreator,
+        setStatus: setStatusThunkCreator,
         updStatus: updStatusThunkCreator,
     }),
     withRouter,
-    // RedirectContainer
+    RedirectContainer,
 )(ContentProfileContainer);
 
 // let WithURLDataContainerComponent = withRouter(ContentProfileContainer);

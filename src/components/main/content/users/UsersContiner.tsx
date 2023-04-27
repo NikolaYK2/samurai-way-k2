@@ -12,7 +12,6 @@ import {
 } from "../../../../redux/usersReducers";
 import {Users} from "./Users";
 import {Loading} from "../../../loading/Loading";
-import {RedirectContainer} from "../../../../hoc/RedirectContainer";
 import {compose} from "redux";
 import {UsersType} from "../../../api/api";
 
@@ -216,5 +215,5 @@ export default compose<React.ComponentType>(
         // setTotalUsersCount: setTotalUsersCountAC,
         // switchLoading: switchLoadingAC,
     }),
-    RedirectContainer
+    // RedirectContainer
 )(UsersAPIComponent);

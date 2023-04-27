@@ -16,8 +16,7 @@ const mapStateToPropsRedirect = (state: AppStateType):MapStatePropsType => {
 export function RedirectContainer<T>(Component: ComponentType<T>) {//COmponentType из реакта импортируем
 
     const RedirectComponent=(props: MapStatePropsType)=> {
-        //isAuth нам не нужно кидат ьв компоненту, он нужен тут, нужно отделаить от props
-        // c помощью деструктизации
+        //isAuth нам не нужно кидать в компоненту, он нужен тут, нужно отделаить от props c помощью деструктизации
         const{isAuth, ...restProps} = props;//Вытягиваем из props isAuth, а все остальное засовывваем в restProps
 
         if (!isAuth) return <Navigate to={'/login'}/>

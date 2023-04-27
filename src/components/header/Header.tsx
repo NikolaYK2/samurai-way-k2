@@ -7,11 +7,11 @@ import {logoutThunkC} from "../../redux/loginReducer";
 
 export const Header = (props: ProfileTypeProps) => {
     const dispatch = useAppDispatch();
-const isAuth = useAppSelector<boolean>(state => state.loginAuthorization.isAuth)
+    const isAuth = useAppSelector<boolean>(state => state.loginAuthorization.isAuth)
 
-const deleteHandl=()=>{
-    dispatch(logoutThunkC());
-}
+    const deleteHandl = () => {
+        dispatch(logoutThunkC());
+    }
     return (
         <header className={s.header}>
             <img
@@ -19,7 +19,9 @@ const deleteHandl=()=>{
                 alt=""/>
             <div className={s.loginBlock}>
                 {props.isAuth
-                    ? <div>{props.login}<button onClick={deleteHandl} disabled={!isAuth}>log out</button></div>
+                    ? <div>{props.login}
+                        <button onClick={deleteHandl} disabled={!isAuth}>log out</button>
+                    </div>
                     : <NavLink to='/login'>Login</NavLink>}
             </div>
         </header>

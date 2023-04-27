@@ -37,9 +37,7 @@ export class MyProfileStatus extends React.Component<MyProfileStatusType> {
 //Если в предыдущих пропсах статус !==- который не равен статусу в текущих пропсах,
 //нужно обновить статус
         if (prevProps.status !== this.props.status){
-            this.setState({
-                status: this.props.status
-            })
+            this.setState({status: this.props.status})
         }
     }
 
