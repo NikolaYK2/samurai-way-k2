@@ -16,10 +16,11 @@ import {compose} from "redux";
 import {UsersType} from "../../../api/api";
 import {
     getCurrentPage,
-    getExpectation, getLoadingPage,
+    getExpectation,
+    getLoadingPage,
     getPageSize,
     getTotalUsersCount,
-    getUsers
+    getUserSelector
 } from "../../../../redux/usersSelectors";
 
 //Контейнерная class компонента которая делает API
@@ -176,7 +177,10 @@ export type MapDispatchPropsType = {
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {//название функции обозначает замапить state на пропсы
     return {
         //getState мы уже не делаем
-        users: getUsers(state),
+        // users: getUsers(state),
+        //FN SELECTOR ------
+        users: getUserSelector(state),
+        // -----------------
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),

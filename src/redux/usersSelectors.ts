@@ -1,8 +1,15 @@
 import {AppStateType} from "./redux-store";
+import {createSelector} from "reselect";
 
 export const getUsers = (state: AppStateType) => {
     return state.usersPage.users;
 }
+//FN SELECTOR ----------
+//Можно исп. несколько селекторов /getUsers, getPageSize, (users,pageSize)=>{}
+export const getUserSelector = createSelector(getUsers,(users)=>{
+    return users;
+})
+
 export const getPageSize = (state: AppStateType) => {
     return state.usersPage.pageSize;
 }
