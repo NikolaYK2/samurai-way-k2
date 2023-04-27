@@ -4,11 +4,11 @@ import {Main} from "./components/main/Main";
 import {Footer} from "./components/footer/Footer";
 import {HeaderContainerConnect} from "./components/header/HeaderContainer";
 import {connect} from "react-redux";
-import {withRouter} from "./components/main/content/ContentProfileContainer";
 import {compose} from "redux";
 import {initializedAppThunkC} from "./redux/appReducer";
 import {AppStateType} from "./redux/redux-store";
 import {Loading} from "./components/loading/Loading";
+import {withRouter} from "./selectors/WithRouter";
 
 // type AppPropsType = {
 //     // store: StoreType,

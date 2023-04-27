@@ -14,6 +14,13 @@ import {Users} from "./Users";
 import {Loading} from "../../../loading/Loading";
 import {compose} from "redux";
 import {UsersType} from "../../../api/api";
+import {
+    getCurrentPage,
+    getExpectation, getLoadingPage,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../../../redux/usersSelectors";
 
 //Контейнерная class компонента которая делает API
 class UsersAPIComponent extends React.Component<UsersTypeProps> {
@@ -165,17 +172,35 @@ export type MapDispatchPropsType = {
     // switchLoading: (onOff: boolean) => void,
 }
 
+//MAP STATE SELECTORS =======================================
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {//название функции обозначает замапить state на пропсы
     return {
         //getState мы уже не делаем
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        loadingPage: state.usersPage.loadingPage,
-        expectation: state.usersPage.expectation,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        loadingPage: getLoadingPage(state),
+        expectation: getExpectation(state),
     }
 }
+//NO SELECTORS ----------------
+// const mapStateToProps = (state: AppStateType): MapStatePropsType => {//название функции обозначает замапить state на пропсы
+//     return {
+//         //getState мы уже не делаем
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         loadingPage: state.usersPage.loadingPage,
+//         expectation: state.usersPage.expectation,
+//     }
+// }
+//======================================================
+
+
+
+
 // const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
 //     return {
 //         follow: (userId: string) => (dispatch(followAC(userId))),

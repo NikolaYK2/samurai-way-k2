@@ -179,12 +179,12 @@ export const toggleExpectationAC = (userId: string, onOff: boolean) => {
 
 //THUNK =====================================================================
 //COmponent UsersContiner ===================================================
-export const getUsersThunkCreator = (/*currentPage:number, pageSize:number*/) => {
+export const getUsersThunkCreator = (page: number, pageSize: number) => {
     return (dispatch: Dispatch<ActionUsersType>) => {
         //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
         dispatch(switchLoadingAC(true));
-
-        usersAPI.getUsers(/*currentPage, pageSize*/).then(data => {
+        dispatch(setCurrentPageAC(page));
+        usersAPI.getUsers(page, pageSize).then(data => {
             dispatch(switchLoadingAC(false));
             dispatch(setUsersAC(data.items));
             dispatch(setTotalUsersCountAC(data.totalCount));
@@ -208,13 +208,13 @@ export const pageChangeThunkCreator = (page: number, /*pageSize: number*/) => {
 //COmponent User ===================================================
 export const unFollowThunkCreator = (id: string) => {
     return (dispatch: Dispatch<ActionUsersType>) => {
-        dispatch(toggleExpectationAC(id,true));
+        dispatch(toggleExpectationAC(id, true));
 
         usersAPI.deleteFollow(id).then(data => {
             if (data.resultCode === 0) {
                 dispatch(unFollowAC(id));
             }
-            dispatch(toggleExpectationAC(id,false));
+            dispatch(toggleExpectationAC(id, false));
         });
         // props.toggleExpectation(id,true, );
         // usersAPI.deleteFollow(id).then(data => {
@@ -228,13 +228,13 @@ export const unFollowThunkCreator = (id: string) => {
 }
 export const followThunkCreator = (id: string) => {
     return (dispatch: Dispatch<ActionUsersType>) => {
-        dispatch(toggleExpectationAC(id,true));
+        dispatch(toggleExpectationAC(id, true));
 
         usersAPI.postFollow(id).then(data => {
             if (data.resultCode === 0) {
                 dispatch(followAC(id));
             }
-            dispatch(toggleExpectationAC(id,false));
+            dispatch(toggleExpectationAC(id, false));
         });
     }
 }
