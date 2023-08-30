@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
-import {Main} from "./components/main/Main";
-import {Footer} from "./components/footer/Footer";
-import {HeaderContainerConnect} from "./components/header/HeaderContainer";
+import {Main} from "features/2-main/Main";
+import {Footer} from "features/footer/Footer";
+import {HeaderContainerConnect} from "features/1-header/HeaderContainer";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {initializedAppThunkC} from "./redux/appReducer";
-import {AppStateType} from "./redux/redux-store";
-import {Loading} from "./components/loading/Loading";
-import {withRouter} from "./selectors/WithRouter";
+import {Loading} from "common/components/loading/Loading";
+import {withRouter} from "common/selectors/WithRouter";
+import {AppStateType} from "app/redux-store";
+import {initializedAppThunkC} from "app/appReducer";
 
 // type AppPropsType = {
 //     // store: StoreType,

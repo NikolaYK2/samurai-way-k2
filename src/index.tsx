@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {store} from "./redux/redux-store";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
+import {store} from "app/redux-store";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -13,25 +13,25 @@ const root = ReactDOM.createRoot(
 
 
 // let rerenderEntireTree=()=> {//функция перерисовки - убираем так как рендерит теперь то что нужно функция connect
-    root.render(
-        // <React.StrictMode>
-        <BrowserRouter>
-            {/*<HashRouter>*/}
-                {/*<StoreContext.Provider value={store}>*/}
-                <Provider store={store}>{/* - Компонента которая работает с контекстом API*/}
-                    <App
-                        // store={store}//store теперь не передаем через пропсы, есть API
-                        // addPost={addPost}
-                        // addPostChange={addPostChangeAC}
-                        // addMessageUsers={addMessageUsers}
-                        // addMessageUsersChange={addMessageUsersChange}
-                    />
-                </Provider>
-                {/*</StoreContext.Provider>*/}
-            {/*</HashRouter>*/}
-        </BrowserRouter>
-        // </React.StrictMode>
-    );
+root.render(
+    // <React.StrictMode>
+    <BrowserRouter>
+        {/*<HashRouter>*/}
+        {/*<StoreContext.Provider value={store}>*/}
+        <Provider store={store}>{/* - Компонента которая работает с контекстом API*/}
+            <App
+                // store={store}//store теперь не передаем через пропсы, есть API
+                // addPost={addPost}
+                // addPostChange={addPostChangeAC}
+                // addMessageUsers={addMessageUsers}
+                // addMessageUsersChange={addMessageUsersChange}
+            />
+        </Provider>
+        {/*</StoreContext.Provider>*/}
+        {/*</HashRouter>*/}
+    </BrowserRouter>
+    // </React.StrictMode>
+);
 // }
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
@@ -44,9 +44,6 @@ const root = ReactDOM.createRoot(
 // store.subscribe(rerenderEntireTree);
 // rerenderEntireTree();
 reportWebVitals();
-
-
-
 
 
 //storeContext просто напоминалка=========================================
