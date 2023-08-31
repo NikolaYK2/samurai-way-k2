@@ -4,7 +4,9 @@ import {MyPostType} from "features/2-main/content/MyProfile/myPost/MyPostContain
 import {FormTextarea} from "common/components/formTextArea/FormTextArea";
 
 export const MyPost = (props: MyPostType) => {
+    console.log('render My Post')
     //POSTS =====================================================================================
+
     const post = props.postData.map(pD => {
         return (
             <div key={pD.id}>

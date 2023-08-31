@@ -27,17 +27,4 @@ export function RedirectContainer<T>(Component: ComponentType<T>) {//COmponentTy
 
     return ConnectedRedirectComponentContainer;
 }
-//class ============================================
-// export const RedirectContainer = (Component: any) => {
-//     class RedirectComponent extends React.Component<any> {
-//         render() {
-//             if (!this.props.isAith) return <Navigate to={'/login'}/>
-//             return <Component {...this.props}/>
-//         }
-//     }
-//
-//     let ConnectedRedirectComponentContainer = connect(mapStateToPropsRedirect)(RedirectComponent);
-//
-//     return ConnectedRedirectComponentContainer;
-// }
 

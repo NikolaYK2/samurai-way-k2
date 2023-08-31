@@ -1,6 +1,4 @@
-export default {
-
-}
+export default {}
 // import React from "react";
 // import s from "./ContentProfile.module.css";
 // import {Profile} from "./MyProfile/MyProfile";

@@ -8,32 +8,13 @@ type FormTextareaType = {
     addMessages: (newMessageUsers: string) => void,
 }
 export const FormTextarea = (props: FormTextareaType) => {
-    // const {addMessages} = props;
-
-    // const [errorText, setErrorText] = useState<string | null>(null);
-    // const [styleError, setStyleError] = useState<string>('');
-    // const [message, setMessage] = useState('');
 
     const {register, handleSubmit, watch, formState: {errors}, reset} = useForm<FormTextareaType>();
-
-    // const writeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //     setMessage(e.currentTarget.value);
-    //     setStyleError(s.noError);
-    //     setErrorText('');
-    // }
 
     const onSubmit: SubmitHandler<FormTextareaType> = data => {
         console.log(data);
         props.addMessages(String(watch('messages')));
         reset();
-        // if (message !== '') {
-        //     addMessages(message);//message - можно не получать этот текст, оно и так сидит в state
-        //     console.log(data)
-        //     setMessage('');
-        // } else {
-        //     setErrorText('Поле не заполнено');
-        //     setStyleError(s.error)
-        // }
     }
 
     return (
@@ -42,20 +23,7 @@ export const FormTextarea = (props: FormTextareaType) => {
                 {...register('messages', {required: 'Поле пустое'})}
                 placeholder={errors.messages ? errors.messages?.message : 'Введите сообщение'}
                 className={errors.messages ? s.error : s.noError}
-                // placeholder={errorText || 'Введите сообщение'}
-                // value={message}
-                // onChange={writeMessage}
             />
-            {/*<p>{errors.messages?.message}</p>*/}
-            {/*<TextArea*/}
-            {/*          // errorText={errorText}*/}
-            {/*          writeMessage={writeMessage}*/}
-            {/*          message={message}*/}
-            {/*          title={'add message'}*/}
-            {/*          errors={errors}*/}
-            {/*          typeRegister={props.usersMessages}*/}
-            {/*          register={register}*/}
-            {/*/>*/}
             <br/>
             <button>send</button>
         </form>
