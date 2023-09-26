@@ -5,7 +5,7 @@ import {messagesPageReducer} from "features/redux/messagesPageReducer";
 import {proFileReducer} from "features/redux/proFilePageReducer";
 import {usersReducer} from "features/redux/usersReducers";
 import {sidebarReducer} from "features/redux/sidebarReducer";
-import {ActionsTypeLoginAuthorization, loginAuthorizationReducer} from "features/redux/loginReducer";
+import {ActionsTypeLoginAuthorization, authorizationReducer} from "features/redux/authReducer";
 import {friendsReducer} from "features/redux/friendsReducer";
 import {ActionsAppType, appReducer} from "app/appReducer";
 
@@ -15,7 +15,7 @@ export let rootReducer = combineReducers({//функция которой пер
     proFilePage: proFileReducer,
     usersPage: usersReducer,
     sidebar: sidebarReducer,
-    loginAuthorization: loginAuthorizationReducer,
+    loginAuthorization: authorizationReducer,
     friends: friendsReducer,
     app: appReducer,
     // form: Controller,

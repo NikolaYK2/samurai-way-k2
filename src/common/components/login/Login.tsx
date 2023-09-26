@@ -4,7 +4,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
 import {Navigate} from "react-router-dom";
 import {AppThunkDispatch, useAppSelector} from "app/redux-store";
-import {authLoginThunkC} from "features/redux/loginReducer";
+import {authLoginThunkC} from "features/redux/authReducer";
 
 export const Login = () => {
 

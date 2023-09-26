@@ -6,28 +6,7 @@
     font-size: 20px;
     margin: 0 0 10px;
 }
-/*.content__myPost>form{*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    max-width: 800px;*/
-/*    margin: 10px 0 0 0;*/
-/*}*/
-/*.content__myPost textarea{*/
-/*    background-color: #daf8e9;*/
-/*    border-radius: 10px;*/
-/*    height: 50px;*/
-/*    padding: 5px 10px 5px 10px;*/
-/*}*/
-/*.content__myPost>form>button {*/
-/*    margin: 10px 0 0 0;*/
-/*    padding: 4px 30px 5px 10px;*/
-/*    border-radius: 10px;*/
-/*    align-self: end;*/
-/*    background-color: aquamarine;*/
-/*    font-size: 16px;*/
-/*    text-transform: uppercase;*/
-/*    color: white;*/
-/*}*/
+
 .content__myPost button:active{
     box-shadow: inset 0 0 5px 2px grey;
 }
@@ -37,33 +16,33 @@
     display: flex;
     margin: 0 0 10px 0;
 }
-.content__profUsers>div{
-    /*position: relative;*/
+.img{
     width: 70px;
+    min-width: 70px;
     height: 70px;
     margin: 0 10px 0 0;
 }
-.content__profUsers>div>img{
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    max-width: 100%;
+.img > img{
+    width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
+}
+.postData{
+    display: flex;
+    flex: 1 1 auto;
 }
 .post{
     margin: 0 0 10px;
 }
 .message{
     flex: 1 1 auto;
-    width: 300px;
+    /*width: 300px;*/
 }
 .delPost{
     cursor: pointer;
-    width: 100%;
+    width: 10px;
     text-align: right;
-    margin: 0 0 0 auto;
 }
 /*.error{*/
 /*    border: 2px solid red;*/

@@ -1,5 +1,5 @@
 import {AppThunk} from "app/redux-store";
-import {authMeThunkC} from "features/redux/loginReducer";
+import {authMeThunkC} from "features/redux/authReducer";
 
 
 export type initializationStateType = {
@@ -30,9 +30,14 @@ export const initializedAppAC = (value: boolean) => ({type: 'app/INITIALIZED-APP
 //THUNK ============================================================================
 export const initializedAppThunkC = (): AppThunk => (dispatch) => {
     let promise = dispatch(authMeThunkC());
-    promise.then(() => {
-        dispatch(initializedAppAC(true));
-    })
+    promise
+        .then(() => {
+            dispatch(initializedAppAC(true));
+        })
+        .finally(() => {
+            dispatch(initializedAppAC(true));
+
+        })
 }
 
 

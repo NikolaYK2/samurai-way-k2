@@ -2,7 +2,7 @@ import {Dispatch} from "redux";
 import {authorizationAPI, RegisterLoginType} from "common/api/api";
 import {ActionsType, AppThunk} from "app/redux-store";
 
-const SET_USER_DATA = 'SET_USER_DATA';
+const SET_USER_DATA = 'auth/SET_USER_DATA';
 
 export type loginType = {
     id: number | null,
@@ -22,7 +22,7 @@ let initializationState: loginType = {
     isAuth: false,
 }
 
-export const loginAuthorizationReducer = (state = initializationState, action: ActionsTypeLoginAuthorization): loginType => {
+export const authorizationReducer = (state = initializationState, action: ActionsTypeLoginAuthorization): loginType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {...state, ...action.payload};
@@ -49,22 +49,35 @@ export const setUserDataAC = (id: number | null, email: string | null, login: st
 
 
 //THUNK ============================================================================
-export const authMeThunkC = () => (dispatch: Dispatch<ActionsType>) => {
-    return authorizationAPI.authorizeMe().then(data => {
-        if (data.resultCode === 0) {
-            const {id, email, login} = data.data;
+export const authMeThunkC = () => async (dispatch: Dispatch<ActionsType>) => {
+
+    let res = await authorizationAPI.authorizeMe()
+    try {
+        if (res.resultCode === 0) {
+            const {id, email, login} = res.data;
             dispatch(setUserDataAC(id, email, login, true));
         }
-    })
-    // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-    //     withCredentials: true
-    // }).then(response => {
-    //     if (response.data.resultCode === 0) {
-    //         let {id, email, login} = response.data.data
-    //         this.props.setUserData(id, email, login)
-    //     }
-    // })
+    } catch (e) {
+        alert('Error authorization')
+    }
 }
+// export const authMeThunkC = () => (dispatch: Dispatch<ActionsType>) => {
+//
+//     return authorizationAPI.authorizeMe().then(data => {
+//         if (data.resultCode === 0) {
+//             const {id, email, login} = data.data;
+//             dispatch(setUserDataAC(id, email, login, true));
+//         }
+//     })
+//     // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+//     //     withCredentials: true
+//     // }).then(response => {
+//     //     if (response.data.resultCode === 0) {
+//     //         let {id, email, login} = response.data.data
+//     //         this.props.setUserData(id, email, login)
+//     //     }
+//     // })
+// }
 
 export const authLoginThunkC = (data: RegisterLoginType, setError?: (text: string) => void): AppThunk => (dispatch) => {
     authorizationAPI.authorizeLogin(data).then(res => {
@@ -73,7 +86,7 @@ export const authLoginThunkC = (data: RegisterLoginType, setError?: (text: strin
         } else {
             const message = res.data.messages.length > 0 ? res.data.messages[0] : 'error';//Делаем проверку на случай прихода с сервера пустого массива
             if (setError) {
-            setError(message)
+                setError(message)
             }
         }
     })

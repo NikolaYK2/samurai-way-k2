@@ -3,7 +3,7 @@ import s from "./Header.module.css";
 import {NavLink} from "react-router-dom";
 import {ProfileTypeProps} from "features/1-header/HeaderContainer";
 import {useAppDispatch, useAppSelector} from "app/redux-store";
-import {logoutThunkC} from "features/redux/loginReducer";
+import {logoutThunkC} from "features/redux/authReducer";
 
 export const Header = (props: ProfileTypeProps) => {
     const dispatch = useAppDispatch();

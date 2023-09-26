@@ -16,13 +16,15 @@ export const MyPost = (props: MyPostType) => {
         return (
             <div key={pD.id} className={s.post}>
                 <div className={s.content__profUsers}>
-                    <div>
+                    <div className={s.img}>
                         <img
                             src="https://avatars.mds.yandex.net/i?id=0eaa142d7202ac9bbd26ac279e7ae159_l-4898876-images-thumbs&n=27&h=384&w=480"
                             alt=""/>
                     </div>
-                    <div className={s.message}>{pD.sms}</div>
-                    <div className={s.delPost} onClick={() => handlDeletePost(pD.id)}>X</div>
+                    <div className={s.postData}>
+                        <div className={s.message}>{pD.sms}</div>
+                        <div className={s.delPost} onClick={() => handlDeletePost(pD.id)}>X</div>
+                    </div>
                 </div>
                 <div>
                     <span>like </span>{pD.like}
