@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {addPostAC, postDataType} from "features/redux/proFilePageReducer";
+import {addPostAC, deletePostAC, postDataType} from "features/redux/proFilePageReducer";
 import {AppStateType} from "app/redux-store";
 import {MyPost} from "features/2-main/content/MyProfile/myPost/MyPost";
 
@@ -13,6 +13,7 @@ type MapStatePropsType = {
 
 type MapDispatchPropsType = {
     addPost:(postMessage: string)=>void,
+    deletePost:(postId:string)=>void
 }
 
 export type MyPostType = MapStatePropsType & MapDispatchPropsType;
@@ -26,6 +27,7 @@ const mapStateToProps = (state: AppStateType):MapStatePropsType => {//назва
 
 export default connect(mapStateToProps, {
     addPost: addPostAC,
+    deletePost: deletePostAC,
 })(MyPost);//Вызываем ее два раза и во второй раз вызываем то ту фукнцию что она вернула в первой
 
 // export default connect(mapStateToProps, mapDispatchToProps)(MyPost);//Вызываем ее два раза и во второй раз вызываем то ту фукнцию что она вернула в первой

@@ -5,6 +5,7 @@ import {profileApi} from "common/api/api";
 const addPost = 'addPost';
 const setUserProfile = 'setUserProfile';
 const setStatus = 'setStatus';
+const deletePost = 'PROFILE/DELETE-POST';
 //==========================================================================================
 //=====типизация actions add post==============================================================================
 // type AddPostActionType ={
@@ -20,8 +21,9 @@ const setStatus = 'setStatus';
 // type AddPostActionType = ReturnType<typeof addPostAC>;
 // type AddPostChangeActionType = ReturnType<typeof addPostChangeActionCreator>;
 export type ActionsTypeProfile = ReturnType<typeof addPostAC>
+    | ReturnType<typeof deletePostAC>
     | ReturnType<typeof setUserProfileAC>
-    | ReturnType<typeof setStatusAC>;
+    | ReturnType<typeof setStatusAC>
 //Type messages Users Type===========================================================================================================
 //======function Action Creator addPoast==============================================================================
 export const addPostAC = (postMessage: string) => {
@@ -30,12 +32,21 @@ export const addPostAC = (postMessage: string) => {
         postMessage: postMessage,
     } as const//воспринимать весь обьект как константу
 }
+
+export const deletePostAC = (postId: string) => {
+    return {
+        type: deletePost,
+        postId,
+    } as const//воспринимать весь обьект как константу
+}
+
 export const setUserProfileAC = (profile: ProfileUserType | null) => {
     return {
         type: 'setUserProfile',
         profile,
     } as const
 }
+
 export const setStatusAC = (status: string) => {
     return {
         type: 'setStatus',
@@ -99,6 +110,8 @@ export const proFileReducer = (state = initializationState, action: ActionsTypeP
         //Добавление нового поста для change(update)=================================================
         return {...state, status: action.status}
         //MESSAGE USERS===============================`================================
+    } else if (action.type === deletePost) {
+        return {...state, postData: state.postData.filter(el=>el.id !== action.postId)}
     }
     return state;
 }
@@ -119,6 +132,7 @@ export const setStatusThunkCreator = (userId: number) => {
         })
     }
 }
+
 export const updStatusThunkCreator = (status: string) => {
     return (dispatch: Dispatch<ActionsTypeProfile>) => {
         profileApi.updProfileStatus(status).then(res => {
@@ -128,3 +142,13 @@ export const updStatusThunkCreator = (status: string) => {
         })
     }
 }
+
+// export const deletePostThunkCreator = (postId: string) => {
+//     return (dispatch: Dispatch<ActionsTypeProfile>) => {
+//         profileApi.updProfileStatus(status).then(res => {
+//             if (res.data.resultCode === 0) {
+//                 dispatch(setStatusAC(status));
+//             }
+//         })
+//     }
+// }

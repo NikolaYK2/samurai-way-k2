@@ -1,5 +1,10 @@
+.continer{
+    max-width: 800px;
+}
+
 .content__myPost{
     font-size: 20px;
+    margin: 0 0 10px;
 }
 /*.content__myPost>form{*/
 /*    display: flex;*/
@@ -33,21 +38,33 @@
     margin: 0 0 10px 0;
 }
 .content__profUsers>div{
-    position: relative;
+    /*position: relative;*/
     width: 70px;
     height: 70px;
     margin: 0 10px 0 0;
 }
 .content__profUsers>div>img{
-    position: absolute;
-    top: 0;
-    left: 0;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
     max-width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
 }
-
+.post{
+    margin: 0 0 10px;
+}
+.message{
+    flex: 1 1 auto;
+    width: 300px;
+}
+.delPost{
+    cursor: pointer;
+    width: 100%;
+    text-align: right;
+    margin: 0 0 0 auto;
+}
 /*.error{*/
 /*    border: 2px solid red;*/
 /*}*/
