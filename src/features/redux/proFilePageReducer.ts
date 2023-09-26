@@ -111,37 +111,57 @@ export const proFileReducer = (state = initializationState, action: ActionsTypeP
         return {...state, status: action.status}
         //MESSAGE USERS===============================`================================
     } else if (action.type === deletePost) {
-        return {...state, postData: state.postData.filter(el=>el.id !== action.postId)}
+        return {...state, postData: state.postData.filter(el => el.id !== action.postId)}
     }
     return state;
 }
 
 //THUNK =============================================================
-export const getUserProfileThunkCreator = (userId: number) => {
-    return (dispatch: Dispatch<ActionsTypeProfile>) => {
-        profileApi.getUserProfile(userId).then(data => {
-            dispatch(setUserProfileAC(data));
-        })
+export const getUserProfileThunkCreator = (userId: number) => async (dispatch: Dispatch<ActionsTypeProfile>) => {
+    let data = await profileApi.getUserProfile(userId)
+    try {
+        dispatch(setUserProfileAC(data));
+    } catch (e) {
+      alert('Error get users')
     }
 }
+// export const getUserProfileThunkCreator = (userId: number) => (dispatch: Dispatch<ActionsTypeProfile>) => {
+//     profileApi.getUserProfile(userId).then(data => {
+//         dispatch(setUserProfileAC(data));
+//     })
+// }
 
-export const setStatusThunkCreator = (userId: number) => {
-    return (dispatch: Dispatch<ActionsTypeProfile>) => {
-        profileApi.getProfileStatusUser(userId).then(res => {
+export const setStatusThunkCreator = (userId: number) => async (dispatch: Dispatch<ActionsTypeProfile>) => {
+    let res = await profileApi.getProfileStatusUser(userId)
+        try {
             dispatch(setStatusAC(res.data));
-        })
-    }
+        } catch (e) {
+            alert('Error set status')
+        }
 }
+// export const setStatusThunkCreator = (userId: number) => (dispatch: Dispatch<ActionsTypeProfile>) => {
+//     profileApi.getProfileStatusUser(userId).then(res => {
+//         dispatch(setStatusAC(res.data));
+//     })
+// }
 
-export const updStatusThunkCreator = (status: string) => {
-    return (dispatch: Dispatch<ActionsTypeProfile>) => {
-        profileApi.updProfileStatus(status).then(res => {
+export const updStatusThunkCreator = (status: string) => async (dispatch: Dispatch<ActionsTypeProfile>) => {
+    let res = await profileApi.updProfileStatus(status)
+        try {
             if (res.data.resultCode === 0) {
                 dispatch(setStatusAC(status));
             }
-        })
-    }
+        } catch (e) {
+            alert('Error upd status')
+        }
 }
+// export const updStatusThunkCreator = (status: string) => (dispatch: Dispatch<ActionsTypeProfile>) => {
+//     profileApi.updProfileStatus(status).then(res => {
+//         if (res.data.resultCode === 0) {
+//             dispatch(setStatusAC(status));
+//         }
+//     })
+// }
 
 // export const deletePostThunkCreator = (postId: string) => {
 //     return (dispatch: Dispatch<ActionsTypeProfile>) => {
