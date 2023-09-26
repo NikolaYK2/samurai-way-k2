@@ -28,16 +28,27 @@ export const initializedAppAC = (value: boolean) => ({type: 'app/INITIALIZED-APP
 
 
 //THUNK ============================================================================
-export const initializedAppThunkC = (): AppThunk => (dispatch) => {
-    let promise = dispatch(authMeThunkC());
-    promise
-        .then(() => {
-            dispatch(initializedAppAC(true));
-        })
-        .finally(() => {
-            dispatch(initializedAppAC(true));
+export const initializedAppThunkC = (): AppThunk => async (dispatch) => {
 
-        })
+    await dispatch(authMeThunkC());
+    try {
+        dispatch(initializedAppAC(true));
+    } catch (e) {
+
+    } finally {
+        dispatch(initializedAppAC(true));
+    }
 }
+// export const initializedAppThunkC = (): AppThunk => (dispatch) => {
+//     let promise = dispatch(authMeThunkC());
+//     promise
+//         .then(() => {
+//             dispatch(initializedAppAC(true));
+//         })
+//         .finally(() => {
+//             dispatch(initializedAppAC(true));
+//
+//         })
+// }
 
 
