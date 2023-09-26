@@ -79,8 +79,10 @@ export const authMeThunkC = () => async (dispatch: Dispatch<ActionsType>) => {
 //     // })
 // }
 
-export const authLoginThunkC = (data: RegisterLoginType, setError?: (text: string) => void): AppThunk => (dispatch) => {
-    authorizationAPI.authorizeLogin(data).then(res => {
+//async ----
+export const authLoginThunkC = (data: RegisterLoginType, setError?: (text: string) => void): AppThunk => async (dispatch) => {
+    try {
+        const res = await authorizationAPI.authorizeLogin(data)
         if (res.data.resultCode === 0) {
             dispatch(authMeThunkC())
         } else {
@@ -89,26 +91,42 @@ export const authLoginThunkC = (data: RegisterLoginType, setError?: (text: strin
                 setError(message)
             }
         }
-    })
+    } catch (e) {
+        alert('Error authLogin')
+    }
 }
-//async ----
-// export const authLoginThunkC = (data: RegisterLoginType): AppThunk => async dispatch => {
-//     try {
-//         const res = await authorizationAPI.authorizeLogin(data)
+// export const authLoginThunkC = (data: RegisterLoginType, setError?: (text: string) => void): AppThunk => (dispatch) => {
+//     authorizationAPI.authorizeLogin(data).then(res => {
 //         if (res.data.resultCode === 0) {
 //             dispatch(authMeThunkC())
+//         } else {
+//             const message = res.data.messages.length > 0 ? res.data.messages[0] : 'error';//Делаем проверку на случай прихода с сервера пустого массива
+//             if (setError) {
+//                 setError(message)
+//             }
 //         }
-//     }catch (error){
-//         throw new Error('error')
-//     }
+//     })
 // }
 
 
-export const logoutThunkC = () => (dispatch: Dispatch<ActionsType>) => {
-    authorizationAPI.logout().then(res => {
+export const logoutThunkC = () => async (dispatch: Dispatch<ActionsType>) => {
+
+    let res = await authorizationAPI.logout()
+    try {
         if (res.data.resultCode === 0) {
             dispatch(setUserDataAC(null, null, null, false));
         }
-    })
+
+    } catch (e) {
+        alert('Error logout')
+    }
 }
+// export const logoutThunkC = () => (dispatch: Dispatch<ActionsType>) => {
+//
+//     authorizationAPI.logout().then(res => {
+//         if (res.data.resultCode === 0) {
+//             dispatch(setUserDataAC(null, null, null, false));
+//         }
+//     })
+// }
 

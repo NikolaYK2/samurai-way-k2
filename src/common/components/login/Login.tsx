@@ -26,7 +26,6 @@ export const Login = () => {
 //====================================================================
 
 
-
 type LoginFormType = {
     email: string,
     password: string,
@@ -40,7 +39,7 @@ export const LoginForm = () => {
 
     const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth);
 
-    const [error,setError] =useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm<LoginFormType>({
         defaultValues: {
@@ -52,7 +51,7 @@ export const LoginForm = () => {
 
     const onSubmit: SubmitHandler<LoginFormType> = data => {
         console.log(data)
-        dispatch(authLoginThunkC(data,setError));
+        dispatch(authLoginThunkC(data, setError));
         reset();
     }
 
@@ -68,7 +67,7 @@ export const LoginForm = () => {
                        },
                    })}/>
             <p>{errors.email?.message}</p>
-            <input type='password' placeholder={'Password'} 
+            <input type='password' placeholder={'Password'}
                    {...register("password", {
                        required: 'Заполни поле',
                        minLength: {value: 4, message: 'min length is 4'}
