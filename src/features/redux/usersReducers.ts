@@ -1,6 +1,13 @@
 import {Dispatch} from "redux";
-import {usersAPI, UsersType} from "common/api/api";
+import {ResponsType, usersAPI, UsersType} from "common/api/api";
+import {updObjInArray} from "common/utills/objHelpers";
 
+//FN IN USER-REDUCER ===========================================
+const followedChange = (state: InitializationStateType, userId: string, changeFallow: boolean) => {
+    return {...state, users: state.users.map(u => u.id === userId ? {...u, followed: changeFallow} : u)};
+}
+
+//TYPES ======================================================
 export type Expectation = {
     id: string,
 }
@@ -24,10 +31,15 @@ let initializationState: InitializationStateType = {
 export const usersReducer = (state: InitializationStateType = initializationState, action: ActionUsersType): InitializationStateType => {
     switch (action.type) {
         case FOLLOW:
-            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)};
+            return {...state, users: updObjInArray(state.users, action.userId, {followed: true})};
+        // return followedChange(state, action.userId, true)
+        // return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)};
 
         case UNFOLLOW:
-            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)};
+            return {...state, users: updObjInArray(state.users, action.userId, {followed: false})};
+
+        // return followedChange(state, action.userId, false)
+        // return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)};
 
         case SET_USERS:
             return {...state, users: [...action.users]};
@@ -78,7 +90,7 @@ export const followAC = (userId: string) => {
     } as const;
 }
 
-type UnFollowACType = ReturnType<typeof unFollowAC>;
+export type UnFollowACType = ReturnType<typeof unFollowAC>;
 export const unFollowAC = (userId: string) => {
     return {
         type: UNFOLLOW,
@@ -130,52 +142,103 @@ export const toggleExpectationAC = (userId: string, onOff: boolean) => {
 
 //THUNK =====================================================================
 //COmponent UsersContiner ===================================================
-export const getUsersThunkCreator = (page: number, pageSize: number) => {
-    return (dispatch: Dispatch<ActionUsersType>) => {
-        //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
-        dispatch(switchLoadingAC(true));
-        dispatch(setCurrentPageAC(page));
-        usersAPI.getUsers(page, pageSize).then(data => {
-            dispatch(switchLoadingAC(false));
-            dispatch(setUsersAC(data.items));
-            dispatch(setTotalUsersCountAC(data.totalCount));
-        })
-    }
-}
-export const pageChangeThunkCreator = (page: number, /*pageSize: number*/) => {
-    return (dispatch: Dispatch<ActionUsersType>) => {
-        dispatch(setCurrentPageAC(page));
-        dispatch(switchLoadingAC(true));
+export const getUsersThunkCreator = (page: number, pageSize: number) => async (dispatch: Dispatch<ActionUsersType>) => {
 
-        usersAPI.getUsers(page)
-           .then(data => {
-            dispatch(switchLoadingAC(false));
-            dispatch(setUsersAC(data.items));
-        })
+    dispatch(switchLoadingAC(true));
+    dispatch(setCurrentPageAC(page));
+    try {
+        let data = await usersAPI.getUsers(page, pageSize)
+        dispatch(switchLoadingAC(false));
+        dispatch(setUsersAC(data.items));
+        dispatch(setTotalUsersCountAC(data.totalCount));
+    } catch (e) {
+        alert('Error get user')
     }
 }
-//COmponent User ===================================================
-export const unFollowThunkCreator = (id: string) => {
-    return (dispatch: Dispatch<ActionUsersType>) => {
-        dispatch(toggleExpectationAC(id, true));
+// export const getUsersThunkCreator = (page: number, pageSize: number) => {
+//     return (dispatch: Dispatch<ActionUsersType>) => {
+//         dispatch(switchLoadingAC(true));
+//         dispatch(setCurrentPageAC(page));
+//         usersAPI.getUsers(page, pageSize).then(data => {
+//             dispatch(switchLoadingAC(false));
+//             dispatch(setUsersAC(data.items));
+//             dispatch(setTotalUsersCountAC(data.totalCount));
+//         })
+//     }
+// }
 
-        usersAPI.deleteFollow(id).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(unFollowAC(id));
-            }
-            dispatch(toggleExpectationAC(id, false));
-        });
-    }
-}
-export const followThunkCreator = (id: string) => {
-    return (dispatch: Dispatch<ActionUsersType>) => {
-        dispatch(toggleExpectationAC(id, true));
+export const pageChangeThunkCreator = (page: number, /*pageSize: number*/) => async (dispatch: Dispatch<ActionUsersType>) => {
+    dispatch(setCurrentPageAC(page));
+    dispatch(switchLoadingAC(true));
+    try {
+        let data = await usersAPI.getUsers(page)
+        dispatch(switchLoadingAC(false));
+        dispatch(setUsersAC(data.items));
 
-        usersAPI.postFollow(id).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(followAC(id));
-            }
-            dispatch(toggleExpectationAC(id, false));
-        });
+    } catch (e) {
+        alert('Error page change')
+
     }
 }
+// export const pageChangeThunkCreator = (page: number, /*pageSize: number*/) => {
+//     return (dispatch: Dispatch<ActionUsersType>) => {
+//         dispatch(setCurrentPageAC(page));
+//         dispatch(switchLoadingAC(true));
+//
+//         usersAPI.getUsers(page)
+//             .then(data => {
+//                 dispatch(switchLoadingAC(false));
+//                 dispatch(setUsersAC(data.items));
+//             })
+//     }
+// }
+
+// ----------------------------------------------------------------------------------------------------
+const followUnFollowChange = async (
+    dispatch: Dispatch<ActionUsersType>,
+    id: string,
+    apiMethod: (id: string) => Promise<ResponsType>,
+    actionCreator: (id: string) => ActionUsersType) => {
+    dispatch(toggleExpectationAC(id, true));
+    try {
+        let data = await apiMethod(id)
+        if (data.resultCode === 0) {
+            dispatch(actionCreator(id));
+        }
+        dispatch(toggleExpectationAC(id, false));
+    } catch (e) {
+        alert('Error unFollow and follow')
+    }
+}
+
+export const unFollowThunkCreator = (id: string) => (dispatch: Dispatch<ActionUsersType>) => {
+    followUnFollowChange(dispatch, id, usersAPI.deleteFollow, unFollowAC)
+}
+// export const unFollowThunkCreator = (id: string) => {
+//     return (dispatch: Dispatch<ActionUsersType>) => {
+//         dispatch(toggleExpectationAC(id, true));
+//
+//         usersAPI.deleteFollow(id).then(data => {
+//             if (data.resultCode === 0) {
+//                 dispatch(unFollowAC(id));
+//             }
+//             dispatch(toggleExpectationAC(id, false));
+//         });
+//     }
+// }
+
+export const followThunkCreator = (id: string) => (dispatch: Dispatch<ActionUsersType>) => {
+    followUnFollowChange(dispatch, id, usersAPI.postFollow, followAC)
+}
+// export const followThunkCreator = (id: string) => {
+//     return (dispatch: Dispatch<ActionUsersType>) => {
+//         dispatch(toggleExpectationAC(id, true));
+//
+//         usersAPI.postFollow(id).then(data => {
+//             if (data.resultCode === 0) {
+//                 dispatch(followAC(id));
+//             }
+//             dispatch(toggleExpectationAC(id, false));
+//         });
+//     }
+// }

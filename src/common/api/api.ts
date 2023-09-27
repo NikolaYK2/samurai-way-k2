@@ -15,13 +15,13 @@ type DataAuthType = {
     login: string,
 }
 
-type ResponsType<D = {}> = {
+export type ResponsType<D = {}> = {
     resultCode: number
     messages: string[],
     data: D
 }
 
-type PhotosType = {
+export type PhotosType = {
     small: string,
     large: string,
 }

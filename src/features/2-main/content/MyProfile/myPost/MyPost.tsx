@@ -23,7 +23,7 @@ export const MyPost = (props: MyPostType) => {
                     </div>
                     <div className={s.postData}>
                         <div className={s.message}>{pD.sms}</div>
-                        <div className={s.delPost} onClick={() => handlDeletePost(pD.id)}>X</div>
+                        <div className={s.delPost} onClick={() => handlDeletePost(pD.id)}>x</div>
                     </div>
                 </div>
                 <div>

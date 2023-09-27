@@ -1,49 +1,66 @@
-.continer{
+.continer {
     max-width: 800px;
 }
 
-.content__myPost{
+.content__myPost {
     font-size: 20px;
     margin: 0 0 10px;
 }
 
-.content__myPost button:active{
+.content__myPost button:active {
     box-shadow: inset 0 0 5px 2px grey;
 }
 
 /*для постов=======================================*/
-.content__profUsers{
+.content__profUsers {
     display: flex;
     margin: 0 0 10px 0;
 }
-.img{
+
+.img {
     width: 70px;
     min-width: 70px;
     height: 70px;
     margin: 0 10px 0 0;
 }
-.img > img{
+
+.img > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
 }
-.postData{
+
+.postData {
     display: flex;
     flex: 1 1 auto;
 }
-.post{
+
+.post {
     margin: 0 0 10px;
 }
-.message{
+
+.message {
     flex: 1 1 auto;
     /*width: 300px;*/
 }
-.delPost{
+
+.delPost {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    align-content: center;
+    align-self: start;
+    line-height: 71%;
     cursor: pointer;
-    width: 10px;
-    text-align: right;
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    /*text-align: right;*/
+    border: 1px solid black;
+    border-radius: 50%;
 }
+
 /*.error{*/
 /*    border: 2px solid red;*/
 /*}*/
