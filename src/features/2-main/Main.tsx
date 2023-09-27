@@ -6,7 +6,7 @@ import {News} from "features/2-main/content/news/News";
 import {Music} from "features/2-main/content/music/Music";
 import {Settings} from "features/2-main/content/settings/Settings";
 import {FriendsContainer} from "features/2-main/content/friends/FriendsContainer";
-import {Login} from "common/components/login/Login";
+import {Login} from "features/0-auth/login/Login";
 import {DialogsMessage} from "features/2-main/content/dialogs/DialogsMessage";
 import ProfileContainer from "features/2-main/content/ContentProfileContainer";
 import UsersContainer from "features/2-main/content/users/UsersContiner";

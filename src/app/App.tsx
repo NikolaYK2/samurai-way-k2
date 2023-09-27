@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import 'app/App.css';
 import {Main} from "features/2-main/Main";
 import {Footer} from "features/footer/Footer";
 import {HeaderContainerConnect} from "features/1-header/HeaderContainer";

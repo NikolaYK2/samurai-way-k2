@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
-import s from 'common/components/login/Login.module.css';
+import s from 'features/0-auth/login/Login.module.css';
 import {SubmitHandler, useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
 import {Navigate} from "react-router-dom";
 import {AppThunkDispatch, useAppSelector} from "app/redux-store";
 import {authLoginThunkC} from "features/redux/authReducer";
+import {loginSelector} from "features/0-auth/login/selectors";
 
 export const Login = () => {
 
-    const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth)
+    const isAuth = useAppSelector(loginSelector)
 
     if (isAuth) {
         return <Navigate to='/profile'/>
@@ -37,7 +38,8 @@ export const LoginForm = () => {
 
     const dispatch = useDispatch<AppThunkDispatch>();
 
-    const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth);
+    const isAuth = useAppSelector(loginSelector)
+    // const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth);
 
     const [error, setError] = useState<string | null>(null);
 
@@ -57,6 +59,7 @@ export const LoginForm = () => {
 
     return (
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+
             <input type='email'
                    placeholder={'email'}
                    {...register('email', {
@@ -67,13 +70,16 @@ export const LoginForm = () => {
                        },
                    })}/>
             <p>{errors.email?.message}</p>
+
             <input type='password' placeholder={'Password'}
                    {...register("password", {
                        required: 'Заполни поле',
                        minLength: {value: 4, message: 'min length is 4'}
                    })}/>
             <p>{errors.password?.message}</p>
+
             <input type="checkbox" {...register('rememberMe')}/> remember my
+
             <input type="submit" disabled={isAuth}/>
             <p>{error}</p>
         </form>
