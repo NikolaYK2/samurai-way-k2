@@ -132,7 +132,8 @@ export const Users = (props: UsersTypeComponent) => {
 
             <div className={s.container__data}>
 
-                {props.users.map(u => <User user={u}
+                {props.users.map(u => <User key={u.id}
+                                            user={u}
                                             expectation={props.expectation}
                                             unFollowThunk={props.unFollowThunk}
                                             followThunk={props.followThunk}/>

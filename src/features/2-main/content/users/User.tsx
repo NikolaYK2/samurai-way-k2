@@ -108,6 +108,7 @@ import {UsersType} from "common/api/api";
 import {Expectation} from "features/redux/usersReducers";
 
 type UserTypeComponent = {
+    key:string,
     user: UsersType,
     expectation: (Expectation | string)[],
     unFollowThunk: (userId: string) => void,
@@ -124,7 +125,7 @@ export const User = (props: UserTypeComponent) => {
     }
 
     return (
-        <div key={props.user.id} className={s.containerUsers}>
+        <div className={s.containerUsers}>
             <div className={s.containerUsers__item}>
                 <div className={s.containerUsers__avatar}>
                     <div>

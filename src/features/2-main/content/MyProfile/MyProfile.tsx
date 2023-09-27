@@ -3,6 +3,7 @@ import s from "./MyProfile.module.css";
 import {ProfileUserType} from "features/redux/proFilePageReducer";
 import {Loading} from "common/components/loading/Loading";
 import {MyProfileStatusHook} from "features/2-main/content/MyProfile/MyProfileStatusHook";
+import ava from 'assets/img/myProf/ava.jpg'
 
 
 type ProfileType = {
