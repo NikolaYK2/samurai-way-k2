@@ -9,7 +9,7 @@ import ava from 'assets/img/myProf/ava.jpg'
 type ProfileType = {
     profile: ProfileUserType | null,
     status: string,
-    updStatus: (status:string)=>void,
+    updStatus: (status: string) => void,
 }
 
 export const Profile = (props: ProfileType) => {
@@ -21,7 +21,9 @@ export const Profile = (props: ProfileType) => {
             <div className={s.blockItem}>
                 <div className={s.content__avatar}>
                     < img
-                        src={props.profile.photos?.large}
+                        // src={props.profile.photos.large !== null ? props.profile.photos.large : ava}
+                        src={props.profile?.photos?.large || ava}
+
                         alt=""/>
                 </div>
                 <div className={s.data}>

@@ -30,8 +30,10 @@
     .content__avatar {
         margin: 0 20px 0 0;
         position: relative;
-        padding: 0 20% 10% 0;
+        /*padding: 0 20% 10% 0;*/
         /*flex: 0 1 30%;*/
+        width: 243px;
+        min-height: 89px;
     }
 
     .content__avatar>img {
@@ -41,7 +43,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: right;
+        object-position: center;
 }
 
 .data {
