@@ -23,11 +23,13 @@ import {
 //Контейнерная class компонента которая делает API
 class UsersAPIComponent extends React.Component<UsersTypeProps> {
     componentDidMount() {
-        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
+        const {currentPage, pageSize} = this.props
+        this.props.getUsersThunk(currentPage, pageSize);
     }
 
     pageChange = (page: number) => {//меняем страницы
-        this.props.pageChangeThunk(page, this.props.pageSize);
+        const {pageSize} = this.props
+        this.props.pageChangeThunk(page, pageSize);
 
     }
 

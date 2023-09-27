@@ -1,0 +1,11 @@
+.containerPages{
+    max-width: 211px;
+    }
+    .page{
+        cursor: pointer;
+        padding: 0 5px;
+    }
+    .pageActive{
+        font-weight: 900;
+        margin: 0 5px;
+}

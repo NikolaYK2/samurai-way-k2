@@ -101,47 +101,59 @@
 //
 //
 import React from 'react';
-import s from "./Users.module.css";
+import s from "./User.module.css";
+import userPhotos from "assets/img/users/pngwing.com.png";
+import {NavLink} from "react-router-dom";
 import {UsersType} from "common/api/api";
 import {Expectation} from "features/redux/usersReducers";
-import {Paginator} from "common/components/paginator/Paginator";
-import {User} from "features/2-main/content/users/User";
 
-type UsersTypeComponent = {
-    totalUsersCount: number,
-    pageSize: number,
-    currentPage: number,
+type UserTypeComponent = {
+    user: UsersType,
     expectation: (Expectation | string)[],
-
-    users: UsersType[],
-    pageChange: (page: number) => void,
-    setUsers: (users: UsersType[]) => void,
     unFollowThunk: (userId: string) => void,
     followThunk: (userId: string) => void,
 }
 
-export const Users = (props: UsersTypeComponent) => {
+export const User = (props: UserTypeComponent) => {
+
+    const unFollowHandler = (id: string) => {
+        props.unFollowThunk(id)
+    }
+    const followHandler = (id: string) => {
+        props.followThunk(id)
+    }
 
     return (
-        <div className={s.container}>
-            Users
-            <Paginator totalUsersCount={props.totalUsersCount}
-                       pageSize={props.pageSize}
-                       currentPage={props.currentPage}
-                       pageChange={props.pageChange}/>
+        <div key={props.user.id} className={s.containerUsers}>
+            <div className={s.containerUsers__item}>
+                <div className={s.containerUsers__avatar}>
+                    <div>
+                        <NavLink to={`/profile/${props.user.id}`}>
+                            <img src={props.user.photos.small !== null ? props.user.photos.small : userPhotos} alt=""/>
+                        </NavLink>
+                    </div>
 
-            <div className={s.container__data}>
+                    {props.user.followed
+                        ? <button disabled={props.expectation.some(id => id === props.user.id)}
+                                  className={s.containerUsers__button}
+                                  onClick={() => unFollowHandler(props.user.id)}>Follow</button>
+                        : <button disabled={props.expectation.some(id => id === props.user.id)}
+                                  className={s.containerUsers__button}
+                                  onClick={() => followHandler(props.user.id)}>Unfollow</button>
+                    }
 
-                {props.users.map(u => <User user={u}
-                                            expectation={props.expectation}
-                                            unFollowThunk={props.unFollowThunk}
-                                            followThunk={props.followThunk}/>
-                )}
-
+                </div>
+                <div className={s.containerUsers__title}>
+                    <div>
+                        <span className={s.containerUser__name}>{props.user.name}</span>
+                        <span className={s.containerUser__status}>{props.user.status}</span>
+                    </div>
+                    <div>
+                        <span>{'u.location.country'}</span>
+                        <span>{'u.location.city'}</span>
+                    </div>
+                </div>
             </div>
-            <button className={s.container__button} onClick={() => props.setUsers(props.users)}>show
-                more
-            </button>
         </div>
     );
 };
