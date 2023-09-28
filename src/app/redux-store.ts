@@ -1,4 +1,4 @@
-import {AnyAction, applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux";
+import {AnyAction, applyMiddleware, combineReducers, compose, legacy_createStore as createStore} from "redux";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {messagesPageReducer} from "features/redux/messagesPageReducer";
@@ -8,6 +8,13 @@ import {sidebarReducer} from "features/redux/sidebarReducer";
 import {ActionsTypeLoginAuthorization, authorizationReducer} from "features/redux/authReducer";
 import {friendsReducer} from "features/redux/friendsReducer";
 import {ActionsAppType, appReducer} from "app/appReducer";
+
+declare global {
+    interface Window{
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+
 
 export let rootReducer = combineReducers({//функция которой передаем обьект внутри
 // Воспринимать как state по сути
@@ -22,9 +29,12 @@ export let rootReducer = combineReducers({//функция которой пер
     // form: useForm,
 });
 
+//функция нашего плагина для слежки за стором
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 export type AppStateType = ReturnType<typeof rootReducer>;
 //Рудьюсеры отдаются стору, автоматически createStore создает внутри себя store
-export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
 //Что-бы работало нужно инициализировать
 
 export const useAppSelector: TypedUseSelectorHook<AppStateType> = useSelector;
@@ -40,6 +50,7 @@ export type ActionsType =
 
 //TYPE THUNK ============================
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, ActionsType>
+
 
 // @ts-ignore
 window.store = store;
