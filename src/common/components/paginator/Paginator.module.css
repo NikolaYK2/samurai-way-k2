@@ -10,6 +10,7 @@
     }
     .pageActive{
         font-weight: 900;
+        text-decoration: underline;
         margin: 0 5px;
     }
 
