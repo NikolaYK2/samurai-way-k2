@@ -108,7 +108,7 @@ import {Paginator} from "common/components/paginator/Paginator";
 import {User} from "features/2-main/content/users/User";
 
 type UsersTypeComponent = {
-    totalUsersCount: number,
+    totalItemsCount: number,
     pageSize: number,
     currentPage: number,
     expectation: (Expectation | string)[],
@@ -125,7 +125,7 @@ export const Users = (props: UsersTypeComponent) => {
     return (
         <div className={s.container}>
             Users
-            <Paginator totalUsersCount={props.totalUsersCount}
+            <Paginator totalItemsCount={props.totalItemsCount}
                        pageSize={props.pageSize}
                        currentPage={props.currentPage}
                        pageChange={props.pageChange}/>

@@ -40,7 +40,7 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
             <div>
                 {this.props.loadingPage && <Loading/>}
                 <Users
-                    totalUsersCount={this.props.totalUsersCount}
+                    totalItemsCount={this.props.totalUsersCount}
                     pageSize={this.props.pageSize}
                     currentPage={this.props.currentPage}
                     users={this.props.users}

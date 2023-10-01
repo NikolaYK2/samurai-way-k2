@@ -3,9 +3,9 @@ import {ResponsType, usersAPI, UsersType} from "common/api/api";
 import {updObjInArray} from "common/utills/objHelpers";
 
 //FN IN USER-REDUCER ===========================================
-const followedChange = (state: InitializationStateType, userId: string, changeFallow: boolean) => {
-    return {...state, users: state.users.map(u => u.id === userId ? {...u, followed: changeFallow} : u)};
-}
+// const followedChange = (state: InitializationStateType, userId: string, changeFallow: boolean) => {
+//     return {...state, users: state.users.map(u => u.id === userId ? {...u, followed: changeFallow} : u)};
+// }
 
 //TYPES ======================================================
 export type Expectation = {
@@ -21,7 +21,7 @@ export type InitializationStateType = {
 }
 let initializationState: InitializationStateType = {
     users: [],
-    pageSize: 5,
+    pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     loadingPage: true,
@@ -211,8 +211,8 @@ const followUnFollowChange = async (
     }
 }
 
-export const unFollowThunkCreator = (id: string) => (dispatch: Dispatch<ActionUsersType>) => {
-    followUnFollowChange(dispatch, id, usersAPI.deleteFollow, unFollowAC)
+export const unFollowThunkCreator = (id: string) => async (dispatch: Dispatch<ActionUsersType>) => {
+    await followUnFollowChange(dispatch, id, usersAPI.deleteFollow, unFollowAC)
 }
 // export const unFollowThunkCreator = (id: string) => {
 //     return (dispatch: Dispatch<ActionUsersType>) => {
@@ -227,8 +227,8 @@ export const unFollowThunkCreator = (id: string) => (dispatch: Dispatch<ActionUs
 //     }
 // }
 
-export const followThunkCreator = (id: string) => (dispatch: Dispatch<ActionUsersType>) => {
-    followUnFollowChange(dispatch, id, usersAPI.postFollow, followAC)
+export const followThunkCreator = (id: string) => async (dispatch: Dispatch<ActionUsersType>) => {
+    await followUnFollowChange(dispatch, id, usersAPI.postFollow, followAC)
 }
 // export const followThunkCreator = (id: string) => {
 //     return (dispatch: Dispatch<ActionUsersType>) => {
