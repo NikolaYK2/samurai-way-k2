@@ -4,7 +4,14 @@
     grid-area: header;
     grid-column: 2;
     background: url("https://catherineasquithgallery.com/uploads/posts/2021-02/1612800826_3-p-nezhno-goluboi-fon-s-oblakami-3.jpg")0 center/cover no-repeat;
+    height: 100px;
+    transition: height 0.5s ease;
 }
+.expanded{
+    height: 300px;
+    transition: height 0.5s ease;
+}
+
 .header img {
     padding: 10px;
     max-width: 100%;

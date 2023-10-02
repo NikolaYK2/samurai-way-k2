@@ -8,17 +8,19 @@ export const Header = (props: ProfileTypeProps) => {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector<boolean>(state => state.loginAuthorization.isAuth)
 
-  const deleteHandl = () => {
+  const deleteHandle = () => {
     dispatch(logoutThunkC());
   }
+
   return (
-    <header className={s.header}>
+    <header className={`${s.header} ${props.headerProfile && s.expanded}`}>
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1667px-Apple_logo_black.svg.png"
         alt=""/>
       <div className={s.loginBlock}>
-        <div>{props.login}
-          <button onClick={deleteHandl} disabled={!isAuth}>log out</button>
+        <div>
+          <div>{props.login}</div>
+          <button onClick={deleteHandle} disabled={!isAuth}>log out</button>
         </div>
       </div>
     </header>
