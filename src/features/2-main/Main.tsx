@@ -6,7 +6,6 @@ import {News} from "features/2-main/content/news/News";
 import {Music} from "features/2-main/content/music/Music";
 import {Settings} from "features/2-main/content/settings/Settings";
 import {FriendsContainer} from "features/2-main/content/friends/FriendsContainer";
-import {Login} from "features/0-auth/login/Login";
 import UsersContainer from "features/2-main/content/users/UsersContiner";
 import {Loading} from "common/components/loading/Loading";
 
@@ -31,7 +30,7 @@ export const Main = () => {
           <Route path="/music" element={<Music/>}/>
           <Route path="/settings" element={<Settings/>}/>
           <Route path="/friends" element={<FriendsContainer/>}/>
-          <Route path="/login" element={<Login/>}/>
+          {/*<Route path="/login" element={<Login/>}/>*/}
           <Route path="*" element={<div>404</div>}/>
         </Routes>
       </Suspense>

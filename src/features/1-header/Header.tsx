@@ -1,29 +1,26 @@
 import React from 'react';
 import s from "./Header.module.css";
-import {NavLink} from "react-router-dom";
 import {ProfileTypeProps} from "features/1-header/HeaderContainer";
 import {useAppDispatch, useAppSelector} from "app/redux-store";
 import {logoutThunkC} from "features/redux/authReducer";
 
 export const Header = (props: ProfileTypeProps) => {
-    const dispatch = useAppDispatch();
-    const isAuth = useAppSelector<boolean>(state => state.loginAuthorization.isAuth)
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector<boolean>(state => state.loginAuthorization.isAuth)
 
-    const deleteHandl = () => {
-        dispatch(logoutThunkC());
-    }
-    return (
-        <header className={s.header}>
-            <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1667px-Apple_logo_black.svg.png"
-                alt=""/>
-            <div className={s.loginBlock}>
-                {props.isAuth
-                    ? <div>{props.login}
-                        <button onClick={deleteHandl} disabled={!isAuth}>log out</button>
-                    </div>
-                    : <NavLink to='/login'>Login</NavLink>}
-            </div>
-        </header>
-    );
+  const deleteHandl = () => {
+    dispatch(logoutThunkC());
+  }
+  return (
+    <header className={s.header}>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1667px-Apple_logo_black.svg.png"
+        alt=""/>
+      <div className={s.loginBlock}>
+        <div>{props.login}
+          <button onClick={deleteHandl} disabled={!isAuth}>log out</button>
+        </div>
+      </div>
+    </header>
+  );
 }

@@ -1,6 +1,151 @@
-.form input, button{
-    display: block;
+.loginFormContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15)), linear-gradient(90deg, #15181B 0, #383a41 40%, #383a41 50%, #15181B 100%);
 }
-.form>input:nth-child(5){
-    display: inline-block;
+
+
+/*component form ------------------------------------------------------------------------*/
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 407px;
+    width: 100%;
+    }
+    .container h2 {
+        color: white;
+        font-size: clamp(10 / 14 * 1rem, 5vw, 26 / 14 * 1rem);
+        line-height: 1.5;
+        margin: 0 auto 10px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*width: 100%;*/
+    color: white;
+}
+
+.inputs {
+    position: relative;
+    top: 0;
+    max-width: 407px;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.inputs input {
+    display: block;
+    width: 100%;
+    padding: 16px 56px 16px 32px;
+    border-bottom: 1px solid grey;
+    font-size: clamp(10 / 14 * 1rem, 5vw, 14 / 14 * 1rem);
+}
+
+.iconMail, .iconPass {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    right: 5%;
+    width: 16px;
+    height: 52px;
+}
+
+.iconMail svg, .iconPass svg {
+    width: 100%;
+    height: 100%;
+}
+
+.iconMail svg path, .iconPass svg path {
+    fill: black;
+}
+
+.iconMail {
+    top: 0;
+}
+
+.checkbox {
+    display: flex;
+    margin: 10px auto 10px 10px;
+    height: 18px;
+    font-size: clamp(10 / 14 * 1rem, 5vw, 14 / 14 * 1rem);
+
+}
+
+.checkbox > input {
+    margin: 0 5px 0 0;
+
+    height: 100%;
+    width: 18px;
+
+    cursor: pointer;
+}
+
+/*ERRORS ------------------------------------------------------*/
+.errors {
+    display: block;
+    color: red;
+}
+
+.errors p {
+    font-size: clamp(10 / 14 * 1rem, 5vw, 14 / 14 * 1rem);
+    line-height: 1.2;
+}
+/*--------------------------------------------------------------------*/
+.button {
+    display: flex;
+    justify-content: center;
+    width: 110px;
+    border-radius: 50px;
+    /*background: rgba(0, 0, 0, 0.5);*/
+    /*box-shadow: inset 0 1px 10px 10px rgba(0, 0, 0, 0.6);*/
+}
+
+.button > input {
+    padding: 12px 32px;
+    border-radius: 50px;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+
+    background-color: #8224e3;
+    background-image: linear-gradient(90deg, #8224e3 0, #a968ec 50%, #8224e3 100%);
+    box-shadow: 0 1px 2px 0 rgba(130, 36, 227, 0.5);
+
+    background-size: 100% auto;
+    background-position: right center;
+
+    color: #fff;
+
+    font-size: clamp(10 / 14 * 1rem, 5vw, 14 / 14 * 1rem);
+
+    cursor: pointer;
+
+    transition: background-size .3s ease 0s,
+    background-image .3s ease 0s,
+    transform .3s ease 0s,
+    background-position .3s ease 0s;
+}
+
+.button > input:hover {
+    background-size: 200% auto;
+    background-position: left center;
+    transition: all .3s ease-out;
+}
+
+.button > input:active {
+    background-size: 150% auto;
+    background-position: right center;
+    transform: scale(0.99) translateX(1px);
+    color: #383a41;
+    box-shadow: inset 0 0 2px 1px rgb(0, 0, 0);
+
+    transition: all .1s ease 0s;
 }

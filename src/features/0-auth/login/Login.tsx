@@ -6,84 +6,98 @@ import {Navigate} from "react-router-dom";
 import {AppThunkDispatch, useAppSelector} from "app/redux-store";
 import {authLoginThunkC} from "features/redux/authReducer";
 import {loginSelector} from "features/0-auth/login/selectors";
+import {IconSvg} from "common/components/iconSvg/IconSVG";
 
 export const Login = () => {
 
-    const isAuth = useAppSelector(loginSelector)
+  const isAuth = useAppSelector(loginSelector)
 
-    if (isAuth) {
-        return <Navigate to='/profile'/>
-    }
+  if (isAuth) {
+    return <Navigate to='/profile'/>
+  }
 
 
-    return (
-        <div className={s.loginFormContainer}>
-            <h2>Login</h2>
-            <LoginForm/>
-        </div>
-    );
+  return (
+    <div className={s.loginFormContainer}>
+      <LoginForm name={'Login'}/>
+    </div>
+  );
 }
 
 //====================================================================
 
 
 type LoginFormType = {
-    email: string,
-    password: string,
-    rememberMe: boolean,
-    captcha: boolean,
+  email: string,
+  password: string,
+  rememberMe: boolean,
+  captcha: boolean,
 
 };
-export const LoginForm = () => {
+export const LoginForm = (props:{name:string}) => {
 
-    const dispatch = useDispatch<AppThunkDispatch>();
+  const dispatch = useDispatch<AppThunkDispatch>();
 
-    const isAuth = useAppSelector(loginSelector)
-    // const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth);
+  const isAuth = useAppSelector(loginSelector)
+  // const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth);
 
-    const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-    const {register, handleSubmit, formState: {errors}, reset} = useForm<LoginFormType>({
-        defaultValues: {
-            email: '',
-            password: '',
-            rememberMe: false,
-        }
-    });
-
-    const onSubmit: SubmitHandler<LoginFormType> = data => {
-        console.log(data)
-        dispatch(authLoginThunkC(data, setError));
-        reset();
+  const {register, handleSubmit, formState: {errors}, reset} = useForm<LoginFormType>({
+    defaultValues: {
+      email: '',
+      password: '',
+      rememberMe: false,
     }
+  });
 
-    return (
-        <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+  const onSubmit: SubmitHandler<LoginFormType> = data => {
+    console.log(data)
+    dispatch(authLoginThunkC(data, setError));
+    reset();
+  }
 
-            <input type='email'
-                   placeholder={'email'}
-                   {...register('email', {
-                       required: 'Заполните поле',
-                       pattern: {
-                           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                           message: 'Enter a valid e-mail address',
-                       },
-                   })}/>
+  return (
+    <div className={s.container}>
+      <h2>{props.name}</h2>
+      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+        <div className={s.inputs}>
+          <input type='email'
+                 placeholder={'email'}
+                 {...register('email', {
+                   required: 'Fill in the @mail field',
+                   pattern: {
+                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                     message: 'Enter a valid e-mail address',
+                   },
+                 })}/>
+          <div className={s.iconMail}><IconSvg name={'loginIn'}/></div>
+          <div className={s.iconPass}><IconSvg name={'password'}/></div>
+
+          <div className={`${errors.email || errors.password || error ? s.errors : ''}`}>
             <p>{errors.email?.message}</p>
-
-            <input type='password' placeholder={'Password'}
-                   {...register("password", {
-                       required: 'Заполни поле',
-                       minLength: {value: 4, message: 'min length is 4'}
-                   })}/>
             <p>{errors.password?.message}</p>
-
-            <input type="checkbox" {...register('rememberMe')}/> remember my
-
-            <input type="submit" disabled={isAuth}/>
             <p>{error}</p>
-        </form>
-    );
+          </div>
+
+          <input type='password' placeholder={'Password'}
+                 {...register("password", {
+                   required: 'Fill in the password field',
+                   minLength: {value: 4, message: 'min length is 4'}
+                 })}/>
+          <div></div>
+        </div>
+
+        <div className={s.checkbox}>
+          <input type="checkbox" {...register('rememberMe')}/>remember my
+        </div>
+
+        <div className={s.button}>
+          <input type="submit" disabled={isAuth}/>
+        </div>
+      </form>
+    </div>
+  );
 };
 
 
