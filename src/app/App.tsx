@@ -7,7 +7,6 @@ import {Loading} from "common/components/loading/Loading";
 import {useAppDispatch, useAppSelector} from "app/redux-store";
 import {initializedAppThunkC} from "app/appReducer";
 import {Login} from "features/0-auth/login/Login";
-import {useLocation} from "react-router-dom";
 
 // type AppPropsType = {
 //     // store: StoreType,
@@ -59,8 +58,6 @@ function App() {
   const init = useAppSelector(state => state.app.initialized)
   const isAuth = useAppSelector(state => state.loginAuthorization.isAuth)
   const dispatch = useAppDispatch()
-  const location = useLocation()
-
 
   useEffect(() => {
     dispatch(initializedAppThunkC())
@@ -74,11 +71,10 @@ function App() {
     return <Login/>
   }
 
-  const headerProfile = location.pathname.includes('/profile');
 
   return (
     <div className="wrapper">
-      <HeaderContainerConnect headerProfile={headerProfile}/>
+      <HeaderContainerConnect/>
       <Main/>
       <Footer/>
     </div>

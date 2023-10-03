@@ -13,7 +13,7 @@ export class HeaderContainer extends React.Component<ProfileTypeProps> {
 }
 
 
-export type ProfileTypeProps = MapDispatchPropsType & MapStateToPropsType & {headerProfile: boolean};
+export type ProfileTypeProps = MapDispatchPropsType & MapStateToPropsType;
 
 
 type MapStateToPropsType = {

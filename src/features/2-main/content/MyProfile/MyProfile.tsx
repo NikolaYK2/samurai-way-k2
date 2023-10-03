@@ -17,11 +17,12 @@ export const Profile = (props: ProfileType) => {
   const styleOnAvatar = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
-    requestAnimationFrame(()=>{
+    requestAnimationFrame(() => {
       styleOnAvatar.current?.classList.add(s.onAvatar)
     })
   }, []);
 
+  console.log(props.profile)
   if (!props.profile) {
     return <Loading/>;
   }
@@ -36,9 +37,28 @@ export const Profile = (props: ProfileType) => {
       </div>
 
       <div className={s.data}>
+        <table>
+          <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          </tbody>
+        </table>
         <h2>{props.profile.fullName}</h2>
         <p><span>aboutMe: </span>{props.profile.aboutMe}</p>
-        <p><span>lookingForAJobDescription: </span>{props.profile.lookingForAJobDescription}</p>
         Contacts
         <ul>
           <li><a href={props.profile.contacts?.facebook}>facebook</a></li>
