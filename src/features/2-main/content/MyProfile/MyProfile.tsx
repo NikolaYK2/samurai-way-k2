@@ -4,6 +4,7 @@ import {ProfileUserType} from "features/redux/proFilePageReducer";
 import {Loading} from "common/components/loading/Loading";
 import {MyProfileStatusHook} from "features/2-main/content/MyProfile/MyProfileStatusHook";
 import ava from 'assets/img/myProf/ava.jpg'
+import {IconSvg} from "common/components/iconSvg/IconSVG";
 
 
 type ProfileType = {
@@ -35,40 +36,28 @@ export const Profile = (props: ProfileType) => {
 
           alt=""/>
       </div>
+      <MyProfileStatusHook/>
 
       <div className={s.data}>
         <table>
           <tbody>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Full name</td>
+            <td>{props.profile.fullName}</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>AboutMe</td>
+            <td>{props.profile.aboutMe}</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Contacts</td>
+            <td><a href={props.profile.contacts?.facebook}>facebook</a></td>
+            <td><a href={props.profile.contacts?.vk}>vk</a></td>
+            <td><a href={props.profile.contacts?.github}><IconSvg name={'gitHub'}/></a></td>
           </tr>
           </tbody>
         </table>
-        <h2>{props.profile.fullName}</h2>
-        <p><span>aboutMe: </span>{props.profile.aboutMe}</p>
-        Contacts
-        <ul>
-          <li><a href={props.profile.contacts?.facebook}>facebook</a></li>
-          <li><a href={props.profile.contacts?.vk}>vk</a></li>
-          <li><a href={props.profile.contacts?.twitter}>twitter</a></li>
-          <li><a href={props.profile.contacts?.instagram}>instagram</a></li>
-          <li><a href={props.profile.contacts?.github}>github</a></li>
-        </ul>
       </div>
-      <MyProfileStatusHook/>
     </div>
   );
 }

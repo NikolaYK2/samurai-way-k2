@@ -42,26 +42,34 @@
 }
 
 .data {
-    margin: 30px 0 0;
+    margin: 90px 0 0;
 }
 
-.data h2 {
-    font-size: 20px;
-    font-weight: 600;
+table {
+    font-size: clamp(10 / 14 * 1rem, 5vw, 14 / 14 * 1rem);;
+    border-collapse: collapse;
+    white-space: nowrap;
+    max-width: 800px;
+    width: 100%;
+}
+tr{
+    border-bottom: 1px solid #babec5;
+}
+tr:last-child{
+    border-bottom: none;
+}
+td{
+    width: 200px;
+    height: 40px;
+    padding: 0 8px;
+}
+a{
+    cursor: pointer;
+}
+td:first-child {
+    background: #e8e6e6;
 }
 
-.data ul {
-    margin: 30px 0 0 0;
-}
-
-.data li {
-    font-size: 17px;
-    line-height: 18px;
-}
-
-.data span {
-    font-weight: 700;
-}
 
 
 
