@@ -2,6 +2,7 @@ import React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import s from 'common/components/formTextArea/FormTextArea.module.css'
 import {usersMessagesType} from "features/redux/messagesPageReducer";
+import {Button} from "common/components/button/Button";
 
 type FormTextareaType = {
     messages: usersMessagesType[],
@@ -18,14 +19,13 @@ export const FormTextarea = (props: FormTextareaType) => {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
             <textarea
                 {...register('messages', {required: 'Поле пустое'})}
-                placeholder={errors.messages ? errors.messages?.message : 'Введите сообщение'}
-                className={errors.messages ? s.error : s.noError}
+                placeholder={errors.messages ? errors.messages.message : 'Введите сообщение'}
+                className={errors.messages ? s.error : s.offError}
             />
-            <br/>
-            <button>send</button>
+            <Button name={'Publish'} modClass={s.color} change={false}/>
         </form>
     );
 };
