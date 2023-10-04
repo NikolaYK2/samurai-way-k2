@@ -25,7 +25,7 @@ export const FormTextarea = (props: FormTextareaType) => {
                 placeholder={errors.messages ? errors.messages.message : 'Введите сообщение'}
                 className={errors.messages ? s.error : s.offError}
             />
-            <Button name={'Publish'} modClass={s.color} change={false}/>
+            <Button name={'Publish'} change={false}/>
         </form>
     );
 };
