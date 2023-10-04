@@ -7,6 +7,7 @@ import {AppThunkDispatch, useAppSelector} from "app/redux-store";
 import {authLoginThunkC} from "features/redux/authReducer";
 import {loginSelector} from "features/0-auth/login/selectors";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
+import {Button} from "common/components/button/Button";
 
 export const Login = () => {
 
@@ -88,13 +89,14 @@ export const LoginForm = (props:{name:string}) => {
           <div></div>
         </div>
 
-        <div className={s.checkbox}>
+        <label className={s.checkbox}>
           <input type="checkbox" {...register('rememberMe')}/>remember my
-        </div>
+        </label>
 
-        <div className={s.button}>
-          <input type="submit" disabled={isAuth}/>
-        </div>
+        {/*<div className={s.button}>*/}
+        {/*  <input type="submit" disabled={isAuth}/>*/}
+        {/*</div>*/}
+        <Button name={'Publish'} change={isAuth}/>
       </form>
     </div>
   );

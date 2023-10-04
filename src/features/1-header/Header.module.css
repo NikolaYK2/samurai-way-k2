@@ -1,33 +1,52 @@
 .header {
+    position: relative;
     display: grid;
     grid-template: 100px / minmax(auto, 100px)  minmax(auto, 1300px);
     grid-area: header;
     grid-column: 2;
-    background: url("https://catherineasquithgallery.com/uploads/posts/2021-02/1612800826_3-p-nezhno-goluboi-fon-s-oblakami-3.jpg")0 center/cover no-repeat;
+    background: url("https://catherineasquithgallery.com/uploads/posts/2021-02/1612800826_3-p-nezhno-goluboi-fon-s-oblakami-3.jpg") 0 center/cover no-repeat;
     height: 100px;
     transition: height 0.5s ease;
 }
-.expanded{
+
+.expanded {
     height: 300px;
     transition: height 0.5s ease;
 }
 
-.header img {
+.log {
+    margin: auto;
     padding: 10px;
+    width: 70px;
+    height: 70px;
+}
+
+.log img {
     max-width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.loginBlock{
+.avatar {
+    position: absolute;
+    bottom: -10px;
+    left: 40px;
+    min-width: 200px;
+    min-height: 200px;
+    padding: 0 18% 18% 0;
+}
+
+.loginBlock {
     margin: auto;
     grid-column: 3;
 }
-.loginBlock>div{
+
+.loginBlock > div {
     text-align: center;
     margin: 0 10px 0 0;
 }
-.loginBlock>div>button{
+
+.loginBlock > div > button {
     margin: 10px auto 0;
     padding: 2px 10px;
     font-size: 12px;
@@ -35,6 +54,7 @@
     border: 1px solid black;
     color: black;
 }
-.header>div:nth-child(3){
+
+.header > div:nth-child(3) {
     cursor: pointer;
 }

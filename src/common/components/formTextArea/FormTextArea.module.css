@@ -1,15 +1,19 @@
-form{
+form {
     display: flex;
     flex-direction: column;
     /*max-width: 800px;*/
     margin: 10px 0 0 0;
 }
- textarea{
-    background-color: #daf8e9;
+
+textarea {
+    outline: 1px solid #babec5;
+    width: 100%;
     border-radius: 10px;
     height: 50px;
     padding: 5px 10px 5px 10px;
+    resize: vertical;
 }
+
 button {
     margin: 10px 0 0 0;
     padding: 4px 30px 5px 10px;
@@ -22,9 +26,10 @@ button {
 }
 
 
-.error{
+.error {
     border: 2px solid red;
 }
-.noError{
+
+.noError {
     border: none;
 }

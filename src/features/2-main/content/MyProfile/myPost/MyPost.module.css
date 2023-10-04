@@ -6,6 +6,14 @@
     font-size: 20px;
     margin: 0 0 10px;
 }
+.content__myPost:before{
+    display: block;
+    content: '';
+    width: 100%;
+    height: 0.5px;
+    background: #babec5;
+    margin: 0 0 24px 0;
+}
 
 .content__myPost button:active {
     box-shadow: inset 0 0 5px 2px grey;
