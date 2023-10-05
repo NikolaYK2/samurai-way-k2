@@ -29,10 +29,11 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
 
     return (
         <section className={s.content}>
-            <Profile {...props}
-                     profile={props.profile}
-                     status={props.status}
-                     updStatus={props.updStatus}/>
+            <Profile />
+            {/*<Profile {...props}*/}
+            {/*         profile={props.profile}*/}
+            {/*         status={props.status}*/}
+            {/*         updStatus={props.updStatus}/>*/}
             <MyPostContainer/>
         </section>
     );

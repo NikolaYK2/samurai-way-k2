@@ -1,22 +1,32 @@
 import s from "./Post.module.css";
-import React from "react";
+import React, {memo, useCallback} from "react";
 import {useAppSelector} from "app/redux-store";
 import {useDispatch} from "react-redux";
-import {deletePostAC} from "features/redux/proFilePageReducer";
+import {deletePostAC, setLikeAC} from "features/redux/proFilePageReducer";
+import {IconSvg} from "common/components/iconSvg/IconSVG";
+import {optimizedPostDataSelector} from "features/2-main/content/MyProfile/myPost/myPost.selectors";
 
-export const Post = () => {
+const day = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday',];
+const data = new Date().getDate()
+const number = new Date().getFullYear()
+const month = new Date().getMonth() + 1
+const dayNumber = new Date().getDay()
 
-  const postData = useAppSelector(state => state.proFilePage.postData)
+export const Post = memo(() => {
+
+  const postData = useAppSelector(optimizedPostDataSelector)
   const dispatch = useDispatch()
 
-  const handlDeletePost = (postId: string) => {
+  const handleDeletePost = (postId: string) => {
     dispatch(deletePostAC(postId))
   }
 
+  const handleLike = useCallback((id: string, like: number) => {
+    dispatch(setLikeAC(id, like))
+  }, [postData])
 
-  const data = new Date().getDate()
-  const day = new Date().getFullYear()
-  const month = new Date().getMonth() + 1
+
+  const dayWeek = day[dayNumber - 1]
   return (
     <>
       {postData.map(pD => {
@@ -31,19 +41,24 @@ export const Post = () => {
                 </div>
                 <div className={s.postData}>
                   <div className={s.message}>{pD.sms}</div>
-                  <div className={s.delPost} onClick={() => handlDeletePost(pD.id)}>x</div>
                 </div>
               </div>
               <div className={s.like}>
-                <span>like</span>{pD.like}
+                <span onClick={() => handleLike(pD.id, pD.like)}><IconSvg name={'like'}/>{pD.like}</span>
+
+                <div className={s.delPost} onClick={() => handleDeletePost(pD.id)}><IconSvg name={'delete'}/></div>
               </div>
             </div>
-            <div className={s.dataPost}>
-              <div>{data}/{month}/{day}</div>
+            <div className={s.dataPostContainer}>
+              <div className={s.dataPost}>
+                <div>{dayWeek}</div>
+                <div>{data}/{month}/{number}</div>
+              </div>
+              <div className={s.psevdoElement}></div>
             </div>
           </div>
         )
       })}
     </>
   )
-}
+})

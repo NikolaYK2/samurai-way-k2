@@ -17,7 +17,8 @@ textarea {
     resize: vertical;
     margin: 5px 5px;
 }
-button{
+
+button {
     display: flex;
     justify-content: center;
     margin: 5px 5px;
@@ -25,13 +26,18 @@ button{
     color: white;
 }
 
-.form button, .form button:active{
+.form button {
+    line-height: 1;
+}
+
+.form button, .form button:active {
     color: white;
 }
 
-.error::placeholder{
+.error::placeholder {
     color: red;
 }
-.offError::placeholder{
+
+.offError::placeholder {
     color: black;
 }

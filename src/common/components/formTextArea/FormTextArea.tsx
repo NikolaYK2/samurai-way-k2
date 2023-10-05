@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import s from 'common/components/formTextArea/FormTextArea.module.css'
 import {usersMessagesType} from "features/redux/messagesPageReducer";
@@ -8,7 +8,8 @@ type FormTextareaType = {
     messages: usersMessagesType[],
     addMessages: (newMessageUsers: string) => void,
 }
-export const FormTextarea = (props: FormTextareaType) => {
+export const FormTextarea = memo((props: FormTextareaType) => {
+  console.log('textarea')
 
     const {register, handleSubmit, watch, formState: {errors}, reset} = useForm<FormTextareaType>();
 
@@ -28,7 +29,7 @@ export const FormTextarea = (props: FormTextareaType) => {
             <Button name={'Publish'} change={false}/>
         </form>
     );
-};
+});
 
 
 

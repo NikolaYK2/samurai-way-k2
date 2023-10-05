@@ -59,6 +59,15 @@ export const IconSvg = (props: { name: string }) => {
 		C21.988,43.9,22.981,44,24,44c0.921,0,1.82-0.084,2.707-0.204V29.301z"/>
         </g>
       </svg>
+    case 'like':
+      return <svg width="100%" height="100%" viewBox="0 0 24 24" >
+        <path
+          fill={'black'}
+          d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z"/></svg>
+    case 'delete':
+      return <svg height="100%" viewBox="0 0 48 48" width="100%" >
+        <path d="M0 0h48v48H0V0z" fill="none"/>
+        <path d="M12 38c0 2.2 1.8 4 4 4h16c2.2 0 4-1.8 4-4V14H12v24zm4.93-14.24l2.83-2.83L24 25.17l4.24-4.24 2.83 2.83L26.83 28l4.24 4.24-2.83 2.83L24 30.83l-4.24 4.24-2.83-2.83L21.17 28l-4.24-4.24zM31 8l-2-2H19l-2 2h-7v4h28V8z"/><path d="M0 0h48v48H0z" fill="none"/></svg>
     default:
       return <svg></svg>
   }

@@ -5,6 +5,7 @@ import {updStatusThunkCreator} from "features/redux/proFilePageReducer";
 import {statusSelector} from "features/2-main/content/MyProfile/MyProfileSelectors";
 
 export const MyProfileStatusHook = () => {
+    console.log('status')
     const status = useAppSelector(statusSelector)
     const dispatch = useAppDispatch();
 

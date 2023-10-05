@@ -1,12 +1,12 @@
 import s from "./MyPost.module.css";
-import React from "react";
+import React, {memo} from "react";
 import {MyPostType} from "features/2-main/content/MyProfile/myPost/MyPostContainer";
 import {FormTextarea} from "common/components/formTextArea/FormTextArea";
 import {Post} from "features/2-main/content/MyProfile/myPost/Post";
 
-export const MyPost = (props: MyPostType) => {
+export const MyPost = memo((props: MyPostType) => {
 
-
+  console.log('my post')
   //POSTS =====================================================================================
 
   return (
@@ -17,5 +17,5 @@ export const MyPost = (props: MyPostType) => {
         <Post/>
     </div>
   );
-}
+})
 //--------------------------------------------------------------------------------------

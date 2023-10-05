@@ -16,7 +16,7 @@
 
     color: #383a41;
 
-    font-size: clamp(10 / 14 * 1rem, 5vw, 14 / 14 * 1rem);
+    font-size: clamp(10 / 14 * 1rem, 5vw, 16 / 14 * 1rem);
 
     cursor: pointer;
 
