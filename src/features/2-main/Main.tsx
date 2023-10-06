@@ -18,23 +18,25 @@ export const Main = () => {
   return (
     <main className={s.main}>
       <Nav/>
-      <Suspense fallback={<Loading/>}>
-        <Routes>
-          <Route path="/samurai-way-k2" element={<Navigate to="/profile" replace/>}/>
-          <Route path='/profile' element={<ProfileContainer/>}>
-            <Route path=":userId" element={<ProfileContainer/>}/>
-          </Route>
-          <Route path="/messages/*" element={<DialogsMessage/>}/>
-          <Route path="/users/*" element={<UsersContainer/>}/>
-          <Route path="/news" element={<News/>}/>
-          <Route path="/music" element={<Music/>}/>
-          <Route path="/settings" element={<Settings/>}/>
-          <Route path="/friends" element={<FriendsContainer/>}/>
-          {/*<Route path="/login" element={<Login/>}/>*/}
-          <Route path="*" element={<div>404</div>}/>
-        </Routes>
-      </Suspense>
+      <div className={s.content}>
+        <Suspense fallback={<Loading/>}>
+          <Routes>
+            <Route path="/samurai-way-k2" element={<Navigate to="/profile" replace/>}/>
+            <Route path='/profile' element={<ProfileContainer/>}>
+              <Route path=":userId" element={<ProfileContainer/>}/>
+            </Route>
+            <Route path="/messages/*" element={<DialogsMessage/>}/>
+            <Route path="/users/*" element={<UsersContainer/>}/>
+            <Route path="/news" element={<News/>}/>
+            <Route path="/music" element={<Music/>}/>
+            <Route path="/settings" element={<Settings/>}/>
+            <Route path="/friends" element={<FriendsContainer/>}/>
+            {/*<Route path="/login" element={<Login/>}/>*/}
+            <Route path="*" element={<div>404</div>}/>
+          </Routes>
+        </Suspense>
 
+      </div>
     </main>
   );
 }
