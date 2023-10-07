@@ -1,10 +1,11 @@
 import React from "react";
 import s from "./Nav.module.css";
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
 import {BcAvatarProfile} from "common/components/bcAvatarProfile/BcAvatarProfile";
 
 export const Nav = () => {
+
   const links = [
     {name: 'Profile', link: '/profile', icon:'loginIn'},
     {name: 'Messages', link: '/messages', icon:'message'},
@@ -15,10 +16,15 @@ export const Nav = () => {
     {name: 'Friends', link: '/friends', icon:'users'},
   ]
 
+  const location = useLocation();
+  const profile = location.pathname.includes('/profile')
+
   return (
-    <aside className={s.container}>
+    <aside className={`${s.container} ${profile && s.burger}`}>
       <nav className={s.nav}>
-        <div className={s.s}><BcAvatarProfile onOffAvatar={true}/></div>
+        <div className={`${s.profile} ${!profile && s.off}`}>
+          <BcAvatarProfile onOffAvatar={!profile} classMod={{ava:s.modAvatar,bc:s.modBcImg}}/>
+        </div>
         <ul>
           {links.map(el => <li key={el.name}>
             <NavLink to={el.link}  className={({isActive}) => isActive ? s.activeLink : ''}>{el.name}</NavLink>
