@@ -20,8 +20,8 @@ export const Nav = () => {
       <nav className={s.nav}>
         <div className={s.s}><AvatarUser/></div>
         <ul>
-          {links.map(el => <li>
-            <NavLink to={el.link} className={({isActive}) => isActive ? s.activeLink : ''}>{el.name}</NavLink>
+          {links.map(el => <li key={el.name}>
+            <NavLink to={el.link}  className={({isActive}) => isActive ? s.activeLink : ''}>{el.name}</NavLink>
             <div className={s.svg}><IconSvg name={el.icon}/></div>
           </li>)}
         </ul>
