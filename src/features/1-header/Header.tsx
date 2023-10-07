@@ -4,7 +4,7 @@ import {ProfileTypeProps} from "features/1-header/HeaderContainer";
 import {useAppDispatch, useAppSelector} from "app/redux-store";
 import {logoutThunkC} from "features/redux/authReducer";
 import {useLocation} from "react-router-dom";
-import {AvatarUser} from "common/components/avatarUser/AvatarUser";
+import {BcAvatarProfile} from "common/components/bcAvatarProfile/BcAvatarProfile";
 
 export const Header = (props: ProfileTypeProps) => {
   const dispatch = useAppDispatch();
@@ -16,7 +16,6 @@ export const Header = (props: ProfileTypeProps) => {
   }
 
   const headerProfile = location.pathname.includes('/profile');
-  const Avatar = location.pathname.includes('/profile') ? <AvatarUser/> : '';
 
   return (
     <header className={`${s.header} ${headerProfile && s.expanded}`}>
@@ -25,11 +24,7 @@ export const Header = (props: ProfileTypeProps) => {
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1667px-Apple_logo_black.svg.png"
           alt=""/>
       </div>
-
-      <div className={s.avatar}>
-        {Avatar}
-      </div>
-
+      <BcAvatarProfile onOffAvatar={headerProfile}/>
       <div className={s.loginBlock}>
         <div>
           <div>{props.login}</div>
