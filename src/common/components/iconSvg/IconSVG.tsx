@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {memo} from 'react';
 
-export const IconSvg = (props: { name: string }) => {
+export const IconSvg = memo((props: { name: string }) => {
+  console.log('iconSVG')
   switch (props.name) {
     case 'loginIn':
       return <svg enableBackground="new 0 0 32 32" width="100%" height="100%" id="Layer_1" version="1.1"
@@ -195,4 +196,4 @@ l29 60 3 558 3 558 197 -188 c108 -103 332 -314 497 -468 165 -154 391 -369
     default:
       return <svg></svg>
   }
-};
+});
