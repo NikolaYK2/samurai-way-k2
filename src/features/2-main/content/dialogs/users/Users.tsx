@@ -1,12 +1,11 @@
 import React from 'react';
 import s from "./Users.module.css";
-import {store, useAppSelector} from "app/redux-store";
+import {store} from "app/redux-store";
 import {MemoNavLink} from "common/utills/MemoNavLink";
 
 export const Users = () => {
-  const messages = useAppSelector(state => state.messagesPage.usersMessages)
   return (
-    <div className={s.dialogs__users}>
+    <div className={`${s.dialogs__users} ${'customScroll'}`}>
       {store.getState().messagesPage.users.map((u) => {
         return (
           <div key={u.id} className={s.users}>

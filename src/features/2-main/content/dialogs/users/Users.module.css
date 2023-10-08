@@ -1,8 +1,10 @@
 .dialogs__users {
     line-height: 17px;
-    /*color: black;*/
-    /*font-weight: 900;*/
+    padding: 0 5px;
+
     font-size: clamp(10 / 14 * 1rem, 5vw, 14 / 14 * 1rem);
+    max-height: 600px;
+    overflow: auto;
 }
 
 .users {

@@ -9,6 +9,7 @@
 @media (max-width: 860px) {
     .main{
         grid-template: auto / minmax(auto, 1fr);
+        margin: 0 0 auto;
     }
 }
 

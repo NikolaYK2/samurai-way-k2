@@ -1,31 +1,54 @@
+.container {
+    width: 100%;
+}
+.container>form{
+    position: relative;
+    padding: 10% 0 0;
+    margin: 0;
+}
+.container>form:before{
+    position: absolute;
+    content: '';
+    display: block;
+    top: 0;
+    left: -40%;
+    width: 125%;
+    height: 1px;
+    border-top: 1px solid #babec5;
+}
 .dialogs__messages {
     display: block;
     line-height: 17px;
     color: black;
     font-weight: 700;
-    max-width: 500px;
-    }
-    .dialogs__messages>textarea{
-        border: 1px solid black;
-        border-radius: 5px 0 5px 0;
-        padding: 0 5px;
-    }
 
-.dialogs__users{
+    max-width: 500px;
+    max-height: 600px;
+    overflow: auto;
+
+    padding: 0 5px;
+}
+
+.dialogs__users {
     display: flex;
     align-items: start;
+
     font-weight: 400;
     min-height: 80px;
+    max-height: 420px;
     margin: 20px 0 0 0;
 }
-    .dialogs__users>div{
-        display: flex;
-        padding: 10px;
-        background-color: #c2ffe7;
-        border-radius: 5px 5px 5px 0;
+
+.dialogs__users > div {
+    display: flex;
+    padding: 10px;
+    background-color: #c2ffe7;
+    border-radius: 5px 5px 5px 0;
 }
-.dialogs__users:nth-child(even){
+
+.dialogs__users:nth-child(even) {
     justify-content: end;
 }
+
 
 
