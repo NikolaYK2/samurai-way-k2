@@ -1,7 +1,6 @@
 .containerUsers{
-    padding: 2.5% 0 0 30px;
+    /*display: flex;*/
 }
-
 .containerUsers__item{
     display: flex;
     flex-wrap: wrap;

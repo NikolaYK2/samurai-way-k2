@@ -2,8 +2,8 @@
     display: block;
     background: rgb(255, 255, 255);
     margin: 10px 0 0;
-    -webkit-box-shadow: 0px 1px 15px 0px rgba(51, 51, 51, 0.3);
-    box-shadow: 0px 1px 15px 0px rgba(51, 51, 51, 0.3);
+    -webkit-box-shadow: 0 1px 15px 0 rgba(51, 51, 51, 0.3);
+    box-shadow: 0 1px 15px 0 rgba(51, 51, 51, 0.3);
     z-index: 1;
 }
 
@@ -167,11 +167,11 @@ div .modAvatar {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #c395f1 0%, #8224e3 75%);
     border-radius: 12px;
     width: 40px;
     height: 40px;
-    box-shadow: 0 10px 20px -8px rgba(58, 46, 68, 0.7);
+    background: var(--bc-but);
+    box-shadow: var(--sw-but);
 }
 
 .nav .activeLink {

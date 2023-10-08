@@ -1,19 +1,21 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {Loading} from "common/components/loading/Loading";
 import {compose} from "redux";
 import {Users} from "features/2-main/content/users/Users";
 import {UsersType} from "common/api/api";
 import {
-    Expectation, followThunkCreator,
+    Expectation,
+    followThunkCreator,
     getUsersThunkCreator,
     pageChangeThunkCreator,
     setUsersAC,
-    toggleExpectationAC, unFollowThunkCreator
+    toggleExpectationAC,
+    unFollowThunkCreator
 } from "features/redux/usersReducers";
 import {AppStateType} from "app/redux-store";
 import {
-    getCurrentPage, getExpectation,
+    getCurrentPage,
+    getExpectation,
     getLoadingPage,
     getPageSize,
     getTotalUsersCount,
@@ -33,12 +35,10 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
 
     }
 
-    render = () => {//Единственный метод, который вы должны определить в React.Componentподклассе, называется render()
-        //теперь и кнопке мы передаем на onClick не переменную а метод через this.getUsers
+    render = () => {
 
         return (
             <div>
-                {this.props.loadingPage && <Loading/>}
                 <Users
                     totalItemsCount={this.props.totalUsersCount}
                     pageSize={this.props.pageSize}

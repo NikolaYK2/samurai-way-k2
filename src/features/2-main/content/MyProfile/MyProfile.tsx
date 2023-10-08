@@ -22,7 +22,6 @@ export const Profile = () => {
   }
   return (
     <div className={s.content__profile}>
-      {/*<AvatarUser/>*/}
       <MyProfileStatusHook/>
 
       <div className={s.data}>

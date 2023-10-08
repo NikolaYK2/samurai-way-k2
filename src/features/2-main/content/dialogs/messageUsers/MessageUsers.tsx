@@ -15,7 +15,7 @@ export const MessageUsers = (props: MessageUsersType) => {
             )
           })}
         </div>
-        <FormTextarea messages={props.usersMessages} addMessages={props.addMessageUsers}/>
+        <FormTextarea messages={props.usersMessages} addMessages={props.addMessageUsers} nameBut={'Send'}/>
       </div>
     );
 };

@@ -21,17 +21,17 @@ export const Header = (props: ProfileTypeProps) => {
   const headerProfile = location.pathname.includes('/profile');
 
   return (
-    <header className={`${s.header} ${headerProfile && s.expanded}`}>
-      { !headerProfile && <div className={s.log}>
-          <MemoNavLink to={'/profile'}><IconSvg name={'logo'}/></MemoNavLink>
-      </div>}
-      <BcAvatarProfile onOffAvatar={headerProfile}/>
-      <div className={s.loginBlock}>
-        <div>
-          <div>{props.login}</div>
-          <button onClick={deleteHandle} disabled={!isAuth}>log out</button>
+      <header className={`${s.header} ${headerProfile && s.expanded}`}>
+        {!headerProfile && <div className={s.log}>
+            <MemoNavLink to={'/profile'}><IconSvg name={'logo'}/></MemoNavLink>
+        </div>}
+        <BcAvatarProfile onOffAvatar={headerProfile}/>
+        <div className={s.loginBlock}>
+          <div>
+            <div>{props.login}</div>
+            <button onClick={deleteHandle} disabled={!isAuth}>log out</button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
   );
 }

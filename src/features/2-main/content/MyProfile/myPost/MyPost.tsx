@@ -12,7 +12,7 @@ export const MyPost = memo((props: MyPostType) => {
   return (
     <div className={s.continer}>
       <div className={s.content__myPost}>
-        <FormTextarea messages={props.postData} addMessages={props.addPost}/>
+        <FormTextarea nameBut={'send'} messages={props.postData} addMessages={props.addPost}/>
       </div>
         <Post/>
     </div>

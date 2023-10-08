@@ -106,6 +106,8 @@ import {UsersType} from "common/api/api";
 import {Expectation} from "features/redux/usersReducers";
 import {Paginator} from "common/components/paginator/Paginator";
 import {User} from "features/2-main/content/users/User";
+import {Loading} from "common/components/loading/Loading";
+import {useAppSelector} from "app/redux-store";
 
 type UsersTypeComponent = {
     totalItemsCount: number,
@@ -121,11 +123,12 @@ type UsersTypeComponent = {
 }
 
 export const Users = (props: UsersTypeComponent) => {
+const loading = useAppSelector(state => state.usersPage.loadingPage)
 
     return (
-        <div className={s.container}>
-            Users
-            <Paginator totalItemsCount={props.totalItemsCount}
+        <div className={`${s.container} ${'containerMod'}`}>
+          {loading && <Loading/>}
+          <Paginator totalItemsCount={props.totalItemsCount}
                        pageSize={props.pageSize}
                        currentPage={props.currentPage}
                        pageChange={props.pageChange}/>
