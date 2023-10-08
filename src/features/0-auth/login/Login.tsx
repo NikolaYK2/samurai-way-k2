@@ -96,7 +96,7 @@ export const LoginForm = (props:{name:string}) => {
         {/*<div className={s.button}>*/}
         {/*  <input type="submit" disabled={isAuth}/>*/}
         {/*</div>*/}
-        <Button name={'Login'} change={isAuth}/>
+        <Button name={'Login'} disabled={isAuth}/>
       </form>
     </div>
   );

@@ -106,6 +106,7 @@ import userPhotos from "assets/img/users/pngwing.com.png";
 import {NavLink} from "react-router-dom";
 import {UsersType} from "common/api/api";
 import {Expectation} from "features/redux/usersReducers";
+import {Button} from "common/components/button/Button";
 
 type UserTypeComponent = {
   key: string,
@@ -124,34 +125,27 @@ export const User = (props: UserTypeComponent) => {
     props.followThunk(id)
   }
 
+  const disabled = props.expectation.some(id => id === props.user.id)
+  const followUnfollow = props.user.followed ? unFollowHandler : followHandler
+  const name = props.user.followed ? 'Follow' : 'Unfollow'
+
   return (
     <div className={s.containerUsers}>
+
       <div className={s.containerUsers__avatar}>
         <div>
           <NavLink to={`/profile/${props.user.id}`}>
             <img src={props.user.photos.small !== null ? props.user.photos.small : userPhotos} alt=""/>
           </NavLink>
         </div>
-
-        {props.user.followed
-          ? <button disabled={props.expectation.some(id => id === props.user.id)}
-                    className={s.containerUsers__button}
-                    onClick={() => unFollowHandler(props.user.id)}>Follow</button>
-          : <button disabled={props.expectation.some(id => id === props.user.id)}
-                    className={s.containerUsers__button}
-                    onClick={() => followHandler(props.user.id)}>Unfollow</button>
-        }
-
       </div>
+
       <div className={s.containerUsers__title}>
         <div>
           <span className={s.containerUser__name}>{props.user.name}</span>
           <span className={s.containerUser__status}>{props.user.status}</span>
         </div>
-        <div>
-          <span>{'u.location.country'}</span>
-          <span>{'u.location.city'}</span>
-        </div>
+        <Button disabled={disabled} callBack={()=>followUnfollow(props.user.id)} name={name}/>
       </div>
     </div>
   );

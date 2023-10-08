@@ -21,18 +21,21 @@ export const Nav = () => {
   const profile = location.pathname.includes('/profile')
 
   return (
-    <aside className={`${s.container} ${profile && s.burger}`}>
-      <nav className={s.nav}>
-        <div className={`${s.profile} ${!profile && s.off}`}>
-          <BcAvatarProfile onOffAvatar={!profile} classMod={{ava: s.modAvatar, bc: s.modBcImg}}/>
-        </div>
-        <ul>
-          {links.map(el => <li key={el.name}>
-            <MemoNavLink to={el.link} className={({isActive}) => isActive ? s.activeLink : ''}>{el.name}</MemoNavLink>
-            <div className={s.svg}><IconSvg name={el.icon}/></div>
-          </li>)}
-        </ul>
-      </nav>
-    </aside>
+    <div className={s.container}>
+      <div className={`${s.profile} ${!profile && s.on}`}>
+        <BcAvatarProfile onOffAvatar={!profile} classMod={{ava: s.modAvatar, bc: s.modBcImg}}/>
+      </div>
+
+      <aside className={`${s.containerNav} ${profile && s.burger}`}>
+        <nav className={s.nav}>
+          <ul>
+            {links.map(el => <li key={el.name}>
+              <MemoNavLink to={el.link} className={({isActive}) => isActive ? s.activeLink : ''}>{el.name}</MemoNavLink>
+              <div className={s.svg}><IconSvg name={el.icon}/></div>
+            </li>)}
+          </ul>
+        </nav>
+      </aside>
+    </div>
   );
 }

@@ -27,7 +27,7 @@ export const FormTextarea = memo((props: FormTextareaType) => {
               placeholder={errors.messages ? errors.messages.message : 'Введите сообщение'}
               className={errors.messages ? s.error : s.offError}
             />
-      <Button name={props.nameBut!} change={false}/>
+      <Button name={props.nameBut!} disabled={false}/>
     </form>
   );
 });

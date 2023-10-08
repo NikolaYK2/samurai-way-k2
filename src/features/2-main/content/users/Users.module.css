@@ -11,7 +11,7 @@
 
 .container__data {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(290px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
 }
 
 .container__button {

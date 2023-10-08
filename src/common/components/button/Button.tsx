@@ -1,9 +1,25 @@
 import React from 'react';
 import s from "./Button.module.css";
 
-export const Button = (props:{name:string, change:boolean,modClass?:string}) => {
+
+type ButtonType = {
+  name: string,
+  modClass?: string,
+  disabled: boolean,
+  callBack?: () => void
+}
+export const Button = (props: ButtonType) => {
+
+  const callbackHandle = () => {
+    props.callBack?.()
+  }
   return (
-      <button disabled={props.change} className={`${s.button} ${props.modClass}`}>{props.name}</button>
+    <button disabled={props.disabled}
+            className={`${s.button} ${props.modClass}`}
+            onClick={callbackHandle}
+    >
+      {props.name}
+    </button>
   );
 };
 
