@@ -1,8 +1,8 @@
 export default {}
 // import React from "react";
 // import s from "./ContentProfile.module.css";
-// import {Profile} from "./MyProfile/MyProfile";
-// import MyPostContainer from "./MyProfile/myPost/MyPostContainer";
+// import {Profile} from "./1-MyProfile/1-MyProfile";
+// import MyPostContainer from "./1-MyProfile/myPost/MyPostContainer";
 //
 // type ContentProfileType = {
 //     // store: StoreType,

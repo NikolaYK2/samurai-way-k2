@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {setStatusFriendAC, setUsersFriendTC, statuses} from "features/redux/friendsReducer";
-import {Friends} from "features/2-main/content/friends/Friends";
+import {Friends} from "features/2-main/content/6-friends/Friends";
 import {UsersType} from "common/api/api";
 import {AppStateType} from "app/redux-store";
 
@@ -35,8 +35,8 @@ type MapDispatchToPropsType = {
 }
 // const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
 //     return {
-//         setUsersFriend: (users: any) => {
-//             dispatch(setUsersFriendAC(users));
+//         setUsersFriend: (3-users: any) => {
+//             dispatch(setUsersFriendAC(3-users));
 //         },
 //         setStatusFriend: (status: any) => {
 //             dispatch(setStatusFriendAC(status));

@@ -11,10 +11,10 @@ export const Nav = () => {
     {name: 'Profile', link: '/profile', icon: 'loginIn'},
     {name: 'Messages', link: '/messages', icon: 'message'},
     {name: 'Users', link: '/users', icon: 'users'},
-    {name: 'News', link: '/news', icon: 'news'},
-    {name: 'Music', link: '/music', icon: 'music'},
-    {name: 'Settings', link: '/settings', icon: 'setting'},
+    {name: 'News', link: '/news', icon: '4-news'},
+    {name: 'Music', link: '/music', icon: '5-music'},
     {name: 'Friends', link: '/friends', icon: 'users'},
+    {name: 'Settings', link: '/settings', icon: 'setting'},
   ]
 
   const location = useLocation();

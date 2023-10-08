@@ -13,7 +13,7 @@
 //      })
 //     },[props.setUsers])
 // //     const getUsers = ()=>{//Как бы лишаем Users сайд эфекта
-// //         if (props.users.length === 0) {
+// //         if (props.3-users.length === 0) {
 // //             //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
 // //             axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
 // //                 props.setUsers(response.data.items);
@@ -41,7 +41,7 @@
 // //         //                 photos: 'https://klike.net/uploads/posts/2020-01/1578990591_1.jpeg',
 // //         //                 followed: false,
 // //         //                 name: "Dima",
-// //         //                 status: 'Cool friends',
+// //         //                 status: 'Cool 6-friends',
 // //         //                 location: {city: 'Varshava', country: 'Polish'}
 // //         //             },
 // //         //         ]
@@ -59,8 +59,8 @@
 //         <div className={s.container}>
 //             Users
 //             <div className={s.container__data}>
-//                 {/*<button onClick={getUsers}>Get users</button>*/}
-//                 {props.users.map(u => {
+//                 {/*<button onClick={getUsers}>Get 3-users</button>*/}
+//                 {props.3-users.map(u => {
 //                     return (
 //                         <div key={u.id} className={s.containerUsers}>
 //                             <div className={s.containerUsers__item}>
@@ -93,7 +93,7 @@
 //                     );
 //                 })}
 //             </div>
-//             <button className={s.container__button} onClick={() => props.setUsers(props.users)}>show more</button>
+//             <button className={s.container__button} onClick={() => props.setUsers(props.3-users)}>show more</button>
 //         </div>
 //     );
 // };
@@ -101,52 +101,53 @@
 //
 //
 import React from 'react';
-import s from "./Users.module.css";
+import s from "./User.module.css";
+import userPhotos from "assets/img/users/pngwing.com.png";
+import {NavLink} from "react-router-dom";
 import {UsersType} from "common/api/api";
 import {Expectation} from "features/redux/usersReducers";
-import {Paginator} from "common/components/paginator/Paginator";
-import {User} from "features/2-main/content/users/User";
-import {Loading} from "common/components/loading/Loading";
-import {useAppSelector} from "app/redux-store";
+import {Button} from "common/components/button/Button";
 
-type UsersTypeComponent = {
-    totalItemsCount: number,
-    pageSize: number,
-    currentPage: number,
-    expectation: (Expectation | string)[],
-
-    users: UsersType[],
-    pageChange: (page: number) => void,
-    setUsers: (users: UsersType[]) => void,
-    unFollowThunk: (userId: string) => void,
-    followThunk: (userId: string) => void,
+type UserTypeComponent = {
+  key: string,
+  user: UsersType,
+  expectation: (Expectation | string)[],
+  unFollowThunk: (userId: string) => void,
+  followThunk: (userId: string) => void,
 }
 
-export const Users = (props: UsersTypeComponent) => {
-const loading = useAppSelector(state => state.usersPage.loadingPage)
+export const User = (props: UserTypeComponent) => {
 
-    return (
-        <div className={`${s.container} ${'containerMod'}`}>
-          {loading && <Loading/>}
-          <Paginator totalItemsCount={props.totalItemsCount}
-                       pageSize={props.pageSize}
-                       currentPage={props.currentPage}
-                       pageChange={props.pageChange}/>
+  const unFollowHandler = (id: string) => {
+    props.unFollowThunk(id)
+  }
+  const followHandler = (id: string) => {
+    props.followThunk(id)
+  }
 
-            <div className={s.container__data}>
+  const disabled = props.expectation.some(id => id === props.user.id)
+  const followUnfollow = props.user.followed ? unFollowHandler : followHandler
+  const name = props.user.followed ? 'Follow' : 'Unfollow'
 
-                {props.users.map(u => <User key={u.id}
-                                            user={u}
-                                            expectation={props.expectation}
-                                            unFollowThunk={props.unFollowThunk}
-                                            followThunk={props.followThunk}/>
-                )}
+  return (
+    <div className={s.containerUsers}>
 
-            </div>
-            <button className={s.container__button} onClick={() => props.setUsers(props.users)}>show
-                more
-            </button>
+      <div className={s.containerUsers__avatar}>
+        <div>
+          <NavLink to={`/profile/${props.user.id}`}>
+            <img src={props.user.photos.small !== null ? props.user.photos.small : userPhotos} alt=""/>
+          </NavLink>
         </div>
-    );
+      </div>
+
+      <div className={s.containerUsers__title}>
+        <div>
+          <span className={s.containerUser__name}>{props.user.name}</span>
+          <span className={s.containerUser__status}>{props.user.status}</span>
+        </div>
+        <Button disabled={disabled} callBack={()=>followUnfollow(props.user.id)} name={name}/>
+      </div>
+    </div>
+  );
 };
 

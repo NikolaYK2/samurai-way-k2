@@ -2,8 +2,8 @@ import React, {useEffect} from "react";
 import s from "./ContentProfile.module.css";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {Profile} from "features/2-main/content/MyProfile/MyProfile";
-import MyPostContainer from "features/2-main/content/MyProfile/myPost/MyPostContainer";
+import {Profile} from "features/2-main/content/1-MyProfile/MyProfile";
+import MyPostContainer from "features/2-main/content/1-MyProfile/myPost/MyPostContainer";
 import {withRouter, WithRouterProps} from "common/selectors/WithRouter";
 import {
     deletePostAC,

@@ -1,10 +1,10 @@
 import React from "react";
 import s from "./MyProfile.module.css";
 import {Loading} from "common/components/loading/Loading";
-import {MyProfileStatusHook} from "features/2-main/content/MyProfile/MyProfileStatusHook";
+import {MyProfileStatusHook} from "features/2-main/content/1-MyProfile/MyProfileStatusHook";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
 import {useAppSelector} from "app/redux-store";
-import {optimizedProfileSelect} from "features/2-main/content/MyProfile/MyProfileSelectors";
+import {optimizedProfileSelect} from "features/2-main/content/1-MyProfile/MyProfileSelectors";
 
 
 // type ProfileType = {

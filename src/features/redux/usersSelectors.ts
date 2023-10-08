@@ -5,7 +5,7 @@ export const getUsers = (state: AppStateType) => {
     return state.usersPage.users;
 }
 //FN SELECTOR ----------
-//Можно исп. несколько селекторов /getUsers, getPageSize, (users,pageSize)=>{}
+//Можно исп. несколько селекторов /getUsers, getPageSize, (3-users,pageSize)=>{}
 export const getUserSelector = createSelector(getUsers,(users)=>{
     return users;
 })

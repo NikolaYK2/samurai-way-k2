@@ -36,18 +36,20 @@ div .modAvatar {
 
 
 .containerNav {
+    position: sticky;
+    top: 0;
     display: flex;
     background: rgb(255, 255, 255);
     margin: 10px 0 0;
     -webkit-box-shadow: 0 1px 15px 0 rgba(51, 51, 51, 0.3);
     box-shadow: 0 1px 15px 0 rgba(51, 51, 51, 0.3);
 }
-
+/*-----------------------------------------------------------------*/
 @media (max-width: 860px) {
     .container{
         position: sticky;
         z-index: 2;
-        margin: 0 0 10%;
+        margin: 0 0 30px;
         transition: all .4s ease-in-out;
 
     }
@@ -95,15 +97,15 @@ div .modAvatar {
     }
 
     .containerNav:hover {
-        height: auto;
+        height: 490px;
         cursor: pointer;
         transition: all .4s ease-in-out;
     }
 }
-
+/*-----------------------------------------------------------------------*/
 .nav {
     display: block;
-    position: sticky;
+    /*position: sticky;*/
     top: 0;
     left: 0;
 }

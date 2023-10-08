@@ -75,12 +75,12 @@ export const authorizationAPI = {
 
 export const friendsAPI = {
     setUsersFriend() {
-        return instance.get<GetUsersType>('users?count=5').then(response => response.data.items)
+        return instance.get<GetUsersType>('users?friend=true').then(response => response.data.items)
     },
 }
 
 // export const getUsers =(currentPage = 1, pageSize = 10)=>{
-//     return instance./*axios.*/get(/*baseUrl + */`users?page=${currentPage}&count=${pageSize}`/*,{withCredentials:true,}*/).then(response=>response.data);
+//     return instance./*axios.*/get(/*baseUrl + */`3-users?page=${currentPage}&count=${pageSize}`/*,{withCredentials:true,}*/).then(response=>response.data);
 // }
 
 export const profileApi = {

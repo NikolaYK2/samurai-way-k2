@@ -135,7 +135,7 @@ export const getUserProfileThunkCreator = (userId: number) => async (dispatch: D
   try {
     dispatch(setUserProfileAC(data));
   } catch (e) {
-    alert('Error get users')
+    alert('Error get 3-users')
   }
 }
 // export const getUserProfileThunkCreator = (userId: number) => (dispatch: Dispatch<ActionsTypeProfile>) => {

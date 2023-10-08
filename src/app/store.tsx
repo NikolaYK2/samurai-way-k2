@@ -30,7 +30,7 @@ export default {}
 //     avatar: string,
 // }
 // export type  messagesPageType = {
-//     users: usersType[],
+//     3-users: usersType[],
 //     message: string,
 //     usersMessages: usersMessagesType[],
 // }
@@ -42,7 +42,7 @@ export default {}
 // }
 
 // export type sidebarType = {
-//     friends: friendsType[],
+//     6-friends: friendsType[],
 // }
 
 // export type stateType = {
@@ -117,9 +117,9 @@ export default {}
 // ==========================================================================================================
 // export let store: StoreType = {
 //     _state: {//_state - Приватный доступ означает _подчеркивание
-//         //DATA messagesUsers /dialogs/=============================================================
+//         //DATA messagesUsers /2-dialogs/=============================================================
 //         messagesPage: {
-//             users: [
+//             3-users: [
 //                 {
 //                     id: v1(),
 //                     name: "Nik",
@@ -153,7 +153,7 @@ export default {}
 //                 {id: v1(), sms: "Cool",},
 //             ],
 //         },
-//         //=============PostData /MyProfile/====================================
+//         //=============PostData /1-MyProfile/====================================
 //         proFilePage: {
 //             message: "",
 //             postData: [
@@ -164,7 +164,7 @@ export default {}
 //         },
 //         //=========Friends======================================================
 //         sidebar: {
-//             friends: [
+//             6-friends: [
 //                 {
 //                     id: v1(),
 //                     name: "Denis",
@@ -200,7 +200,7 @@ export default {}
 // //     },
 // //=====================================================================
 // //MESSAGE USERS===============================================================
-// //add new message users=============================================
+// //add new message 3-users=============================================
 // //     addMessageUsers() {
 // //         this._state.messagesPage.usersMessages.push({id: v1(), sms: this._state.messagesPage.message,});
 // //         this._state.messagesPage.message = '';
@@ -243,7 +243,7 @@ export default {}
 //         //     this._rerenderEntireTree(store);
 //         //     //MESSAGE USERS===============================`================================
 //         // } else if (action.type === addMessageUsers) {
-//         //     //add new message users=============================================
+//         //     //add new message 3-users=============================================
 //         //     // this._state.messagesPage.usersMessages.push({id: v1(), sms: action.newMessageUsers,});
 //         //     const newMessages = {id: v1(), sms: action.newMessageUsers,}
 //         //     this._state.messagesPage.usersMessages = [...this._state.messagesPage.usersMessages, newMessages];

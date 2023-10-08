@@ -90,7 +90,7 @@ export const IconSvg = memo((props: { name: string }) => {
         </g>
       </svg>
 
-    case 'music':
+    case '5-music':
       return <svg enableBackground="new 0 0 32 32" height="100%" id="svg2" version="1.1" viewBox="0 0 32 32"
                   width="100%" xmlns="http://www.w3.org/2000/svg">
         <g id="background">
@@ -102,7 +102,7 @@ export const IconSvg = memo((props: { name: string }) => {
         </g>
       </svg>
 
-    case 'news':
+    case '4-news':
       return <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg"><title/>
         <g>
           <path

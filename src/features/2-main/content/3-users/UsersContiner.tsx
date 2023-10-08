@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {Users} from "features/2-main/content/users/Users";
+import {Users} from "features/2-main/content/3-users/Users";
 import {UsersType} from "common/api/api";
 import {
     Expectation,
@@ -82,7 +82,7 @@ export type MapDispatchPropsType = {
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {//название функции обозначает замапить state на пропсы
     return {
         //getState мы уже не делаем
-        // users: getUsers(state),
+        // 3-users: getUsers(state),
         //FN SELECTOR ------
         users: getUserSelector(state),
         // -----------------

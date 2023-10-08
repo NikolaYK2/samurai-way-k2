@@ -4,7 +4,7 @@ import {useAppSelector} from "app/redux-store";
 import {useDispatch} from "react-redux";
 import {deletePostAC, setLikeAC} from "features/redux/proFilePageReducer";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
-import {optimizedPostDataSelector} from "features/2-main/content/MyProfile/myPost/myPost.selectors";
+import {optimizedPostDataSelector} from "features/2-main/content/1-MyProfile/myPost/myPost.selectors";
 
 const day = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday',];
 const data = new Date().getDate()

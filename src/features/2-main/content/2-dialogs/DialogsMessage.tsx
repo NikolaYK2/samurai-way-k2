@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./DialogsMessage.module.css";
-import {Users} from "features/2-main/content/dialogs/users/Users";
-import MessageUsersContainer from "features/2-main/content/dialogs/messageUsers/MessageUsersContainer";
+import {Users} from "features/2-main/content/2-dialogs/users/Users";
+import MessageUsersContainer from "features/2-main/content/2-dialogs/messageUsers/MessageUsersContainer";
 
 type DialogsMessageType = {}
 const DialogsMessage: React.FC<DialogsMessageType> = () => {

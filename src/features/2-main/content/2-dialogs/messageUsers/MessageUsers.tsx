@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./MessageUsers.module.css";
-import {MessageUsersType} from "features/2-main/content/dialogs/messageUsers/MessageUsersContainer";
+import {MessageUsersType} from "features/2-main/content/2-dialogs/messageUsers/MessageUsersContainer";
 import {FormTextarea} from "common/components/formTextArea/FormTextArea";
 
 export const MessageUsers = (props: MessageUsersType) => {
