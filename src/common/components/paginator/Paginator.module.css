@@ -19,7 +19,7 @@
     margin: 0 2px;
     transition: box-shadow .2s ease 0s;
 }
-.containerPages>span:not(.pageActive):hover{
+.containerPages>span:not(.pageActive):hover, .paginatorBut>button:hover{
     color: var(--color);
     box-shadow: inset 1px 1px 4px black;
     transition: box-shadow .3s ease 0s;
@@ -40,6 +40,9 @@ div .pageActive{
 }
 
 .paginatorBut > button {
+    display: flex;
+    align-items: center;
+    color: var(--color);
 
     width: 36px;
     height: 36px;
