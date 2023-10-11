@@ -35,7 +35,7 @@ type LoginFormType = {
   captcha: boolean,
 
 };
-export const LoginForm = (props:{name:string}) => {
+export const LoginForm = (props: { name: string }) => {
 
   const dispatch = useDispatch<AppThunkDispatch>();
 
@@ -60,6 +60,10 @@ export const LoginForm = (props:{name:string}) => {
 
   return (
     <div className={s.container}>
+      <div className={s.span}>
+        <span>Email: free@samuraijs.com</span>
+        <span>Password: free</span>
+      </div>
       <h2>{props.name}</h2>
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.inputs}>
