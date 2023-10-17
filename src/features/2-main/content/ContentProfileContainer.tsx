@@ -17,23 +17,20 @@ import {RedirectContainer} from "common/hoc/RedirectContainer";
 
 const ContentProfileContainer = (props: ProfileTypeProps) => {
 
+    let userId: number | null = props.params.userId;
+    if (!userId) {
+        userId = props.userId;
+    }
 
     useEffect(() => {
-        let userId: number | null = props.params.userId;
-        if (!userId) {
-            userId = props.userId;
-        }
         props.getUserProfile(userId);
         props.setStatus(userId);
+
     }, [])
 
     return (
         <section className={s.content}>
             <Profile />
-            {/*<Profile {...props}*/}
-            {/*         profile={props.profile}*/}
-            {/*         status={props.status}*/}
-            {/*         updStatus={props.updStatus}/>*/}
             <MyPostContainer/>
         </section>
     );

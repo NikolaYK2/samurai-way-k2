@@ -7,11 +7,7 @@ import {useAppSelector} from "app/redux-store";
 import {optimizedProfileSelect} from "features/2-main/content/1-MyProfile/MyProfileSelectors";
 
 
-// type ProfileType = {
-//   profile: ProfileUserType | null,
-//   status: string,
-//   updStatus: (status: string) => void,
-// }
+
 
 export const Profile = () => {
   console.log('весь проф')

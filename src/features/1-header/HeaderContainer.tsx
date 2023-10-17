@@ -7,7 +7,7 @@ export class HeaderContainer extends React.Component<ProfileTypeProps> {
 
   render() {
     return (
-      <Header {...this.props}/>
+      <Header/>
     );
   }
 }

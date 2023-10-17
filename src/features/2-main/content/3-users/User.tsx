@@ -102,7 +102,7 @@
 //
 import React from 'react';
 import s from "./User.module.css";
-import userPhotos from "assets/img/users/pngwing.com.png";
+import userPhotos from "assets/img/myProf/ava.jpg";
 import {NavLink} from "react-router-dom";
 import {UsersType} from "common/api/api";
 import {Expectation} from "features/redux/usersReducers";

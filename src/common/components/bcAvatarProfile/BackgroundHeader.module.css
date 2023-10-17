@@ -52,3 +52,18 @@
 
     transition: height .3s ease .1s, opacity .3s ease 0s;
 }
+
+/*.changeAva{*/
+/*    position: relative;*/
+/*    z-index: 2;*/
+/*    !*width: 30px;*!*/
+/*    !*height: 30px;*!*/
+/*}*/
+/*.changeAva>input{*/
+/*    !*display: none;*!*/
+
+/*}*/
+/*.changeAva>svg{*/
+/*    width: 30px;*/
+/*    height: 30px;*/
+/*}*/

@@ -7,25 +7,16 @@ const setUserProfile = 'setUserProfile';
 const setStatus = 'setStatus';
 const deletePost = 'PROFILE/DELETE-POST';
 const likePost = 'PROFILE/LIKE-POST';
-//==========================================================================================
-//=====типизация actions add post==============================================================================
-// type AddPostActionType ={
-//     type: 'addPost'
-//     postMessage: string,
-//
-// }
-// type AddPostChangeActionType ={
-//     type: 'addPostChange'
-//     postMessage: string,
-// }
-//Автоматическое определение типа функции=============================================================
-// type AddPostActionType = ReturnType<typeof addPostAC>;
-// type AddPostChangeActionType = ReturnType<typeof addPostChangeActionCreator>;
+const photoUserChange = 'PROFILE/CHANGE-PHOTO';
+const loadingToggle = 'PROFILE/LOADING-TOGGLE';
+
 export type ActionsTypeProfile = ReturnType<typeof addPostAC>
   | ReturnType<typeof deletePostAC>
   | ReturnType<typeof setUserProfileAC>
   | ReturnType<typeof setStatusAC>
   | ReturnType<typeof setLikeAC>
+  | ReturnType<typeof changePhotoAC>
+  | ReturnType<typeof loadingAC>
 //Type messages Users Type===========================================================================================================
 //======function Action Creator addPoast==============================================================================
 export const addPostAC = (postMessage: string) => {
@@ -64,6 +55,19 @@ export const setLikeAC = (postId: string, like: number) => {
   } as const
 }
 
+export const changePhotoAC = (photo: PhotosType) => {
+  return {
+    type: photoUserChange,
+    photo,
+  } as const
+}
+
+export const loadingAC = (toggle: boolean) => {
+  return {
+    type: loadingToggle,
+    toggle
+  } as const
+}
 
 export type postDataType = {
   id: string,
@@ -99,7 +103,11 @@ export type proFilePageType = {
   status: string,
 }
 
-let initializationState: proFilePageType = {
+type LoadingType = {
+  loading?: boolean
+}
+
+let initializationState: proFilePageType & LoadingType = {
   postData: [
     {id: v1(), sms: "Ha, how are you?", like: 15,},
     {id: v1(), sms: "It's my first post", like: 43,},
@@ -125,15 +133,28 @@ export const proFileReducer = (state = initializationState, action: ActionsTypeP
 
   } else if (action.type === likePost) {
     return {...state, postData: state.postData.map(el => el.id === action.postId ? {...el, like: action.like + 1} : el)}
+
+  } else if (action.type === photoUserChange) {
+    return {
+      ...state,
+      profile: state.profile
+        ? {...state.profile, photos: action.photo}
+        : null,
+    }
+  } else if (action.type === loadingToggle) {
+    return {...state, loading: action.toggle};
   }
   return state;
 }
 
 //THUNK =============================================================
 export const getUserProfileThunkCreator = (userId: number) => async (dispatch: Dispatch<ActionsTypeProfile>) => {
-  let data = await profileApi.getUserProfile(userId)
+  dispatch(loadingAC(true))
   try {
+    let data = await profileApi.getUserProfile(userId)
     dispatch(setUserProfileAC(data));
+    dispatch(loadingAC(false))
+
   } catch (e) {
     alert('Error get 3-users')
   }
@@ -146,8 +167,11 @@ export const getUserProfileThunkCreator = (userId: number) => async (dispatch: D
 
 export const setStatusThunkCreator = (userId: number) => async (dispatch: Dispatch<ActionsTypeProfile>) => {
   let res = await profileApi.getProfileStatusUser(userId)
+  dispatch(loadingAC(true))
+
   try {
     dispatch(setStatusAC(res.data));
+    dispatch(loadingAC(false))
   } catch (e) {
     alert('Error set status')
   }
@@ -168,6 +192,25 @@ export const updStatusThunkCreator = (status: string) => async (dispatch: Dispat
     alert('Error upd status')
   }
 }
+
+export const changePhotoTC = (file: File) => async (dispatch: Dispatch<ActionsTypeProfile>) => {
+  const formData = new FormData();
+  formData.append('file', file)
+
+  let res = await profileApi.changePhotoUser(formData)
+  dispatch(loadingAC(true))
+
+  try {
+    if (res.data.resultCode === 0) {
+      dispatch(changePhotoAC(res.data.data));
+      dispatch(loadingAC(false))
+    }
+  } catch (e) {
+    alert('Error upd status')
+  }
+}
+
+
 // export const updStatusThunkCreator = (status: string) => (dispatch: Dispatch<ActionsTypeProfile>) => {
 //     profileApi.updProfileStatus(status).then(res => {
 //         if (res.data.resultCode === 0) {

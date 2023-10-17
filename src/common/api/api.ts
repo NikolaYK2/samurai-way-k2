@@ -83,6 +83,7 @@ export const friendsAPI = {
 //     return instance./*axios.*/get(/*baseUrl + */`3-users?page=${currentPage}&count=${pageSize}`/*,{withCredentials:true,}*/).then(response=>response.data);
 // }
 
+
 export const profileApi = {
     getUserProfile(userId: number) {
         return instance.get<ProfileUserType>(`profile/${userId}`).then(response => response.data);
@@ -92,5 +93,8 @@ export const profileApi = {
     },
     updProfileStatus(status: string) {
         return instance.put<ResponsType>('profile/status', {status: status});
+    },
+    changePhotoUser(file: FormData) {
+        return instance.put<ResponsType<PhotosType>>('profile/photo', file);
     }
 }
