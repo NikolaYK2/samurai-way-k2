@@ -33,6 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "set \"GENERATE_SOURCEMAP=false\" && react-scripts build",
+    "postbuild": "copy build\\index.html build\\404.html /Y",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
