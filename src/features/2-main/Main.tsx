@@ -21,7 +21,7 @@ export const Main = () => {
       <div className={s.content}>
         <Suspense fallback={<Loading/>}>
           <Routes>
-            <Route path="/samurai-way-k2" element={<Navigate to="/profile" replace/>}/>
+            <Route path="/" element={<Navigate to="/profile" replace/>}/>
             <Route path='/profile' element={<ProfileContainer/>}>
               <Route path=":userId" element={<ProfileContainer/>}/>
             </Route>
