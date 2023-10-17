@@ -1,26 +1,19 @@
 {
   "files": {
-    "main.css": "/samurai-way-k2/static/css/main.56e92c80.css",
-    "main.js": "/samurai-way-k2/static/js/main.8b1bdead.js",
-    "static/css/316.a44d08af.chunk.css": "/samurai-way-k2/static/css/316.a44d08af.chunk.css",
-    "static/js/316.06d85ae4.chunk.js": "/samurai-way-k2/static/js/316.06d85ae4.chunk.js",
-    "static/css/1.2a3ec1a2.chunk.css": "/samurai-way-k2/static/css/1.2a3ec1a2.chunk.css",
-    "static/js/1.af271463.chunk.js": "/samurai-way-k2/static/js/1.af271463.chunk.js",
-    "static/js/787.b9ea7040.chunk.js": "/samurai-way-k2/static/js/787.b9ea7040.chunk.js",
+    "main.css": "/samurai-way-k2/static/css/main.0c63820d.css",
+    "main.js": "/samurai-way-k2/static/js/main.08ba4355.js",
+    "static/css/747.622dcca5.chunk.css": "/samurai-way-k2/static/css/747.622dcca5.chunk.css",
+    "static/js/747.406ae99c.chunk.js": "/samurai-way-k2/static/js/747.406ae99c.chunk.js",
+    "static/css/427.2fe81028.chunk.css": "/samurai-way-k2/static/css/427.2fe81028.chunk.css",
+    "static/js/427.767264da.chunk.js": "/samurai-way-k2/static/js/427.767264da.chunk.js",
+    "static/js/27.9e17fb13.chunk.js": "/samurai-way-k2/static/js/27.9e17fb13.chunk.js",
     "static/media/pngwing.com.png": "/samurai-way-k2/static/media/pngwing.com.9c9a32fb44026217dd68.png",
     "static/media/bc.jpg": "/samurai-way-k2/static/media/bc.e3f8268ea4277078289f.jpg",
     "static/media/ava.jpg": "/samurai-way-k2/static/media/ava.01bc07663d733bf302bf.jpg",
-    "index.html": "/samurai-way-k2/index.html",
-    "main.56e92c80.css.map": "/samurai-way-k2/static/css/main.56e92c80.css.map",
-    "main.8b1bdead.js.map": "/samurai-way-k2/static/js/main.8b1bdead.js.map",
-    "316.a44d08af.chunk.css.map": "/samurai-way-k2/static/css/316.a44d08af.chunk.css.map",
-    "316.06d85ae4.chunk.js.map": "/samurai-way-k2/static/js/316.06d85ae4.chunk.js.map",
-    "1.2a3ec1a2.chunk.css.map": "/samurai-way-k2/static/css/1.2a3ec1a2.chunk.css.map",
-    "1.af271463.chunk.js.map": "/samurai-way-k2/static/js/1.af271463.chunk.js.map",
-    "787.b9ea7040.chunk.js.map": "/samurai-way-k2/static/js/787.b9ea7040.chunk.js.map"
+    "index.html": "/samurai-way-k2/index.html"
   },
   "entrypoints": [
-    "static/css/main.56e92c80.css",
-    "static/js/main.8b1bdead.js"
+    "static/css/main.0c63820d.css",
+    "static/js/main.08ba4355.js"
   ]
 }
