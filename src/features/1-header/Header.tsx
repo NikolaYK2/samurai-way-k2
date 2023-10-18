@@ -12,7 +12,7 @@ import {
   myIdSelector,
   optimizedProfileSelector
 } from "features/1-header/HeaderSelectors";
-import {changePhotoTC} from "features/redux/proFilePageReducer";
+import {changeBackgroundAC, changePhotoTC} from "features/redux/proFilePageReducer";
 import {Loading} from "common/components/loading/Loading";
 
 export const Header = () => {
@@ -35,6 +35,16 @@ export const Header = () => {
       dispatch(changePhotoTC(e.currentTarget.files[0]))
     }
   }
+  const changeBackgroundUserHandle = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.files && e.currentTarget.files.length > 0) {
+      const file = e.currentTarget.files[0]
+      const reader = new FileReader()
+      reader.onloadend = ()=>{
+        dispatch(changeBackgroundAC(String(reader.result)))
+      }
+      reader.readAsDataURL(file)
+    }
+  }
 
   const headerProfile = location.pathname.includes('/profile');
 
@@ -53,7 +63,7 @@ export const Header = () => {
                 </label>
 
                 <label className={s.changeAva}><IconSvg name={'changeBc'}/>
-                    <input type="file"/>
+                    <input type="file" onChange={changeBackgroundUserHandle}/>
                 </label>
             </div>
         }

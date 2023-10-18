@@ -8,6 +8,8 @@ import {sidebarReducer} from "features/redux/sidebarReducer";
 import {ActionsTypeLoginAuthorization, authorizationReducer} from "features/redux/authReducer";
 import {friendsReducer} from "features/redux/friendsReducer";
 import {ActionsAppType, appReducer} from "app/appReducer";
+import {loadState, saveState} from "common/utills/localStorage";
+import {throttle} from "common/utills/throttle";
 
 declare global {
     interface Window{
@@ -15,6 +17,7 @@ declare global {
     }
 }
 
+const persistedState = loadState();
 
 export let rootReducer = combineReducers({//функция которой передаем обьект внутри
 // Воспринимать как state по сути
@@ -27,14 +30,14 @@ export let rootReducer = combineReducers({//функция которой пер
     app: appReducer,
     // form: Controller,
     // form: useForm,
-});
+},);
 
 //функция нашего плагина для слежки за стором
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export type AppStateType = ReturnType<typeof rootReducer>;
 //Рудьюсеры отдаются стору, автоматически createStore создает внутри себя store
-export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
+export const store = createStore(rootReducer, persistedState, composeEnhancers(applyMiddleware(thunkMiddleware)));
 //Что-бы работало нужно инициализировать
 
 export const useAppSelector: TypedUseSelectorHook<AppStateType> = useSelector;
@@ -50,6 +53,28 @@ export type ActionsType =
 
 //TYPE THUNK ============================
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, ActionsType>
+
+//localStorage =========================
+// Эта функция будет вызвана после каждого действия
+store.subscribe(() => {
+    // Вы можете получить текущее состояние хранилища с помощью store.getState()
+    const state = store.getState();
+    // Вы можете выбрать те части состояния, которые вы хотите сохранить
+    const { proFilePage } = state;
+    // Вы можете использовать вашу функцию saveState(), чтобы сохранить их в localStorage
+    saveState({ proFilePage });
+});
+
+store.subscribe(
+
+throttle(() => {
+    const state = store.getState();
+
+    const { proFilePage } = state;
+
+   saveState({ proFilePage });
+}, 1000)
+);
 
 
 // @ts-ignore

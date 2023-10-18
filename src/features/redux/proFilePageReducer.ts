@@ -8,6 +8,7 @@ const setStatus = 'setStatus';
 const deletePost = 'PROFILE/DELETE-POST';
 const likePost = 'PROFILE/LIKE-POST';
 const photoUserChange = 'PROFILE/CHANGE-PHOTO';
+const bcUserChange = 'PROFILE/CHANGE-BACKGROUND';
 const loadingToggle = 'PROFILE/LOADING-TOGGLE';
 
 export type ActionsTypeProfile = ReturnType<typeof addPostAC>
@@ -16,6 +17,7 @@ export type ActionsTypeProfile = ReturnType<typeof addPostAC>
   | ReturnType<typeof setStatusAC>
   | ReturnType<typeof setLikeAC>
   | ReturnType<typeof changePhotoAC>
+  | ReturnType<typeof changeBackgroundAC>
   | ReturnType<typeof loadingAC>
 //Type messages Users Type===========================================================================================================
 //======function Action Creator addPoast==============================================================================
@@ -62,6 +64,13 @@ export const changePhotoAC = (photo: PhotosType) => {
   } as const
 }
 
+export const changeBackgroundAC = (bc: string) => {
+  return {
+    type: bcUserChange,
+    bc,
+  } as const
+}
+
 export const loadingAC = (toggle: boolean) => {
   return {
     type: loadingToggle,
@@ -103,11 +112,12 @@ export type proFilePageType = {
   status: string,
 }
 
-type LoadingType = {
+type ComponentStateType = {
   loading?: boolean
+  background?:string,
 }
 
-let initializationState: proFilePageType & LoadingType = {
+let initializationState: proFilePageType & ComponentStateType = {
   postData: [
     {id: v1(), sms: "Ha, how are you?", like: 15,},
     {id: v1(), sms: "It's my first post", like: 43,},
@@ -143,6 +153,9 @@ export const proFileReducer = (state = initializationState, action: ActionsTypeP
     }
   } else if (action.type === loadingToggle) {
     return {...state, loading: action.toggle};
+
+  } else if (action.type === bcUserChange) {
+    return {...state, background: action.bc};
   }
   return state;
 }
