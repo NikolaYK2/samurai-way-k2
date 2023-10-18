@@ -172,11 +172,6 @@ export const getUserProfileThunkCreator = (userId: number) => async (dispatch: D
     alert('Error get 3-users')
   }
 }
-// export const getUserProfileThunkCreator = (userId: number) => (dispatch: Dispatch<ActionsTypeProfile>) => {
-//     profileApi.getUserProfile(userId).then(data => {
-//         dispatch(setUserProfileAC(data));
-//     })
-// }
 
 export const setStatusThunkCreator = (userId: number) => async (dispatch: Dispatch<ActionsTypeProfile>) => {
   let res = await profileApi.getProfileStatusUser(userId)
@@ -189,11 +184,6 @@ export const setStatusThunkCreator = (userId: number) => async (dispatch: Dispat
     alert('Error set status')
   }
 }
-// export const setStatusThunkCreator = (userId: number) => (dispatch: Dispatch<ActionsTypeProfile>) => {
-//     profileApi.getProfileStatusUser(userId).then(res => {
-//         dispatch(setStatusAC(res.data));
-//     })
-// }
 
 export const updStatusThunkCreator = (status: string) => async (dispatch: Dispatch<ActionsTypeProfile>) => {
   let res = await profileApi.updProfileStatus(status)
@@ -222,22 +212,3 @@ export const changePhotoTC = (file: File) => async (dispatch: Dispatch<ActionsTy
     alert('Error upd status')
   }
 }
-
-
-// export const updStatusThunkCreator = (status: string) => (dispatch: Dispatch<ActionsTypeProfile>) => {
-//     profileApi.updProfileStatus(status).then(res => {
-//         if (res.data.resultCode === 0) {
-//             dispatch(setStatusAC(status));
-//         }
-//     })
-// }
-
-// export const deletePostThunkCreator = (postId: string) => {
-//     return (dispatch: Dispatch<ActionsTypeProfile>) => {
-//         profileApi.updProfileStatus(status).then(res => {
-//             if (res.data.resultCode === 0) {
-//                 dispatch(setStatusAC(status));
-//             }
-//         })
-//     }
-// }

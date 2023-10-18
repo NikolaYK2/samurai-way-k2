@@ -7,13 +7,15 @@ import {statusSelector} from "features/2-main/content/1-MyProfile/MyProfileSelec
 export const MyProfileStatusHook = () => {
     console.log('status')
     const status = useAppSelector(statusSelector)
+    const userId = useAppSelector(state => state.proFilePage.profile?.userId)
+    const myId = useAppSelector(state => state.loginAuthorization.id)
     const dispatch = useAppDispatch();
 
     const [editMode, setEditMode] = useState(true);
     const [statusLocal, setStatusLocal] = useState(status);
 
     const activateEditMode = () => {
-        setEditMode(false)
+        if (userId === myId) setEditMode(false)
     }
     const deactivateEditMode = () => {
         setEditMode(true)
@@ -28,6 +30,7 @@ export const MyProfileStatusHook = () => {
     useEffect(() => {
         setStatusLocal(status)
     }, [status]);
+
 
     return (
         <div className={s.blockStatus}>
