@@ -1,10 +1,10 @@
-import s from "./Post.module.css";
+import s from "features/2-main/content/1-MyProfile/ui/myPost/Post.module.css";
 import React, {memo, useCallback} from "react";
 import {useAppSelector} from "app/redux-store";
 import {useDispatch} from "react-redux";
-import {deletePostAC, setLikeAC} from "features/redux/proFilePageReducer";
+import {deletePostAC, setLikeAC} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
-import {optimizedPostDataSelector} from "features/2-main/content/1-MyProfile/myPost/myPost.selectors";
+import {optimizedPostDataSelector} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
 
 const day = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday',];
 const data = new Date().getDate()

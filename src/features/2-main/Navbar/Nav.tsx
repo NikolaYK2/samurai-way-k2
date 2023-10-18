@@ -19,6 +19,7 @@ export const Nav = () => {
 
   const changeNav = useRef<HTMLDivElement>(null)
   const location = useLocation();
+
   const profile = location.pathname.includes('/profile')
 
   const changeNavHandle = () => {

@@ -1,8 +1,8 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import s from './MyProfileStatus.module.css'
+import s from 'features/2-main/content/1-MyProfile/ui/MyProfileStatus.module.css'
 import {useAppDispatch, useAppSelector} from "app/redux-store";
-import {updStatusThunkCreator} from "features/redux/proFilePageReducer";
-import {statusSelector} from "features/2-main/content/1-MyProfile/MyProfileSelectors";
+import {updStatusThunkCreator} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
+import {statusSelector} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
 
 export const MyProfileStatusHook = () => {
     console.log('status')

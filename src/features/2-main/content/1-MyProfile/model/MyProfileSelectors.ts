@@ -8,3 +8,7 @@ export const optimizedProfileSelect = createSelector([profileSelect],(profile)=>
   return profile
 })
 
+const postDataSelector = (state:AppStateType) =>state.proFilePage.postData
+export const optimizedPostDataSelector = createSelector([postDataSelector],(postData)=>{
+  return postData
+})

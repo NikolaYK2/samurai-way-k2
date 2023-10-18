@@ -2,7 +2,7 @@ import {AnyAction, applyMiddleware, combineReducers, compose, legacy_createStore
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {messagesPageReducer} from "features/redux/messagesPageReducer";
-import {proFileReducer} from "features/redux/proFilePageReducer";
+import {proFileReducer} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {usersReducer} from "features/redux/usersReducers";
 import {sidebarReducer} from "features/redux/sidebarReducer";
 import {ActionsTypeLoginAuthorization, authorizationReducer} from "features/redux/authReducer";

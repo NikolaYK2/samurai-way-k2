@@ -12,7 +12,7 @@ import {
   myIdSelector,
   optimizedProfileSelector
 } from "features/1-header/HeaderSelectors";
-import {changeBackgroundAC, changePhotoTC} from "features/redux/proFilePageReducer";
+import {changeBackgroundAC, changePhotoTC} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {Loading} from "common/components/loading/Loading";
 
 export const Header = () => {

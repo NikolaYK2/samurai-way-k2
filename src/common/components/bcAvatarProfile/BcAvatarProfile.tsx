@@ -4,6 +4,7 @@ import ava from "assets/img/myProf/ava.jpg";
 import {useAppSelector} from "app/redux-store";
 import bc from 'assets/img/myProf/bc.jpg';
 import {myIdSelector, optimizedProfileSelector} from "features/1-header/HeaderSelectors";
+import {MyProfileStatusHook} from "features/2-main/content/1-MyProfile/ui/MyProfileStatusHook";
 
 
 export const BcAvatarProfile = memo((props: { onOffAvatar?: boolean, classMod?: { ava: string, bc: string } }) => {
@@ -20,6 +21,7 @@ export const BcAvatarProfile = memo((props: { onOffAvatar?: boolean, classMod?: 
           src={profile?.photos?.large || ava}
           alt=""/>
       </div>
+      {props.onOffAvatar && <MyProfileStatusHook/>}
     </div>
   );
 });

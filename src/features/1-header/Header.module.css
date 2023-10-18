@@ -70,7 +70,7 @@
     z-index: 1;
     color: white;
     text-shadow: 0 1px 3px #8224e3;
-    background: rgba(0, 0, 0, 0.6);
+    background: var(--rgba-color);
     flex: 1 1 auto;
     /*max-width: 200px;*/
     /*width: 100%;*/
@@ -90,7 +90,7 @@
     position: relative;
     z-index: 2;
     cursor: pointer;
-    margin: 5px;
+    margin: 5px 20px;
     width: 30px;
     height: 30px;
 }
@@ -112,6 +112,7 @@
     justify-content: center;
     width: 35px;
     height: 35px;
+    margin: 0 10px;
 }
 
 .blockLogout > button {

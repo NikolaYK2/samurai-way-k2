@@ -4,7 +4,7 @@ import {
     proFileReducer,
     ProfileUserType,
     setStatusAC
-} from "features/redux/proFilePageReducer";
+} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 
 let proFilePage: proFilePageType;
 beforeEach(() => {

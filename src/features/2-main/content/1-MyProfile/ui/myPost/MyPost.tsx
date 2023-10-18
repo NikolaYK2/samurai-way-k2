@@ -1,8 +1,8 @@
-import s from "./MyPost.module.css";
+import s from "features/2-main/content/1-MyProfile/ui/myPost/MyPost.module.css";
 import React, {memo} from "react";
-import {MyPostType} from "features/2-main/content/1-MyProfile/myPost/MyPostContainer";
+import {MyPostType} from "features/2-main/content/1-MyProfile/ui/myPost/MyPostContainer";
 import {FormTextarea} from "common/components/formTextArea/FormTextArea";
-import {Post} from "features/2-main/content/1-MyProfile/myPost/Post";
+import {Post} from "features/2-main/content/1-MyProfile/ui/myPost/Post";
 
 export const MyPost = memo((props: MyPostType) => {
 

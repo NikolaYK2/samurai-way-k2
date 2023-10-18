@@ -1,9 +1,10 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
-import {profileApi} from "common/api/api";
+import {profileApi, UpdProfileType} from "features/2-main/content/1-MyProfile/api/profileApi";
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addPost = 'addPost';
 const setUserProfile = 'setUserProfile';
+const updUserProfile = 'PROFILE/UPD-USER-PROFILE';
 const setStatus = 'setStatus';
 const deletePost = 'PROFILE/DELETE-POST';
 const likePost = 'PROFILE/LIKE-POST';
@@ -14,6 +15,7 @@ const loadingToggle = 'PROFILE/LOADING-TOGGLE';
 export type ActionsTypeProfile = ReturnType<typeof addPostAC>
   | ReturnType<typeof deletePostAC>
   | ReturnType<typeof setUserProfileAC>
+  | ReturnType<typeof updUserProfileAC>
   | ReturnType<typeof setStatusAC>
   | ReturnType<typeof setLikeAC>
   | ReturnType<typeof changePhotoAC>
@@ -39,6 +41,12 @@ export const setUserProfileAC = (profile: ProfileUserType | null) => {
   return {
     type: 'setUserProfile',
     profile,
+  } as const
+}
+export const updUserProfileAC = (updProfile: ProfileUserType) => {
+  return {
+    type: updUserProfile,
+    updProfile,
   } as const
 }
 
@@ -98,13 +106,13 @@ export type PhotosType = {
   large: string,
 }
 export type ProfileUserType = {
-  aboutMe: string,
-  contacts: ContactsType,
+  userId: number,
   lookingForAJob: boolean,
   lookingForAJobDescription: string,
   fullName: string,
+  contacts: ContactsType,
   photos: PhotosType
-  userId: number,
+  aboutMe?: string,
 }
 export type proFilePageType = {
   postData: postDataType[],
@@ -134,6 +142,10 @@ export const proFileReducer = (state = initializationState, action: ActionsTypeP
     //MESSAGE USERS===============================`================================
   } else if (action.type === setUserProfile) {
     return {...state, profile: action.profile}
+
+  } else if (action.type === updUserProfile) {
+    return {...state, profile: action.updProfile}
+
   } else if (action.type === setStatus) {
     //Добавление нового поста для change(update)=================================================
     return {...state, status: action.status}
@@ -167,6 +179,18 @@ export const getUserProfileThunkCreator = (userId: number) => async (dispatch: D
     let data = await profileApi.getUserProfile(userId)
     dispatch(setUserProfileAC(data));
     dispatch(loadingAC(false))
+
+  } catch (e) {
+    alert('Error get 3-users')
+  }
+}
+
+export const updUserProfileThunkCreator = (updProfile: UpdProfileType) => async (dispatch: Dispatch<ActionsTypeProfile>) => {
+  dispatch(loadingAC(true))
+  try {
+    let data = await profileApi.updUserProfile(updProfile)
+    // dispatch(setUserProfileAC(data));
+    // dispatch(loadingAC(false))
 
   } catch (e) {
     alert('Error get 3-users')

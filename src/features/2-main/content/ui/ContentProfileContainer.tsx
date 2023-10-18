@@ -1,9 +1,9 @@
 import React, {useEffect} from "react";
-import s from "./ContentProfile.module.css";
+import s from "features/2-main/content/ui/ContentProfile.module.css";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {Profile} from "features/2-main/content/1-MyProfile/MyProfile";
-import MyPostContainer from "features/2-main/content/1-MyProfile/myPost/MyPostContainer";
+import {Profile} from "features/2-main/content/1-MyProfile/ui/MyProfile";
+import MyPostContainer from "features/2-main/content/1-MyProfile/ui/myPost/MyPostContainer";
 import {withRouter, WithRouterProps} from "common/selectors/WithRouter";
 import {
     deletePostAC,
@@ -11,7 +11,7 @@ import {
     ProfileUserType,
     setStatusThunkCreator,
     updStatusThunkCreator
-} from "features/redux/proFilePageReducer";
+} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {AppStateType} from "app/redux-store";
 import {RedirectContainer} from "common/hoc/RedirectContainer";
 
