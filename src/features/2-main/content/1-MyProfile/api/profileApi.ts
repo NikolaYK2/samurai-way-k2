@@ -1,7 +1,9 @@
-import {ProfileUserType} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
+import {ContactsType, ProfileUserType} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {instance, PhotosType, ResponsType} from "common/api/api";
 
-export type UpdProfileType = Omit<ProfileUserType, 'photos' | 'aboutMe'>
+export type UpdProfileType = Omit<ProfileUserType, 'photos' | 'aboutMe' > & {
+  contacts: ContactsType & { [key: string]: string };
+}
 
 export const profileApi = {
   getUserProfile(userId: number) {

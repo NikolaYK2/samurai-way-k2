@@ -1,49 +1,25 @@
 /*====================Профиль данные =========================*/
 .content__profile {
-    position: relative;
+    /*position: relative;*/
     max-width: 100%;
     /*background: red;*/
     /*min-height: 200px;*/
+    height: auto;
+    margin: 0 0 50px;
 }
 
-
-.data {
-    margin: 90px 0 0;
+.statusProfile{
+    height: 30px;
+    border-bottom: 1px solid var(--border-decor);
+    margin: 0 0 20px;
 }
-
-table {
-    font-size: clamp(10 / 14 * 1rem, 5vw, 14 / 14 * 1rem);;
-    border-collapse: collapse;
-    white-space: nowrap;
-    max-width: 800px;
-    width: 100%;
-}
-tr{
-    border-bottom: 1px solid #babec5;
-}
-tr:last-child{
-    border-bottom: none;
-}
-td{
-    width: 200px;
-    padding:8px;
-}
-a{
-    display: block;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-}
-td:first-child {
-    background: #e8e6e6;
-}
-
 
 .profileInfo{
-    position: relative;
-    top: 0;
+    /*position: relative;*/
+    /*top: 0;*/
     width: 100%;
     height: 100%;
+    background: var(--border-decor);
 }
 
 

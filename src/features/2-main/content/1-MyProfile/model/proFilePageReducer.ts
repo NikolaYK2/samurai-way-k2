@@ -92,14 +92,14 @@ export type postDataType = {
   like: number,
 }
 export type ContactsType = {
-  facebook: string,
-  website: null,
-  vk: string,
-  twitter: string,
-  instagram: string,
-  youtube: null,
   github: string,
-  mainLink: null,
+  vk: string,
+  facebook: string,
+  instagram: string,
+  twitter: string,
+  website: string,
+  youtube: string,
+  mainLink: string,
 }
 export type PhotosType = {
   small: string,
