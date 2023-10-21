@@ -44,6 +44,7 @@ export const ProfileUpdateInfo = (props: Props) => {
 
   return (
     <div className={s.container}>
+      <h2>{props.statusProfile ? 'View Profile' : 'Edit Profile'}</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <table>
           <tbody>
@@ -88,7 +89,7 @@ export const ProfileUpdateInfo = (props: Props) => {
             <td>Contacts</td>
             {props.statusProfile ||
               contacts.map(contact => {
-                return <td key={contact.name}><a href={contact.link}><IconSvg name={contact.name}/></a>
+                return <td key={contact.name} className={s.contacts}><a href={contact.link} className={s.link}><IconSvg name={contact.name}/></a>
                   {<input type="text" {...register(`contacts.${contact.name}`)}/>}
                 </td>
               })}

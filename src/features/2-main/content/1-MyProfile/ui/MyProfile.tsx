@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import s from "features/2-main/content/1-MyProfile/ui/MyProfile.module.css";
 import {Loading} from "common/components/loading/Loading";
 import {useAppSelector} from "app/redux-store";
@@ -11,7 +11,10 @@ export const Profile = () => {
 
   const profile = useAppSelector(optimizedProfileSelect)
 
-  const toggleStatusProfHandle = () => {
+  const toggleStatusViewHandle = () => {
+    setStatusProfile(true)
+  }
+  const toggleStatusEditHandle = () => {
     setStatusProfile(false)
   }
 
@@ -23,8 +26,9 @@ export const Profile = () => {
     <div className={s.content__profile}>
 
       <div className={s.statusProfile}>
-        <div onClick={toggleStatusProfHandle}></div>
-        <div onClick={()=>{}}></div>
+        <div onClick={toggleStatusViewHandle} className={statusProfile ? s.isActive : ''}>View</div>
+        <div onClick={toggleStatusEditHandle} className={!statusProfile ? s.isActive : ''}>Edit profile</div>
+        <div className={s.slider} style={{left: `${statusProfile ? -9 : 77}px`}}></div>
       </div>
 
       <div className={s.profileInfo}>

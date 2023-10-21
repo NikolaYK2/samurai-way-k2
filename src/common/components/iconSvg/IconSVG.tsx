@@ -69,8 +69,7 @@ export const IconSvg = memo((props: { name: string }) => {
       </svg>
 
     case 'facebook':
-      return <svg version="1.1" id="Layer_2" x="0px" y="0px"
-                  viewBox="0 0 48 48">
+      return <svg version="1.1" id="Layer_2" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 48 48">
         <g>
           <path fill="#1976D2" d="M24,4C12.954,4,4,12.954,4,24s8.954,20,20,20s20-8.954,20-20S35.046,4,24,4z"/>
           <path fill="#fff" d="M26.707,29.301h5.176l0.813-5.258h-5.989v-2.874c0-2.184,0.714-4.121,2.757-4.121h3.283V12.46
@@ -95,7 +94,7 @@ export const IconSvg = memo((props: { name: string }) => {
       </svg>
 
     case 'message':
-      return <svg version="1.1" viewBox="0 0 24 24">
+      return <svg version="1.1" viewBox="0 0 24 24" width="100%" height="100%">
         <g id="info"/>
         <g id="icons">
           <path
@@ -237,6 +236,7 @@ l29 60 3 558 3 558 197 -188 c108 -103 332 -314 497 -468 165 -154 391 -369
                   version="1.1"
                   viewBox="0 0 128 128"
                   xmlns="http://www.w3.org/2000/svg"
+                  width="100%" height="100%"
       >
         <g id="_x37__stroke">
           <g id="Instagram_1_">

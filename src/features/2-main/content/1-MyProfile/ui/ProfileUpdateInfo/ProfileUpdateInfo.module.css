@@ -7,9 +7,55 @@
     /*height: auto;*/
     z-index: 1;
 }
+.container > h2{
+    font-size: var(--f-size16-22);
+    padding: 0 0 5%;
+    margin: 0 0 16px;
+    border-bottom: 1px solid var(--border-decor);
+}
 
 .cont {
     display: flex;
     /*flex-wrap: wrap;*/
     flex-direction: column;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr {
+    display: flex;
+    font-size: var(--f-size10-14);
+    border-bottom: 1px solid var(--border-decor);
+}
+
+tr:last-child {
+    border: none;
+
+}
+td{
+    padding: 2%;
+    max-width: 230px;
+    width: 100%;
+}
+td:first-child {
+    font-weight: 700;
+    background: var(--bc-decor);
+}
+td:last-child {
+    /*text-align: left;*/
+}
+td > a {
+    width: 20px;
+    height: 20px;
+}
+.contacts{
+    display: flex;
+    align-items: center;
+    background: #383a41;
+}
+.contacts a {
+    margin: 0 10px;
 }

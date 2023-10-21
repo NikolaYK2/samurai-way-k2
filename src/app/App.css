@@ -74,9 +74,12 @@ h1,h2,h3,h4,h5,h6{font-size: inherit; font-weight: 400; margin: 0; }
 :root{
     --main-color:#fff;
     --bc-decor: #f9f9f9;
-    --border-decor: #babec5;
+    --border-decor: rgba(186, 190, 197, 0.6);
     --bc-but: linear-gradient(135deg, #c395f1 0%, #8224e3 75%);
     --sw-but:0 10px 20px -8px rgba(58, 46, 68, 0.7);
     --color: #8224e3;
     --rgba-color: rgba(0, 0, 0, 0.6);
+    --f-size10-14: clamp(10 / 14 *1rem, 5vw, 14 /14 *1rem);
+    --f-size14-16: clamp(14 / 14 *1rem, 5vw, 16 /14 *1rem);
+    --f-size16-22: clamp(16 / 14 *1rem, 5vw, 22 /14 *1rem);
 }
