@@ -14,7 +14,7 @@ export const BcAvatarProfile = memo((props: { onOffAvatar?: boolean, classMod?: 
 
 
   return (
-    <div className={`${s.contain} ${props.classMod?.bc}`} style={{backgroundImage: `url(${profile?.userId === myId ? background : bc})`}}>
+    <div className={`${s.contain} ${props.classMod?.bc}`} style={{backgroundImage: `url(${profile?.userId === myId ? background || bc : bc})`}}>
       <div className={`${s.avatar}`}>
         < img
           className={`${s.img} ${props.onOffAvatar && s.onImg} ${props.classMod?.ava}`}

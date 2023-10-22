@@ -189,8 +189,8 @@ export const updUserProfileThunkCreator = (updProfile: UpdProfileType) => async 
   dispatch(loadingAC(true))
   try {
     let data = await profileApi.updUserProfile(updProfile)
-    // dispatch(setUserProfileAC(data));
-    // dispatch(loadingAC(false))
+    dispatch(updUserProfileAC(data.data.data));
+    dispatch(loadingAC(false))
 
   } catch (e) {
     alert('Error get 3-users')
