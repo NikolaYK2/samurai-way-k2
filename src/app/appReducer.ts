@@ -1,5 +1,5 @@
 import {AppThunk} from "app/redux-store";
-import {authMeThunkC} from "features/redux/authReducer";
+import {authMeThunkC} from "features/0-auth/model/authReducer";
 
 
 export type initializationStateType = {

@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import s from "./Header.module.css";
 import {useAppDispatch, useAppSelector} from "app/redux-store";
-import {logoutThunkC} from "features/redux/authReducer";
+import {logoutThunkC} from "features/0-auth/model/authReducer";
 import {useLocation} from "react-router-dom";
 import {BcAvatarProfile} from "common/components/bcAvatarProfile/BcAvatarProfile";
 import {IconSvg} from "common/components/iconSvg/IconSVG";

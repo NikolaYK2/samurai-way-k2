@@ -11,12 +11,13 @@ import {IconSvg} from "common/components/iconSvg/IconSVG";
 import {profileInfoTextInputs, requiredTextInputs} from "common/utills/errorsText";
 import {Button} from "common/components/button/Button";
 import {updUserProfileThunkCreator} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
+import {myIdSelector} from "features/0-auth/model/authSelectors";
 
 type Props = {
   statusProfile: boolean
 }
 export const ProfileUpdateInfo = (props: Props) => {
-  const myId = useAppSelector(state => state.loginAuthorization.id)
+  const myId = useAppSelector(myIdSelector)
   const profile = useAppSelector(optimizedProfileSelect)
   const contacts = useAppSelector(optimizedProfileContactsSelect)
   const dispatch = useAppDispatch();

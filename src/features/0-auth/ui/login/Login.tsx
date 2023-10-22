@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import s from 'features/0-auth/login/Login.module.css';
+import s from 'features/0-auth/ui/login/Login.module.css';
 import {SubmitHandler, useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
 import {Navigate} from "react-router-dom";
 import {AppThunkDispatch, useAppSelector} from "app/redux-store";
-import {authLoginThunkC} from "features/redux/authReducer";
-import {loginSelector} from "features/0-auth/login/selectors";
+import {authLoginThunkC} from "features/0-auth/model/authReducer";
+import {loginSelector} from "features/0-auth/ui/login/selectors";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
 import {Button} from "common/components/button/Button";
 

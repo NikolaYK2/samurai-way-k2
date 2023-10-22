@@ -8,11 +8,7 @@ export const instance = axios.create({
   headers: {'API-KEY': '0317dbf2-f26f-44a4-a811-d77a69628a1e'},
 });
 
-type DataAuthType = {
-  id: number,
-  email: string,
-  login: string,
-}
+
 
 export type ResponsType<D = {}> = {
   resultCode: number
@@ -50,26 +46,6 @@ export const usersAPI = {
     return instance.post<ResponsType>(`follow/${id}`).then(response => response.data);
   },
 }
-//=================================================================================================
-
-export type RegisterLoginType = {
-  email: string,
-  password: string,
-  rememberMe: boolean,
-  captcha: boolean,
-}
-export const authorizationAPI = {
-  authorizeMe() {
-    return instance.get<ResponsType<DataAuthType>>(`auth/me`).then(response => response.data);
-  },
-  authorizeLogin(data: RegisterLoginType) {
-    return instance.post<ResponsType<RegisterLoginType>>('auth/login', data);
-  },
-  logout() {
-    return instance.delete<ResponsType>('auth/login');
-  }
-}
-//================================================================================
 
 
 export const friendsAPI = {

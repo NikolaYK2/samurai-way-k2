@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
-import {authorizationAPI, RegisterLoginType} from "common/api/api";
 import {ActionsType, AppThunk} from "app/redux-store";
+import {authorizationAPI, RegisterLoginType} from "features/0-auth/ip/authApi";
 
 const SET_USER_DATA = 'auth/SET_USER_DATA';
 
