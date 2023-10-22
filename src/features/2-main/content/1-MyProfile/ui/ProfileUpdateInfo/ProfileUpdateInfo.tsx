@@ -12,6 +12,7 @@ import {profileInfoTextInputs, requiredTextInputs} from "common/utills/errorsTex
 import {Button} from "common/components/button/Button";
 import {updUserProfileThunkCreator} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {myIdSelector} from "features/0-auth/model/authSelectors";
+import {determineLinkUrl} from "common/utills/determineLinkUrl";
 
 type Props = {
   statusProfile: boolean
@@ -28,7 +29,7 @@ export const ProfileUpdateInfo = (props: Props) => {
       lookingForAJob: profile?.lookingForAJob,
       LookingForAJobDescription: profile?.lookingForAJobDescription,
       FullName: profile?.fullName,
-      AboutMe:profile?.aboutMe || undefined,
+      AboutMe: profile?.aboutMe || undefined,
       contacts: {
         github: profile?.contacts?.github,
         vk: profile?.contacts?.vk,
@@ -38,7 +39,7 @@ export const ProfileUpdateInfo = (props: Props) => {
         website: profile?.contacts?.website,
         youtube: profile?.contacts?.youtube,
         mainLink: profile?.contacts?.mainLink,
-       }
+      }
     }
   })
   console.log(profile?.fullName)
@@ -113,24 +114,27 @@ export const ProfileUpdateInfo = (props: Props) => {
           >
             <td>Contacts</td>
             {contacts.map(contact => {
-                return <td key={contact.name} className={s.contacts}>
-                  <a href={contact.link} className={s.link}><IconSvg
-                    name={contact.name}/>
-                  </a>
+              const linkUrl = determineLinkUrl(contact.link)
+              return <td key={contact.name}
+                         className={s.contacts}
+                         style={{display: !contact.link && props.statusProfile ? 'none' :  'flex'}}>
 
-                  {props.statusProfile ||
+                <a href={linkUrl} className={s.link}>
+                  <IconSvg name={contact.name}/>
+                </a>
+                {props.statusProfile ||
                     <div className={s.input}>
-                    <input type="text"{...register(`contacts.${contact.name}`, {
-                      pattern: {
-                        value: profileInfoTextInputs,
-                        message: 'incorrect messenger names'
-                      }
-                    })}/>
-                    <p>{errors.contacts?.[contact.name]?.message}</p>
-                  </div>}
+                        <input type="text"{...register(`contacts.${contact.name}`, {
+                          pattern: {
+                            value: profileInfoTextInputs,
+                            message: 'incorrect messenger names'
+                          }
+                        })}/>
+                        <p>{errors.contacts?.[contact.name]?.message}</p>
+                    </div>}
 
-                </td>
-              })}
+              </td>
+            })}
           </tr>
           </tbody>
         </table>
