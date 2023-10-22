@@ -1,23 +1,13 @@
 .container {
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
     background: var(--main-color);
     width: 100%;
-    /*height: auto;*/
-    z-index: 1;
 }
-.container > h2{
+
+.container > h2 {
     font-size: var(--f-size16-22);
     padding: 0 0 5%;
     margin: 0 0 16px;
     border-bottom: 1px solid var(--border-decor);
-}
-
-.cont {
-    display: flex;
-    /*flex-wrap: wrap;*/
-    flex-direction: column;
 }
 
 table {
@@ -35,27 +25,56 @@ tr:last-child {
     border: none;
 
 }
-td{
+
+td {
     padding: 2%;
-    max-width: 230px;
     width: 100%;
 }
+
 td:first-child {
     font-weight: 700;
     background: var(--bc-decor);
 }
+
 td:last-child {
-    /*text-align: left;*/
 }
-td > a {
-    width: 20px;
-    height: 20px;
+
+.blockContacts {
+    display: flex;
+    flex-direction: column;
 }
-.contacts{
+
+.contacts {
     display: flex;
     align-items: center;
-    background: #383a41;
+    border-bottom: 1px solid var(--border-decor);
 }
-.contacts a {
+
+a {
+    width: 20px;
+    height: 20px;
     margin: 0 10px;
 }
+
+.input {
+    display: flex;
+    width: auto;
+    align-items: center;
+}
+
+
+input {
+    border: 1px solid var(--border-decor);
+}
+p{
+    margin: 5px;
+    color: red;
+}
+
+.container form button {
+    margin: 10px auto;
+    padding: 10px 20px;
+
+    color: var(--main-color);
+}
+

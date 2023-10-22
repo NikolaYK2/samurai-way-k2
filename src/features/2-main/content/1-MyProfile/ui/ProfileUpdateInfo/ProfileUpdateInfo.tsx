@@ -8,7 +8,8 @@ import {
   optimizedProfileSelect
 } from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
-import {requiredTextInputs} from "common/utills/errorsText";
+import {profileInfoTextInputs, requiredTextInputs} from "common/utills/errorsText";
+import {Button} from "common/components/button/Button";
 
 type Props = {
   statusProfile: boolean
@@ -17,29 +18,28 @@ export const ProfileUpdateInfo = (props: Props) => {
   const myId = useAppSelector(state => state.loginAuthorization.id)
   const profile = useAppSelector(optimizedProfileSelect)
   const contacts = useAppSelector(optimizedProfileContactsSelect)
-  console.log(contacts)
 
-  const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm<UpdProfileType>({
+  const {register, handleSubmit, formState: {errors, isSubmitting, isValid}} = useForm<UpdProfileType>({
     defaultValues: {
       userId: myId || undefined,
-      lookingForAJob: false,
-      lookingForAJobDescription: '',
-      fullName: '',
+      lookingForAJob: profile?.lookingForAJob,
+      lookingForAJobDescription: profile?.lookingForAJobDescription,
+      fullName: profile?.fullName,
       contacts: {
-        github: '',
-        vk: '',
-        facebook: '',
-        instagram: '',
-        twitter: '',
-        website: '',
-        youtube: '',
-        mainLink: '',
+        github: profile?.contacts.github,
+        vk: profile?.contacts.vk,
+        facebook: profile?.contacts.facebook,
+        instagram: profile?.contacts.instagram,
+        twitter: profile?.contacts.twitter,
+        website: profile?.contacts.website,
+        youtube: profile?.contacts.youtube,
+        mainLink: profile?.contacts.mainLink,
       }
     }
   })
 
   const onSubmit: SubmitHandler<UpdProfileType> = data => {
-
+    console.log(data)
   }
 
   return (
@@ -55,9 +55,14 @@ export const ProfileUpdateInfo = (props: Props) => {
                 ?
                 profile?.fullName
                 :
-                <input placeholder={profile?.fullName}
-                       type={'text'}
-                       {...register('fullName', {required: requiredTextInputs})}/>}
+
+                <>
+                  <input
+                    type={'text'}
+                    {...register('fullName', {required: requiredTextInputs})}/>
+                  <p>{errors.fullName?.message}</p>
+                </>
+              }
             </td>
           </tr>
           {/*<tr>*/}
@@ -71,9 +76,10 @@ export const ProfileUpdateInfo = (props: Props) => {
             <td>
               {props.statusProfile
                 ?
-                <span style={{color: 'red'}}>{!profile?.lookingForAJob ? 'Yes' : 'No'}</span>
+                <span>{profile?.lookingForAJob ? 'Yes' : 'No'}</span>
                 :
-                <input type={'checkbox'} {...register('lookingForAJob',)}/>}
+                <input type={'checkbox'} {...register('lookingForAJob',)}/>
+              }
             </td>
           </tr>
           <tr>
@@ -82,22 +88,37 @@ export const ProfileUpdateInfo = (props: Props) => {
               ?
               profile?.lookingForAJobDescription
               :
-              <input type={'text'} {...register('lookingForAJobDescription', {required: requiredTextInputs})}/>}
+              <>
+                <input type={'text'} {...register('lookingForAJobDescription', {required: requiredTextInputs})}/>
+                <p>{errors.lookingForAJobDescription?.message}</p>
+              </>
+            }
             </td>
           </tr>
-          <tr className={s.cont}>
+          <tr className={s.blockContacts}>
             <td>Contacts</td>
             {props.statusProfile ||
               contacts.map(contact => {
-                return <td key={contact.name} className={s.contacts}><a href={contact.link} className={s.link}><IconSvg name={contact.name}/></a>
-                  {<input type="text" {...register(`contacts.${contact.name}`)}/>}
+                return <td key={contact.name} className={s.contacts}><a href={contact.link} className={s.link}><IconSvg
+                  name={contact.name}/></a>
+                  {<div className={s.input}><input type="text"
+                                                   {...register(`contacts.${contact.name}`, {
+                                                     required: requiredTextInputs,
+                                                     pattern: {
+                                                       value: profileInfoTextInputs,
+                                                       message: 'incorrect messenger names'
+                                                     }
+                                                   })}/>
+                    <p>{errors.contacts?.[contact.name]?.message}</p>
+                  </div>
+                  }
                 </td>
               })}
           </tr>
           </tbody>
         </table>
 
-
+        {!props.statusProfile && <Button name={'save'} disabled={false}/>}
       </form>
 
     </div>

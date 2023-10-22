@@ -15,7 +15,7 @@ export const Button = (props: ButtonType) => {
   }
   return (
     <button disabled={props.disabled}
-            className={`${s.button} ${props.modClass}`}
+            className={`${s.button} ${props.modClass} ${props.disabled ? s.disabled : ''}`}
             onClick={callbackHandle}
     >
       {props.name}
