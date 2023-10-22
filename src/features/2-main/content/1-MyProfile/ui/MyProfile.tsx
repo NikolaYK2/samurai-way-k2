@@ -36,7 +36,7 @@ export const Profile = () => {
       </div>
 
       <div className={s.profileInfo}>
-        <ProfileUpdateInfo statusProfile={statusProfile}/>
+        <ProfileUpdateInfo statusProfile={statusProfile} setStatusProfile={setStatusProfile}/>
       </div>
     </div>
   );

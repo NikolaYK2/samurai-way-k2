@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
 import {UpdProfileType} from "features/2-main/content/1-MyProfile/api/profileApi";
 import {useAppDispatch, useAppSelector} from "app/redux-store";
@@ -16,6 +16,7 @@ import {determineLinkUrl} from "common/utills/determineLinkUrl";
 
 type Props = {
   statusProfile: boolean
+  setStatusProfile: (status: boolean) => void
 }
 export const ProfileUpdateInfo = (props: Props) => {
   const myId = useAppSelector(myIdSelector)
@@ -23,13 +24,13 @@ export const ProfileUpdateInfo = (props: Props) => {
   const contacts = useAppSelector(optimizedProfileContactsSelect)
   const dispatch = useAppDispatch();
 
-  const {register, handleSubmit, formState: {errors, isSubmitting, isValid}} = useForm<UpdProfileType>({
+  const {register, handleSubmit, formState: {errors, isSubmitting, isValid}, reset} = useForm<UpdProfileType>({
     defaultValues: {
       userId: myId || undefined,
       lookingForAJob: profile?.lookingForAJob,
-      LookingForAJobDescription: profile?.lookingForAJobDescription,
-      FullName: profile?.fullName,
-      AboutMe: profile?.aboutMe || undefined,
+      lookingForAJobDescription: profile?.lookingForAJobDescription,
+      fullName: profile?.fullName,
+      aboutMe: profile?.aboutMe || undefined,
       contacts: {
         github: profile?.contacts?.github,
         vk: profile?.contacts?.vk,
@@ -42,12 +43,27 @@ export const ProfileUpdateInfo = (props: Props) => {
       }
     }
   })
-  console.log(profile?.fullName)
 
-  const onSubmit: SubmitHandler<UpdProfileType> = data => {
-    console.log(data)
-    dispatch(updUserProfileThunkCreator(data))
+  const onSubmit: SubmitHandler<UpdProfileType> = async data => {
+      if (myId)  {
+        try {
+          await dispatch(updUserProfileThunkCreator(data, myId))
+          props.setStatusProfile(true)
+        }catch (e) {
+          props.setStatusProfile(false)
+        }
+      }
   }
+
+  useEffect(() => {
+    reset({
+      ...profile,
+      lookingForAJobDescription: profile?.lookingForAJobDescription,
+      fullName: profile?.fullName,
+      aboutMe: profile?.aboutMe || undefined,
+    })
+
+  }, [profile, reset]);
 
   return (
     <div className={s.container}>
@@ -65,8 +81,8 @@ export const ProfileUpdateInfo = (props: Props) => {
                 <>
                   <input
                     type={'text'}
-                    {...register('FullName', {required: requiredTextInputs})}/>
-                  <p>{errors.FullName?.message}</p>
+                    {...register('fullName', {required: requiredTextInputs})}/>
+                  <p>{errors.fullName?.message}</p>
                 </>
               }
             </td>
@@ -79,8 +95,8 @@ export const ProfileUpdateInfo = (props: Props) => {
                 <span>{profile?.aboutMe}</span>
                 :
                 <>
-                  <textarea {...register('AboutMe', {required: requiredTextInputs})}/>
-                  <p>{errors.AboutMe?.message}</p>
+                  <textarea {...register('aboutMe', {required: requiredTextInputs})}/>
+                  <p>{errors.aboutMe?.message}</p>
                 </>
               }
             </td>
@@ -103,8 +119,8 @@ export const ProfileUpdateInfo = (props: Props) => {
               profile?.lookingForAJobDescription
               :
               <>
-                <textarea {...register('LookingForAJobDescription', {required: requiredTextInputs})}/>
-                <p>{errors.LookingForAJobDescription?.message}</p>
+                <textarea {...register('lookingForAJobDescription', {required: requiredTextInputs})}/>
+                <p>{errors.lookingForAJobDescription?.message}</p>
               </>
             }
             </td>
@@ -117,7 +133,7 @@ export const ProfileUpdateInfo = (props: Props) => {
               const linkUrl = determineLinkUrl(contact.link)
               return <td key={contact.name}
                          className={s.contacts}
-                         style={{display: !contact.link && props.statusProfile ? 'none' :  'flex'}}>
+                         style={{display: !contact.link && props.statusProfile ? 'none' : 'flex'}}>
 
                 <a href={linkUrl} className={s.link}>
                   <IconSvg name={contact.name}/>

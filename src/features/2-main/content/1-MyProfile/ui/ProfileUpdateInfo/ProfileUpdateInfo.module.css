@@ -51,7 +51,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: start;
-    flex: 1 1 10%;
+    flex: 0 1 10%;
     border-bottom: 1px solid var(--border-decor);
 }
 

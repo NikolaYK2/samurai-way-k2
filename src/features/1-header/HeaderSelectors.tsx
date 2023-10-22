@@ -12,4 +12,4 @@ export const isAuthSelector = (state: AppStateType) => state.loginAuthorization.
 
 export const loadingToggleSelector = (state: AppStateType) => state.proFilePage.loading
 
-
+export const bcSelector = (state:AppStateType)=> state.proFilePage.background

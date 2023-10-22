@@ -1,17 +1,14 @@
 import {ContactsType, ProfileUserType} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {instance, PhotosType, ResponsType} from "common/api/api";
 
-export type UpdProfileType = Omit<ProfileUserType, 'photos' | 'fullName' | 'lookingForAJobDescription' | 'aboutMe'> & {
+export type UpdProfileType = Omit<ProfileUserType, 'photos'> & {
   contacts: ContactsType & { [key: string]: string };
-} & {
-  FullName:string,
-  LookingForAJobDescription:string,
-  AboutMe: string,
 }
 
 export const profileApi = {
-  getUserProfile(userId: number) {
-    return instance.get<ProfileUserType>(`profile/${userId}`).then(response => response.data);
+  async getUserProfile(userId: number) {
+    let response = await instance.get<ProfileUserType>(`profile/${userId}`);
+    return response.data;
   },
   updUserProfile(updProfile: UpdProfileType) {
     return instance.put<ResponsType<ProfileUserType>>(`profile`, updProfile);

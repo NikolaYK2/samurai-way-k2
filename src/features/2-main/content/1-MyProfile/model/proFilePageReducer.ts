@@ -1,6 +1,7 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {profileApi, UpdProfileType} from "features/2-main/content/1-MyProfile/api/profileApi";
+import {AppThunk} from "app/redux-store";
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addPost = 'addPost';
 const setUserProfile = 'setUserProfile';
@@ -119,10 +120,9 @@ export type proFilePageType = {
   profile: ProfileUserType | null,
   status: string,
 }
-
 type ComponentStateType = {
   loading?: boolean
-  background?:string,
+  background?: string,
 }
 
 let initializationState: proFilePageType & ComponentStateType = {
@@ -178,22 +178,24 @@ export const getUserProfileThunkCreator = (userId: number) => async (dispatch: D
   try {
     let data = await profileApi.getUserProfile(userId)
     dispatch(setUserProfileAC(data));
-    dispatch(loadingAC(false))
-
   } catch (e) {
     alert('Error get 3-users')
+  } finally {
+    dispatch(loadingAC(false))
   }
 }
 
-export const updUserProfileThunkCreator = (updProfile: UpdProfileType) => async (dispatch: Dispatch<ActionsTypeProfile>) => {
+export const updUserProfileThunkCreator = (updProfile: UpdProfileType, id:number):AppThunk => async (dispatch) => {
   dispatch(loadingAC(true))
   try {
-    let data = await profileApi.updUserProfile(updProfile)
-    dispatch(updUserProfileAC(data.data.data));
-    dispatch(loadingAC(false))
+    await profileApi.updUserProfile(updProfile)
+    dispatch(getUserProfileThunkCreator(id))
 
   } catch (e) {
     alert('Error get 3-users')
+  } finally {
+    dispatch(loadingAC(false))
+
   }
 }
 
