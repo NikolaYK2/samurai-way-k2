@@ -51,7 +51,7 @@ export const ProfileUpdateInfo = (props: Props) => {
     <div className={s.container}>
       <h2>{props.statusProfile ? 'View Profile' : 'Edit Profile'}</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <table>
+        <table className={s.table}>
           <tbody>
           <tr>
             <td>Full name</td>
@@ -60,7 +60,6 @@ export const ProfileUpdateInfo = (props: Props) => {
                 ?
                 profile?.fullName
                 :
-
                 <>
                   <input
                     type={'text'}
