@@ -99,7 +99,7 @@ export const LoginForm = (props: { name: string }) => {
         </label>
 
 
-        <div className={s.captcha} style={{height: captcha && 'auto'}}>
+        <div className={`${s.captcha} ${captcha && s.onCaptcha}`} >
           <img src={captcha} alt=""/>
           <input type="text" placeholder='Captcha' {...register('captcha')}/>
         </div>
