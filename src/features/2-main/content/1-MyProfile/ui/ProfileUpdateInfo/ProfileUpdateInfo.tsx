@@ -1,69 +1,22 @@
-import React, {useEffect} from 'react';
-import {SubmitHandler, useForm} from "react-hook-form";
-import {UpdProfileType} from "features/2-main/content/1-MyProfile/api/profileApi";
-import {useAppDispatch, useAppSelector} from "app/redux-store";
+import React from 'react';
+import {useAppSelector} from "app/redux-store";
 import s from './ProfileUpdateInfo.module.css'
-import {
-  optimizedProfileContactsSelect,
-  optimizedProfileSelect
-} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
+import {optimizedProfileContactsSelect} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
 import {profileInfoTextInputs, requiredTextInputs} from "common/utills/errorsText";
 import {Button} from "common/components/button/Button";
-import {updUserProfileThunkCreator} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
-import {myIdSelector} from "features/0-auth/model/authSelectors";
 import {determineLinkUrl} from "common/utills/determineLinkUrl";
+import {useHookForm} from "features/2-main/content/1-MyProfile/model/useHookForm";
 
 type Props = {
   statusProfile: boolean
   setStatusProfile: (status: boolean) => void
 }
 export const ProfileUpdateInfo = (props: Props) => {
-  const myId = useAppSelector(myIdSelector)
-  const profile = useAppSelector(optimizedProfileSelect)
+
+  const {handleSubmit, onSubmit, profile, register, errors, isSubmitting}= useHookForm(props)
+
   const contacts = useAppSelector(optimizedProfileContactsSelect)
-  const dispatch = useAppDispatch();
-
-  const {register, handleSubmit, formState: {errors, isSubmitting, isValid}, reset} = useForm<UpdProfileType>({
-    defaultValues: {
-      userId: myId || undefined,
-      lookingForAJob: profile?.lookingForAJob,
-      lookingForAJobDescription: profile?.lookingForAJobDescription,
-      fullName: profile?.fullName,
-      aboutMe: profile?.aboutMe || undefined,
-      contacts: {
-        github: profile?.contacts?.github,
-        vk: profile?.contacts?.vk,
-        facebook: profile?.contacts?.facebook,
-        instagram: profile?.contacts?.instagram,
-        twitter: profile?.contacts?.twitter,
-        website: profile?.contacts?.website,
-        youtube: profile?.contacts?.youtube,
-        mainLink: profile?.contacts?.mainLink,
-      }
-    }
-  })
-
-  const onSubmit: SubmitHandler<UpdProfileType> = async data => {
-      if (myId)  {
-        try {
-          await dispatch(updUserProfileThunkCreator(data, myId))
-          props.setStatusProfile(true)
-        }catch (e) {
-          props.setStatusProfile(false)
-        }
-      }
-  }
-
-  useEffect(() => {
-    reset({
-      ...profile,
-      lookingForAJobDescription: profile?.lookingForAJobDescription,
-      fullName: profile?.fullName,
-      aboutMe: profile?.aboutMe || undefined,
-    })
-
-  }, [profile, reset]);
 
   return (
     <div className={s.container}>
@@ -155,7 +108,7 @@ export const ProfileUpdateInfo = (props: Props) => {
           </tbody>
         </table>
 
-        {!props.statusProfile && <Button name={'save'} disabled={false}/>}
+        {!props.statusProfile && <Button name={'save'} disabled={isSubmitting}/>}
       </form>
 
     </div>

@@ -188,8 +188,10 @@ export const getUserProfileThunkCreator = (userId: number) => async (dispatch: D
 export const updUserProfileThunkCreator = (updProfile: UpdProfileType, id:number):AppThunk => async (dispatch) => {
   dispatch(loadingAC(true))
   try {
-    await profileApi.updUserProfile(updProfile)
-    dispatch(getUserProfileThunkCreator(id))
+    let res = await profileApi.updUserProfile(updProfile)
+    if (res.data.resultCode === 0){
+      dispatch(getUserProfileThunkCreator(id))
+    }
 
   } catch (e) {
     alert('Error get 3-users')
