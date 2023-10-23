@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {ActionsType, AppThunk} from "app/redux-store";
 import {authorizationAPI, RegisterLoginType} from "features/0-auth/ip/authApi";
+import {getCaptchaUrlThunkCreator} from "features/0-security/model/securityReducer";
 
 const SET_USER_DATA = 'auth/SET_USER_DATA';
 
@@ -90,6 +91,9 @@ export const authLoginThunkC = (data: RegisterLoginType, setError?: (text: strin
             if (setError) {
                 setError(message)
             }
+        }
+        if (res.data.resultCode === 10){
+            dispatch(getCaptchaUrlThunkCreator())
         }
     } catch (e) {
         alert('Error authLogin')

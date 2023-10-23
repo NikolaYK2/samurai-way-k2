@@ -115,6 +115,38 @@
 
 }
 
+.captcha{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    border-radius: 0 0 12px 12px;
+    border-bottom: 1px solid white;
+    height: 0;
+    transition: height .4s ease 0s;
+    /*transform: translate(0,-300%);*/
+    /*opacity: 0;*/
+    overflow: hidden;
+    margin: 0 0 10px;
+}
+.captcha > img{
+    flex: 1 1 20%;
+    width: 150px;
+}
+.captcha > input{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    flex: 1 1 20%;
+    width: 100px;
+    padding: 5px;
+    font-size: var(--f-size10-14);
+    background: rgba(128, 128, 128, 0.3);
+    box-shadow: inset 0 2px 5px black;
+    color: #10b0ff;
+}
+
+
 /*ERRORS ------------------------------------------------------*/
 .errors {
     display: block;

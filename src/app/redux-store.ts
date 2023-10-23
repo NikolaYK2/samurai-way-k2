@@ -10,6 +10,7 @@ import {friendsReducer} from "features/redux/friendsReducer";
 import {ActionsAppType, appReducer} from "app/appReducer";
 import {loadState, saveState} from "common/utills/localStorage";
 import {throttle} from "common/utills/throttle";
+import {securityReducer} from "features/0-security/model/securityReducer";
 
 declare global {
   interface Window {
@@ -28,6 +29,7 @@ export let rootReducer = combineReducers({//функция которой пер
   loginAuthorization: authorizationReducer,
   friends: friendsReducer,
   app: appReducer,
+  security: securityReducer,
   // form: Controller,
   // form: useForm,
 },);

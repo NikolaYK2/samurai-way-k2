@@ -12,6 +12,7 @@ export const Login = () => {
 
   const isAuth = useAppSelector(loginSelector)
 
+
   if (isAuth) {
     return <Navigate to='/profile'/>
   }
@@ -39,7 +40,7 @@ export const LoginForm = (props: { name: string }) => {
   const dispatch = useAppDispatch();
 
   const isAuth = useAppSelector(loginSelector)
-  // const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth);
+  const captcha = useAppSelector(state => state.security.url)
 
   const [error, setError] = useState<string | null>(null);
 
@@ -84,7 +85,8 @@ export const LoginForm = (props: { name: string }) => {
             <p>{error}</p>
           </div>
 
-          <input type='password' placeholder={'Password'}
+          <input
+            type='password' placeholder={'Password'} autoComplete={'false'}
                  {...register("password", {
                    required: 'Fill in the password field',
                    minLength: {value: 4, message: 'min length is 4'}
@@ -96,9 +98,12 @@ export const LoginForm = (props: { name: string }) => {
           <input type="checkbox" {...register('rememberMe')}/>remember my
         </label>
 
-        {/*<div className={s.button}>*/}
-        {/*  <input type="submit" disabled={isAuth}/>*/}
-        {/*</div>*/}
+
+        <div className={s.captcha} style={{height: captcha && 'auto'}}>
+          <img src={captcha} alt=""/>
+          <input type="text" placeholder='Captcha' {...register('captcha')}/>
+        </div>
+
         <Button name={'Login'} disabled={isAuth}/>
       </form>
     </div>
