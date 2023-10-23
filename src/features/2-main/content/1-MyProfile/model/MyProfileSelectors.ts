@@ -9,16 +9,8 @@ export const optimizedProfileSelect = createSelector([profileSelect], (profile) 
   return profile
 })
 export const optimizedProfileContactsSelect = createSelector([contactsSelect], (contacts) => {
-  const names = [
-    'facebook',
-    'website',
-    'vk',
-    'twitter',
-    'instagram',
-    'youtube',
-    'github',
-    'mainLink'
-  ]
+
+  const names = contacts ? Object.keys(contacts) : []
   const meaning = contacts ? Object.values(contacts) : []
 
   return names.map((name,i)=> ({ name:name, link: meaning[i] }))

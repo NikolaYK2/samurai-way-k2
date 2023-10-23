@@ -14,7 +14,7 @@ type Props = {
 }
 export const ProfileUpdateInfo = (props: Props) => {
 
-  const {handleSubmit, onSubmit, profile, register, errors, isSubmitting}= useHookForm(props)
+  const {handleSubmit, onSubmit, profile, register, errors, isSubmitting} = useHookForm(props)
 
   const contacts = useAppSelector(optimizedProfileContactsSelect)
 
@@ -78,10 +78,9 @@ export const ProfileUpdateInfo = (props: Props) => {
             }
             </td>
           </tr>
-          <tr className={s.blockContacts}
-              style={{flexDirection: !props.statusProfile ? 'column' : 'initial'}}
-          >
+          <tr className={s.blockContacts} style={{flexDirection: !props.statusProfile ? 'column' : 'initial'}}>
             <td>Contacts</td>
+
             {contacts.map(contact => {
               const linkUrl = determineLinkUrl(contact.link)
               return <td key={contact.name}
@@ -104,6 +103,7 @@ export const ProfileUpdateInfo = (props: Props) => {
 
               </td>
             })}
+
           </tr>
           </tbody>
         </table>

@@ -39,7 +39,7 @@ export const useHookForm = (props:Props) => {
   const onSubmit: SubmitHandler<UpdProfileType> = async data => {
     if (myId)  {
       try {
-        await dispatch(updUserProfileThunkCreator(data, myId))
+        await dispatch(updUserProfileThunkCreator(data))
         props.setStatusProfile(true)
       }catch (e) {
         props.setStatusProfile(false)

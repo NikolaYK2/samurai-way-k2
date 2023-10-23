@@ -6,7 +6,6 @@ import {BcAvatarProfile} from "common/components/bcAvatarProfile/BcAvatarProfile
 import {MemoNavLink} from "common/utills/MemoNavLink";
 
 export const Nav = () => {
-
   const links = [
     {name: 'Profile', link: '/profile', icon: 'loginIn'},
     {name: 'Messages', link: '/messages', icon: 'message'},

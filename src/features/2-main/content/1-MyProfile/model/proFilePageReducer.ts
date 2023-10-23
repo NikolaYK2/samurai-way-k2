@@ -5,7 +5,6 @@ import {AppThunk} from "app/redux-store";
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addPost = 'addPost';
 const setUserProfile = 'setUserProfile';
-const updUserProfile = 'PROFILE/UPD-USER-PROFILE';
 const setStatus = 'setStatus';
 const deletePost = 'PROFILE/DELETE-POST';
 const likePost = 'PROFILE/LIKE-POST';
@@ -16,7 +15,6 @@ const loadingToggle = 'PROFILE/LOADING-TOGGLE';
 export type ActionsTypeProfile = ReturnType<typeof addPostAC>
   | ReturnType<typeof deletePostAC>
   | ReturnType<typeof setUserProfileAC>
-  | ReturnType<typeof updUserProfileAC>
   | ReturnType<typeof setStatusAC>
   | ReturnType<typeof setLikeAC>
   | ReturnType<typeof changePhotoAC>
@@ -44,12 +42,7 @@ export const setUserProfileAC = (profile: ProfileUserType | null) => {
     profile,
   } as const
 }
-export const updUserProfileAC = (updProfile: ProfileUserType) => {
-  return {
-    type: updUserProfile,
-    updProfile,
-  } as const
-}
+
 
 export const setStatusAC = (status: string) => {
   return {
@@ -143,9 +136,6 @@ export const proFileReducer = (state = initializationState, action: ActionsTypeP
   } else if (action.type === setUserProfile) {
     return {...state, profile: action.profile}
 
-  } else if (action.type === updUserProfile) {
-    return {...state, profile: action.updProfile}
-
   } else if (action.type === setStatus) {
     //Добавление нового поста для change(update)=================================================
     return {...state, status: action.status}
@@ -185,11 +175,12 @@ export const getUserProfileThunkCreator = (userId: number) => async (dispatch: D
   }
 }
 
-export const updUserProfileThunkCreator = (updProfile: UpdProfileType, id:number):AppThunk => async (dispatch) => {
+export const updUserProfileThunkCreator = (updProfile: UpdProfileType):AppThunk => async (dispatch, getState) => {
+  const id = getState().loginAuthorization.id
   dispatch(loadingAC(true))
   try {
     let res = await profileApi.updUserProfile(updProfile)
-    if (res.data.resultCode === 0){
+    if (res.data.resultCode === 0 && id){
       dispatch(getUserProfileThunkCreator(id))
     }
 
