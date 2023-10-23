@@ -10,7 +10,7 @@ import UsersContainer from "features/2-main/content/3-users/UsersContiner";
 import {Loading} from "common/components/loading/Loading";
 
 const DialogsMessage = lazy(() => import('features/2-main/content/2-dialogs/DialogsMessage'));
-const ProfileContainer = lazy(() => import('features/2-main/content/ui/ContentProfileContainer'));
+const ProfileContainer = lazy(() => import('features/2-main/content/ContentProfileContainer'));
 
 export const Main = () => {
 

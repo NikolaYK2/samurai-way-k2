@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import s from "features/2-main/content/ui/ContentProfile.module.css";
+import s from "features/2-main/content/ContentProfile.module.css";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {Profile} from "features/2-main/content/1-MyProfile/ui/MyProfile";

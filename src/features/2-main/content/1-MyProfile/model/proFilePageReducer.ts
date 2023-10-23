@@ -2,6 +2,7 @@ import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {profileApi, UpdProfileType} from "features/2-main/content/1-MyProfile/api/profileApi";
 import {AppThunk} from "app/redux-store";
+import {handleServerNetworkError} from "common/utills/errorsText";
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addPost = 'addPost';
 const setUserProfile = 'setUserProfile';
@@ -21,7 +22,7 @@ export type ActionsTypeProfile = ReturnType<typeof addPostAC>
   | ReturnType<typeof changePhotoAC>
   | ReturnType<typeof changeBackgroundAC>
   | ReturnType<typeof loadingAC>
-  | ReturnType<typeof errorsAC>
+  | ReturnType<typeof setErrorsAC>
 //Type messages Users Type===========================================================================================================
 //======function Action Creator addPoast==============================================================================
 export const addPostAC = (postMessage: string) => {
@@ -82,12 +83,13 @@ export const loadingAC = (toggle: boolean) => {
   } as const
 }
 
-export const errorsAC = (err: string) => {
+export const setErrorsAC = (err: string | null) => {
   return {
     type: errors,
     err
   } as const
 }
+
 
 export type postDataType = {
   id: string,
@@ -124,8 +126,8 @@ export type proFilePageType = {
 }
 type ComponentStateType = {
   loading?: boolean
+  error?: string | null
   background?: string,
-  error?:string
 }
 
 let initializationState: proFilePageType & ComponentStateType = {
@@ -188,19 +190,19 @@ export const getUserProfileThunkCreator = (userId: number) => async (dispatch: D
   }
 }
 
-export const updUserProfileThunkCreator = (updProfile: UpdProfileType):AppThunk => async (dispatch, getState) => {
+export const updUserProfileThunkCreator = (updProfile: UpdProfileType): AppThunk => async (dispatch, getState) => {
   const id = getState().loginAuthorization.id
   dispatch(loadingAC(true))
   try {
     let res = await profileApi.updUserProfile(updProfile)
-    if (res.data.resultCode === 0 && id){
+    if (res.data.resultCode === 0 && id) {
       dispatch(getUserProfileThunkCreator(id))
     }
 
   } catch (e) {
+    handleServerNetworkError(e, dispatch)
   } finally {
     dispatch(loadingAC(false))
-
   }
 }
 

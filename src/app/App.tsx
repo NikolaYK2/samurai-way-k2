@@ -7,6 +7,7 @@ import {Loading} from "common/components/loading/Loading";
 import {useAppDispatch, useAppSelector} from "app/redux-store";
 import {initializedAppThunkC} from "app/appReducer";
 import {Login} from "features/0-auth/ui/login/Login";
+import {ErrorsApp} from "common/components/errors/ErrorsApp";
 
 // type AppPropsType = {
 //     // store: StoreType,
@@ -77,6 +78,7 @@ function App() {
       <HeaderContainerConnect/>
       <Main/>
       <Footer/>
+      <ErrorsApp/>
     </div>
   );
 }
