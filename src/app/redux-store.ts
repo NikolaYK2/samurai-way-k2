@@ -1,5 +1,5 @@
-import {AnyAction, applyMiddleware, combineReducers, compose, legacy_createStore as createStore} from "redux";
-import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk';
+import {applyMiddleware, combineReducers, compose, legacy_createStore as createStore} from "redux";
+import thunkMiddleware, {ThunkAction} from 'redux-thunk';
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {messagesPageReducer} from "features/redux/messagesPageReducer";
 import {ActionsTypeProfile, proFileReducer} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
@@ -43,8 +43,9 @@ export const store = createStore(rootReducer, persistedState, composeEnhancers(a
 export const useAppSelector: TypedUseSelectorHook<AppStateType> = useSelector;
 
 //Type DISPATCH =============
-export type AppThunkDispatch = ThunkDispatch<AppStateType, any, AnyAction>;
-export const useAppDispatch = () => useDispatch<AppThunkDispatch>();
+export type AppDispatch = typeof store.dispatch
+// export type AppThunkDispatch = ThunkDispatch<AppStateType, any, AnyAction>;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 //Types action для всего app=============
 export type ActionsType =

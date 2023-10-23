@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import s from 'features/0-auth/ui/login/Login.module.css';
 import {SubmitHandler, useForm} from "react-hook-form";
-import {useDispatch} from "react-redux";
 import {Navigate} from "react-router-dom";
-import {AppThunkDispatch, useAppSelector} from "app/redux-store";
+import {useAppDispatch, useAppSelector} from "app/redux-store";
 import {authLoginThunkC} from "features/0-auth/model/authReducer";
 import {loginSelector} from "features/0-auth/ui/login/selectors";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
@@ -37,7 +36,7 @@ type LoginFormType = {
 };
 export const LoginForm = (props: { name: string }) => {
 
-  const dispatch = useDispatch<AppThunkDispatch>();
+  const dispatch = useAppDispatch();
 
   const isAuth = useAppSelector(loginSelector)
   // const isAuth = useAppSelector<boolean>((state) => state.loginAuthorization.isAuth);

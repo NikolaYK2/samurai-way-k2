@@ -9,6 +9,9 @@
     margin: 0 0 16px;
     border-bottom: 1px solid var(--border-decor);
 }
+.container p {
+    color: red;
+}
 
 .table {
     width: 100%;
@@ -87,10 +90,10 @@
     font-size: var(--f-size10-14);
 
 }
-
 .container form button {
+    display: flex;
     margin: 10px auto;
-    padding: 10px 20px;
+    padding: 7px 50px;
 
     color: var(--main-color);
 }

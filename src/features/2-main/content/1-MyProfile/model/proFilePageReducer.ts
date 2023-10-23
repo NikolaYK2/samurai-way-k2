@@ -11,6 +11,7 @@ const likePost = 'PROFILE/LIKE-POST';
 const photoUserChange = 'PROFILE/CHANGE-PHOTO';
 const bcUserChange = 'PROFILE/CHANGE-BACKGROUND';
 const loadingToggle = 'PROFILE/LOADING-TOGGLE';
+const errors = 'PROFILE/ERRORS';
 
 export type ActionsTypeProfile = ReturnType<typeof addPostAC>
   | ReturnType<typeof deletePostAC>
@@ -20,6 +21,7 @@ export type ActionsTypeProfile = ReturnType<typeof addPostAC>
   | ReturnType<typeof changePhotoAC>
   | ReturnType<typeof changeBackgroundAC>
   | ReturnType<typeof loadingAC>
+  | ReturnType<typeof errorsAC>
 //Type messages Users Type===========================================================================================================
 //======function Action Creator addPoast==============================================================================
 export const addPostAC = (postMessage: string) => {
@@ -80,6 +82,13 @@ export const loadingAC = (toggle: boolean) => {
   } as const
 }
 
+export const errorsAC = (err: string) => {
+  return {
+    type: errors,
+    err
+  } as const
+}
+
 export type postDataType = {
   id: string,
   sms: string,
@@ -116,6 +125,7 @@ export type proFilePageType = {
 type ComponentStateType = {
   loading?: boolean
   background?: string,
+  error?:string
 }
 
 let initializationState: proFilePageType & ComponentStateType = {
@@ -158,6 +168,9 @@ export const proFileReducer = (state = initializationState, action: ActionsTypeP
 
   } else if (action.type === bcUserChange) {
     return {...state, background: action.bc};
+
+  } else if (action.type === errors) {
+    return {...state, error: action.err};
   }
   return state;
 }
@@ -185,7 +198,6 @@ export const updUserProfileThunkCreator = (updProfile: UpdProfileType):AppThunk 
     }
 
   } catch (e) {
-    alert('Error get 3-users')
   } finally {
     dispatch(loadingAC(false))
 

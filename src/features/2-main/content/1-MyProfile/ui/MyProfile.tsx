@@ -7,7 +7,6 @@ import {ProfileUpdateInfo} from "features/2-main/content/1-MyProfile/ui/ProfileU
 import {myIdSelector} from "features/0-auth/model/authSelectors";
 
 export const Profile = () => {
-  console.log('весь проф')
   const [statusProfile, setStatusProfile] = useState(true)
 
   const profile = useAppSelector(optimizedProfileSelect)
