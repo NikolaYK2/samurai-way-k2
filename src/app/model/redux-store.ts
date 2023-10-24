@@ -7,7 +7,7 @@ import {usersReducer} from "features/redux/usersReducers";
 import {sidebarReducer} from "features/redux/sidebarReducer";
 import {ActionsTypeLoginAuthorization, authorizationReducer} from "features/0-auth/model/authReducer";
 import {friendsReducer} from "features/redux/friendsReducer";
-import {ActionsAppType, appReducer} from "app/appReducer";
+import {ActionsAppType, appReducer} from "app/model/appReducer";
 import {loadState, saveState} from "common/utills/localStorage";
 import {throttle} from "common/utills/throttle";
 import {securityReducer} from "features/0-security/model/securityReducer";

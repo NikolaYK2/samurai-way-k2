@@ -1,4 +1,4 @@
-import {AppStateType} from "app/redux-store";
+import {AppStateType} from "app/model/redux-store";
 
 
 // export const saveState = (state: {background: string}) => {

@@ -107,7 +107,7 @@ import {Expectation} from "features/redux/usersReducers";
 import {Paginator} from "common/components/paginator/Paginator";
 import {User} from "features/2-main/content/3-users/User";
 import {Loading} from "common/components/loading/Loading";
-import {useAppSelector} from "app/redux-store";
+import {useAppSelector} from "app/model/redux-store";
 
 type UsersTypeComponent = {
     totalItemsCount: number,

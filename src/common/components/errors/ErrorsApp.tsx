@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import s from './ErrorsApp.module.css'
-import {useAppDispatch, useAppSelector} from "app/redux-store";
+import {useAppDispatch, useAppSelector} from "app/model/redux-store";
 import {setErrorsAC} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {errorSelect} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
 import {IconSvg} from "common/components/iconSvg/IconSVG";

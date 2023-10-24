@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {Header} from "features/1-header/Header";
-import {AppStateType} from "app/redux-store";
+import {AppStateType} from "app/model/redux-store";
 
 export class HeaderContainer extends React.Component<ProfileTypeProps> {
 

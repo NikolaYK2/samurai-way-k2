@@ -1,4 +1,4 @@
-import {AppThunk} from "app/redux-store";
+import {AppThunk} from "app/model/redux-store";
 import {authMeThunkC} from "features/0-auth/model/authReducer";
 
 

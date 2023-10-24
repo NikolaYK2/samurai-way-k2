@@ -1,5 +1,5 @@
 import axios from "axios";
-import {AppDispatch} from "app/redux-store";
+import {AppDispatch} from "app/model/redux-store";
 import {setErrorsAC} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 
 export const requiredTextInputs = 'Fill in the field'

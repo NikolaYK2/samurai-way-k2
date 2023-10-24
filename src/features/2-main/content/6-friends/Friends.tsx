@@ -1,6 +1,6 @@
 import React from 'react';
 import {UsersType} from "common/api/api";
-import {useAppSelector} from "app/redux-store";
+import {useAppSelector} from "app/model/redux-store";
 import {optimizedFriendsSelector} from "features/2-main/content/6-friends/Friends.seceltors";
 
 type FriendsType = {

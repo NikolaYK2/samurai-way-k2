@@ -1,7 +1,7 @@
 import React, {ComponentType} from 'react';
 import {Navigate} from "react-router-dom";
 import {connect} from "react-redux";
-import {AppStateType} from "app/redux-store";
+import {AppStateType} from "app/model/redux-store";
 
 
 type MapStatePropsType = {

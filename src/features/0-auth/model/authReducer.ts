@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {ActionsType, AppThunk} from "app/redux-store";
+import {ActionsType, AppThunk} from "app/model/redux-store";
 import {authorizationAPI, RegisterLoginType} from "features/0-auth/ip/authApi";
 import {getCaptchaUrlThunkCreator} from "features/0-security/model/securityReducer";
 

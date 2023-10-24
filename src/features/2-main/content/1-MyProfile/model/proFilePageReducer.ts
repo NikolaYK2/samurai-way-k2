@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {profileApi, UpdProfileType} from "features/2-main/content/1-MyProfile/api/profileApi";
-import {AppThunk} from "app/redux-store";
+import {AppThunk} from "app/model/redux-store";
 import {handleServerNetworkError} from "common/utills/errorsText";
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addPost = 'addPost';

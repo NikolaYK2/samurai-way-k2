@@ -5,23 +5,19 @@ const getCaptcha = 'SECURITY/GET-CAPTCHA'
 
 export type ActionsTypeSecurity = ReturnType<typeof getCaptchaUrlAC>
 
-const getCaptchaUrlAC = (imageCaptcha: string) => {
-  return {
-    type: getCaptcha,
-    imageCaptcha
-  } as const
-}
+const getCaptchaUrlAC = (imageCaptcha: string) => ({type: getCaptcha, imageCaptcha} as const)
+
 
 type Props = {
-  url: string
+  captchaUrl: string
 }
 const init: Props = {
-  url: ''
+  captchaUrl: ''
 }
 export const securityReducer = (state = init, action: ActionsTypeSecurity): Props => {
   switch (action.type) {
     case getCaptcha: {
-      return {...state, url: action.imageCaptcha}
+      return {...state, captchaUrl: action.imageCaptcha}
     }
     default:
       return state;

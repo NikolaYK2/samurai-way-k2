@@ -1,4 +1,4 @@
-import {AppStateType} from "app/redux-store";
+import {AppStateType} from "app/model/redux-store";
 import {createSelector} from "reselect";
 
 export const statusSelector = (state: AppStateType) => state.proFilePage.status

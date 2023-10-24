@@ -12,7 +12,7 @@ import {
     setStatusThunkCreator,
     updStatusThunkCreator
 } from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
-import {AppStateType} from "app/redux-store";
+import {AppStateType} from "app/model/redux-store";
 import {RedirectContainer} from "common/hoc/RedirectContainer";
 
 const ContentProfileContainer = (props: ProfileTypeProps) => {

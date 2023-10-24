@@ -1,4 +1,4 @@
-import {useAppDispatch, useAppSelector} from "app/redux-store";
+import {useAppDispatch, useAppSelector} from "app/model/redux-store";
 import {myIdSelector} from "features/0-auth/model/authSelectors";
 import {optimizedProfileSelect} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
 import {SubmitHandler, useForm} from "react-hook-form";

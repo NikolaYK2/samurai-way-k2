@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import s from 'features/0-auth/ui/login/Login.module.css';
 import {SubmitHandler, useForm} from "react-hook-form";
 import {Navigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "app/redux-store";
+import {useAppDispatch, useAppSelector} from "app/model/redux-store";
 import {authLoginThunkC} from "features/0-auth/model/authReducer";
 import {loginSelector} from "features/0-auth/ui/login/selectors";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
 import {Button} from "common/components/button/Button";
+import {captchaSelector} from "features/0-security/model/securitySelectors";
 
 export const Login = () => {
 
@@ -40,7 +41,7 @@ export const LoginForm = (props: { name: string }) => {
   const dispatch = useAppDispatch();
 
   const isAuth = useAppSelector(loginSelector)
-  const captcha = useAppSelector(state => state.security.url)
+  const captcha = useAppSelector(captchaSelector)
 
   const [error, setError] = useState<string | null>(null);
 
@@ -53,7 +54,6 @@ export const LoginForm = (props: { name: string }) => {
   });
 
   const onSubmit: SubmitHandler<LoginFormType> = data => {
-    console.log(data)
     dispatch(authLoginThunkC(data, setError));
     reset();
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
 import {addMessageUsersAC, usersMessagesType} from "features/redux/messagesPageReducer";
-import {AppStateType} from "app/redux-store";
+import {AppStateType} from "app/model/redux-store";
 import {RedirectContainer} from "common/hoc/RedirectContainer";
 import {MessageUsers} from "features/2-main/content/2-dialogs/messageUsers/MessageUsers";
 

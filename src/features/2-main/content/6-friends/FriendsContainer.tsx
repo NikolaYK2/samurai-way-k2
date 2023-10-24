@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {setStatusFriendAC, setUsersFriendTC, statuses} from "features/redux/friendsReducer";
 import {Friends} from "features/2-main/content/6-friends/Friends";
 import {UsersType} from "common/api/api";
-import {AppStateType} from "app/redux-store";
+import {AppStateType} from "app/model/redux-store";
 
 class FriendsApi extends React.Component<FriendsTypeProps> {
     componentDidMount() {

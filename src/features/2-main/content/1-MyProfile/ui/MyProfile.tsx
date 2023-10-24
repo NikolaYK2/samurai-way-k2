@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import s from "features/2-main/content/1-MyProfile/ui/MyProfile.module.css";
 import {Loading} from "common/components/loading/Loading";
-import {useAppSelector} from "app/redux-store";
+import {useAppSelector} from "app/model/redux-store";
 import {optimizedProfileSelect} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
 import {ProfileUpdateInfo} from "features/2-main/content/1-MyProfile/ui/ProfileUpdateInfo/ProfileUpdateInfo";
 import {myIdSelector} from "features/0-auth/model/authSelectors";

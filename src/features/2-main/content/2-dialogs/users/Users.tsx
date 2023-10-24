@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./Users.module.css";
-import {store} from "app/redux-store";
+import {store} from "app/model/redux-store";
 import {MemoNavLink} from "common/utills/MemoNavLink";
 
 export const Users = () => {

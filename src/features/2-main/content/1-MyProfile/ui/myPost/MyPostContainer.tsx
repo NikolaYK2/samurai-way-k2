@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {addPostAC, deletePostAC, postDataType} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
-import {AppStateType} from "app/redux-store";
+import {AppStateType} from "app/model/redux-store";
 import {MyPost} from "features/2-main/content/1-MyProfile/ui/myPost/MyPost";
 
 //ФУнкции которые возвращают объект. Создает контейнерную компоненту и

@@ -12,7 +12,7 @@ import {
     toggleExpectationAC,
     unFollowThunkCreator
 } from "features/redux/usersReducers";
-import {AppStateType} from "app/redux-store";
+import {AppStateType} from "app/model/redux-store";
 import {
     getCurrentPage,
     getExpectation,

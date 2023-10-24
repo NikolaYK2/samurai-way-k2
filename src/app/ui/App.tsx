@@ -1,13 +1,15 @@
 import React, {useEffect} from 'react';
-import 'app/App.css';
+import 'app/ui/App.css';
 import {Main} from "features/2-main/Main";
 import {Footer} from "features/footer/Footer";
 import {HeaderContainerConnect} from "features/1-header/HeaderContainer";
 import {Loading} from "common/components/loading/Loading";
-import {useAppDispatch, useAppSelector} from "app/redux-store";
-import {initializedAppThunkC} from "app/appReducer";
+import {useAppDispatch, useAppSelector} from "app/model/redux-store";
+import {initializedAppThunkC} from "app/model/appReducer";
 import {Login} from "features/0-auth/ui/login/Login";
 import {ErrorsApp} from "common/components/errors/ErrorsApp";
+import {initSelect} from "app/model/appSelectors";
+import {isAuthSelect} from "features/0-auth/model/authSelectors";
 
 // type AppPropsType = {
 //     // store: StoreType,
@@ -56,8 +58,8 @@ import {ErrorsApp} from "common/components/errors/ErrorsApp";
 
 //FN COMPONENT
 function App() {
-  const init = useAppSelector(state => state.app.initialized)
-  const isAuth = useAppSelector(state => state.loginAuthorization.isAuth)
+  const init = useAppSelector(initSelect)
+  const isAuth = useAppSelector(isAuthSelect)
   const dispatch = useAppDispatch()
 
   useEffect(() => {

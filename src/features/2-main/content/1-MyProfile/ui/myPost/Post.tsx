@@ -1,6 +1,6 @@
 import s from "features/2-main/content/1-MyProfile/ui/myPost/Post.module.css";
 import React, {memo, useCallback} from "react";
-import {useAppSelector} from "app/redux-store";
+import {useAppSelector} from "app/model/redux-store";
 import {useDispatch} from "react-redux";
 import {deletePostAC, setLikeAC} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {IconSvg} from "common/components/iconSvg/IconSVG";

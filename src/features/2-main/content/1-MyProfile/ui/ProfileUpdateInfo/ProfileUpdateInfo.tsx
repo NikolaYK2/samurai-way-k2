@@ -1,5 +1,5 @@
 import React from 'react';
-import {useAppSelector} from "app/redux-store";
+import {useAppSelector} from "app/model/redux-store";
 import s from './ProfileUpdateInfo.module.css'
 import {optimizedProfileContactsSelect} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
