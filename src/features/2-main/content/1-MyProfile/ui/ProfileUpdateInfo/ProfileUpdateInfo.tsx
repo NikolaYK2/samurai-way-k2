@@ -1,5 +1,5 @@
 import React from 'react';
-import {useAppSelector} from "app/model/redux-store";
+import {useAppDispatch, useAppSelector} from "app/model/redux-store";
 import s from './ProfileUpdateInfo.module.css'
 import {optimizedProfileContactsSelect} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
@@ -7,6 +7,10 @@ import {profileInfoTextInputs, requiredTextInputs} from "common/utills/errorsTex
 import {Button} from "common/components/button/Button";
 import {determineLinkUrl} from "common/utills/determineLinkUrl";
 import {useHookForm} from "features/2-main/content/1-MyProfile/lib/useHookForm";
+import {namesStatusFollowed, updateFollowState} from "common/utills/updateFollowState";
+import {followedUserSelector} from "features/2-main/content/3-users/model/usersSelectors";
+import {followThunkCreator, unFollowThunkCreator} from "features/2-main/content/3-users/model/usersReducers";
+import {myIdSelector} from "features/0-auth/model/authSelectors";
 
 type Props = {
   statusProfile: boolean
@@ -15,8 +19,27 @@ type Props = {
 export const ProfileUpdateInfo = (props: Props) => {
 
   const {handleSubmit, onSubmit, profile, register, errors, isSubmitting} = useHookForm(props)
-
+  const dispatch = useAppDispatch()
   const contacts = useAppSelector(optimizedProfileContactsSelect)
+  const userId = useAppSelector(state => state.proFilePage.profile?.userId)
+  const myId = useAppSelector(myIdSelector)
+  const expectation = useAppSelector(state => state.usersPage.expectation)
+  const user = useAppSelector((state) => followedUserSelector(state, userId))
+
+  const {names, disabled, addAndRemove} = updateFollowState(
+    user?.id,
+    namesStatusFollowed,
+    expectation,
+    user?.followed,
+    unFollowThunkCreator,
+    followThunkCreator,
+  )
+
+  const handleAddAndRemove = () => {
+    if (addAndRemove && user?.id) {
+      dispatch(addAndRemove(user.id))
+    }
+  }
 
   return (
     <div className={s.container}>
@@ -110,7 +133,7 @@ export const ProfileUpdateInfo = (props: Props) => {
 
         {!props.statusProfile && <Button name={'save'} disabled={isSubmitting}/>}
       </form>
-
+      {myId !== userId && <Button name={names} disabled={disabled} callBack={handleAddAndRemove}/>}
     </div>
   );
 };

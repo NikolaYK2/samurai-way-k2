@@ -36,7 +36,7 @@ export const MyProfileStatusHook = () => {
     <div className={s.blockStatus}>
       {editMode ?
         <span onDoubleClick={activateEditMode} className={s.span}>
-                    {userId === myId ? status || 'no status' : statusUser?.status || 'no status'}
+                    {userId === myId ? status || 'no status' : statusUser?.status}
                 </span>
         :
         <input autoFocus={true}

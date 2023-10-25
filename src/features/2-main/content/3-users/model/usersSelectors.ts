@@ -13,6 +13,13 @@ export const getUserOptimized = createSelector(getUsers,
   (_: AppStateType, userId: number | undefined) => userId,
   (users, userId) => users.find(user => userId && +user.id === userId))
 
+export const followedUserSelector = createSelector(getUsers,
+  (_: AppStateType, userId: number | undefined) => userId,
+  (users, userId) => users.find(user => +user.id === userId ))
+
+
+
+
 export const getPageSize = (state: AppStateType) => state.usersPage.pageSize;
 
 export const getTotalUsersCount = (state: AppStateType) => state.usersPage.totalUsersCount;

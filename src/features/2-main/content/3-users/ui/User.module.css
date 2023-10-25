@@ -62,7 +62,7 @@
 .containerUsers__title > div {
     display: flex;
     flex-direction: column;
-    flex: 1 1 60%;
+    flex: 1 1 50%;
     margin: 0 10px 0 0;
 }
 
@@ -78,6 +78,8 @@
     font-size: clamp(10 / 14 * 1rem, 5vw, 13 / 14 * 1rem);
 }
 
-.containerUsers__title>button{
+.containerUsers__title button{
+    flex: 1 1 67%;
     color: var(--main-color);
+    width: 100%;
 }
