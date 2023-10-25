@@ -62,8 +62,15 @@ function App() {
   const isAuth = useAppSelector(isAuthSelect)
   const dispatch = useAppDispatch()
 
+  const allError = (promiseRejEvent:any) => {
+    alert(promiseRejEvent + 'App alert')
+  }
   useEffect(() => {
     dispatch(initializedAppThunkC())
+    window.addEventListener('unhandledrejection', allError)
+    return ()=>{
+      window.removeEventListener('unhandledrejection', allError)
+    }
   }, []);
 
   if (!init) {

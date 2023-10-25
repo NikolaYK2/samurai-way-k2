@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {Users} from "features/2-main/content/3-users/Users";
+import {Users} from "features/2-main/content/3-users/ui/Users";
 import {UsersType} from "common/api/api";
 import {
     Expectation,
@@ -11,7 +11,7 @@ import {
     setUsersAC,
     toggleExpectationAC,
     unFollowThunkCreator
-} from "features/redux/usersReducers";
+} from "features/2-main/content/3-users/model/usersReducers";
 import {AppStateType} from "app/model/redux-store";
 import {
     getCurrentPage,
@@ -19,8 +19,8 @@ import {
     getLoadingPage,
     getPageSize,
     getTotalUsersCount,
-    getUserSelector
-} from "features/redux/usersSelectors";
+    getUsersSelector
+} from "features/2-main/content/3-users/model/usersSelectors";
 
 //Контейнерная class компонента которая делает API
 class UsersAPIComponent extends React.Component<UsersTypeProps> {
@@ -84,7 +84,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {//назв�
         //getState мы уже не делаем
         // 3-users: getUsers(state),
         //FN SELECTOR ------
-        users: getUserSelector(state),
+        users: getUsersSelector(state),
         // -----------------
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),

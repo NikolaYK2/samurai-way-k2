@@ -101,12 +101,13 @@
 //
 //
 import React from 'react';
-import s from "./User.module.css";
+import s from "features/2-main/content/3-users/ui/User.module.css";
 import userPhotos from "assets/img/myProf/ava.jpg";
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 import {UsersType} from "common/api/api";
-import {Expectation} from "features/redux/usersReducers";
+import {Expectation} from "features/2-main/content/3-users/model/usersReducers";
 import {Button} from "common/components/button/Button";
+import {useAppSelector} from "app/model/redux-store";
 
 type UserTypeComponent = {
   key: string,
@@ -118,6 +119,10 @@ type UserTypeComponent = {
 
 export const User = (props: UserTypeComponent) => {
 
+  const location = useLocation()
+  const userProfile = location.pathname.includes('/profile');
+  const myId = useAppSelector(state => state.loginAuthorization.id)
+
   const unFollowHandler = (id: string) => {
     props.unFollowThunk(id)
   }
@@ -128,6 +133,8 @@ export const User = (props: UserTypeComponent) => {
   const disabled = props.expectation.some(id => id === props.user.id)
   const followUnfollow = props.user.followed ? unFollowHandler : followHandler
   const name = props.user.followed ? 'Follow' : 'Unfollow'
+
+
 
   return (
     <div className={s.containerUsers}>

@@ -2,7 +2,7 @@ import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {profileApi, UpdProfileType} from "features/2-main/content/1-MyProfile/api/profileApi";
 import {AppThunk} from "app/model/redux-store";
-import {handleServerNetworkError} from "common/utills/errorsText";
+import {handleServerAppError, handleServerNetworkError} from "common/utills/errorsText";
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addPost = 'addPost';
 const setUserProfile = 'setUserProfile';
@@ -209,12 +209,15 @@ export const updUserProfileThunkCreator = (updProfile: UpdProfileType): AppThunk
 export const setStatusThunkCreator = (userId: number) => async (dispatch: Dispatch<ActionsTypeProfile>) => {
   let res = await profileApi.getProfileStatusUser(userId)
   dispatch(loadingAC(true))
-
   try {
-    dispatch(setStatusAC(res.data));
-    dispatch(loadingAC(false))
+    if (res.data.resultCode === 0) {
+      dispatch(setStatusAC(res.data));
+      // dispatch(loadingAC(false))
+    }
   } catch (e) {
-    alert('Error set status')
+    handleServerNetworkError(e, dispatch)
+  }finally {
+    dispatch(loadingAC(false))
   }
 }
 
@@ -223,9 +226,11 @@ export const updStatusThunkCreator = (status: string) => async (dispatch: Dispat
   try {
     if (res.data.resultCode === 0) {
       dispatch(setStatusAC(status));
+    }else {
+      handleServerAppError(res.data, dispatch)
     }
   } catch (e) {
-    alert('Error upd status')
+    handleServerNetworkError(e, dispatch)
   }
 }
 

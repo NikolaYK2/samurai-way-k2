@@ -1,4 +1,5 @@
 import axios from "axios";
+import {GetUsersType} from "features/2-main/content/3-users/api/usersApi";
 
 // const baseUrl = 'https://social-network.samuraijs.com/api/1.0/';
 
@@ -30,22 +31,6 @@ export type UsersType = {
   // location: LocationType,
 }
 
-type GetUsersType = {
-  items: UsersType[],
-  totalCount: number,
-  error: string,
-}
-export const usersAPI = {
-  getUsers(currentPage = 1, pageSize = 10) {
-    return instance./*axios.*/get<GetUsersType>(/*baseUrl + */`users?page=${currentPage}&count=${pageSize}`/*,{withCredentials:true,}*/).then(response => response.data);
-  },
-  deleteFollow(id: string) {
-    return instance.delete<ResponsType<{}>>(`follow/${id}`).then(response => response.data);
-  },
-  postFollow(id: string) {
-    return instance.post<ResponsType>(`follow/${id}`).then(response => response.data);
-  },
-}
 
 
 export const friendsAPI = {

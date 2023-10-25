@@ -6,7 +6,7 @@ import {IconSvg} from "common/components/iconSvg/IconSVG";
 import {profileInfoTextInputs, requiredTextInputs} from "common/utills/errorsText";
 import {Button} from "common/components/button/Button";
 import {determineLinkUrl} from "common/utills/determineLinkUrl";
-import {useHookForm} from "features/2-main/content/1-MyProfile/model/useHookForm";
+import {useHookForm} from "features/2-main/content/1-MyProfile/lib/useHookForm";
 
 type Props = {
   statusProfile: boolean

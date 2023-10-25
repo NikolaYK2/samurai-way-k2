@@ -101,11 +101,11 @@
 //
 //
 import React from 'react';
-import s from "./Users.module.css";
+import s from "features/2-main/content/3-users/ui/Users.module.css";
 import {UsersType} from "common/api/api";
-import {Expectation} from "features/redux/usersReducers";
+import {Expectation} from "features/2-main/content/3-users/model/usersReducers";
 import {Paginator} from "common/components/paginator/Paginator";
-import {User} from "features/2-main/content/3-users/User";
+import {User} from "features/2-main/content/3-users/ui/User";
 import {Loading} from "common/components/loading/Loading";
 import {useAppSelector} from "app/model/redux-store";
 

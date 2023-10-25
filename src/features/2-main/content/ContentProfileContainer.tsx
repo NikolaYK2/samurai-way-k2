@@ -25,8 +25,7 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
     useEffect(() => {
         props.getUserProfile(userId);
         props.setStatus(userId);
-
-    }, [])
+    }, [userId])
 
     return (
         <section className={s.content}>

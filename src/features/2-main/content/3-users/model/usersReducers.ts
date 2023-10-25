@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
-import {ResponsType, usersAPI, UsersType} from "common/api/api";
+import {ResponsType, UsersType} from "common/api/api";
 import {updObjInArray} from "common/utills/objHelpers";
+import {usersAPI} from "features/2-main/content/3-users/api/usersApi";
 
 //FN IN USER-REDUCER ===========================================
 // const followedChange = (state: InitializationStateType, userId: string, changeFallow: boolean) => {

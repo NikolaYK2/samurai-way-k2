@@ -3,7 +3,7 @@ import thunkMiddleware, {ThunkAction} from 'redux-thunk';
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {messagesPageReducer} from "features/redux/messagesPageReducer";
 import {ActionsTypeProfile, proFileReducer} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
-import {usersReducer} from "features/redux/usersReducers";
+import {usersReducer} from "features/2-main/content/3-users/model/usersReducers";
 import {sidebarReducer} from "features/redux/sidebarReducer";
 import {ActionsTypeLoginAuthorization, authorizationReducer} from "features/0-auth/model/authReducer";
 import {friendsReducer} from "features/redux/friendsReducer";

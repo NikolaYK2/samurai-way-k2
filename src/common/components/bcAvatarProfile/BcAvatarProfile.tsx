@@ -12,7 +12,6 @@ export const BcAvatarProfile = memo((props: { onOffAvatar?: boolean, classMod?: 
   const background = useAppSelector(bcSelector)
   const myId = useAppSelector(myIdSelector)
 
-
   return (
     <div className={`${s.contain} ${props.classMod?.bc}`} style={{backgroundImage: `url(${profile?.userId === myId ? background || bc : bc})`}}>
       <div className={`${s.avatar}`}>
