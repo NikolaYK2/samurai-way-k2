@@ -40,7 +40,6 @@ export const ProfileUpdateInfo = (props: Props) => {
       dispatch(addAndRemove(user.id))
     }
   }
-
   return (
     <div className={s.container}>
       <h2>{props.statusProfile ? 'View Profile' : 'Edit Profile'}</h2>

@@ -16,7 +16,6 @@ import {changeBackgroundAC, changePhotoTC} from "features/2-main/content/1-MyPro
 import {Loading} from "common/components/loading/Loading";
 
 export const Header = () => {
-  console.log('header')
 
   const dispatch = useAppDispatch();
   const profile = useAppSelector(optimizedProfileSelector)
@@ -25,6 +24,7 @@ export const Header = () => {
   const loadingToggle = useAppSelector(loadingToggleSelector)
 
   const location = useLocation()
+  const headerProfile = location.pathname.includes('/profile');
 
   const deleteHandle = () => {
     dispatch(logoutThunkC());
@@ -46,7 +46,6 @@ export const Header = () => {
     }
   }
 
-  const headerProfile = location.pathname.includes('/profile');
 
   return (
     <header className={`${s.header} ${headerProfile && s.expanded}`}>

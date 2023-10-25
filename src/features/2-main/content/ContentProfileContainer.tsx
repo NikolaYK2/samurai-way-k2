@@ -7,7 +7,8 @@ import MyPostContainer from "features/2-main/content/1-MyProfile/ui/myPost/MyPos
 import {withRouter, WithRouterProps} from "common/selectors/WithRouter";
 import {
   deletePostAC,
-  getUserProfileThunkCreator, postDataType,
+  getUserProfileThunkCreator,
+  postDataType,
   ProfileUserType,
   setStatusThunkCreator,
   updStatusThunkCreator
@@ -34,6 +35,7 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
       props.getUserProfile(myId);
       props.setStatus(myId);
     }
+
   }, [userId, users])
 
   return (

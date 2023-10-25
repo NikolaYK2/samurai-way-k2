@@ -143,9 +143,9 @@ const loading = useAppSelector(state => state.usersPage.loadingPage)
                 )}
 
             </div>
-            <button className={s.container__button} onClick={() => props.setUsers(props.users)}>show
-                more
-            </button>
+            {/*<button className={s.container__button} onClick={() => props.setUsers(props.users)}>show*/}
+            {/*    more*/}
+            {/*</button>*/}
         </div>
     );
 };

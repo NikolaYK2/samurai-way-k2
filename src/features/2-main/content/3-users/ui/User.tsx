@@ -118,6 +118,7 @@ type UserTypeComponent = {
 }
 
 export const User = (props: UserTypeComponent) => {
+
   const {disabled, names, addAndRemove} = updateFollowState(
     props.user.id,
     namesStatusFollowed,

@@ -42,6 +42,7 @@ div .pageActive{
 .paginatorBut > button {
     display: flex;
     align-items: center;
+    justify-content: center;
     color: var(--color);
 
     width: 36px;

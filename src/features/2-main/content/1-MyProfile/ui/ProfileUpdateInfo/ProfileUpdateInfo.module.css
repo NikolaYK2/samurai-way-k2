@@ -90,11 +90,10 @@
     font-size: var(--f-size10-14);
 
 }
-.container form button {
+.container form button, .container > button {
     display: flex;
-    margin: 10px auto;
+    margin: 7% auto 0;
     padding: 7px 50px;
 
     color: var(--main-color);
 }
-

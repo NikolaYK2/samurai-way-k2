@@ -22,7 +22,7 @@ export type InitializationStateType = {
 }
 let initializationState: InitializationStateType = {
     users: [],
-    pageSize: 10,
+    pageSize: 12,
     totalUsersCount: 0,
     currentPage: 1,
     loadingPage: true,
