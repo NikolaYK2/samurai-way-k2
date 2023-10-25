@@ -42,7 +42,7 @@ type MapStateToPropsType = {
     profile: ProfileUserType | null,
     postData: postDataType[]
     isAuth?: boolean,
-    status: string,
+    status: string | null,
     userId: number | null,
 }
 

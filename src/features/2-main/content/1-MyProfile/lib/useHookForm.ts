@@ -22,7 +22,7 @@ export const useHookForm = (props: Props) => {
       lookingForAJob: profile?.lookingForAJob,
       lookingForAJobDescription: profile?.lookingForAJobDescription,
       fullName: profile?.fullName,
-      aboutMe: profile?.aboutMe || undefined,
+      aboutMe: profile?.aboutMe,
       contacts: {
         github: profile?.contacts?.github,
         vk: profile?.contacts?.vk,
@@ -37,14 +37,12 @@ export const useHookForm = (props: Props) => {
   })
 
   const onSubmit: SubmitHandler<UpdProfileType> = data => {
-    if (myId) {
       try {
         dispatch(updUserProfileThunkCreator(data))
         props.setStatusProfile(true)
       } catch (e: any) {
         props.setStatusProfile(false)
       }
-    }
   }
 
   useEffect(() => {
@@ -52,7 +50,7 @@ export const useHookForm = (props: Props) => {
       ...profile,
       lookingForAJobDescription: profile?.lookingForAJobDescription,
       fullName: profile?.fullName,
-      aboutMe: profile?.aboutMe || undefined,
+      aboutMe: profile?.aboutMe,
     })
 
   }, [profile, reset]);

@@ -210,7 +210,7 @@ export const setStatusThunkCreator = (userId: number) => async (dispatch: Dispat
   let res = await profileApi.getProfileStatusUser(userId)
   dispatch(loadingAC(true))
   try {
-    if (res.data.resultCode === 0) {
+    if (res.data && res.data.resultCode === 0) {
       dispatch(setStatusAC(res.data));
       // dispatch(loadingAC(false))
     }
