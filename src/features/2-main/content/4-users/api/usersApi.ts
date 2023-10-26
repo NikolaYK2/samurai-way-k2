@@ -7,12 +7,12 @@ export type GetUsersType = {
 }
 
 export const usersAPI = {
-  getUsers(currentPage = 1, pageSize = 12) {
-    return instance./*axios.*/get<GetUsersType>(/*baseUrl + */`users?page=${currentPage}&count=${pageSize}`/*,{withCredentials:true,}*/).then(response => response.data);
+  getUsers(currentPage = 1, pageSize = 12, friend = false) {
+    return instance.get<GetUsersType>(`users?page=${currentPage}&count=${pageSize}&friend=${friend}`).then(response => response.data);
   },
-  getFriends(friend:boolean) {
-    return instance.get<GetUsersType>(`users?friend=${friend}`);
-  },
+  // getFriends(friend:boolean, currentPage = 1, pageSize = 3) {
+  //   return instance.get<GetUsersType>(`users?friend=${friend}&page=${currentPage}&count=${pageSize}`);
+  // },
   deleteFollow(id: string) {
     return instance.delete<ResponsType<{}>>(`follow/${id}`).then(response => response.data);
   },

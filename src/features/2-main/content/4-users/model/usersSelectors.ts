@@ -6,7 +6,7 @@ const getUsers = (state: AppStateType) => state.usersPage.users;
 //FN SELECTOR ----------
 //Можно исп. несколько селекторов /getUsers, getPageSize, (4-users,pageSize)=>{}
 export const getUsersSelector = createSelector(getUsers, (users) => {
-  return users;
+  return users.filter(el=>el.followed);
 })
 
 export const getUserOptimized = createSelector(getUsers,

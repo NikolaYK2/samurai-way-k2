@@ -10,7 +10,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const LOADING_SWITCH = 'LOADING_SWITCH';
 const TOGGLE_EXPECTATION = 'TOGGLE_EXPECTATION';
-const SET_FRIENDS = 'USERS/SET_FRIENDS';
+const ADD_FRIENDS = 'USERS/SET_FRIENDS';
 
 export type Expectation = {
   id: string,
@@ -48,8 +48,8 @@ export const usersReducer = (state: InitializationStateType = initializationStat
     case SET_USERS:
       return {...state, users: [...action.users]};
 
-    case SET_FRIENDS:
-      return {...state, users: [...action.friends]};
+    case ADD_FRIENDS:
+      return {...state, users: [...state.users.filter(el=>el.followed), ...action.friends]};
 
     case SET_CURRENT_PAGE:
       return {...state, currentPage: action.page};
@@ -108,10 +108,10 @@ export const setUsersAC = (users: UsersType[]) => {
   } as const;
 }
 
-type SetFriendsACType = ReturnType<typeof setFriendsAC>;
-export const setFriendsAC = (friends: UsersType[]) => {
+type SetFriendsACType = ReturnType<typeof addFriendsAC>;
+export const addFriendsAC = (friends: UsersType[]) => {
   return {
-    type: SET_FRIENDS,
+    type: ADD_FRIENDS,
     friends,
   } as const;
 }
@@ -152,31 +152,52 @@ export const toggleExpectationAC = (userId: string, onOff: boolean) => {
 
 //THUNK =====================================================================
 //COmponent UsersContiner ===================================================
-export const getUsersThunkCreator = (page: number, pageSize: number) => async (dispatch: Dispatch<ActionUsersType>) => {
+export const getUsersThunkCreator = (page: number, pageSize: number,) => async (dispatch: Dispatch<ActionUsersType>) => {
 
   dispatch(switchLoadingAC(true));
   dispatch(setCurrentPageAC(page));
   try {
+
     let data = await usersAPI.getUsers(page, pageSize)
-    dispatch(switchLoadingAC(false));
-    dispatch(setUsersAC(data.items));
     dispatch(setTotalUsersCountAC(data.totalCount));
+    dispatch(setUsersAC(data.items));
+    dispatch(switchLoadingAC(false));
+
   } catch (e) {
     alert('Error get user')
   }
 }
 
-export const getFriendsThunkCreator = (friend:boolean) => async (dispatch: Dispatch<ActionUsersType>) => {
+export const addFriendsThunkCreator = (
+  page: number,
+  pageSize: number,
+  friend: boolean,
+  loaderStyle: string,
+  loader: any,
+) => async (dispatch: Dispatch<ActionUsersType>) => {
 
   dispatch(switchLoadingAC(true));
+  // dispatch(setCurrentPageAC(page));
   try {
-    let res = await usersAPI.getFriends(friend)
+    let data = await usersAPI.getUsers(page, pageSize, friend)
+
+    dispatch(addFriendsAC(data.items));
+
+    // Если в ответе нет друзей, это означает, что мы достигли конца списка.
+    if (data.items.length === 0) {
+      const loaderElement = document.querySelector(`.${loaderStyle}`);
+      if (loaderElement) {
+        loaderElement.remove(); // Удаляем заглушку
+      }
+      if (loader.current) loader.current.disconnect(); // Останавливаем наблюдение
+    }
+
     dispatch(switchLoadingAC(false));
-    dispatch(setUsersAC(res.data.items));
   } catch (e) {
-    alert('Error get friend')
+    alert('Error get user')
   }
 }
+
 
 export const pageChangeThunkCreator = (page: number, /*pageSize: number*/) => async (dispatch: Dispatch<ActionUsersType>) => {
   dispatch(setCurrentPageAC(page));

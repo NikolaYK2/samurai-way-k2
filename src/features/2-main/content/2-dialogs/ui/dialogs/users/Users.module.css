@@ -70,3 +70,8 @@
     align-items: center;
     margin: 0 10px;
 }
+
+.loader{
+    height: 3px;
+    width: 100px;
+}
