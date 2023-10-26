@@ -34,8 +34,7 @@ export const ProfileUpdateInfo = (props: Props) => {
   const {userId} = useParams()
 
   const {names, disabled, addAndRemove} = updateFollowState(
-    // userId,
-    user?.id,
+    userId,
     namesStatusFollowed,
     expectation,
     user?.followed,

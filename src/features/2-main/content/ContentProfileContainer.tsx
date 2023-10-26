@@ -20,8 +20,6 @@ import {getUsersSelector} from "features/2-main/content/4-users/model/usersSelec
 const ContentProfileContainer = (props: ProfileTypeProps) => {
 
   const users = useAppSelector(getUsersSelector)
-  const friends = useAppSelector(state => state.friends.users)
-  const myId = useAppSelector(state => state.loginAuthorization.id)
 
   let userId: number | null = props.params.userId;
   if (!userId) {

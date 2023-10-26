@@ -2,17 +2,17 @@ import React, {memo, useEffect} from 'react';
 import s from "features/2-main/content/2-dialogs/ui/dialogs/users/Users.module.css";
 import {useAppDispatch, useAppSelector} from "app/model/redux-store";
 import {MemoNavLink} from "common/utills/MemoNavLink";
-import {setUsersFriendTC} from "features/2-main/content/3-friends/model/friendsReducer";
 import ava from 'assets/img/myProf/ava.jpg'
-import {optimizedFriendsSelector} from "features/2-main/content/3-friends/model/Friends.seceltors";
+import {getFriendsThunkCreator} from "features/2-main/content/4-users/model/usersReducers";
+import {getUsersSelector} from "features/2-main/content/4-users/model/usersSelectors";
 
 export const Users = memo(() => {
 
-  const friends = useAppSelector(optimizedFriendsSelector)
+  const friends = useAppSelector(getUsersSelector)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(setUsersFriendTC())
+    dispatch(getFriendsThunkCreator(true))
   }, []);
 
   return (
@@ -21,7 +21,7 @@ export const Users = memo(() => {
         return (
           <div key={f.id} className={s.users}>
             <div className={s.users__avatar}>
-              <MemoNavLink to={`/profile/${f.id}`} >
+              <MemoNavLink to={`/profile/${f.id}`}>
                 <img src={f.photos?.small || ava} alt=""/>
               </MemoNavLink>
             </div>
