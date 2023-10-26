@@ -3,7 +3,7 @@ import s from 'features/2-main/content/1-MyProfile/ui/MyProfileStatus.module.css
 import {useAppDispatch, useAppSelector} from "app/model/redux-store";
 import {updStatusThunkCreator} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {statusSelector} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
-import {getUserOptimized} from "features/2-main/content/3-users/model/usersSelectors";
+import {getUserOptimized} from "features/2-main/content/4-users/model/usersSelectors";
 
 export const MyProfileStatusHook = () => {
   const status = useAppSelector(statusSelector)

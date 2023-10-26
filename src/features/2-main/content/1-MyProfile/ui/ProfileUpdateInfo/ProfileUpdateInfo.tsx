@@ -1,16 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "app/model/redux-store";
 import s from './ProfileUpdateInfo.module.css'
-import {optimizedProfileContactsSelect} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
+import {
+  optimizedProfileContactsSelect,
+  userIdSelector
+} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
 import {profileInfoTextInputs, requiredTextInputs} from "common/utills/errorsText";
 import {Button} from "common/components/button/Button";
 import {determineLinkUrl} from "common/utills/determineLinkUrl";
 import {useHookForm} from "features/2-main/content/1-MyProfile/lib/useHookForm";
 import {namesStatusFollowed, updateFollowState} from "common/utills/updateFollowState";
-import {followedUserSelector} from "features/2-main/content/3-users/model/usersSelectors";
-import {followThunkCreator, unFollowThunkCreator} from "features/2-main/content/3-users/model/usersReducers";
+import {followedUserSelector} from "features/2-main/content/4-users/model/usersSelectors";
+import {followThunkCreator, unFollowThunkCreator} from "features/2-main/content/4-users/model/usersReducers";
 import {myIdSelector} from "features/0-auth/model/authSelectors";
+import {useParams} from "react-router-dom";
+import {getUserProfileThunkCreator} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 
 type Props = {
   statusProfile: boolean
@@ -21,12 +26,15 @@ export const ProfileUpdateInfo = (props: Props) => {
   const {handleSubmit, onSubmit, profile, register, errors, isSubmitting} = useHookForm(props)
   const dispatch = useAppDispatch()
   const contacts = useAppSelector(optimizedProfileContactsSelect)
-  const userId = useAppSelector(state => state.proFilePage.profile?.userId)
+  const id = useAppSelector(userIdSelector)
   const myId = useAppSelector(myIdSelector)
   const expectation = useAppSelector(state => state.usersPage.expectation)
-  const user = useAppSelector((state) => followedUserSelector(state, userId))
+  const user = useAppSelector((state) => followedUserSelector(state, id))
+
+  const {userId} = useParams()
 
   const {names, disabled, addAndRemove} = updateFollowState(
+    // userId,
     user?.id,
     namesStatusFollowed,
     expectation,
@@ -40,6 +48,16 @@ export const ProfileUpdateInfo = (props: Props) => {
       dispatch(addAndRemove(user.id))
     }
   }
+
+
+  useEffect(() => {
+    if (userId) {
+      dispatch(getUserProfileThunkCreator(+userId))
+    } else {
+      dispatch(getUserProfileThunkCreator(myId!))
+    }
+  }, [userId]);
+
   return (
     <div className={s.container}>
       <h2>{props.statusProfile ? 'View Profile' : 'Edit Profile'}</h2>
@@ -132,7 +150,7 @@ export const ProfileUpdateInfo = (props: Props) => {
 
         {!props.statusProfile && <Button name={'save'} disabled={isSubmitting}/>}
       </form>
-      {myId !== userId && <Button name={names} disabled={disabled} callBack={handleAddAndRemove}/>}
+      {myId !== id && <Button name={names} disabled={disabled} callBack={handleAddAndRemove}/>}
     </div>
   );
 };

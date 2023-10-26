@@ -1,4 +1,4 @@
-import {Expectation} from "features/2-main/content/3-users/model/usersReducers";
+import {Expectation} from "features/2-main/content/4-users/model/usersReducers";
 
 export const namesStatusFollowed = {del: 'Unfriend', add: 'add Friend'}
 

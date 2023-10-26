@@ -1,12 +1,12 @@
 import {applyMiddleware, combineReducers, compose, legacy_createStore as createStore} from "redux";
 import thunkMiddleware, {ThunkAction} from 'redux-thunk';
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {messagesPageReducer} from "features/redux/messagesPageReducer";
+import {messagesPageReducer} from "features/2-main/content/2-dialogs/model/messagesPageReducer";
 import {ActionsTypeProfile, proFileReducer} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
-import {usersReducer} from "features/2-main/content/3-users/model/usersReducers";
+import {usersReducer} from "features/2-main/content/4-users/model/usersReducers";
 import {sidebarReducer} from "features/redux/sidebarReducer";
 import {ActionsTypeLoginAuthorization, authorizationReducer} from "features/0-auth/model/authReducer";
-import {friendsReducer} from "features/redux/friendsReducer";
+import {friendsReducer} from "features/2-main/content/3-friends/model/friendsReducer";
 import {ActionsAppType, appReducer} from "app/model/appReducer";
 import {loadState, saveState} from "common/utills/localStorage";
 import {throttle} from "common/utills/throttle";
@@ -64,18 +64,18 @@ store.subscribe(() => {
   // Вы можете получить текущее состояние хранилища с помощью store.getState()
   const state = store.getState();
   // Вы можете выбрать те части состояния, которые вы хотите сохранить
-  const {proFilePage} = state;
+  const {proFilePage, usersPage} = state;
   // Вы можете использовать вашу функцию saveState(), чтобы сохранить их в localStorage
-  saveState({proFilePage});
+  saveState({proFilePage, usersPage});
 });
 
 store.subscribe(
   throttle(() => {
     const state = store.getState();
 
-    const {proFilePage} = state;
+    const {proFilePage, usersPage} = state;
 
-    saveState({proFilePage});
+    saveState({proFilePage, usersPage});
   }, 1000)
 );
 

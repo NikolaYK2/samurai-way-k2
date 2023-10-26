@@ -1,11 +1,11 @@
 import {Dispatch} from "redux";
 import {ResponsType, UsersType} from "common/api/api";
 import {updObjInArray} from "common/utills/objHelpers";
-import {usersAPI} from "features/2-main/content/3-users/api/usersApi";
+import {usersAPI} from "features/2-main/content/4-users/api/usersApi";
 
 //FN IN USER-REDUCER ===========================================
 // const followedChange = (state: InitializationStateType, userId: string, changeFallow: boolean) => {
-//     return {...state, 3-users: state.3-users.map(u => u.id === userId ? {...u, followed: changeFallow} : u)};
+//     return {...state, 4-users: state.4-users.map(u => u.id === userId ? {...u, followed: changeFallow} : u)};
 // }
 
 //TYPES ======================================================
@@ -34,13 +34,13 @@ export const usersReducer = (state: InitializationStateType = initializationStat
         case FOLLOW:
             return {...state, users: updObjInArray(state.users, action.userId, {followed: true})};
         // return followedChange(state, action.userId, true)
-        // return {...state, 3-users: state.3-users.map(u => u.id === action.userId ? {...u, followed: true} : u)};
+        // return {...state, 4-users: state.4-users.map(u => u.id === action.userId ? {...u, followed: true} : u)};
 
         case UNFOLLOW:
             return {...state, users: updObjInArray(state.users, action.userId, {followed: false})};
 
         // return followedChange(state, action.userId, false)
-        // return {...state, 3-users: state.3-users.map(u => u.id === action.userId ? {...u, followed: false} : u)};
+        // return {...state, 4-users: state.4-users.map(u => u.id === action.userId ? {...u, followed: false} : u)};
 
         case SET_USERS:
             return {...state, users: [...action.users]};

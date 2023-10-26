@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
-import {addMessageUsersAC, usersMessagesType} from "features/redux/messagesPageReducer";
+import {addMessageUsersAC, usersMessagesType} from "features/2-main/content/2-dialogs/model/messagesPageReducer";
 import {AppStateType} from "app/model/redux-store";
 import {RedirectContainer} from "common/hoc/RedirectContainer";
-import {MessageUsers} from "features/2-main/content/2-dialogs/messageUsers/MessageUsers";
+import {MessageUsers} from "features/2-main/content/2-dialogs/ui/dialogs/messageUsers/MessageUsers";
 
 
 type MapStatePropsType = {

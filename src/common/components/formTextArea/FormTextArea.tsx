@@ -1,7 +1,7 @@
 import React, {memo} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import s from 'common/components/formTextArea/FormTextArea.module.css'
-import {usersMessagesType} from "features/redux/messagesPageReducer";
+import {usersMessagesType} from "features/2-main/content/2-dialogs/model/messagesPageReducer";
 import {Button} from "common/components/button/Button";
 
 type FormTextareaType = {

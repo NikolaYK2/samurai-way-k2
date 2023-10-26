@@ -15,11 +15,12 @@ import {
 } from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {AppStateType, useAppSelector} from "app/model/redux-store";
 import {RedirectContainer} from "common/hoc/RedirectContainer";
-import {getUsersSelector} from "features/2-main/content/3-users/model/usersSelectors";
+import {getUsersSelector} from "features/2-main/content/4-users/model/usersSelectors";
 
 const ContentProfileContainer = (props: ProfileTypeProps) => {
 
   const users = useAppSelector(getUsersSelector)
+  const friends = useAppSelector(state => state.friends.users)
   const myId = useAppSelector(state => state.loginAuthorization.id)
 
   let userId: number | null = props.params.userId;
@@ -31,12 +32,8 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
     if (users.length > 0) {
       props.getUserProfile(userId);
       props.setStatus(userId);
-    } else {
-      props.getUserProfile(myId);
-      props.setStatus(myId);
     }
-
-  }, [userId, users])
+  }, [users])
 
   return (
     <section className={s.content}>

@@ -1,13 +1,13 @@
 import React from 'react';
 import {UsersType} from "common/api/api";
 import {useAppSelector} from "app/model/redux-store";
-import {optimizedFriendsSelector} from "features/2-main/content/6-friends/Friends.seceltors";
+import {optimizedFriendsFollowedSelector} from "features/2-main/content/3-friends/model/Friends.seceltors";
 
 type FriendsType = {
   users: UsersType[],
 }
 export const Friends = (props: FriendsType) => {
-  const friends = useAppSelector(optimizedFriendsSelector)
+  const friends = useAppSelector(optimizedFriendsFollowedSelector)
 
   if (!props.users.length) {
     return <div>Users not found</div>

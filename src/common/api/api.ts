@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GetUsersType} from "features/2-main/content/3-users/api/usersApi";
+import {GetUsersType} from "features/2-main/content/4-users/api/usersApi";
 
 // const baseUrl = 'https://social-network.samuraijs.com/api/1.0/';
 
@@ -40,6 +40,6 @@ export const friendsAPI = {
 }
 
 // export const getUsers =(currentPage = 1, pageSize = 10)=>{
-//     return instance./*axios.*/get(/*baseUrl + */`3-users?page=${currentPage}&count=${pageSize}`/*,{withCredentials:true,}*/).then(response=>response.data);
+//     return instance./*axios.*/get(/*baseUrl + */`4-users?page=${currentPage}&count=${pageSize}`/*,{withCredentials:true,}*/).then(response=>response.data);
 // }
 

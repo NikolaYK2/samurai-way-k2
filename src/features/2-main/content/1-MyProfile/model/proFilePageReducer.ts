@@ -184,7 +184,7 @@ export const getUserProfileThunkCreator = (userId: number) => async (dispatch: D
     let data = await profileApi.getUserProfile(userId)
     dispatch(setUserProfileAC(data));
   } catch (e) {
-    alert('Error get 3-users')
+    alert('Error get 4-users')
   } finally {
     dispatch(loadingAC(false))
   }

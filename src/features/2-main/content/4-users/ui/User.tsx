@@ -13,7 +13,7 @@
 //      })
 //     },[props.setUsers])
 // //     const getUsers = ()=>{//Как бы лишаем Users сайд эфекта
-// //         if (props.3-users.length === 0) {
+// //         if (props.4-users.length === 0) {
 // //             //Get Ничего кроме адреса мы отправить не можем, когда ответ с сервера придет, пишем .then(response=> и можем выполнить какую-то логику)
 // //             axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
 // //                 props.setUsers(response.data.items);
@@ -41,7 +41,7 @@
 // //         //                 photos: 'https://klike.net/uploads/posts/2020-01/1578990591_1.jpeg',
 // //         //                 followed: false,
 // //         //                 name: "Dima",
-// //         //                 status: 'Cool 6-friends',
+// //         //                 status: 'Cool 3-friends',
 // //         //                 location: {city: 'Varshava', country: 'Polish'}
 // //         //             },
 // //         //         ]
@@ -59,8 +59,8 @@
 //         <div className={s.container}>
 //             Users
 //             <div className={s.container__data}>
-//                 {/*<button onClick={getUsers}>Get 3-users</button>*/}
-//                 {props.3-users.map(u => {
+//                 {/*<button onClick={getUsers}>Get 4-users</button>*/}
+//                 {props.4-users.map(u => {
 //                     return (
 //                         <div key={u.id} className={s.containerUsers}>
 //                             <div className={s.containerUsers__item}>
@@ -93,7 +93,7 @@
 //                     );
 //                 })}
 //             </div>
-//             <button className={s.container__button} onClick={() => props.setUsers(props.3-users)}>show more</button>
+//             <button className={s.container__button} onClick={() => props.setUsers(props.4-users)}>show more</button>
 //         </div>
 //     );
 // };
@@ -101,11 +101,11 @@
 //
 //
 import React from 'react';
-import s from "features/2-main/content/3-users/ui/User.module.css";
+import s from "features/2-main/content/4-users/ui/User.module.css";
 import userPhotos from "assets/img/myProf/ava.jpg";
 import {NavLink} from "react-router-dom";
 import {UsersType} from "common/api/api";
-import {Expectation} from "features/2-main/content/3-users/model/usersReducers";
+import {Expectation} from "features/2-main/content/4-users/model/usersReducers";
 import {Button} from "common/components/button/Button";
 import {namesStatusFollowed, updateFollowState} from "common/utills/updateFollowState";
 

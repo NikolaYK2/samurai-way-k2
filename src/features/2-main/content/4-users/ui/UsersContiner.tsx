@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {Users} from "features/2-main/content/3-users/ui/Users";
+import {Users} from "features/2-main/content/4-users/ui/Users";
 import {UsersType} from "common/api/api";
 import {
     Expectation,
@@ -11,7 +11,7 @@ import {
     setUsersAC,
     toggleExpectationAC,
     unFollowThunkCreator
-} from "features/2-main/content/3-users/model/usersReducers";
+} from "features/2-main/content/4-users/model/usersReducers";
 import {AppStateType} from "app/model/redux-store";
 import {
     getCurrentPage,
@@ -20,7 +20,7 @@ import {
     getPageSize,
     getTotalUsersCount,
     getUsersSelector
-} from "features/2-main/content/3-users/model/usersSelectors";
+} from "features/2-main/content/4-users/model/usersSelectors";
 
 //Контейнерная class компонента которая делает API
 class UsersAPIComponent extends React.Component<UsersTypeProps> {
@@ -82,7 +82,7 @@ export type MapDispatchPropsType = {
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {//название функции обозначает замапить state на пропсы
     return {
         //getState мы уже не делаем
-        // 3-users: getUsers(state),
+        // 4-users: getUsers(state),
         //FN SELECTOR ------
         users: getUsersSelector(state),
         // -----------------

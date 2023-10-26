@@ -30,7 +30,7 @@ export const getCaptchaUrlThunkCreator = () => async (dispatch: Dispatch<Actions
     let res = await securityApi.security()
     dispatch(getCaptchaUrlAC(res.data.url));
   } catch (e) {
-    alert('Error get 3-users')
+    alert('Error get 4-users')
   } finally {
     // dispatch(loadingAC(false))
   }

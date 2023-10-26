@@ -30,7 +30,7 @@ export default {}
 //     avatar: string,
 // }
 // export type  messagesPageType = {
-//     3-users: usersType[],
+//     4-users: usersType[],
 //     message: string,
 //     usersMessages: usersMessagesType[],
 // }
@@ -42,7 +42,7 @@ export default {}
 // }
 
 // export type sidebarType = {
-//     6-friends: friendsType[],
+//     3-friends: friendsType[],
 // }
 
 // export type stateType = {
@@ -119,7 +119,7 @@ export default {}
 //     _state: {//_state - Приватный доступ означает _подчеркивание
 //         //DATA messagesUsers /2-dialogs/=============================================================
 //         messagesPage: {
-//             3-users: [
+//             4-users: [
 //                 {
 //                     id: v1(),
 //                     name: "Nik",
@@ -164,7 +164,7 @@ export default {}
 //         },
 //         //=========Friends======================================================
 //         sidebar: {
-//             6-friends: [
+//             3-friends: [
 //                 {
 //                     id: v1(),
 //                     name: "Denis",
@@ -200,7 +200,7 @@ export default {}
 // //     },
 // //=====================================================================
 // //MESSAGE USERS===============================================================
-// //add new message 3-users=============================================
+// //add new message 4-users=============================================
 // //     addMessageUsers() {
 // //         this._state.messagesPage.usersMessages.push({id: v1(), sms: this._state.messagesPage.message,});
 // //         this._state.messagesPage.message = '';
@@ -243,7 +243,7 @@ export default {}
 //         //     this._rerenderEntireTree(store);
 //         //     //MESSAGE USERS===============================`================================
 //         // } else if (action.type === addMessageUsers) {
-//         //     //add new message 3-users=============================================
+//         //     //add new message 4-users=============================================
 //         //     // this._state.messagesPage.usersMessages.push({id: v1(), sms: action.newMessageUsers,});
 //         //     const newMessages = {id: v1(), sms: action.newMessageUsers,}
 //         //     this._state.messagesPage.usersMessages = [...this._state.messagesPage.usersMessages, newMessages];

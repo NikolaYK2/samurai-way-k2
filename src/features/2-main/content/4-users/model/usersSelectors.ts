@@ -4,7 +4,7 @@ import {AppStateType} from "app/model/redux-store";
 const getUsers = (state: AppStateType) => state.usersPage.users;
 
 //FN SELECTOR ----------
-//Можно исп. несколько селекторов /getUsers, getPageSize, (3-users,pageSize)=>{}
+//Можно исп. несколько селекторов /getUsers, getPageSize, (4-users,pageSize)=>{}
 export const getUsersSelector = createSelector(getUsers, (users) => {
   return users;
 })

@@ -9,11 +9,11 @@ export const Nav = () => {
   const links = [
     {name: 'Profile', link: '/profile', icon: 'loginIn'},
     {name: 'Messages', link: '/messages', icon: 'message'},
-    {name: 'Users', link: '/users', icon: 'users'},
-    {name: 'News', link: '/news', icon: '4-news'},
-    {name: 'Music', link: '/music', icon: '5-music'},
-    {name: 'Friends', link: '/friends', icon: 'users'},
-    {name: 'Settings', link: '/settings', icon: 'setting'},
+    {name: 'Friends', link: '/friends', icon: 'friends'},
+    {name: 'People', link: '/users', icon: 'users'},
+    // {name: 'News', link: '/news', icon: '4-news'},
+    // {name: 'Music', link: '/music', icon: '5-music'},
+    // {name: 'Settings', link: '/settings', icon: 'setting'},
   ]
 
   const changeNav = useRef<HTMLDivElement>(null)
