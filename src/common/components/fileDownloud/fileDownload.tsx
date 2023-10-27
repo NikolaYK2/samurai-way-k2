@@ -7,12 +7,15 @@ import {Dispatch} from "redux";
 
 type Props = {
   name: string,
+  register?: any
   callbackFile?: (file: File) => (dispatch: Dispatch<ActionsTypeProfile>) => Promise<void>;
-  callbackString?: (bc: string) => { readonly type: string;  readonly bc: string};
+  callbackAction?: (bc: string) => ActionsTypeProfile;
+  callback?: (bc: string) => void;
 }
 export const FileDownload = (props: Props) => {
 
   const dispatch = useAppDispatch();
+
 
   const FileDownloadHandle = (e: ChangeEvent<HTMLInputElement>) => {
 
@@ -25,7 +28,8 @@ export const FileDownload = (props: Props) => {
       } else {
         const reader = new FileReader()
         reader.onloadend = () => {
-          props.callbackString && dispatch(props.callbackString(String(reader.result)))
+          if(props.callbackAction) dispatch(props.callbackAction(String(reader.result)))
+          if(props.callback) props.callback(String(reader.result))
         }
         reader.readAsDataURL(e.currentTarget.files[0])
       }
@@ -33,9 +37,9 @@ export const FileDownload = (props: Props) => {
   }
 
   return (
-      <label className={s.changeAva}><IconSvg name={props.name}/>
-        <input type="file" onChange={FileDownloadHandle}/>
-      </label>
+    <label className={s.changeAva}><IconSvg name={props.name}/>
+          <input type="file" onChange={FileDownloadHandle}/>
+    </label>
   );
 };
 

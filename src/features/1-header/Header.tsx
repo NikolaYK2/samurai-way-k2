@@ -44,7 +44,7 @@ export const Header = () => {
         {profile?.userId === myId &&
             <>
                 <FileDownload name={'changeAva'} callbackFile={changePhotoTC}/>
-                <FileDownload name={'changeBc'} callbackString={changeBackgroundAC}/>
+                <FileDownload name={'changeBc'} callbackAction={changeBackgroundAC}/>
             </>
         }
 

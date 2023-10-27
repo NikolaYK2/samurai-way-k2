@@ -3,6 +3,7 @@ import {Dispatch} from "redux";
 import {profileApi, UpdProfileType} from "features/2-main/content/1-MyProfile/api/profileApi";
 import {AppThunk} from "app/model/redux-store";
 import {handleServerAppError, handleServerNetworkError} from "common/utills/errorsText";
+import morning from 'assets/img/myProf/morning.jpg'
 //КОНСТАНТЫ ТИПОВ ЭКШЭНА=====================================================================
 const addPost = 'addPost';
 const setUserProfile = 'setUserProfile';
@@ -25,7 +26,7 @@ export type ActionsTypeProfile = ReturnType<typeof addPostAC>
   | ReturnType<typeof setErrorsAC>
 //Type messages Users Type===========================================================================================================
 //======function Action Creator addPoast==============================================================================
-export const addPostAC = (postMessage: string) => ({type: 'addPost', postMessage: postMessage,} as const)
+export const addPostAC = (postMessage: string, image = '') => ({type: 'addPost', postMessage, image} as const)
 
 export const deletePostAC = (postId: string) => ({type: deletePost, postId,} as const)
 
@@ -46,7 +47,7 @@ export const setErrorsAC = (err: string | null) => ({type: errors, err} as const
 
 export type postDataType = {
   id: string,
-  postImg:string,
+  postImg?: string,
   sms: string,
   like: number,
   likedUsers: number[],
@@ -87,18 +88,18 @@ export type proFilePageType = ComponentStateType & {
 
 let initializationState: proFilePageType = {
   postData: [
-    {id: '1', postImg:'', sms: "Ha, how are you?", like: 15, likedUsers: []},
-    {id: '2', postImg:'', sms: "It's my first post", like: 43, likedUsers: []},
+    {id: v1(), postImg: morning, sms: "Good morning. How's it going?", like: 100500, likedUsers: []},
+    {id: v1(), postImg: '', sms: "It's my first post", like: 35, likedUsers: []},
   ],
   profile: {} as ProfileUserType,
   status: '',
 };
 
-export const proFileReducer = (state = initializationState, action: ActionsTypeProfile):proFilePageType => {
+export const proFileReducer = (state = initializationState, action: ActionsTypeProfile): proFilePageType => {
 
   if (action.type === addPost) {
     //Добавление нового поста кнопка=================================================
-    return {...state, /*message: '', */postData: [{id: v1(),postImg:'', sms: action.postMessage, like: 0, likedUsers:[]}, ...state.postData]}
+    return {...state, postData: [{id: v1(), postImg: action.image, sms: action.postMessage, like: 0, likedUsers: []}, ...state.postData]}
     //MESSAGE USERS===============================`================================
   } else if (action.type === setUserProfile) {
     return {...state, profile: action.profile}

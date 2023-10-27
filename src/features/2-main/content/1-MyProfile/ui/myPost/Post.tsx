@@ -1,5 +1,5 @@
 import s from "features/2-main/content/1-MyProfile/ui/myPost/Post.module.css";
-import React, {memo, useCallback} from "react";
+import React, {memo, MouseEvent, useCallback} from "react";
 import {useAppSelector} from "app/model/redux-store";
 import {useDispatch} from "react-redux";
 import {deletePostAC, setLikeAC} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
@@ -26,6 +26,15 @@ export const Post = memo(() => {
     if (userId) dispatch(setLikeAC(userId, id))
   }, [postData])
 
+  const fullPostImg = useCallback((event: MouseEvent<HTMLDivElement>) => {
+    const element = event.currentTarget;
+    element.classList.toggle(s.on);
+  }, []);
+
+  const defaultPostImg = useCallback((event:MouseEvent<HTMLDivElement>) => {
+    const element = event.currentTarget;
+    element.classList.remove(s.on);
+  }, []);
 
   const dayWeek = day[dayNumber - 1]
   return (
@@ -34,7 +43,13 @@ export const Post = memo(() => {
         return (
           <div key={pD.id} className={s.containerPost}>
             <div className={s.post}>
-              <div className={s.postImg}><img src="" alt=""/></div>
+              <div className={s.postImg}
+                   onClick={fullPostImg}
+                   onMouseLeave={defaultPostImg}
+                   style={{padding: `${pD.postImg && '0 0 56% 0'}`}}
+              >
+                <img src={pD.postImg} alt=""/>
+              </div>
               <div className={s.content__profUsers}>
                 <div className={s.img}>
                   <img
