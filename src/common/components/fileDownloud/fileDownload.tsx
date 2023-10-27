@@ -1,13 +1,17 @@
 import React, {ChangeEvent} from 'react';
 import {IconSvg} from "common/components/iconSvg/IconSVG";
 import s from './fileDownload.module.css'
-import {changeBackgroundAC, changePhotoTC} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
+import {ActionsTypeProfile} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {useAppDispatch} from "app/model/redux-store";
+import {Dispatch} from "redux";
 
 type Props = {
   name: string,
+  callbackFile?: (file: File) => (dispatch: Dispatch<ActionsTypeProfile>) => Promise<void>;
+  callbackString?: (bc: string) => { readonly type: string;  readonly bc: string};
 }
 export const FileDownload = (props: Props) => {
+
   const dispatch = useAppDispatch();
 
   const FileDownloadHandle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,38 +20,22 @@ export const FileDownload = (props: Props) => {
 
       if (props.name === 'changeAva') {
 
-        dispatch(changePhotoTC(e.currentTarget.files[0]))
+        props.callbackFile && dispatch(props.callbackFile(e.currentTarget.files[0]))
 
       } else {
         const reader = new FileReader()
         reader.onloadend = () => {
-          dispatch(changeBackgroundAC(String(reader.result)))
+          props.callbackString && dispatch(props.callbackString(String(reader.result)))
         }
         reader.readAsDataURL(e.currentTarget.files[0])
-
       }
-
     }
   }
-  // const changeBackgroundUserHandle = (e: ChangeEvent<HTMLInputElement>) => {
-  //   if (e.currentTarget.files && e.currentTarget.files.length > 0) {
-  //     const file = e.currentTarget.files[0]
-  //     const reader = new FileReader()
-  //     reader.onloadend = ()=>{
-  //       dispatch(changeBackgroundAC(String(reader.result)))
-  //     }
-  //     reader.readAsDataURL(file)
-  //   }
-  // }
-
 
   return (
-    <div className={s.blockImg}>
       <label className={s.changeAva}><IconSvg name={props.name}/>
         <input type="file" onChange={FileDownloadHandle}/>
       </label>
-
-    </div>
   );
 };
 

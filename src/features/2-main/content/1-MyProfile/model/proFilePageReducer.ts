@@ -25,70 +25,23 @@ export type ActionsTypeProfile = ReturnType<typeof addPostAC>
   | ReturnType<typeof setErrorsAC>
 //Type messages Users Type===========================================================================================================
 //======function Action Creator addPoast==============================================================================
-export const addPostAC = (postMessage: string) => {
-  return {
-    type: 'addPost',
-    postMessage: postMessage,
-  } as const//воспринимать весь обьект как константу
-}
+export const addPostAC = (postMessage: string) => ({type: 'addPost', postMessage: postMessage,} as const)
 
-export const deletePostAC = (postId: string) => {
-  return {
-    type: deletePost,
-    postId,
-  } as const//воспринимать весь обьект как константу
-}
+export const deletePostAC = (postId: string) => ({type: deletePost, postId,} as const)
 
-export const setUserProfileAC = (profile: ProfileUserType | null) => {
-  return {
-    type: 'setUserProfile',
-    profile,
-  } as const
-}
+export const setUserProfileAC = (profile: ProfileUserType | null) => ({type: 'setUserProfile', profile,} as const)
 
+export const setStatusAC = (status: string) => ({type: 'setStatus', status,} as const)
 
-export const setStatusAC = (status: string) => {
-  return {
-    type: 'setStatus',
-    status,
-  } as const
-}
+export const setLikeAC = (userId: number, postId: string) => ({type: likePost, userId, postId,} as const)
 
-export const setLikeAC = (userId: number, postId: string) => {
-  return {
-    type: likePost,
-    userId,
-    postId,
-  } as const
-}
+export const changePhotoAC = (photo: PhotosType) => ({type: photoUserChange, photo} as const)
 
-export const changePhotoAC = (photo: PhotosType) => {
-  return {
-    type: photoUserChange,
-    photo,
-  } as const
-}
+export const changeBackgroundAC = (bc: string) => ({type: bcUserChange, bc} as const)
 
-export const changeBackgroundAC = (bc: string) => {
-  return {
-    type: bcUserChange,
-    bc,
-  } as const
-}
+export const loadingAC = (toggle: boolean) => ({type: loadingToggle, toggle} as const)
 
-export const loadingAC = (toggle: boolean) => {
-  return {
-    type: loadingToggle,
-    toggle
-  } as const
-}
-
-export const setErrorsAC = (err: string | null) => {
-  return {
-    type: errors,
-    err
-  } as const
-}
+export const setErrorsAC = (err: string | null) => ({type: errors, err} as const)
 
 
 export type postDataType = {
@@ -131,7 +84,6 @@ export type proFilePageType = ComponentStateType & {
   profile: ProfileUserType | null,
   status: string,
 }
-
 
 let initializationState: proFilePageType = {
   postData: [

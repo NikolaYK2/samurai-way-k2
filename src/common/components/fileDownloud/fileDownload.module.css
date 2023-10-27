@@ -1,11 +1,3 @@
-.blockImg {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-
-}
-
 .changeAva {
   position: relative;
   z-index: 2;
@@ -17,7 +9,7 @@
 
 .changeAva:hover g, .changeAva:hover g path {
   background: #a968ec;
-  fill: white;
+  fill: var(--color);
 }
 
 .changeAva > input {
