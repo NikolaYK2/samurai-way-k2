@@ -19,7 +19,6 @@ export type usersMessagesType = {
 
 export type  messagesPageType = {
     users: usersType[],
-    // message: string,
     usersMessages: usersMessagesType[],
 }
 

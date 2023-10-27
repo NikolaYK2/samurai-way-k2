@@ -14,6 +14,7 @@ import {
 } from "features/1-header/HeaderSelectors";
 import {changeBackgroundAC, changePhotoTC} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {Loading} from "common/components/loading/Loading";
+import logo from 'assets/img/logo/logo.png'
 
 export const Header = () => {
 
@@ -50,7 +51,8 @@ export const Header = () => {
   return (
     <header className={`${s.header} ${headerProfile && s.expanded}`}>
       {!headerProfile && <div className={s.log}>
-          <MemoNavLink to={'/profile'}><IconSvg name={'logo'}/></MemoNavLink>
+          <MemoNavLink to={'/profile'}><img src={logo} alt=""/></MemoNavLink>
+          {/*<MemoNavLink to={'/profile'}><IconSvg name={'logo'}/></MemoNavLink>*/}
       </div>}
       <BcAvatarProfile onOffAvatar={headerProfile}/>
 

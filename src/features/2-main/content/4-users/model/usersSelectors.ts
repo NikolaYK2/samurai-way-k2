@@ -2,6 +2,10 @@ import {createSelector} from "reselect";
 import {AppStateType} from "app/model/redux-store";
 
 const getUsers = (state: AppStateType) => state.usersPage.users;
+export const usersSelectOptimized = createSelector(getUsers, (users) => {
+  return users;
+})
+
 
 //FN SELECTOR ----------
 //Можно исп. несколько селекторов /getUsers, getPageSize, (4-users,pageSize)=>{}
@@ -20,14 +24,14 @@ export const followedUserSelector = createSelector(getUsers,
 
 
 
-export const getPageSize = (state: AppStateType) => state.usersPage.pageSize;
+export const getPageSizeSelect = (state: AppStateType) => state.usersPage.pageSize;
 
-export const getTotalUsersCount = (state: AppStateType) => state.usersPage.totalUsersCount;
+export const getTotalUsersCountSelect = (state: AppStateType) => state.usersPage.totalUsersCount;
 
-export const getCurrentPage = (state: AppStateType) => state.usersPage.currentPage;
+export const getCurrentPageSelect = (state: AppStateType) => state.usersPage.currentPage;
 
-export const getLoadingPage = (state: AppStateType) => state.usersPage.loadingPage;
+export const getLoadingPageSelect = (state: AppStateType) => state.usersPage.loadingPage;
 
-export const getExpectation = (state: AppStateType) => state.usersPage.expectation;
+export const getExpectationSelect = (state: AppStateType) => state.usersPage.expectation;
 
 

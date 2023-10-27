@@ -49,8 +49,13 @@ export const usersReducer = (state: InitializationStateType = initializationStat
       return {...state, users: [...action.users]};
 
     case ADD_FRIENDS:
-      return {...state, users: [...state.users.filter(el=>el.followed), ...action.friends]};
-
+      return {
+        ...state,
+        users: [
+          ...state.users.filter(el => el.followed),
+          ...action.friends.filter(friend => !state.users.some(user => user.id === friend.id))
+        ]
+      };
     case SET_CURRENT_PAGE:
       return {...state, currentPage: action.page};
 

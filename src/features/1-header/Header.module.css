@@ -15,27 +15,45 @@
 }
 
 .log {
+    display: flex;
     margin: auto;
     width: 70px;
     height: 70px;
     z-index: 1;
 
 }
-.log a svg{
+
+/*.log a svg{*/
+/*    transition: all .1s ease 0s;*/
+/*}*/
+.log > a > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     transition: all .1s ease 0s;
+    filter: drop-shadow(2px 2px 2px black);
 
 }
 
-.log:hover a svg {
+.log:hover > a > img {
     transform: rotate(-3deg);
-    filter: drop-shadow(2px 2px 2px black);
+    filter: drop-shadow(0 2px 5px black);
+
+    /*filter: drop-shadow(2px 2px 2px black);*/
     transition: all .3s ease 0s;
 }
+/*.log:hover a svg {*/
+/*    transform: rotate(-3deg);*/
+/*    filter: drop-shadow(2px 2px 2px black);*/
+/*    transition: all .3s ease 0s;*/
+/*}*/
+
 .log a {
     display: block;
     width: 100%;
     height: 100%;
 }
+
 /*COLOR LOGO -------------------------------*/
 .log a svg path:nth-child(1) {
     fill: brown;
@@ -79,14 +97,15 @@
 
 }
 
-.blockImg{
+.blockImg {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 
 
 }
-.changeAva{
+
+.changeAva {
     position: relative;
     z-index: 2;
     cursor: pointer;
@@ -94,14 +113,17 @@
     width: 30px;
     height: 30px;
 }
-.changeAva:hover g, .changeAva:hover g path{
+
+.changeAva:hover g, .changeAva:hover g path {
     background: #a968ec;
     fill: white;
 }
-.changeAva>input{
+
+.changeAva > input {
     display: none;
 }
-.changeAva>svg, .blockLogout>button>svg{
+
+.changeAva > svg, .blockLogout > button > svg {
     filter: drop-shadow(0px 0px 2px var(--main-color));
 }
 
@@ -120,6 +142,7 @@
     width: 100%;
     height: 100%;
 }
-.blockLogout:hover svg{
+
+.blockLogout:hover svg {
     fill: #a968ec;
 }

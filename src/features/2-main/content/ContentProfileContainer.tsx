@@ -13,13 +13,10 @@ import {
   setStatusThunkCreator,
   updStatusThunkCreator
 } from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
-import {AppStateType, useAppSelector} from "app/model/redux-store";
+import {AppStateType} from "app/model/redux-store";
 import {RedirectContainer} from "common/hoc/RedirectContainer";
-import {getUsersSelector} from "features/2-main/content/4-users/model/usersSelectors";
 
 const ContentProfileContainer = (props: ProfileTypeProps) => {
-
-  const users = useAppSelector(getUsersSelector)
 
   let userId: number | null = props.params.userId;
   if (!userId) {
@@ -27,11 +24,11 @@ const ContentProfileContainer = (props: ProfileTypeProps) => {
   }
 
   useEffect(() => {
-    if (users.length > 0) {
+    if (userId) {
       props.getUserProfile(userId);
       props.setStatus(userId);
     }
-  }, [users])
+  }, [userId])
 
   return (
     <section className={s.content}>

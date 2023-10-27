@@ -108,45 +108,52 @@ import {Paginator} from "common/components/paginator/Paginator";
 import {User} from "features/2-main/content/4-users/ui/User";
 import {Loading} from "common/components/loading/Loading";
 import {useAppSelector} from "app/model/redux-store";
+import {
+  getCurrentPageSelect,
+  getLoadingPageSelect, getPageSizeSelect,
+  getTotalUsersCountSelect,
+  usersSelectOptimized
+} from "features/2-main/content/4-users/model/usersSelectors";
 
 type UsersTypeComponent = {
-    totalItemsCount: number,
-    pageSize: number,
-    currentPage: number,
-    expectation: (Expectation | string)[],
+  totalItemsCount: number,
+  pageSize: number,
+  currentPage: number,
+  expectation: (Expectation | string)[],
 
-    users: UsersType[],
-    pageChange: (page: number) => void,
-    setUsers: (users: UsersType[]) => void,
-    unFollowThunk: (userId: string) => void,
-    followThunk: (userId: string) => void,
+  users: UsersType[],
+  pageChange: (page: number) => void,
+  setUsers: (users: UsersType[]) => void,
+  unFollowThunk: (userId: string) => void,
+  followThunk: (userId: string) => void,
 }
 
 export const Users = (props: UsersTypeComponent) => {
-const loading = useAppSelector(state => state.usersPage.loadingPage)
+  const totalItemsCount = useAppSelector(getTotalUsersCountSelect)
+  const pageSize = useAppSelector(getPageSizeSelect)
+  const currentPage = useAppSelector(getCurrentPageSelect)
+  const loading = useAppSelector(getLoadingPageSelect)
+  const users = useAppSelector(usersSelectOptimized)
 
-    return (
-        <div className={`${s.container} ${'containerMod'}`}>
-          {loading && <Loading/>}
-          <Paginator totalItemsCount={props.totalItemsCount}
-                       pageSize={props.pageSize}
-                       currentPage={props.currentPage}
-                       pageChange={props.pageChange}/>
+  return (
+    <div className={`${s.container} ${'containerMod'}`}>
+      {loading && <Loading/>}
+      <Paginator totalItemsCount={totalItemsCount}
+                 pageSize={pageSize}
+                 currentPage={currentPage}
+                 pageChange={props.pageChange}/>
 
-            <div className={s.container__data}>
+      <div className={s.container__data}>
 
-                {props.users.map(u => <User key={u.id}
-                                            user={u}
-                                            expectation={props.expectation}
-                                            unFollowThunk={props.unFollowThunk}
-                                            followThunk={props.followThunk}/>
-                )}
+        {users.map(u => <User key={u.id}
+                              user={u}
+                              expectation={props.expectation}
+                              unFollowThunk={props.unFollowThunk}
+                              followThunk={props.followThunk}/>
+        )}
 
-            </div>
-            {/*<button className={s.container__button} onClick={() => props.setUsers(props.users)}>show*/}
-            {/*    more*/}
-            {/*</button>*/}
-        </div>
-    );
+      </div>
+    </div>
+  );
 };
 

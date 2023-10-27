@@ -4,7 +4,8 @@
 
     /*font-size: clamp(10 / 14 * 1rem, 5vw, 14 / 14 * 1rem);*/
     max-height: 747px;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .users {

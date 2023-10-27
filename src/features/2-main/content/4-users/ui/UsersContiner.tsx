@@ -14,11 +14,11 @@ import {
 } from "features/2-main/content/4-users/model/usersReducers";
 import {AppStateType} from "app/model/redux-store";
 import {
-    getCurrentPage,
-    getExpectation,
-    getLoadingPage,
-    getPageSize,
-    getTotalUsersCount,
+    getCurrentPageSelect,
+    getExpectationSelect,
+    getLoadingPageSelect,
+    getPageSizeSelect,
+    getTotalUsersCountSelect,
     getUsersSelector
 } from "features/2-main/content/4-users/model/usersSelectors";
 
@@ -86,11 +86,11 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {//назв�
         //FN SELECTOR ------
         users: getUsersSelector(state),
         // -----------------
-        pageSize: getPageSize(state),
-        totalUsersCount: getTotalUsersCount(state),
-        currentPage: getCurrentPage(state),
-        loadingPage: getLoadingPage(state),
-        expectation: getExpectation(state),
+        pageSize: getPageSizeSelect(state),
+        totalUsersCount: getTotalUsersCountSelect(state),
+        currentPage: getCurrentPageSelect(state),
+        loadingPage: getLoadingPageSelect(state),
+        expectation: getExpectationSelect(state),
     }
 }
 //======================================================
