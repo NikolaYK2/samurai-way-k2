@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import s from 'features/2-main/content/1-MyProfile/ui/MyProfileStatus.module.css'
+import s from 'features/2-main/content/1-MyProfile/ui/3-status/MyProfileStatus.module.css'
 import {useAppDispatch, useAppSelector} from "app/model/redux-store";
 import {updStatusThunkCreator} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {statusSelector} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";

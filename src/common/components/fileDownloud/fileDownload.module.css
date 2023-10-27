@@ -1,0 +1,29 @@
+.blockImg {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+
+}
+
+.changeAva {
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  margin: 5px 20px;
+  width: 30px;
+  height: 30px;
+}
+
+.changeAva:hover g, .changeAva:hover g path {
+  background: #a968ec;
+  fill: white;
+}
+
+.changeAva > input {
+  display: none;
+}
+
+.changeAva > svg, .blockLogout > button > svg {
+  filter: drop-shadow(0px 0px 2px var(--main-color));
+}

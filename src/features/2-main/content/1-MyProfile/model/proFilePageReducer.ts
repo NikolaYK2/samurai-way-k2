@@ -93,6 +93,7 @@ export const setErrorsAC = (err: string | null) => {
 
 export type postDataType = {
   id: string,
+  postImg:string,
   sms: string,
   like: number,
   likedUsers: number[],
@@ -134,8 +135,8 @@ export type proFilePageType = ComponentStateType & {
 
 let initializationState: proFilePageType = {
   postData: [
-    {id: '1', sms: "Ha, how are you?", like: 15, likedUsers: []},
-    {id: '2', sms: "It's my first post", like: 43, likedUsers: []},
+    {id: '1', postImg:'', sms: "Ha, how are you?", like: 15, likedUsers: []},
+    {id: '2', postImg:'', sms: "It's my first post", like: 43, likedUsers: []},
   ],
   profile: {} as ProfileUserType,
   status: '',
@@ -145,7 +146,7 @@ export const proFileReducer = (state = initializationState, action: ActionsTypeP
 
   if (action.type === addPost) {
     //Добавление нового поста кнопка=================================================
-    return {...state, /*message: '', */postData: [{id: v1(), sms: action.postMessage, like: 0, likedUsers:[]}, ...state.postData]}
+    return {...state, /*message: '', */postData: [{id: v1(),postImg:'', sms: action.postMessage, like: 0, likedUsers:[]}, ...state.postData]}
     //MESSAGE USERS===============================`================================
   } else if (action.type === setUserProfile) {
     return {...state, profile: action.profile}

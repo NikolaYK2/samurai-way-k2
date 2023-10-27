@@ -34,6 +34,7 @@ export const Post = memo(() => {
         return (
           <div key={pD.id} className={s.containerPost}>
             <div className={s.post}>
+              <div className={s.postImg}><img src="" alt=""/></div>
               <div className={s.content__profUsers}>
                 <div className={s.img}>
                   <img

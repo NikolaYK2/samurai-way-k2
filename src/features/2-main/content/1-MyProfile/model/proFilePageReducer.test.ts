@@ -10,8 +10,8 @@ let proFilePage: proFilePageType;
 beforeEach(() => {
     proFilePage = {
         postData: [
-            {id: '1', sms: "Ha, how are you?", like: 15, likedUsers:[]},
-            {id: '2', sms: "It's my first post", like: 43, likedUsers:[]},
+            {id: '1',postImg:'', sms: "Ha, how are you?", like: 15, likedUsers:[]},
+            {id: '2',postImg:'', sms: "It's my first post", like: 43, likedUsers:[]},
         ],
         profile: {} as ProfileUserType,
         status:''

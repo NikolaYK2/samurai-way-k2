@@ -4,7 +4,7 @@ import ava from "assets/img/myProf/ava.jpg";
 import {useAppDispatch, useAppSelector} from "app/model/redux-store";
 import bc from 'assets/img/myProf/bc.jpg';
 import {bcSelector, myIdSelector, optimizedProfileSelector} from "features/1-header/HeaderSelectors";
-import {MyProfileStatusHook} from "features/2-main/content/1-MyProfile/ui/MyProfileStatusHook";
+import {MyProfileStatusHook} from "features/2-main/content/1-MyProfile/ui/3-status/MyProfileStatusHook";
 import {getUserProfileThunkCreator} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {useLocation} from "react-router-dom";
 

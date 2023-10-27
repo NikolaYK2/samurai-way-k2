@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from "./Header.module.css";
 import {useAppDispatch, useAppSelector} from "app/model/redux-store";
 import {logoutThunkC} from "features/0-auth/model/authReducer";
@@ -12,9 +12,9 @@ import {
   myIdSelector,
   optimizedProfileSelector
 } from "features/1-header/HeaderSelectors";
-import {changeBackgroundAC, changePhotoTC} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {Loading} from "common/components/loading/Loading";
 import logo from 'assets/img/logo/logo.png'
+import {FileDownload} from "common/components/fileDownloud/fileDownload";
 
 export const Header = () => {
 
@@ -31,46 +31,23 @@ export const Header = () => {
     dispatch(logoutThunkC());
   }
 
-  const changePhotoUserHandle = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.currentTarget.files && e.currentTarget.files.length > 0) {
-      dispatch(changePhotoTC(e.currentTarget.files[0]))
-    }
-  }
-  const changeBackgroundUserHandle = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.currentTarget.files && e.currentTarget.files.length > 0) {
-      const file = e.currentTarget.files[0]
-      const reader = new FileReader()
-      reader.onloadend = ()=>{
-        dispatch(changeBackgroundAC(String(reader.result)))
-      }
-      reader.readAsDataURL(file)
-    }
-  }
-
-
   return (
     <header className={`${s.header} ${headerProfile && s.expanded}`}>
       {!headerProfile && <div className={s.log}>
           <MemoNavLink to={'/profile'}><img src={logo} alt=""/></MemoNavLink>
-          {/*<MemoNavLink to={'/profile'}><IconSvg name={'logo'}/></MemoNavLink>*/}
+        {/*<MemoNavLink to={'/profile'}><IconSvg name={'logo'}/></MemoNavLink>*/}
       </div>}
       <BcAvatarProfile onOffAvatar={headerProfile}/>
 
       <div className={s.loginBlock}>
         {profile?.userId === myId &&
-            <div className={s.blockImg}>
-                <label className={s.changeAva}><IconSvg name={'changeAva'}/>
-                    <input type="file" onChange={changePhotoUserHandle}/>
-                </label>
-
-                <label className={s.changeAva}><IconSvg name={'changeBc'}/>
-                    <input type="file" onChange={changeBackgroundUserHandle}/>
-                </label>
-            </div>
+            <>
+                <FileDownload name={'changeAva'}/>
+                <FileDownload name={'changeBc'}/>
+            </>
         }
 
         <div className={s.blockLogout}>
-          {/*<div>{props.login}</div>*/}
           <button onClick={deleteHandle} disabled={!isAuth}><IconSvg name={'logOut'}/></button>
         </div>
       </div>
