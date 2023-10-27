@@ -3,7 +3,7 @@
     padding: 0 5px;
 
     /*font-size: clamp(10 / 14 * 1rem, 5vw, 14 / 14 * 1rem);*/
-    max-height: 747px;
+    max-height: 650px;
     overflow-x: hidden;
     overflow-y: auto;
 }
