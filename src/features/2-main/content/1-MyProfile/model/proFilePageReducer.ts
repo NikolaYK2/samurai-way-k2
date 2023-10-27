@@ -54,11 +54,11 @@ export const setStatusAC = (status: string) => {
   } as const
 }
 
-export const setLikeAC = (postId: string, like: number) => {
+export const setLikeAC = (userId: number, postId: string) => {
   return {
     type: likePost,
+    userId,
     postId,
-    like
   } as const
 }
 
@@ -95,6 +95,7 @@ export type postDataType = {
   id: string,
   sms: string,
   like: number,
+  likedUsers: number[],
 }
 export type ContactsType = {
   facebook: string,
@@ -119,31 +120,32 @@ export type ProfileUserType = {
   photos: PhotosType
   aboutMe?: string,
 }
-export type proFilePageType = {
+type ComponentStateType = {
+  loading?: boolean
+  error?: string | null,
+  background?: string,
+}
+export type proFilePageType = ComponentStateType & {
   postData: postDataType[],
   profile: ProfileUserType | null,
   status: string,
 }
-type ComponentStateType = {
-  loading?: boolean
-  error?: string | null
-  background?: string,
-}
 
-let initializationState: proFilePageType & ComponentStateType = {
+
+let initializationState: proFilePageType = {
   postData: [
-    {id: v1(), sms: "Ha, how are you?", like: 15,},
-    {id: v1(), sms: "It's my first post", like: 43,},
+    {id: '1', sms: "Ha, how are you?", like: 15, likedUsers: []},
+    {id: '2', sms: "It's my first post", like: 43, likedUsers: []},
   ],
   profile: {} as ProfileUserType,
   status: '',
 };
 
-export const proFileReducer = (state = initializationState, action: ActionsTypeProfile) => {
+export const proFileReducer = (state = initializationState, action: ActionsTypeProfile):proFilePageType => {
 
   if (action.type === addPost) {
     //Добавление нового поста кнопка=================================================
-    return {...state, /*message: '', */postData: [{id: v1(), sms: action.postMessage, like: 0}, ...state.postData]}
+    return {...state, /*message: '', */postData: [{id: v1(), sms: action.postMessage, like: 0, likedUsers:[]}, ...state.postData]}
     //MESSAGE USERS===============================`================================
   } else if (action.type === setUserProfile) {
     return {...state, profile: action.profile}
@@ -156,8 +158,22 @@ export const proFileReducer = (state = initializationState, action: ActionsTypeP
     return {...state, postData: state.postData.filter(el => el.id !== action.postId)}
 
   } else if (action.type === likePost) {
-    return {...state, postData: state.postData.map(el => el.id === action.postId ? {...el, like: action.like + 1} : el)}
-
+    return {
+      ...state,
+      postData: state.postData.map(el => {
+        if (el.id === action.postId) {
+          if (el.likedUsers && el.likedUsers.includes(action.userId)) {
+            // Если пользователь уже поставил лайк, уменьшаем количество лайков и удаляем его ID из массива
+            return {...el, like: el.like - 1, likedUsers: el.likedUsers.filter(id => id !== action.userId)};
+          } else {
+            // Если пользователь еще не поставил лайк, добавляем его ID в массив и увеличиваем количество лайков
+            return {...el, like: el.like + 1, likedUsers: [...el.likedUsers, action.userId]};
+          }
+        } else {
+          return el;
+        }
+      })
+    }
   } else if (action.type === photoUserChange) {
     return {
       ...state,
@@ -216,7 +232,7 @@ export const setStatusThunkCreator = (userId: number) => async (dispatch: Dispat
     }
   } catch (e) {
     handleServerNetworkError(e, dispatch)
-  }finally {
+  } finally {
     dispatch(loadingAC(false))
   }
 }
@@ -226,7 +242,7 @@ export const updStatusThunkCreator = (status: string) => async (dispatch: Dispat
   try {
     if (res.data.resultCode === 0) {
       dispatch(setStatusAC(status));
-    }else {
+    } else {
       handleServerAppError(res.data, dispatch)
     }
   } catch (e) {

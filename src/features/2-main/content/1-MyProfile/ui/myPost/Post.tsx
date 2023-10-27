@@ -4,7 +4,7 @@ import {useAppSelector} from "app/model/redux-store";
 import {useDispatch} from "react-redux";
 import {deletePostAC, setLikeAC} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
-import {optimizedPostDataSelector} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
+import {optimizedPostDataSelector, userIdSelector} from "features/2-main/content/1-MyProfile/model/MyProfileSelectors";
 
 const day = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday',];
 const data = new Date().getDate()
@@ -16,13 +16,14 @@ export const Post = memo(() => {
 
   const postData = useAppSelector(optimizedPostDataSelector)
   const dispatch = useDispatch()
+  const userId = useAppSelector(userIdSelector)
 
   const handleDeletePost = (postId: string) => {
     dispatch(deletePostAC(postId))
   }
 
-  const handleLike = useCallback((id: string, like: number) => {
-    dispatch(setLikeAC(id, like))
+  const handleLike = useCallback((id: string) => {
+    if (userId) dispatch(setLikeAC(userId, id))
   }, [postData])
 
 
@@ -44,11 +45,12 @@ export const Post = memo(() => {
                 </div>
               </div>
               <div className={s.like}>
-                <span onClick={() => handleLike(pD.id, pD.like)}><IconSvg name={'like'}/>{pD.like}</span>
+                <span onClick={() => handleLike(pD.id)}><IconSvg name={'like'}/>{pD.like}</span>
 
                 <div className={s.delPost} onClick={() => handleDeletePost(pD.id)}><IconSvg name={'delete'}/></div>
               </div>
             </div>
+
             <div className={s.dataPostContainer}>
               <div className={s.dataPost}>
                 <div>{dayWeek}</div>

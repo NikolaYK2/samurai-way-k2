@@ -24,8 +24,8 @@
 
     max-height: 747px;
     overflow-y: auto;
-
-    padding: 0 10px 0 0;
+padding: 0 20px;
+    /*padding: 0 10px 0 0;*/
 }
 
 .dialogs__users {
