@@ -157,13 +157,13 @@ export const toggleExpectationAC = (userId: string, onOff: boolean) => {
 
 //THUNK =====================================================================
 //COmponent UsersContiner ===================================================
-export const getUsersThunkCreator = (page: number, pageSize: number,) => async (dispatch: Dispatch<ActionUsersType>) => {
+export const getUsersThunkCreator = (page: number, pageSize: number, term?: string) => async (dispatch: Dispatch<ActionUsersType>) => {
 
   dispatch(switchLoadingAC(true));
   dispatch(setCurrentPageAC(page));
   try {
 
-    let data = await usersAPI.getUsers(page, pageSize)
+    let data = await usersAPI.getUsers(page, pageSize, false, term)
     dispatch(setTotalUsersCountAC(data.totalCount));
     dispatch(setUsersAC(data.items));
     dispatch(switchLoadingAC(false));
@@ -225,7 +225,7 @@ export const pageChangeFriendThunkCreator = (page: number) => async (dispatch: D
   dispatch(setCurrentPageAC(page));
   dispatch(switchLoadingAC(true));
   try {
-    let data = await usersAPI.getUsers(page,12,true)
+    let data = await usersAPI.getUsers(page, 12, true)
     dispatch(switchLoadingAC(false));
     dispatch(setUsersAC(data.items));
 

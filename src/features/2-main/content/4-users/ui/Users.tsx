@@ -115,6 +115,7 @@ import {
   getTotalUsersCountSelect,
   usersSelectOptimized
 } from "features/2-main/content/4-users/model/usersSelectors";
+import {FindName} from "common/components/FindName/FindName";
 
 type UsersTypeComponent = {
   totalItemsCount: number,
@@ -122,7 +123,6 @@ type UsersTypeComponent = {
   currentPage: number,
   expectation: (Expectation | string)[],
 
-  users: UsersType[],
   pageChange: (page: number) => void,
   setUsers: (users: UsersType[]) => void,
   unFollowThunk: (userId: string) => void,
@@ -144,7 +144,7 @@ export const Users = (props: UsersTypeComponent) => {
                  pageSize={pageSize}
                  currentPage={currentPage}
                  pageChangeThunkCreator={pageChangeThunkCreator}/>
-
+      <FindName/>
       <div className={s.container__data}>
 
         {users.map(u => <User key={u.id}

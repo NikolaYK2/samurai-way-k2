@@ -36,7 +36,6 @@ div .pageActive{
     display: flex;
     margin: 0;
     max-width: 79px;
-    width: 100%;
 }
 
 .paginatorBut > button {

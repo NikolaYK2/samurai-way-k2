@@ -43,7 +43,6 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
                     totalItemsCount={this.props.totalUsersCount}
                     pageSize={this.props.pageSize}
                     currentPage={this.props.currentPage}
-                    users={this.props.users}
                     expectation={this.props.expectation}
 
                     pageChange={this.pageChange}
