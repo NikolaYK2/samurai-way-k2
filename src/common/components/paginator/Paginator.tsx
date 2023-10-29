@@ -1,15 +1,20 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import s from "common/components/paginator/Paginator.module.css";
+import {AppThunk, useAppDispatch} from "app/model/redux-store";
+import {useLocation} from "react-router-dom";
 
 type PaginatorTypeComponent = {
   totalItemsCount: number,
   pageSize: number,
   currentPage: number,
-  pageChange: (page: number) => void,
+  pageChangeThunkCreator: (page: number) => AppThunk,
 }
 
 
 export const Paginator = (props: PaginatorTypeComponent) => {
+  const location = useLocation();
+  const users = location.pathname.includes('/users')
+  const dispatch = useAppDispatch();
   //общее количество страниц при показе props.pageSize на странице
   let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize);
 
@@ -33,6 +38,13 @@ export const Paginator = (props: PaginatorTypeComponent) => {
     return pages.filter(p => p >= prevPortionNumber && p <= nextPortionNumber)
   }, [pages, prevPortionNumber, nextPortionNumber])
 
+  useEffect(() => {
+    if (!users) {
+      setPortionPage(1)
+      dispatch(props.pageChangeThunkCreator(1))
+    }
+  }, [users]);
+
   return (
     <div className={s.containerPages}>
       <div className={s.paginatorBut}>
@@ -47,7 +59,7 @@ export const Paginator = (props: PaginatorTypeComponent) => {
         return (
           <span key={p}
                 className={props.currentPage === p ? s.pageActive : s.page}
-                onClick={() => props.pageChange(p)}
+                onClick={() => dispatch(props.pageChangeThunkCreator(p))}
           >{p}</span>
         );
       })}

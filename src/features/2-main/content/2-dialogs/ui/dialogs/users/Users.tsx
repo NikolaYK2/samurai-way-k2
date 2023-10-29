@@ -3,19 +3,21 @@ import s from "features/2-main/content/2-dialogs/ui/dialogs/users/Users.module.c
 import {useAppDispatch, useAppSelector} from "app/model/redux-store";
 import {MemoNavLink} from "common/utills/MemoNavLink";
 import ava from 'assets/img/myProf/ava.jpg'
-import {getUsersSelector} from "features/2-main/content/4-users/model/usersSelectors";
 import {addFriendsThunkCreator} from "features/2-main/content/4-users/model/usersReducers";
+import {getCurrentPageSelect, usersSelectOptimized} from "features/2-main/content/4-users/model/usersSelectors";
 
 export const Users = memo(() => {
 
-  const friends = useAppSelector(getUsersSelector)
+  const friends = useAppSelector(usersSelectOptimized)
   const dispatch = useAppDispatch()
+  const currentPage = useAppSelector(getCurrentPageSelect)
+
   const page = useRef(1); // создаем ссылку для хранения текущей страницы
   const loader = useRef<IntersectionObserver | null>(null); // создаем ссылку для нашего наблюдателя
   const loaderClassName = s.loader;
 
   useEffect(() => {
-    dispatch(addFriendsThunkCreator( page.current, 12, true, loaderClassName, loader))
+    dispatch(addFriendsThunkCreator( page.current, currentPage, true, loaderClassName, loader))
   }, []);
 
   useEffect(() => {

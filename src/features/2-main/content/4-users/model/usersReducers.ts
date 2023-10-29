@@ -177,8 +177,8 @@ export const addFriendsThunkCreator = (
   page: number,
   pageSize: number,
   friend: boolean,
-  loaderStyle: string,
-  loader: any,
+  loaderStyle?: string,
+  loader?: any,
 ) => async (dispatch: Dispatch<ActionUsersType>) => {
 
   dispatch(switchLoadingAC(true));
@@ -186,15 +186,20 @@ export const addFriendsThunkCreator = (
   try {
     let data = await usersAPI.getUsers(page, pageSize, friend)
 
-    dispatch(addFriendsAC(data.items));
 
-    // Если в ответе нет друзей, это означает, что мы достигли конца списка.
-    if (data.items.length === 0) {
-      const loaderElement = document.querySelector(`.${loaderStyle}`);
-      if (loaderElement) {
-        loaderElement.remove(); // Удаляем заглушку
+    if (loaderStyle && loader) {
+      // Если в ответе нет друзей, это означает, что мы достигли конца списка.
+      if (data.items.length === 0) {
+        const loaderElement = document.querySelector(`.${loaderStyle}`);
+        if (loaderElement) {
+          loaderElement.remove(); // Удаляем заглушку
+        }
+        if (loader.current) loader.current.disconnect(); // Останавливаем наблюдение
       }
-      if (loader.current) loader.current.disconnect(); // Останавливаем наблюдение
+      dispatch(addFriendsAC(data.items));
+    } else {
+      dispatch(setUsersAC(data.items))
+      dispatch(setTotalUsersCountAC(data.totalCount))
     }
 
     dispatch(switchLoadingAC(false));
@@ -204,7 +209,7 @@ export const addFriendsThunkCreator = (
 }
 
 
-export const pageChangeThunkCreator = (page: number, /*pageSize: number*/) => async (dispatch: Dispatch<ActionUsersType>) => {
+export const pageChangeThunkCreator = (page: number) => async (dispatch: Dispatch<ActionUsersType>) => {
   dispatch(setCurrentPageAC(page));
   dispatch(switchLoadingAC(true));
   try {
@@ -214,9 +219,33 @@ export const pageChangeThunkCreator = (page: number, /*pageSize: number*/) => as
 
   } catch (e) {
     alert('Error page change')
-
   }
 }
+export const pageChangeFriendThunkCreator = (page: number) => async (dispatch: Dispatch<ActionUsersType>) => {
+  dispatch(setCurrentPageAC(page));
+  dispatch(switchLoadingAC(true));
+  try {
+    let data = await usersAPI.getUsers(page,12,true)
+    dispatch(switchLoadingAC(false));
+    dispatch(setUsersAC(data.items));
+
+  } catch (e) {
+    alert('Error page change')
+  }
+}
+
+// export const pageChangeFriendsThunkCreator = (page: number) => async (dispatch: Dispatch<ActionUsersType>) => {
+//   dispatch(setCurrentPageAC(page));
+//   dispatch(switchLoadingAC(true));
+//   try {
+//     let data = await usersAPI.getUsers(page)
+//     dispatch(switchLoadingAC(false));
+//     dispatch(addFriendsAC(data.items));
+//
+//   } catch (e) {
+//     alert('Error page change')
+//   }
+// }
 // export const pageChangeThunkCreator = (page: number, /*pageSize: number*/) => {
 //     return (dispatch: Dispatch<ActionUsersType>) => {
 //         dispatch(setCurrentPageAC(page));

@@ -1,29 +1,68 @@
-import React from 'react';
-import {UsersType} from "common/api/api";
-import {useAppSelector} from "app/model/redux-store";
-import {optimizedFriendsFollowedSelector} from "features/2-main/content/3-friends/model/Friends.seceltors";
+import React, {useEffect} from 'react';
+import {useAppDispatch, useAppSelector} from "app/model/redux-store";
+import s from './Friends.module.css'
+import {Paginator} from "common/components/paginator/Paginator";
+import {
+  getCurrentPageSelect,
+  getPageSizeSelect,
+  getTotalUsersCountSelect,
+  getUsersSelector
+} from "features/2-main/content/4-users/model/usersSelectors";
+import {
+  addFriendsThunkCreator,
+  pageChangeFriendThunkCreator,
+  unFollowThunkCreator
+} from "features/2-main/content/4-users/model/usersReducers";
+import {NavLink} from "react-router-dom";
+import {Button} from "common/components/button/Button";
 
-type FriendsType = {
-  users: UsersType[],
-}
-export const Friends = (props: FriendsType) => {
-  const friends = useAppSelector(optimizedFriendsFollowedSelector)
+export const Friends = () => {
 
-  if (!props.users.length) {
-    return <div>Users not found</div>
-  }
+  const friends = useAppSelector(getUsersSelector)
+  const totalItemsCount = useAppSelector(getTotalUsersCountSelect)
+  const pageSize = useAppSelector(getPageSizeSelect)
+  const currentPage = useAppSelector(getCurrentPageSelect)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(addFriendsThunkCreator(currentPage, pageSize, true,))
+  }, []);
+
+
+  // if (!friends.length) {
+  //   return <div>Users not found</div>
+  // }
+
 
   return (
-    <div>
-      {friends.map(user => {
-        return (
-          <div key={user.id}>
-            <img src={!user.photos.small ? 'https://via.placeholder.com/100' : user.photos.small} alt=""/>
-            <span>{user.name}</span>
-            <div>{user.status ? user.status : 'no status'}</div>
-          </div>
-        );
-      })}
+    <div className={s.container}>
+      <div className={s.blockFriends}>
+        <Paginator totalItemsCount={totalItemsCount} pageSize={pageSize} currentPage={currentPage}
+                   pageChangeThunkCreator={pageChangeFriendThunkCreator}/>
+        <div className={s.friends}>
+          {friends.map(user => {
+            return (
+              <div key={user.id} className={s.friend}>
+                <div className={s.avatar}>
+                  <NavLink to={`/profile/${user.id}`}>
+                    <img src={!user.photos.small ? 'https://via.placeholder.com/100' : user.photos.small} alt=""/>
+                  </NavLink>
+
+                </div>
+                <h3>{user.name}</h3>
+                <span>{user.status ? user.status : 'no status'}</span>
+                <div>
+                  <Button name={'Unfriend'} disabled={false} callBack={() => dispatch(unFollowThunkCreator(user.id))}/>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+      </div>
+      <div className={s.blockSubscribers}>
+        <h2>Subscribers</h2>
+      </div>
     </div>
   );
 };

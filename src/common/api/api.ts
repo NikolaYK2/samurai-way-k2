@@ -35,7 +35,7 @@ export type UsersType = {
 
 export const friendsAPI = {
   setUsersFriend() {
-    return instance.get<GetUsersType>('users?friend=true').then(response => response.data.items)
+    return instance.get<GetUsersType>('users?friend=true')
   },
 }
 

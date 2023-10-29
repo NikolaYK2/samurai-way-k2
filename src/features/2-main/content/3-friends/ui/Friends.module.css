@@ -1,0 +1,91 @@
+.container {
+    display: flex;
+    background: var(--main-color);
+    margin: 10px;
+    padding: 20px;
+}
+
+.blockFriends {
+    flex: 1 1 80%;
+    border-right: 1px solid var(--border-decor);
+}
+
+.friends {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.friend {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1 0 23%;
+    max-width: 300px;
+    min-width: 250px;
+    border-radius: 12px;
+    box-shadow: 15px 15px 20px rgba(58, 46, 68, 0.04);
+    margin: 10px 15px 10px 0;
+    padding: 30px;
+    transition: box-shadow .3s ease 0s;
+}
+
+.friend:hover {
+    box-shadow: 15px 15px 20px rgba(58, 46, 68, 0.1);
+    transition: box-shadow .3s ease 0s;
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    margin: 0 0 12px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.avatar > a > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.friend > h3, .friend > span {
+    word-break: break-all;
+}
+.friend>h3{
+    font-size: var(--f-size16-19);
+    font-weight: 600;
+    margin: 10px 0 0;
+}
+.friend>span{
+    font-size: var(--f-size10-14);
+    margin: 8px 0 30px;
+}
+.friend>div:last-child{
+    width: 100%;
+}
+.friend>div>button{
+    width: 100%;
+    color: white;
+}
+
+/*BLOCK--------------------------------------------------------------*/
+.blockSubscribers {
+    flex: 1 1 20%;
+}
+
+.blockSubscribers > h2 {
+    display: block;
+    font-size: var(--f-size16-22);
+    margin: 0 30px;
+}
+
+.blockSubscribers > h2:after {
+    content: '';
+    display: block;
+    margin: 16px 0 0;
+    width: 40px;
+    height: 2px;
+    background: var(--color);
+}

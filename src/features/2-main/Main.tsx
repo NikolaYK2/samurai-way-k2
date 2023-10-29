@@ -5,9 +5,9 @@ import {Nav} from "features/2-main/Navbar/Nav";
 import {News} from "features/2-main/content/4-news/News";
 import {Music} from "features/2-main/content/5-music/Music";
 import {Settings} from "features/2-main/content/7-settings/Settings";
-import {FriendsContainer} from "features/2-main/content/3-friends/ui/FriendsContainer";
 import UsersContainer from "features/2-main/content/4-users/ui/UsersContiner";
 import {Loading} from "common/components/loading/Loading";
+import {Friends} from "features/2-main/content/3-friends/ui/Friends";
 
 const DialogsMessage = lazy(() => import('features/2-main/content/2-dialogs/ui/dialogs/DialogsMessage'));
 const ProfileContainer = lazy(() => import('features/2-main/content/ContentProfileContainer'));
@@ -28,10 +28,10 @@ export const Main = () => {
             <Route path="/messages" element={<DialogsMessage/>}>
               <Route path=":name" element={<DialogsMessage/>}/>
             </Route>
-            <Route path="/users/*" element={<UsersContainer/>}/>
+            <Route path="/users" element={<UsersContainer/>}/>
             <Route path="/news" element={<News/>}/>
             <Route path="/music" element={<Music/>}/>
-            <Route path="/friends" element={<FriendsContainer/>}/>
+            <Route path="/friends" element={<Friends/>}/>
             <Route path="/settings" element={<Settings/>}/>
             <Route path="*" element={<div>404</div>}/>
           </Routes>

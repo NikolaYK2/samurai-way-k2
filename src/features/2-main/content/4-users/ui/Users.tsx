@@ -103,14 +103,15 @@
 import React from 'react';
 import s from "features/2-main/content/4-users/ui/Users.module.css";
 import {UsersType} from "common/api/api";
-import {Expectation} from "features/2-main/content/4-users/model/usersReducers";
+import {Expectation, pageChangeThunkCreator} from "features/2-main/content/4-users/model/usersReducers";
 import {Paginator} from "common/components/paginator/Paginator";
 import {User} from "features/2-main/content/4-users/ui/User";
 import {Loading} from "common/components/loading/Loading";
 import {useAppSelector} from "app/model/redux-store";
 import {
   getCurrentPageSelect,
-  getLoadingPageSelect, getPageSizeSelect,
+  getLoadingPageSelect,
+  getPageSizeSelect,
   getTotalUsersCountSelect,
   usersSelectOptimized
 } from "features/2-main/content/4-users/model/usersSelectors";
@@ -129,6 +130,7 @@ type UsersTypeComponent = {
 }
 
 export const Users = (props: UsersTypeComponent) => {
+
   const totalItemsCount = useAppSelector(getTotalUsersCountSelect)
   const pageSize = useAppSelector(getPageSizeSelect)
   const currentPage = useAppSelector(getCurrentPageSelect)
@@ -141,7 +143,7 @@ export const Users = (props: UsersTypeComponent) => {
       <Paginator totalItemsCount={totalItemsCount}
                  pageSize={pageSize}
                  currentPage={currentPage}
-                 pageChange={props.pageChange}/>
+                 pageChangeThunkCreator={pageChangeThunkCreator}/>
 
       <div className={s.container__data}>
 

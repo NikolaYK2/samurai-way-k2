@@ -6,7 +6,6 @@ import {ActionsTypeProfile, proFileReducer} from "features/2-main/content/1-MyPr
 import {usersReducer} from "features/2-main/content/4-users/model/usersReducers";
 import {sidebarReducer} from "features/redux/sidebarReducer";
 import {ActionsTypeLoginAuthorization, authorizationReducer} from "features/0-auth/model/authReducer";
-import {friendsReducer} from "features/2-main/content/3-friends/model/friendsReducer";
 import {ActionsAppType, appReducer} from "app/model/appReducer";
 import {loadState, saveState} from "common/utills/localStorage";
 import {throttle} from "common/utills/throttle";
@@ -27,7 +26,6 @@ export let rootReducer = combineReducers({//функция которой пер
   usersPage: usersReducer,
   sidebar: sidebarReducer,
   loginAuthorization: authorizationReducer,
-  friends: friendsReducer,
   app: appReducer,
   security: securityReducer,
   // form: Controller,

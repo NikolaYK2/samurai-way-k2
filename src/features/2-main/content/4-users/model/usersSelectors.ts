@@ -1,7 +1,7 @@
 import {createSelector} from "reselect";
 import {AppStateType} from "app/model/redux-store";
 
-const getUsers = (state: AppStateType) => state.usersPage.users;
+export const getUsers = (state: AppStateType) => state.usersPage.users;
 export const usersSelectOptimized = createSelector(getUsers, (users) => {
   return users;
 })

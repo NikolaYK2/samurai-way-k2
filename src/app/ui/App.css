@@ -86,5 +86,6 @@ h1,h2,h3,h4,h5,h6{font-size: inherit; font-weight: 400; margin: 0; }
     --rgba-color: rgba(0, 0, 0, 0.6);
     --f-size10-14: clamp(10 / 14 *1rem, 5vw, 14 /14 *1rem);
     --f-size14-16: clamp(14 / 14 *1rem, 5vw, 16 /14 *1rem);
+    --f-size16-19: clamp(16 / 14 *1rem, 5vw, 19 /14 *1rem);
     --f-size16-22: clamp(16 / 14 *1rem, 5vw, 22 /14 *1rem);
 }
