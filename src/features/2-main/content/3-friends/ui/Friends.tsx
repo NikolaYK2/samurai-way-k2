@@ -28,12 +28,6 @@ export const Friends = () => {
     dispatch(addFriendsThunkCreator(currentPage, pageSize, true,))
   }, []);
 
-
-  // if (!friends.length) {
-  //   return <div>Users not found</div>
-  // }
-
-
   return (
     <div className={s.container}>
       <div className={s.blockFriends}>

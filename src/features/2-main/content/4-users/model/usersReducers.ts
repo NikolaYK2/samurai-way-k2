@@ -198,8 +198,8 @@ export const addFriendsThunkCreator = (
       }
       dispatch(addFriendsAC(data.items));
     } else {
-      dispatch(setUsersAC(data.items))
       dispatch(setTotalUsersCountAC(data.totalCount))
+      // dispatch(setUsersAC(data.items))
     }
 
     dispatch(switchLoadingAC(false));
