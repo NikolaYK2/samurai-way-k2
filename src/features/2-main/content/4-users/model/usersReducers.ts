@@ -176,15 +176,16 @@ export const getUsersThunkCreator = (page: number, pageSize: number, term?: stri
 export const addFriendsThunkCreator = (
   page: number,
   pageSize: number,
-  friend: boolean,
+  friend?: boolean,
   loaderStyle?: string,
   loader?: any,
+  term?: string,
 ) => async (dispatch: Dispatch<ActionUsersType>) => {
 
   dispatch(switchLoadingAC(true));
   // dispatch(setCurrentPageAC(page));
   try {
-    let data = await usersAPI.getUsers(page, pageSize, friend)
+    let data = await usersAPI.getUsers(page, pageSize, friend, term)
 
 
     if (loaderStyle && loader) {
@@ -199,7 +200,7 @@ export const addFriendsThunkCreator = (
       dispatch(addFriendsAC(data.items));
     } else {
       dispatch(setTotalUsersCountAC(data.totalCount))
-      // dispatch(setUsersAC(data.items))
+      dispatch(setUsersAC(data.items))
     }
 
     dispatch(switchLoadingAC(false));

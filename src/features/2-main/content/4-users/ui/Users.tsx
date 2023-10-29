@@ -102,8 +102,11 @@
 //
 import React from 'react';
 import s from "features/2-main/content/4-users/ui/Users.module.css";
-import {UsersType} from "common/api/api";
-import {Expectation, pageChangeThunkCreator} from "features/2-main/content/4-users/model/usersReducers";
+import {
+  Expectation,
+  getUsersThunkCreator,
+  pageChangeThunkCreator
+} from "features/2-main/content/4-users/model/usersReducers";
 import {Paginator} from "common/components/paginator/Paginator";
 import {User} from "features/2-main/content/4-users/ui/User";
 import {Loading} from "common/components/loading/Loading";
@@ -118,13 +121,8 @@ import {
 import {FindName} from "common/components/FindName/FindName";
 
 type UsersTypeComponent = {
-  totalItemsCount: number,
-  pageSize: number,
-  currentPage: number,
   expectation: (Expectation | string)[],
 
-  pageChange: (page: number) => void,
-  setUsers: (users: UsersType[]) => void,
   unFollowThunk: (userId: string) => void,
   followThunk: (userId: string) => void,
 }
@@ -144,7 +142,7 @@ export const Users = (props: UsersTypeComponent) => {
                  pageSize={pageSize}
                  currentPage={currentPage}
                  pageChangeThunkCreator={pageChangeThunkCreator}/>
-      <FindName/>
+      <FindName callbackUsers={getUsersThunkCreator}/>
       <div className={s.container__data}>
 
         {users.map(u => <User key={u.id}

@@ -40,13 +40,8 @@ class UsersAPIComponent extends React.Component<UsersTypeProps> {
         return (
             <div>
                 <Users
-                    totalItemsCount={this.props.totalUsersCount}
-                    pageSize={this.props.pageSize}
-                    currentPage={this.props.currentPage}
                     expectation={this.props.expectation}
 
-                    pageChange={this.pageChange}
-                    setUsers={this.props.setUsers}
                     unFollowThunk={this.props.unFollowThunk}
                     followThunk={this.props.followThunk}
                 />

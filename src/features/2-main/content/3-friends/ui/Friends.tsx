@@ -15,6 +15,7 @@ import {
 } from "features/2-main/content/4-users/model/usersReducers";
 import {NavLink} from "react-router-dom";
 import {Button} from "common/components/button/Button";
+import {FindName} from "common/components/FindName/FindName";
 
 export const Friends = () => {
 
@@ -26,13 +27,14 @@ export const Friends = () => {
 
   useEffect(() => {
     dispatch(addFriendsThunkCreator(currentPage, pageSize, true,))
-  }, []);
+  }, [currentPage]);
 
   return (
     <div className={s.container}>
       <div className={s.blockFriends}>
         <Paginator totalItemsCount={totalItemsCount} pageSize={pageSize} currentPage={currentPage}
                    pageChangeThunkCreator={pageChangeFriendThunkCreator}/>
+        <FindName callbackFriends={addFriendsThunkCreator}/>
         <div className={s.friends}>
           {friends.map(user => {
             return (
