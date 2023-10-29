@@ -1,4 +1,7 @@
 .container {
+    position: relative;
+    top: 0;
+    left: 0;
     display: flex;
     background: var(--main-color);
     margin: 10px;
@@ -53,19 +56,23 @@
 .friend > h3, .friend > span {
     word-break: break-all;
 }
-.friend>h3{
+
+.friend > h3 {
     font-size: var(--f-size16-19);
     font-weight: 600;
     margin: 10px 0 0;
 }
-.friend>span{
+
+.friend > span {
     font-size: var(--f-size10-14);
     margin: 8px 0 30px;
 }
-.friend>div:last-child{
+
+.friend > div:last-child {
     width: 100%;
 }
-.friend>div>button{
+
+.friend > div > button {
     width: 100%;
     color: white;
 }
@@ -74,18 +81,59 @@
 .blockSubscribers {
     flex: 1 1 20%;
 }
-
-.blockSubscribers > h2 {
+.blockSubscribers > h3 {
     display: block;
     font-size: var(--f-size16-22);
     margin: 0 30px;
 }
 
-.blockSubscribers > h2:after {
+
+
+
+.blockSubscribers > h3:after {
     content: '';
     display: block;
     margin: 16px 0 0;
     width: 40px;
     height: 2px;
     background: var(--color);
+}
+
+@media (max-width: 790px) {
+    .blockSubscribers {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30px;
+        height: 100%;
+        transform: translateX(33%);
+        cursor: pointer;
+        transition: all .4s ease 0s;
+        border-left: 1px solid var(--border-decor);
+        background: var(--main-color);
+    }
+
+    .blockSubscribers:before {
+        position: sticky;
+        content: '';
+        display: block;
+        top: 50vh;
+        left: 0;
+        width: 10px;
+        height: 40px;
+        margin: 0 0 0 10px;
+        border-left: 2px solid red;
+        border-right: 2px solid red;
+    }
+    .blockSubscribers>h3{
+        display: none;
+    }
+    .blockSubscribers:hover, .blockSubscribers:hover > h3{
+        display: block;
+        width: 400px;
+        transition: width .4s ease 0s;
+    }
+    .blockSubscribers:hover:before{
+        left: -16px;
+    }
 }

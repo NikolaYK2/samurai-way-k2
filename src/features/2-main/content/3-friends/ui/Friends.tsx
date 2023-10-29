@@ -58,10 +58,9 @@ export const Friends = () => {
             );
           })}
         </div>
-
       </div>
       <div className={s.blockSubscribers}>
-        <h2>Subscribers</h2>
+        <h3>Subscribers</h3>
       </div>
     </div>
   );
