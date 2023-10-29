@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
 import s from 'features/2-main/content/1-MyProfile/ui/3-status/MyProfileStatus.module.css'
 import {useAppDispatch, useAppSelector} from "app/model/redux-store";
 import {updStatusThunkCreator} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
@@ -26,6 +26,12 @@ export const MyProfileStatusHook = () => {
     setStatusLocal(e.currentTarget.value)
   }
 
+  const downEnterHandle = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      deactivateEditMode()
+    }
+  }
+
   //При монтировании компоненты сетаем новые данные и подписываемся на обновления
   useEffect(() => {
     setStatusLocal(status)
@@ -42,6 +48,7 @@ export const MyProfileStatusHook = () => {
         <input autoFocus={true}
                onBlur={deactivateEditMode}
                onChange={onStatusChange}
+               onKeyDown={downEnterHandle}
                value={statusLocal}
                placeholder={'status'}
         ></input>
