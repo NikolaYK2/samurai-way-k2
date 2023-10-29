@@ -6,6 +6,7 @@ import {Button} from "common/components/button/Button";
 import {FileDownload} from "common/components/fileDownloud/fileDownload";
 import {addPostAC, postDataType} from "features/2-main/content/1-MyProfile/model/proFilePageReducer";
 import {useAppDispatch} from "app/model/redux-store";
+import {useLocation} from "react-router-dom";
 
 type FormTextareaType = {
   nameBut?: string
@@ -13,6 +14,9 @@ type FormTextareaType = {
   addMessages: (newMessageUsers: string) => void,
 }
 export const FormTextarea = memo((props: FormTextareaType) => {
+  const location = useLocation()
+  const profile = location.pathname.includes('/profile')
+
   const [value, setValue] = useState('')
 
   const dispatch = useAppDispatch();
@@ -37,7 +41,7 @@ export const FormTextarea = memo((props: FormTextareaType) => {
               placeholder={errors.sms ? errors.sms.message : 'Введите сообщение'}
               className={`${errors.sms ? s.error : s.offError} customScroll`}
             />
-      <FileDownload name={'changeBc'} register={register('postImg')} callback={setValue}/>
+      {profile && <FileDownload name={'changeBc'} register={register('postImg')} callback={setValue}/>}
       <Button name={props.nameBut!} disabled={false}/>
     </form>
   );
