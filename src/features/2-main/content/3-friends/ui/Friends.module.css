@@ -26,7 +26,7 @@
     justify-content: space-between;
     flex: 1 0 23%;
     max-width: 300px;
-    min-width: 250px;
+    min-width: 240px;
     border-radius: 12px;
     box-shadow: 15px 15px 20px rgba(58, 46, 68, 0.04);
     margin: 10px 15px 10px 0;
@@ -80,15 +80,20 @@
 /*BLOCK--------------------------------------------------------------*/
 .blockSubscribers {
     flex: 1 1 20%;
+    z-index: 2;
 }
 .blockSubscribers > h3 {
+    position: sticky;
+    top:0;
     display: block;
     font-size: var(--f-size16-22);
     margin: 0 30px;
 }
-
-
-
+@media (max-width: 860px) {
+    .blockSubscribers > h3 {
+        top: 132px;
+    }
+}
 
 .blockSubscribers > h3:after {
     content: '';
@@ -134,6 +139,6 @@
         transition: width .4s ease 0s;
     }
     .blockSubscribers:hover:before{
-        left: -16px;
+        left: -15%;
     }
 }

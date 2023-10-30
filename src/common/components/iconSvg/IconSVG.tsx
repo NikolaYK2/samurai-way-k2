@@ -313,6 +313,22 @@ l29 60 3 558 3 558 197 -188 c108 -103 332 -314 497 -468 165 -154 391 -369
       return <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" width='100%' height='100%'>
         <g data-name="Layer 2" id="Layer_2">
         <path d="M13,23A10,10,0,1,1,23,13,10,10,0,0,1,13,23ZM13,5a8,8,0,1,0,8,8A8,8,0,0,0,13,5Z"/><path d="M28,29a1,1,0,0,1-.71-.29l-8-8a1,1,0,0,1,1.42-1.42l8,8a1,1,0,0,1,0,1.42A1,1,0,0,1,28,29Z"/></g><g id="frame"><rect style={{fill:'none'}} height="32" width="32"/></g></svg>
+    case 'telegram':
+      return <svg id="Layer_1" version="1.1" viewBox="0 0 512 512" width='100%' height='100%'>
+  <g>
+    <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_1_" x1="256" x2="256" y1="0" y2="510.1322">
+      <stop offset="0" style={{color:'#41BCE7'}}/>
+      <stop offset="1" style={{color:'#22A6DC'}}/>
+    </linearGradient>
+    <g>
+    <path style={{fill:'black'}} d="M380.6,147.3l-45.7,230.5c0,0-6.4,16-24,8.3l-105.5-80.9L167,286.7l-64.6-21.7c0,0-9.9-3.5-10.9-11.2    c-1-7.7,11.2-11.8,11.2-11.8l256.8-100.7C359.5,141.2,380.6,131.9,380.6,147.3z"/>
+    <path style={{fill:'grey'}} d="M197.2,375.2c0,0-3.1-0.3-6.9-12.4c-3.8-12.1-23.3-76.1-23.3-76.1l155.1-98.5c0,0,9-5.4,8.6,0    c0,0,1.6,1-3.2,5.4c-4.8,4.5-121.8,109.7-121.8,109.7"/>
+    <path style={{fill:'grey'}} d="M245.8,336.2l-41.7,38.1c0,0-3.3,2.5-6.8,0.9l8-70.7"/></g></g></svg>
+    case 'linkedin':
+      return <svg  height="100%" id="Layer_1" version="1.0" viewBox="0 0 32 32" width="100%"><g>
+        <circle clipRule="evenodd" cx="16" cy="16"
+                fill="#007BB5" fillRule="evenodd" r="16"/><g><rect fill="#FFFFFF" height="14" width="4" x="7" y="11"/>
+        <path d="M20.499,11c-2.791,0-3.271,1.018-3.499,2v-2h-4v14h4v-8c0-1.297,0.703-2,2-2c1.266,0,2,0.688,2,2v8h4v-7    C25,14,24.479,11,20.499,11z" fill="#FFFFFF"/><circle cx="9" cy="8" fill="#FFFFFF" r="2"/></g></g><g/><g/><g/><g/><g/><g/></svg>
     default:
       return <svg></svg>
   }

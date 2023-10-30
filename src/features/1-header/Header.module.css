@@ -14,46 +14,6 @@
     transition: height 0.5s ease;
 }
 
-.log {
-    display: flex;
-    margin: auto;
-    width: 70px;
-    height: 70px;
-    z-index: 1;
-
-}
-
-/*.log a svg{*/
-/*    transition: all .1s ease 0s;*/
-/*}*/
-.log > a > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: all .1s ease 0s;
-    filter: drop-shadow(2px 2px 2px black);
-
-}
-
-.log:hover > a > img {
-    transform: rotate(-3deg);
-    filter: drop-shadow(0 2px 5px black);
-
-    /*filter: drop-shadow(2px 2px 2px black);*/
-    transition: all .3s ease 0s;
-}
-/*.log:hover a svg {*/
-/*    transform: rotate(-3deg);*/
-/*    filter: drop-shadow(2px 2px 2px black);*/
-/*    transition: all .3s ease 0s;*/
-/*}*/
-
-.log a {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
 .loginBlock {
     display: flex;
     align-items: center;
