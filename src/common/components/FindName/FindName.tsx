@@ -7,18 +7,24 @@ import {getCurrentPageSelect, getPageSizeSelect} from "features/2-main/content/4
 import {IconSvg} from "common/components/iconSvg/IconSVG";
 import {Dispatch} from "redux";
 
-type Props={
-  callbackFriends?:(page: number, pageSize: number, friend?: boolean, loaderStyle?: string, loader?: any, term?: string) => (dispatch: Dispatch<ActionUsersType>) => Promise<void>
-  callbackUsers?:(page: number, pageSize: number, term?: string | undefined) => (dispatch: Dispatch<ActionUsersType>) => Promise<void>
+type Props = {
+  callbackFriends?: (page: number,
+                     pageSize: number,
+                     friend?: boolean,
+                     loaderStyle?: string,
+                     loader?: any,
+                     term?: string) => (dispatch: Dispatch<ActionUsersType>) => Promise<void>
+  callbackUsers?: (page: number,
+                   pageSize: number,
+                   term?: string | undefined) => (dispatch: Dispatch<ActionUsersType>) => Promise<void>
 }
-export const FindName = (props:Props) => {
+export const FindName = (props: Props) => {
 
   const pageSize = useAppSelector(getPageSizeSelect)
   const currentPage = useAppSelector(getCurrentPageSelect)
 
   const dispatch = useAppDispatch()
   const [text, setText] = useState('');
-  console.log(text)
 
   const debouncedValue = useDebounce(text, 1000)
 
@@ -30,11 +36,11 @@ export const FindName = (props:Props) => {
     if (text) {
       if (debouncedValue) {
         if (props.callbackUsers) dispatch(props.callbackUsers(1, 12, text))
-        if (props.callbackFriends) dispatch(props.callbackFriends(1, 12, true, '','', text))
+        if (props.callbackFriends) dispatch(props.callbackFriends(1, 12, true, '', '', text))
       }
     } else {
       if (props.callbackUsers) dispatch(props.callbackUsers(currentPage, pageSize, text))
-      if (props.callbackFriends) dispatch(props.callbackFriends(currentPage, pageSize, true, '','', text))
+      if (props.callbackFriends) dispatch(props.callbackFriends(currentPage, pageSize, true, '', '', text))
 
       // dispatch(getUsersThunkCreator(currentPage, pageSize))
     }

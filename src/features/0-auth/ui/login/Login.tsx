@@ -8,6 +8,7 @@ import {loginSelector} from "features/0-auth/ui/login/selectors";
 import {IconSvg} from "common/components/iconSvg/IconSVG";
 import {Button} from "common/components/button/Button";
 import {captchaSelector} from "features/0-security/model/securitySelectors";
+import {useShowPasswordInput} from "common/hooks/useShowPasswordInput";
 
 export const Login = () => {
 
@@ -44,11 +45,12 @@ export const LoginForm = (props: { name: string }) => {
   const captcha = useAppSelector(captchaSelector)
 
   const [error, setError] = useState<string | null>(null);
+  const{type, toggle} = useShowPasswordInput()
 
   const {register, handleSubmit, formState: {errors}, reset} = useForm<LoginFormType>({
     defaultValues: {
-      email: '',
-      password: '',
+      email: 'free@samuraijs.com',
+      password: 'free',
       rememberMe: false,
     }
   });
@@ -60,10 +62,6 @@ export const LoginForm = (props: { name: string }) => {
 
   return (
     <div className={s.container}>
-      <div className={s.span}>
-        <span>Email: free@samuraijs.com</span>
-        <span>Password: free</span>
-      </div>
       <h2>{props.name}</h2>
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.inputs}>

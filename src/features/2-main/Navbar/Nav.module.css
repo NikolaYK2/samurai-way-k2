@@ -1,6 +1,5 @@
 .container {
     position: relative;
-    /*display: flex;*/
     top: 0;
     left: 0;
     margin: 0 0 15px;
@@ -48,7 +47,7 @@ div .modAvatar {
 @media (max-width: 860px) {
     .container{
         position: sticky;
-        z-index: 2;
+        z-index: 3;
         margin: 0 0 30px;
         transition: all .4s ease-in-out;
 
