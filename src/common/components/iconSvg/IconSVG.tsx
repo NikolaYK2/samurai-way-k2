@@ -1,7 +1,6 @@
 import React, {memo} from 'react';
-
 export const IconSvg = memo((props: { name: string }) => {
-  console.log('iconSVG')
+
   switch (props.name) {
     case 'loginIn':
       return <svg enableBackground="new 0 0 32 32" width="100%" height="100%" id="Layer_1" version="1.1"
