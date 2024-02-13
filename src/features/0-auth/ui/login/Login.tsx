@@ -45,6 +45,7 @@ export const LoginForm = (props: { name: string }) => {
   const captcha = useAppSelector(captchaSelector)
 
   const [error, setError] = useState<string | null>(null);
+
   const{type, toggle} = useShowPasswordInput()
 
   const {register, handleSubmit, formState: {errors}, reset} = useForm<LoginFormType>({
@@ -75,7 +76,7 @@ export const LoginForm = (props: { name: string }) => {
                    },
                  })}/>
           <div className={s.iconMail}><IconSvg name={'loginIn'}/></div>
-          <div className={s.iconPass}><IconSvg name={'password'}/></div>
+          <div className={s.iconPass} onClick={toggle}><IconSvg name={'password'}/></div>
 
           <div className={`${errors.email || errors.password || error ? s.errors : ''}`}>
             <p>{errors.email?.message}</p>
@@ -84,12 +85,11 @@ export const LoginForm = (props: { name: string }) => {
           </div>
 
           <input
-            type='password' placeholder={'Password'} autoComplete={'false'}
+            type={type} placeholder={'Password'} autoComplete={'false'}
                  {...register("password", {
                    required: 'Fill in the password field',
                    minLength: {value: 4, message: 'min length is 4'}
                  })}/>
-          <div></div>
         </div>
 
         <label className={s.checkbox}>
