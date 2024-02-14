@@ -235,30 +235,7 @@ export const pageChangeFriendThunkCreator = (page: number) => async (dispatch: D
   }
 }
 
-// export const pageChangeFriendsThunkCreator = (page: number) => async (dispatch: Dispatch<ActionUsersType>) => {
-//   dispatch(setCurrentPageAC(page));
-//   dispatch(switchLoadingAC(true));
-//   try {
-//     let data = await usersAPI.getUsers(page)
-//     dispatch(switchLoadingAC(false));
-//     dispatch(addFriendsAC(data.items));
-//
-//   } catch (e) {
-//     alert('Error page change')
-//   }
-// }
-// export const pageChangeThunkCreator = (page: number, /*pageSize: number*/) => {
-//     return (dispatch: Dispatch<ActionUsersType>) => {
-//         dispatch(setCurrentPageAC(page));
-//         dispatch(switchLoadingAC(true));
-//
-//         usersAPI.getUsers(page)
-//             .then(data => {
-//                 dispatch(switchLoadingAC(false));
-//                 dispatch(setUsersAC(data.items));
-//             })
-//     }
-// }
+
 
 // ----------------------------------------------------------------------------------------------------
 const followUnFollowChange = async (
@@ -268,44 +245,22 @@ const followUnFollowChange = async (
   actionCreator: (id: string) => ActionUsersType) => {
   dispatch(toggleExpectationAC(id, true));
   try {
-    let data = await apiMethod(id)
-    if (data.resultCode === 0) {
+    let res = await apiMethod(id)
+    if (res.resultCode === 0) {
       dispatch(actionCreator(id));
     }
-    dispatch(toggleExpectationAC(id, false));
   } catch (e) {
-    alert('Error unFollow and follow')
+    console.error('Error unFollow and follow')
   }
+  dispatch(toggleExpectationAC(id, false));
+
 }
 
 export const unFollowThunkCreator = (id: string) => async (dispatch: Dispatch<ActionUsersType>) => {
   await followUnFollowChange(dispatch, id, usersAPI.deleteFollow, unFollowAC)
 }
-// export const unFollowThunkCreator = (id: string) => {
-//     return (dispatch: Dispatch<ActionUsersType>) => {
-//         dispatch(toggleExpectationAC(id, true));
-//
-//         usersAPI.deleteFollow(id).then(data => {
-//             if (data.resultCode === 0) {
-//                 dispatch(unFollowAC(id));
-//             }
-//             dispatch(toggleExpectationAC(id, false));
-//         });
-//     }
-// }
+
 
 export const followThunkCreator = (id: string) => async (dispatch: Dispatch<ActionUsersType>) => {
   await followUnFollowChange(dispatch, id, usersAPI.postFollow, followAC)
 }
-// export const followThunkCreator = (id: string) => {
-//     return (dispatch: Dispatch<ActionUsersType>) => {
-//         dispatch(toggleExpectationAC(id, true));
-//
-//         usersAPI.postFollow(id).then(data => {
-//             if (data.resultCode === 0) {
-//                 dispatch(followAC(id));
-//             }
-//             dispatch(toggleExpectationAC(id, false));
-//         });
-//     }
-// }
